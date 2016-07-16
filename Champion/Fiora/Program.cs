@@ -612,11 +612,11 @@ namespace FioraProject
                     {
                         var point = status.PassivePredictedPositions.OrderBy(x => x.LSDistance(Player.Position.LSTo2D())).FirstOrDefault();
                         point = point.IsValid() ? point : Game.CursorPos.LSTo2D();
-                        Orbwalker.OrbwalkTo(point.To3D());
+                        Orbwalker.MoveTo(point.To3D());
                     }
-                    else Orbwalker.OrbwalkTo(Game.CursorPos);
+                    else Orbwalker.MoveTo(Game.CursorPos);
                 }
-                else Orbwalker.OrbwalkTo(Game.CursorPos);
+                else Orbwalker.MoveTo(Game.CursorPos);
             }
         }
         #endregion OrbwalkToPassive

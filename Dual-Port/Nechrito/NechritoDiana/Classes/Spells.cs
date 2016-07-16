@@ -2,7 +2,7 @@
 using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace Nechrito_Diana
+ namespace Nechrito_Diana
 {
     class Spells
     {

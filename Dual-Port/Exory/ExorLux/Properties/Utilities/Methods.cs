@@ -3,7 +3,7 @@ using EloBuddy.SDK;
 using LeagueSharp;
 using LeagueSharp.SDK;
 
-namespace ExorAIO.Champions.Lux
+ namespace ExorAIO.Champions.Lux
 {
     /// <summary>
     ///     The methods class.

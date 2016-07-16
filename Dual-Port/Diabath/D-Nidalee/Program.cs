@@ -12,7 +12,7 @@ using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace D_Nidalee
+ namespace D_Nidalee
 {
     internal class Program
     {
@@ -259,7 +259,7 @@ namespace D_Nidalee
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
@@ -283,7 +283,7 @@ namespace D_Nidalee
 
             Player = ObjectManager.Player;
             QC = new Spell(SpellSlot.Q, Player.AttackRange + 50);
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
             //            OrbwalkerLS.SetAttack(true);
 
             CheckSpells();
@@ -305,12 +305,12 @@ namespace D_Nidalee
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Farm();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Jungleclear();
             }
@@ -474,7 +474,7 @@ namespace D_Nidalee
         //New map Monsters Name By SKO
         private static void Smiteuse()
         {
-            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
+            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
             if (ObjectManager.Player.Spellbook.CanUseSpell(_smiteSlot) != SpellState.Ready) return;
             var useblue = getCheckBoxItem(smiteMenu, "Useblue");
             var usered = getCheckBoxItem(smiteMenu, "Usered");
@@ -584,7 +584,7 @@ namespace D_Nidalee
                         if (QC.IsReady() && getCheckBoxItem(comboMenu, "UseQComboCougar") &&
                             target.LSIsValidTarget(QC.Range))
                         {
-                            Orbwalker.DisableAttacking = false;
+                            PortAIO.OrbwalkerManager.SetAttack(true);
                             //                        OrbwalkerLS.SetAttack(true);
                             QC.Cast();
                         }
@@ -616,7 +616,7 @@ namespace D_Nidalee
                         target.LSIsValidTarget(QC.Range))
                     {
                         //                       OrbwalkerLS.SetAttack(true);
-                        Orbwalker.DisableAttacking = false;
+                        PortAIO.OrbwalkerManager.SetAttack(true);
                         QC.Cast();
                     }
                 }
@@ -761,7 +761,7 @@ namespace D_Nidalee
             if (Player.InFountain() || ObjectManager.Player.HasBuff("Recall")) return;
 
             if (Utility.LSCountEnemiesInRange(800) > 0
-                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && _smite != null))
+                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && _smite != null))
             {
                 if (iusepotionhp && iusehppotion
                     && !(ObjectManager.Player.HasBuff("RegenerationPotion")

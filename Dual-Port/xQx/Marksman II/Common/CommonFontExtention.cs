@@ -6,7 +6,7 @@ using SharpDX.Direct3D9;
 
 #endregion
 
-namespace Marksman.Common
+ namespace Marksman.Common
 {
     public static class CommonFontExtension
     {

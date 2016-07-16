@@ -13,7 +13,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace Activators.Base
+ namespace Activators.Base
 {
     public enum PrimaryRole
     {

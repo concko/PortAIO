@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     class Yasuo
     {

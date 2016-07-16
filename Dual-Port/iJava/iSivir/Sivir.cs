@@ -11,7 +11,7 @@ using Utility = LeagueSharp.Common.Utility;
 using Spell = LeagueSharp.Common.Spell;
 using EloBuddy.SDK.Menu.Values;
 
-namespace iSivir
+ namespace iSivir
 {
     class Sivir
     {
@@ -173,7 +173,7 @@ namespace iSivir
                 }
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -184,7 +184,7 @@ namespace iSivir
             {
                 Harass();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Laneclear();
             }
@@ -222,7 +222,7 @@ namespace iSivir
                         Spells[SpellSlot.W].Cast();
                     }
 
-                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                     {
                         if (getCheckBoxItem(laneMenu, "com.isivir.laneclear.useW") && target.IsValid<Obj_AI_Minion>()
                         && ObjectManager.Player.ManaPercent

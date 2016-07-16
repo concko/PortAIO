@@ -4,7 +4,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace ezEvade.SpecialSpells
+ namespace ezEvade.SpecialSpells
 {
     class Taric : ChampionPlugin
     {

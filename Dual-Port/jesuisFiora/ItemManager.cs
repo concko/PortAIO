@@ -5,7 +5,7 @@ using LeagueSharp.Common;
 using LeagueSharp.Common.Data;
 using TreeLib.Extensions;
 
-namespace jesuisFiora
+ namespace jesuisFiora
 {
     internal static class ItemManager
     {

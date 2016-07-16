@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using vSupport_Series.Core.Plugins;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace vSupport_Series.Champions
+ namespace vSupport_Series.Champions
 {
     public class Nami : Helper
     {
@@ -39,7 +39,6 @@ namespace vSupport_Series.Champions
             comboMenu = Config.AddSubMenu("Combo Settings", "Combo Settings");
             comboMenu.Add("nami.q.combo", new CheckBox("Use Q"));
             comboMenu.Add("nami.w.combo", new CheckBox("Use W"));
-            comboMenu.Add("nami.e.combo", new CheckBox("Use E"));
             comboMenu.Add("nami.r.combo", new CheckBox("Use R"));
             comboMenu.AddGroupLabel("R Settings");
             comboMenu.Add("nami.min.enemy.count", new Slider("Min. Enemy Count", 3, 1, 5));
@@ -65,6 +64,7 @@ namespace vSupport_Series.Champions
             }
 
             esettings = Config.AddSubMenu("(E) Settings", "(E) Settings");
+            esettings.Add("nami.e.disable", new CheckBox("Disable E?", false));
             esettings.Add("e.mana", new Slider("Min. Mana to use (E)", 20, 1, 99));
             esettings.AddGroupLabel("(E) Whitelist");
             foreach (var ally in ObjectManager.Get<AIHeroClient>().Where(o => o.IsAlly && !o.IsMe))
@@ -86,7 +86,7 @@ namespace vSupport_Series.Champions
             miscMenu = Config.AddSubMenu("Misc Settings", "misc Settings");
             miscMenu.Add("nami.q.hitchance", new ComboBox("Skillshot Hit Chance", 2, HitchanceNameArray));
 
-            Orbwalker.OnPostAttack += NamiAfterAttack;
+            AIHeroClient.OnBasicAttack += NamiAfterAttack;
             Game.OnUpdate += NamiOnUpdate;
             Drawing.OnDraw += NamiOnDraw;
         }
@@ -110,28 +110,21 @@ namespace vSupport_Series.Champions
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
-        private static void NamiAfterAttack(AttackableUnit unit, EventArgs args)
+        
+        private static void NamiAfterAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (getSliderItem(esettings, "e.mana") <= Player.ManaPercent)
+            if (getSliderItem(esettings, "e.mana") <= Player.ManaPercent || getCheckBoxItem(esettings, "nami.e.disable"))
             {
                 return;
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) &&
-                getCheckBoxItem(comboMenu, "nami.e.combo") && E.IsReady())
+            if (E.IsReady())
             {
-                foreach (
-                    var ally in
-                        ObjectManager.Get<AIHeroClient>()
-                            .Where(
-                                x =>
-                                    x.IsAlly && !x.IsMe && x.LSDistance(Player.Position) < E.Range && !x.IsDead &&
-                                    !x.IsZombie))
+                if (sender.IsAlly && sender.IsValid<AIHeroClient>() && args.Target.IsValid<AIHeroClient>() && args.Target.IsEnemy)
                 {
-                    if (getCheckBoxItem(esettings, "ewhite." + ally.NetworkId))
+                    if (getCheckBoxItem(esettings, "ewhite." + sender.NetworkId) && E.IsInRange(sender))
                     {
-                        E.Cast(ally);
+                        E.Cast(sender);
                     }
                 }
             }
@@ -238,8 +231,7 @@ namespace vSupport_Series.Champions
                 return;
             }
 
-            if (getCheckBoxItem(healMenu, "nami.heal.self") &&
-                Player.HealthPercent <= getSliderItem(healMenu, "nami.heal.self.percent"))
+            if (getCheckBoxItem(healMenu, "nami.heal.self") && Player.HealthPercent <= getSliderItem(healMenu, "nami.heal.self.percent"))
             {
                 W.Cast(Player);
             }
@@ -251,11 +243,9 @@ namespace vSupport_Series.Champions
 
             if (W.IsReady() && !Player.IsDead && !Player.IsZombie)
             {
-                foreach (
-                    var ally in HeroManager.Allies.Where(x => W.IsInRange(x) && !x.IsDead && !x.IsZombie && !x.IsMe))
+                foreach (var ally in EntityManager.Heroes.Allies.Where(x => W.IsInRange(x) && !x.IsDead && !x.IsZombie && !x.IsMe))
                 {
-                    if (getCheckBoxItem(healMenu, "heal." + ally.NetworkId) &&
-                        ally.HealthPercent < getSliderItem(healMenu, "heal.percent." + ally.NetworkId))
+                    if (getCheckBoxItem(healMenu, "heal." + ally.NetworkId) && ally.HealthPercent < getSliderItem(healMenu, "heal.percent." + ally.NetworkId))
                     {
                         W.Cast(ally);
                     }

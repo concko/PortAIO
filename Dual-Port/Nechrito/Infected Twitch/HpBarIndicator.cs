@@ -8,7 +8,7 @@ using Color = System.Drawing.Color;
 
 #endregion
 
-namespace Infected_Twitch
+ namespace Infected_Twitch
 {
     internal class HpBarIndicator
     {

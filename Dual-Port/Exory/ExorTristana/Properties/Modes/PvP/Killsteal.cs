@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Core.Utils;
 using LeagueSharp.Data.Enumerations;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Tristana
+ namespace ExorAIO.Champions.Tristana
 {
     /// <summary>
     ///     The logics class.

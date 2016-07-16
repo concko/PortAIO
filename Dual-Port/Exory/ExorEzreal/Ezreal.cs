@@ -8,7 +8,7 @@ using EloBuddy;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Ezreal
+ namespace ExorAIO.Champions.Ezreal
 {
     /// <summary>
     ///     The champion class.
@@ -40,6 +40,7 @@ namespace ExorAIO.Champions.Ezreal
             /// </summary>
             Drawings.Initialize();
         }
+        
 
         /// <summary>
         ///     Fired when the game is updated.

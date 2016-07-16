@@ -4,10 +4,12 @@ using EloBuddy.SDK;
 using Jhin___The_Virtuoso.Extensions;
 using LeagueSharp.Common;
 
+
 namespace Jhin___The_Virtuoso.Modes
 {
     internal static class None
     {
+        
         public static void ImmobileExecute()
         {
             if (Spells.E.IsReady() && Menus.getCheckBoxItem(Menus.miscMenu, "auto.e.immobile"))

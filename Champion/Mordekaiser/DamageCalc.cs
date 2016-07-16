@@ -3,7 +3,7 @@ using EloBuddy.SDK;
 using LeagueSharp.Common;
 using Damage = LeagueSharp.Common.Damage;
 
-namespace Mordekaiser
+ namespace Mordekaiser
 {
     internal class DamageCalc
     {

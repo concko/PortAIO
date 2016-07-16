@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.SDK.Enumerations;
 
-namespace Challenger_Series.Plugins
+ namespace Challenger_Series.Plugins
 {
     public class Ashe : CSPlugin
     {
@@ -35,7 +35,7 @@ namespace Challenger_Series.Plugins
             Events.OnGapCloser += EventsOnOnGapCloser;
             Events.OnInterruptableTarget += OnInterruptableTarget;
         }
-
+        
         private void Orbwalker_OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (Q.IsReady() && args.Target is AIHeroClient && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && UseQCombo)

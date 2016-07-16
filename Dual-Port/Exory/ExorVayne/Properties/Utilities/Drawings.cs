@@ -7,7 +7,7 @@ using SharpDX;
 using Color = System.Drawing.Color;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Vayne
+ namespace ExorAIO.Champions.Vayne
 {
     /// <summary>
     ///     The prediction drawings class.

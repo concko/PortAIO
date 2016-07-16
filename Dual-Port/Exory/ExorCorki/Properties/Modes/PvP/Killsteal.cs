@@ -7,7 +7,7 @@ using LeagueSharp.Data.Enumerations;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Corki
+ namespace ExorAIO.Champions.Corki
 {
     /// <summary>
     ///     The logics class.

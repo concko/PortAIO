@@ -12,7 +12,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace OlafxQx.Modes
+ namespace OlafxQx.Modes
 {
     internal static class ModeHarass
     {
@@ -33,7 +33,7 @@ namespace OlafxQx.Modes
 
             Game.OnUpdate += OnUpdate;
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

@@ -4,7 +4,7 @@ using Activators.Handlers;
 using LeagueSharp.Common;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Items.Defensives
+ namespace Activators.Items.Defensives
 {
     class _3364 : CoreItem
     {
@@ -30,11 +30,11 @@ namespace Activators.Items.Defensives
 
             foreach (var hero in Activator.Allies())
             {
-                if (Activator.dmenu[Parent.UniqueMenuId + "useon" + hero.Player.NetworkId] == null)
+                if (Activator.dmenu[Activator.dmenu.UniqueMenuId + "useon" + hero.Player.NetworkId] == null)
                 {
                     continue;
                 }
-                if (!Activator.dmenu[Parent.UniqueMenuId + "useon" + hero.Player.NetworkId].Cast<CheckBox>().CurrentValue)
+                if (!Activator.dmenu[Activator.dmenu.UniqueMenuId + "useon" + hero.Player.NetworkId].Cast<CheckBox>().CurrentValue)
                     continue;
 
                 if (hero.Player.LSDistance(Player.ServerPosition) > Range)

@@ -3,7 +3,7 @@ using LeagueSharp.Common;
 using System.Linq;
 using ItemData = LeagueSharp.Common.Data.ItemData;
 
-namespace Nechrito_Diana
+ namespace Nechrito_Diana
 {
     class Logic
     {

@@ -5,13 +5,14 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The activator class.
     /// </summary>
     internal partial class Activator
     {
+        
         /// <summary>
         ///     Called on do-cast.
         /// </summary>
@@ -25,7 +26,7 @@ namespace NabbActivator
             }
 
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) &&
-                !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 return;
             }

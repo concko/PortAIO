@@ -27,7 +27,7 @@ using Color = System.Drawing.Color;
 
 #endregion
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     public static class Utils
     {

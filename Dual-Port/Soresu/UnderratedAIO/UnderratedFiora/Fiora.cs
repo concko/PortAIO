@@ -14,7 +14,7 @@ using Environment = System.Environment;
 using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Fiora
     {
@@ -93,10 +93,10 @@ namespace UnderratedAIO.Champions
             }
         }
 
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
-            Orbwalker.DisableMovement = false;
+            PortAIO.OrbwalkerManager.SetMovement(true);
 
             ClearList();
 
@@ -105,8 +105,8 @@ namespace UnderratedAIO.Champions
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
+                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -149,8 +149,9 @@ namespace UnderratedAIO.Champions
             }
         }
 
-        private static void AfterAttack(AttackableUnit targetO, EventArgs args)
+        private static void AfterAttack(AttackableUnit targetA, EventArgs args)
         {
+            var targetO = targetA;
             if (!(targetO is AIHeroClient))
             {
                 return;
@@ -243,10 +244,10 @@ namespace UnderratedAIO.Champions
 
             var closestPassive = GetClosestPassivePosition(target);
             if (closestPassive.IsValid() && getCheckBoxItem(comboMenu, "MoveToVitals") && !Orbwalker.CanAutoAttack &&
-                !Orbwalker.IsAutoAttacking && Game.CursorPos.LSDistance(target.Position) < 350)
+                !ObjectManager.Player.Spellbook.IsAutoAttacking && Game.CursorPos.LSDistance(target.Position) < 350)
             {
-                //orbwalker.SetMovement(false);
-                Orbwalker.DisableMovement = true;
+                //PortAIO.OrbwalkerManager.SetMovement(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 Player.IssueOrder(GameObjectOrder.MoveTo,
                     target.Position.LSExtend(closestPassive,
                         Math.Max(player.BoundingRadius + target.BoundingRadius, 100)));
@@ -255,7 +256,7 @@ namespace UnderratedAIO.Champions
             var hasIgnite = player.Spellbook.CanUseSpell(player.GetSpellSlot("SummonerDot")) == SpellState.Ready;
             if (getCheckBoxItem(comboMenu, "useq") && Q.IsReady() &&
                 getSliderItem(comboMenu, "useqMin") <= player.LSDistance(target) &&
-                (closestPassive.IsValid() || (target.HealthPercent < 30)) && !Orbwalker.IsAutoAttacking)
+                (closestPassive.IsValid() || (target.HealthPercent < 30)) && !ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 var pos = GetQpoint(target, closestPassive);
                 if (pos.IsValid())

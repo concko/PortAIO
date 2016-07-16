@@ -9,7 +9,7 @@
 
 using System;
 
-namespace GodJungleTracker.Classes
+ namespace GodJungleTracker.Classes
 {
     public class Packets
     {

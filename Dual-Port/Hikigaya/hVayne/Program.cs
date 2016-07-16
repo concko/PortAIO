@@ -7,7 +7,7 @@ using hVayne.Champions;
 using EloBuddy;
 using LeagueSharp.SDK;
 
-namespace hVayne
+ namespace hVayne
 {
     class Program
     {

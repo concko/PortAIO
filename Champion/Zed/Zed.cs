@@ -1,4 +1,4 @@
-﻿namespace Valvrave_Sharp.Plugin
+﻿ namespace Valvrave_Sharp.Plugin
 {
     #region
 
@@ -863,7 +863,7 @@
                 Drawing.DrawText(pos.X - (float)30 / 2, pos.Y, Color.BlueViolet, "R");
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead || MenuGUI.IsChatOpen || Shop.IsOpen || Player.LSIsRecalling())
@@ -891,7 +891,7 @@
             {
                 if (getKeyBindItem(miscMenu, "FleeW"))
                 {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                     if (WState == 0)
                     {
                         W.Cast(Game.CursorPos);

@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using Firestorm_AIO.DataBases;
 
-namespace Firestorm_AIO.Bases
+ namespace Firestorm_AIO.Bases
 {
     public abstract class ChampionBase
     {
@@ -221,7 +221,7 @@ namespace Firestorm_AIO.Bases
 
 
         }
-
+        
         private void Drawing_OnDraw(EventArgs args)
         {
             if (Me.IsDead) return;

@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Summoners
+﻿ namespace ElUtilitySuite.Summoners
 {
     using EloBuddy;
     using EloBuddy.SDK;

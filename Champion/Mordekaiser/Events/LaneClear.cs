@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp.Common;
 
-namespace Mordekaiser.Events
+ namespace Mordekaiser.Events
 {
     internal class LaneClear
     {
@@ -20,7 +20,7 @@ namespace Mordekaiser.Events
 
         private void Orbwalker_OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var minion = args.Target as Obj_AI_Minion;
                 AttackingToMinion = minion != null;
@@ -36,7 +36,7 @@ namespace Mordekaiser.Events
 
         private static void Game_OnUpdate(EventArgs args)
         {
-            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 return;
 
             ExecuteQ();

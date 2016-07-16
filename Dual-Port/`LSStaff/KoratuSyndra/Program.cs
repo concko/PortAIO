@@ -9,7 +9,7 @@ using SharpDX;
 
 #endregion
 
-namespace Syndra
+ namespace Syndra
 {
     using EloBuddy;
     using EloBuddy.SDK;
@@ -172,7 +172,7 @@ namespace Syndra
                 UseQe(sender);
             }
         }
-
+        
         // ReSharper disable once InconsistentNaming
         private static void Orbwalking_BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {

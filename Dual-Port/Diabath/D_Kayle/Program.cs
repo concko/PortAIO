@@ -13,7 +13,7 @@ using Utility = LeagueSharp.Common.Utility;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace D_Kayle
+ namespace D_Kayle
 {
     internal class Program
     {
@@ -222,7 +222,7 @@ namespace D_Kayle
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             _player = ObjectManager.Player;
@@ -251,13 +251,13 @@ namespace D_Kayle
                 Lasthit();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)
                 && (100 * (_player.Mana / _player.MaxMana)) > getSliderItem(clearMenu, "Farmmana"))
             {
                 Farm();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)
                 && (100 * (_player.Mana / _player.MaxMana)) > getSliderItem(clearMenu, "junglemana"))
             {
                 JungleFarm();
@@ -519,7 +519,7 @@ namespace D_Kayle
             if (_player.InFountain() || ObjectManager.Player.HasBuff("Recall")) return;
 
             if (ObjectManager.Player.LSCountEnemiesInRange(800) > 0
-                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && _smite != null))
+                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && _smite != null))
             {
                 if (iusepotionhp && iusehppotion
                     && !(ObjectManager.Player.HasBuff("RegenerationPotion")
@@ -834,7 +834,7 @@ namespace D_Kayle
         //New map Monsters Name By SKO
         private static void Smiteuse()
         {
-            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
+            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
             if (ObjectManager.Player.Spellbook.CanUseSpell(_smiteSlot) != SpellState.Ready) return;
             var useblue = getCheckBoxItem(smiteMenu, "Useblue");
             var usered = getCheckBoxItem(smiteMenu, "Usered");

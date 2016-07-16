@@ -26,7 +26,7 @@ using EloBuddy.SDK.Menu.Values;
 using Prediction = Challenger_Series.Utils.Prediction;
 using LeagueSharp.SDK.Enumerations;
 
-namespace Challenger_Series
+ namespace Challenger_Series
 {
     public class Soraka : CSPlugin
     {
@@ -138,7 +138,7 @@ namespace Challenger_Series
         }
 
         #region Events
-
+        
         public override void OnUpdate(EventArgs args)
         {
             base.OnUpdate(args);
@@ -149,7 +149,7 @@ namespace Challenger_Series
             QLogic();
             ELogic();
             EAntiMelee();
-            Orbwalker.DisableAttacking = getCheckBoxItem(MainMenu, "blockaas");
+            PortAIO.OrbwalkerManager.SetAttack(!getCheckBoxItem(MainMenu, "blockaas"));
         }
 
 

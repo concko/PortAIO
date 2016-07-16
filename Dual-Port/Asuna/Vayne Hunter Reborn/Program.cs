@@ -4,7 +4,7 @@ using LeagueSharp.Common;
 using VayneHunter_Reborn.Utility;
 using EloBuddy;
 
-namespace VayneHunter_Reborn
+ namespace VayneHunter_Reborn
 {
     class Program
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using LeagueSharp.Common;
 
-namespace BlackFeeder
+ namespace BlackFeeder
 {
     internal class Program
     {

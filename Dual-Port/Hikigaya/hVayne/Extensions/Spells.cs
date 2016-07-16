@@ -2,7 +2,7 @@
 using LeagueSharp.SDK;
 using Spell = LeagueSharp.SDK.Spell;
 
-namespace hVayne.Extensions
+ namespace hVayne.Extensions
 {
     class Spells
     {

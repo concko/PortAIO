@@ -12,7 +12,7 @@ using Orbwalking = SebbyLib.Orbwalking;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace OneKeyToWin_AIO_Sebby
+ namespace OneKeyToWin_AIO_Sebby
 {
     internal class MissFortune
     {
@@ -123,6 +123,7 @@ namespace OneKeyToWin_AIO_Sebby
                 }
             }
         }
+        
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
@@ -134,12 +135,12 @@ namespace OneKeyToWin_AIO_Sebby
                 }
                 RCastTime = Game.Time;
                 Program.debug(args.SData.Name);
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 if (getCheckBoxItem(rMenu, "forceBlockMove"))
                 {
-                    Orbwalker.DisableAttacking = true;
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                 }
             }
         }
@@ -213,8 +214,8 @@ namespace OneKeyToWin_AIO_Sebby
         {
             if (getKeyBindItem(rMenu, "disableBlock"))
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
                 return;
             }
 
@@ -222,21 +223,21 @@ namespace OneKeyToWin_AIO_Sebby
             {
                 if (getCheckBoxItem(rMenu, "forceBlockMove"))
                 {
-                    Orbwalker.DisableAttacking = true;
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                 }
 
                 Program.debug("cast R");
                 return;
             }
 
-            Orbwalker.DisableAttacking = false;
-            Orbwalker.DisableMovement = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
+            PortAIO.OrbwalkerManager.SetMovement(true);
 
             if (getCheckBoxItem(rMenu, "forceBlockMove"))
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (R.IsReady() && getKeyBindItem(rMenu, "useR"))
@@ -257,7 +258,7 @@ namespace OneKeyToWin_AIO_Sebby
                 Jungle();
             }
 
-            if (Program.LagFree(2) && !Orbwalker.IsAutoAttacking && Q.IsReady() && getCheckBoxItem(qMenu, "autoQ"))
+            if (Program.LagFree(2) && !ObjectManager.Player.Spellbook.IsAutoAttacking && Q.IsReady() && getCheckBoxItem(qMenu, "autoQ"))
                 LogicQ();
 
             if (Program.LagFree(3) && E.IsReady() && getCheckBoxItem(eMenu, "autoE"))
@@ -266,8 +267,8 @@ namespace OneKeyToWin_AIO_Sebby
             if (Program.LagFree(4) && R.IsReady() && getCheckBoxItem(rMenu, "autoR"))
                 LogicR();
 
-            Orbwalker.DisableAttacking = false;
-            Orbwalker.DisableMovement = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
+            PortAIO.OrbwalkerManager.SetMovement(true);
         }
 
         private static void LogicQ()

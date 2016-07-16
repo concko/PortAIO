@@ -10,7 +10,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace VayneHunter_Reborn.Skills.Tumble
+ namespace VayneHunter_Reborn.Skills.Tumble
 {
     class TumbleLogic
     {
@@ -43,10 +43,10 @@ namespace VayneHunter_Reborn.Skills.Tumble
                 LastCondemnTick = Environment.TickCount;
             }
         }
-
+        
         private static void ExecuteAALogic(Obj_AI_Base sender, Obj_AI_Base target)
         {
-            var QEnabled = Q.IsEnabledAndReady(Orbwalker.ActiveModesFlags.ToString().ToLower());
+            var QEnabled = Q.IsEnabledAndReady(PortAIO.OrbwalkerManager.GetActiveMode());
             
             if (QEnabled)
             {

@@ -8,7 +8,7 @@ using LeagueSharp.Data.Enumerations;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Lucian
+ namespace ExorAIO.Champions.Lucian
 {
     /// <summary>
     ///     The champion class.
@@ -40,7 +40,7 @@ namespace ExorAIO.Champions.Lucian
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>

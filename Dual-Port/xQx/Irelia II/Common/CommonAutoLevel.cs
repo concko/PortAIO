@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 
-namespace Irelia.Common
+ namespace Irelia.Common
 {
     internal class CommonAutoLevel
     {

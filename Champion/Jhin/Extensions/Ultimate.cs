@@ -3,10 +3,12 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp.Common;
 
+
 namespace Jhin___The_Virtuoso.Extensions
 {
     internal static class Ultimate
     {
+        
         public static void ComboUltimate()
         {
             if (ObjectManager.Player.IsActive(Spells.R))

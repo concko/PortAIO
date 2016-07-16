@@ -29,7 +29,7 @@ using Color = System.Drawing.Color;
 using LeagueSharp.Common;
 using LeagueSharp.Common.Data;
 
-namespace ExorAIO.Utilities
+ namespace ExorAIO.Utilities
 {
     using System.Linq;
     using System.Text.RegularExpressions;

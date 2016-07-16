@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace SharpPredictioner
+ namespace SharpPredictioner
 {
     public class SharpPredictioner
     {

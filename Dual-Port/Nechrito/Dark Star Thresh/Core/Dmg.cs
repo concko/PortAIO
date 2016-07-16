@@ -5,7 +5,7 @@ using System.Linq;
 using LeagueSharp.Common.Data;
 using EloBuddy;
 
-namespace Dark_Star_Thresh.Core
+ namespace Dark_Star_Thresh.Core
 {
     class Dmg
     {

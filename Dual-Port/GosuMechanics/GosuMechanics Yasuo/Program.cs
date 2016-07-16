@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     class Program
     {
@@ -297,6 +297,7 @@ namespace GosuMechanicsYasuo
 
             LeagueSharp.Common.Utility.DelayAction.Add(450, () => isDashing = false);
         }
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             if (myHero.IsDead || myHero.IsRecalling())

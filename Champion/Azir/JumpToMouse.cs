@@ -9,6 +9,7 @@ namespace HeavenStrikeAzir
 {
     public static class JumpToMouse
     {
+        
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
         public static int LastJump;
         private static Vector2 CastQLocation, CastELocation, JumpTo;
@@ -108,7 +109,7 @@ namespace HeavenStrikeAzir
                 return;
             if (Orbwalker.CanMove)
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
             Jump(Game.CursorPos, true);
         }

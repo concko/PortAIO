@@ -7,7 +7,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 
-namespace ExorAIO.Champions.KogMaw
+ namespace ExorAIO.Champions.KogMaw
 {
     /// <summary>
     ///     The logics class.
@@ -28,7 +28,8 @@ namespace ExorAIO.Champions.KogMaw
             {
                 foreach (var target in GameObjects.EnemyHeroes.Where(
                     t =>
-                        !Invulnerable.Check(t) &&
+                        !Invulnerable.Check(t) && t.IsVisible &&
+                        t.IsHPBarRendered &&
                         !t.LSIsValidTarget(Vars.AARange) &&
                         t.LSIsValidTarget(Vars.Q.Range - 100f) &&
                         Vars.GetRealHealth(t) <

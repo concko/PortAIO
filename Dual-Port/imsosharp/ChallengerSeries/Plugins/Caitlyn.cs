@@ -14,7 +14,7 @@ using Prediction = Challenger_Series.Utils.Prediction;
 using Challenger_Series.Utils;
 using LeagueSharp.SDK.Enumerations;
 
-namespace Challenger_Series.Plugins
+ namespace Challenger_Series.Plugins
 {
     public class Caitlyn : CSPlugin
     {
@@ -163,7 +163,7 @@ namespace Challenger_Series.Plugins
 
         private void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
-            Orbwalker.ForcedTarget = null;
+            Orbwalker.ForcedTarget =(null);
             if (E.IsReady() && this.UseECombo)
             {
                 if (!OnlyUseEOnMelees)
@@ -256,7 +256,7 @@ namespace Challenger_Series.Plugins
         }
 
         #region Logic
-
+        
         void QLogic()
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

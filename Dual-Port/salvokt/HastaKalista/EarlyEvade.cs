@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace HastaKalistaBaby
+ namespace HastaKalistaBaby
 {
 
     internal partial class EarlyList

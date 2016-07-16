@@ -13,7 +13,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Irelia
+ namespace Irelia
 {
     internal class Irelia
     {

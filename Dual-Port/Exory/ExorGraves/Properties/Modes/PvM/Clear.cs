@@ -9,7 +9,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Graves
+ namespace ExorAIO.Champions.Graves
 {
     /// <summary>
     ///     The logics class.

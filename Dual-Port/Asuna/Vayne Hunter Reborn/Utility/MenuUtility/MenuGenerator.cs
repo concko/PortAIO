@@ -5,7 +5,7 @@ using VayneHunter_Reborn.External;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace VayneHunter_Reborn.Utility.MenuUtility
+ namespace VayneHunter_Reborn.Utility.MenuUtility
 {
     class MenuGenerator
     {

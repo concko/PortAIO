@@ -13,6 +13,7 @@ using ItemData = LeagueSharp.Common.Data.ItemData;
 using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace PortAIO.Champion.Aatrox
 {
     public static class Program
@@ -21,6 +22,7 @@ namespace PortAIO.Champion.Aatrox
         private static Spell W, R;
         public static Items.Item Tiamat, Hydra, Youmuu, Zhonya, Seraph, Sheen, Iceborn, Trinity;
         public static SpellSlot Flash, Smite, Ignite;
+        
 
         private static Menu Menu,
             ComboMenu,
@@ -249,8 +251,7 @@ namespace PortAIO.Champion.Aatrox
             {
                 Fight("Harass");
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -259,7 +260,7 @@ namespace PortAIO.Champion.Aatrox
                 Flee();
             }
             if (Auto)
-                //&& !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                //&& !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 SmiteMob();
             }

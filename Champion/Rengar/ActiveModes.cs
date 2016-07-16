@@ -1,4 +1,4 @@
-namespace ElRengarRevamped
+ namespace ElRengarRevamped
 {
     using System;
     using System.Collections.Generic;
@@ -135,6 +135,11 @@ namespace ElRengarRevamped
                     return;
                 }
 
+                if (RengarR)
+                {
+                    return;
+                }
+
                 var pred = spells[Spells.E].GetPrediction(target);
                 if (pred.Hitchance >= HitChance.High)
                 {
@@ -265,6 +270,10 @@ namespace ElRengarRevamped
         /// </summary>
         public static void Jungleclear()
         {
+            if (RengarR)
+            {
+                return;
+            }
             try
             {
                 var minion =
@@ -447,7 +456,7 @@ namespace ElRengarRevamped
 
             return false;
         }
-
+        
         /// <summary>
         ///     Cast items
         /// </summary>

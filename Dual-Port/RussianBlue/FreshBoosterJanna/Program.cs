@@ -12,7 +12,7 @@ using Spell = LeagueSharp.Common.Spell;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace FreshBooster.Champion
+ namespace FreshBooster.Champion
 {
     class Janna
     {
@@ -175,7 +175,7 @@ namespace FreshBooster.Champion
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             try

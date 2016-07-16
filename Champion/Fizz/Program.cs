@@ -18,7 +18,7 @@ namespace MathFizz
     internal class Program
     {
         #region OnDraw
-
+        
         private static void OnDraw(EventArgs args)
         {
             if (getCheckBoxItem(drawingsMenu, "drawQ"))
@@ -212,8 +212,7 @@ namespace MathFizz
             {
                 Combo();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Lane();
                 Jungle();
@@ -301,7 +300,7 @@ namespace MathFizz
 
         private static void Flee()
         {
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             if (E.IsReady())
             {
                 E.Cast(Game.CursorPos);
@@ -1049,7 +1048,7 @@ namespace MathFizz
 
         private static void lateGameZhonyaCombo()
         {
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             var m = SelectedTarget;
             if (m.LSIsValidTarget())
             {
@@ -1109,7 +1108,7 @@ namespace MathFizz
 
         private static void QminionREWCombo()
         {
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             var m = SelectedTarget;
             if (m.LSIsValidTarget())
             {
@@ -1192,7 +1191,7 @@ namespace MathFizz
         private static void EFlashCombo()
         {
             //E Flash RWQ Combo
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             var m = SelectedTarget;
             if (m.LSIsValidTarget())
             {

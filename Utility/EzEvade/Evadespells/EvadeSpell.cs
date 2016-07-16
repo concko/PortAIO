@@ -10,6 +10,9 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
+
+using EloBuddy.SDK;
+
 namespace ezEvade
 {
     class EvadeSpell
@@ -50,10 +53,11 @@ namespace ezEvade
             {
                 var dashInfo = myHero.LSGetDashInfo();
 
-                //Console.WriteLine("" + dashInfo.EndPos.LSDistance(lastSpellEvadeCommand.targetPosition));
+                //Console.WriteLine("" + dashInfo.EndPos.Distance(lastSpellEvadeCommand.targetPosition));
                 lastSpellEvadeCommand.targetPosition = dashInfo.EndPos;
             }
         }
+
 
         private static void CheckForItems()
         {
@@ -151,7 +155,6 @@ namespace ezEvade
             }
 
         }
-
         public static bool ActivateEvadeSpell(Spell spell, bool checkSpell = false)
         {
             var sortedEvadeSpells = evadeSpells.OrderBy(s => s.dangerlevel);
@@ -177,7 +180,6 @@ namespace ezEvade
                     || (evadeSpell.isItem == false && myHero.Spellbook.CanUseSpell(evadeSpell.spellKey) != SpellState.Ready)
                     || (evadeSpell.isItem && !Items.CanUseItem((int)evadeSpell.itemID))
                     || (evadeSpell.checkSpellName && myHero.Spellbook.GetSpell(evadeSpell.spellKey).Name != evadeSpell.spellName))
-
                 {
                     continue; //can't use spell right now               
                 }
@@ -189,7 +191,8 @@ namespace ezEvade
 
                 if (checkSpell)
                 {
-                    var mode = ObjectCache.menuCache.cache[evadeSpell.name + "EvadeSpellMode"].Cast<ComboBox>().CurrentValue;
+                    var mode = ObjectCache.menuCache.cache[evadeSpell.name + "EvadeSpellMode"]
+                        .Cast<ComboBox>().CurrentValue;
 
                     if (mode == 0)
                     {
@@ -211,7 +214,7 @@ namespace ezEvade
                         var path = myHero.Path;
                         if (path.Length > 0)
                         {
-                            var movePos = path[path.Length - 1].LSTo2D();
+                            var movePos = path[path.Length - 1].To2D();
                             var posInfo = EvadeHelper.CanHeroWalkToPos(movePos, ObjectCache.myHeroCache.moveSpeed, 0, 0);
 
                             if (GetSpellDangerLevel(evadeSpell) > posInfo.posDangerLevel)
@@ -277,8 +280,8 @@ namespace ezEvade
                         {
                             if (evadeSpell.isReversed)
                             {
-                                var dir = (posInfo.position - ObjectCache.myHeroCache.serverPos2D).LSNormalized();
-                                var range = ObjectCache.myHeroCache.serverPos2D.LSDistance(posInfo.position);
+                                var dir = (posInfo.position - ObjectCache.myHeroCache.serverPos2D).Normalized();
+                                var range = ObjectCache.myHeroCache.serverPos2D.Distance(posInfo.position);
                                 var pos = ObjectCache.myHeroCache.serverPos2D - dir * range;
 
                                 posInfo.position = pos;
@@ -304,7 +307,7 @@ namespace ezEvade
                 {
                     if (spell.hasProjectile() || evadeSpell.spellName == "FioraW") //temp fix, don't have fiora :'(
                     {
-                        var dir = (spell.startPos - ObjectCache.myHeroCache.serverPos2D).LSNormalized();
+                        var dir = (spell.startPos - ObjectCache.myHeroCache.serverPos2D).Normalized();
                         var pos = ObjectCache.myHeroCache.serverPos2D + dir * 100;
 
                         CastEvadeSpell(() => EvadeCommand.CastSpell(evadeSpell, pos), processSpell);
@@ -365,6 +368,7 @@ namespace ezEvade
                                 EvadeCommand.MoveTo(posInfo.position);
                                 return true;
                             }
+
                         }
 
                         else if (evadeSpell.castType == CastType.Position)
@@ -373,7 +377,6 @@ namespace ezEvade
                             if (posInfo != null)
                             {
                                 CastEvadeSpell(() => EvadeCommand.CastSpell(evadeSpell, posInfo.position), processSpell);
-
                                 EvadeCommand.MoveTo(posInfo.position);
                                 return true;
                             }
@@ -381,9 +384,9 @@ namespace ezEvade
                     }
                 }
             }
+
             return false;
         }
-
         public static void CastEvadeSpell(Callback func, bool process = true)
         {
             if (process)

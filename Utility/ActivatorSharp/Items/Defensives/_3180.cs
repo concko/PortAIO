@@ -3,7 +3,7 @@ using Activators.Base;
 using LeagueSharp.Common;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Items.Defensives
+ namespace Activators.Items.Defensives
 {
     class _3180 : CoreItem
     {
@@ -22,11 +22,11 @@ namespace Activators.Items.Defensives
         {
             if (!Menu["use" + Name].Cast<CheckBox>().CurrentValue || !IsReady())
                 return;
-            if (Activator.dmenu[Parent.UniqueMenuId + "useon" + Player.NetworkId] == null)
+            if (Activator.dmenu[Activator.dmenu.UniqueMenuId + "useon" + Player.NetworkId] == null)
             {
                 return;
             }
-            if (!Activator.dmenu[Parent.UniqueMenuId + "useon" + Player.NetworkId].Cast<CheckBox>().CurrentValue)
+            if (!Activator.dmenu[Activator.dmenu.UniqueMenuId + "useon" + Player.NetworkId].Cast<CheckBox>().CurrentValue)
                 return;
 
             if (Player.Health/Player.MaxHealth*100 <= Menu["selflowhp" + Name + "pct"].Cast<Slider>().CurrentValue)

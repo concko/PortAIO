@@ -9,6 +9,7 @@ using SharpDX;
 using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace Illaoi___Tentacle_Kitty
 {
     internal class Program
@@ -16,7 +17,7 @@ namespace Illaoi___Tentacle_Kitty
         public static Spell Q, W, E, R;
         private static readonly AIHeroClient Illaoi = ObjectManager.Player;
         public static Menu Config, comboMenu, harassMenu, clearMenu, eMenu, ksMenu, drawMenu;
-
+        
         public static string[] HighChamps =
         {
             "Ahri", "Anivia", "Annie", "Ashe", "Azir", "Brand", "Caitlyn", "Cassiopeia", "Corki", "Draven",
@@ -181,8 +182,7 @@ namespace Illaoi___Tentacle_Kitty
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

@@ -1,4 +1,4 @@
-﻿namespace SkyLv_Taric
+﻿ namespace SkyLv_Taric
 {
     using System;
     using LeagueSharp;

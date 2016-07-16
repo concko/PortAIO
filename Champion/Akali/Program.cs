@@ -10,12 +10,13 @@ using LeagueSharp.Common;
 using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace PortAIO.Champion.Akali
 {
     internal class Program
     {
         public const string ChampionName = "Akali";
-
+        
         public static Spell Q;
         public static Spell W;
         public static Spell E;
@@ -157,7 +158,7 @@ namespace PortAIO.Champion.Akali
                 }
             }
 
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
@@ -172,14 +173,10 @@ namespace PortAIO.Champion.Akali
                     Harass();
             }
 
-            var lc = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear);
+            var lc = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
             if (lc)
             {
                 Farm(lc);
-            }
-
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
-            {
                 JungleFarm();
             }
 

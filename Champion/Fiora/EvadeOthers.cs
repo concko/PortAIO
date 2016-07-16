@@ -21,6 +21,7 @@ namespace FioraProject
     #region OtherSkill
     internal class OtherSkill
     {
+        
         private static readonly List<SpellData> Spells = new List<SpellData>();
 
         // riven variables

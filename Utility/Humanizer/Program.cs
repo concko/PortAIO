@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace Humanizer
+ namespace Humanizer
 {
     public class Program
     {

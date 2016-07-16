@@ -6,13 +6,14 @@ using LeagueSharp.SDK;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.DrMundo
+ namespace ExorAIO.Champions.DrMundo
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>

@@ -1,4 +1,4 @@
-﻿namespace ElVi
+﻿ namespace ElVi
 {
     using System;
     using System.Collections.Generic;
@@ -125,7 +125,7 @@
             var titanic = Titanic;
             return titanic.IsReady() && count > 0 && titanic.Cast();
         }
-
+        
         public static float GetComboDamage(Obj_AI_Base enemy)
         {
             var damage = 0d;
@@ -518,6 +518,7 @@
             if (getCheckBoxItem(ElViMenu.cMenu, "ElVi.Combo.E"))
             {
                 Spells[ElVi.Spells.E].Cast();
+                Orbwalker.ResetAutoAttack();
             }
         }
 

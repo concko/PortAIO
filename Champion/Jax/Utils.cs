@@ -2,10 +2,12 @@
 using SharpDX;
 using SharpDX.Direct3D9;
 
+
 namespace JaxQx
 {
     internal class Utils
     {
+        
         public static Font Text, TextBold, TextWarning;
 
         public Utils()

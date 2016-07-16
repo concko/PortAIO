@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace D_Graves
+ namespace D_Graves
 {
     using SharpDX;
 
@@ -187,6 +187,7 @@ namespace D_Graves
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+        
 
         private static void Game_OnGameUpdate(EventArgs args)
         {
@@ -209,13 +210,13 @@ namespace D_Graves
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)
                 && (100 * (_player.Mana / _player.MaxMana)) > getSliderItem(clearMenu, "Lanemana"))
             {
                 Laneclear();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)
                 && (100 * (_player.Mana / _player.MaxMana)) > getSliderItem(jungleMenu, "Junglemana"))
             {
                 JungleClear();
@@ -234,7 +235,7 @@ namespace D_Graves
 
             _player = ObjectManager.Player;
 
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
             Usecleanse();
             KillSteal();
             Usepotion();
@@ -257,7 +258,7 @@ namespace D_Graves
         //New map Monsters Name By SKO
         private static void Smiteuse()
         {
-            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
+            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
             if (ObjectManager.Player.Spellbook.CanUseSpell(_smiteSlot) != SpellState.Ready) return;
             var useblue = getCheckBoxItem(smiteMenu, "Useblue");
             var usered = getCheckBoxItem(smiteMenu, "Usered");
@@ -745,7 +746,7 @@ namespace D_Graves
             if (_player.InFountain() || ObjectManager.Player.HasBuff("Recall")) return;
 
             if (ObjectManager.Player.CountEnemiesInRange(800) > 0
-                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear)))
+                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)))
             {
                 if (iusepotionhp && iusehppotion
                     && !(ObjectManager.Player.HasBuff("RegenerationPotion")

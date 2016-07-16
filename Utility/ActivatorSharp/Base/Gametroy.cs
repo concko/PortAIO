@@ -12,7 +12,7 @@ using EloBuddy;
 using LeagueSharp;
 using System.Collections.Generic;
 
-namespace Activators.Base
+ namespace Activators.Base
 {
     public class Gametroy
     {

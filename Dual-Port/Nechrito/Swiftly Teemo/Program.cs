@@ -12,7 +12,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Swiftly_Teemo
+ namespace Swiftly_Teemo
 {
     internal class Program : Core
     {
@@ -35,6 +35,7 @@ namespace Swiftly_Teemo
             Spellbook.OnCastSpell += Mode.OnCastSpell;
             Game.OnUpdate += OnUpdate;
         }
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead || Player.LSIsRecalling())

@@ -10,7 +10,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace NechritoRiven.Event
+ namespace NechritoRiven.Event
 {
     internal class Modes : Core.Core
     {
@@ -36,7 +36,7 @@ namespace NechritoRiven.Event
                 }
             }
         }
-
+        
         // Jungle, Combo etc.
         public static void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
@@ -162,7 +162,7 @@ namespace NechritoRiven.Event
 
         public static void Jungleclear()
         {
-            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) return;
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) return;
 
             var mobs = MinionManager.GetMinions(Player.Position, 600f, MinionTypes.All, MinionTeam.Neutral).FirstOrDefault();
             if(mobs == null || mobs.IsDead || !mobs.LSIsValidTarget()) return;
@@ -224,7 +224,7 @@ namespace NechritoRiven.Event
 
         public static void Burst()
         {
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             var target = TargetSelector.SelectedTarget;
 
             if (target == null || !target.LSIsValidTarget() || target.IsZombie || target.IsInvulnerable) return;
@@ -261,7 +261,7 @@ namespace NechritoRiven.Event
 
         public static void FastHarass()
         {
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             if (Spells.Q.IsReady() && Spells.E.IsReady())
             {
                 var target = TargetSelector.GetTarget(450 + Player.AttackRange + 70, DamageType.Physical);

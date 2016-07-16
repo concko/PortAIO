@@ -106,9 +106,24 @@ namespace ExorAIO.Utilities
         public static AttackableUnit PassiveTarget = null;
 
         /// <summary>
+        ///     The last tick.
+        /// </summary>
+        public static int Tick = 0;
+
+        /// <summary>
         ///     The args End.
         /// </summary>
         public static Vector3 End { get; set; } = Vector3.Zero;
+
+        /// <summary>
+        ///     The Q Stacks.
+        /// </summary>
+        public static int RyzeStacks =>
+            GameObjects.Player.HasBuff("ryzeqiconnocharge")
+                ? 0
+                : GameObjects.Player.HasBuff("ryzeqiconhalfcharge")
+                    ? 1
+                    : 2;
 
         /// <summary>
         ///     Gets or sets the Q Spell.
@@ -144,6 +159,11 @@ namespace ExorAIO.Utilities
         ///     Gets or sets the R Spell.
         /// </summary>
         public static Spell R { internal get; set; }
+
+        /// <summary>
+        ///     Gets or sets the R2 Spell.
+        /// </summary>
+        public static Spell R2 { internal get; set; }
 
         /// <summary>
         ///     Gets or sets the assembly menu.
@@ -220,12 +240,7 @@ namespace ExorAIO.Utilities
         /// <summary>
         ///     Gets the Player's real AutoAttack-Range.
         /// </summary>
-        public static float AARange
-            =>
-                GameObjects.Player.GetRealAutoAttackRange() +
-                (GameObjects.Player.GetBuffCount("itemstatikshankcharge") == 100
-                    ? GameObjects.Player.GetRealAutoAttackRange() / 100 * 30
-                    : 0f);
+        public static float AARange => GameObjects.Player.GetRealAutoAttackRange();
 
         /// <summary>
         ///     The jungle HP bar offset.

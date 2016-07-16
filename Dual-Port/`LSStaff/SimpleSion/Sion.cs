@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu;
 
 #endregion
 
-namespace Sion
+ namespace Sion
 {
     internal class Program
     {
@@ -86,6 +86,7 @@ namespace Sion
         {
             LeagueSharp.Common.Utility.DrawCircle(ObjectManager.Player.Position, Q.Range, System.Drawing.Color.White);
         }
+        
 
         private static void Game_OnGameUpdate(EventArgs args)
         {

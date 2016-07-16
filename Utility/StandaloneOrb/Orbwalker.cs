@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 
-namespace xSLx_Orbwalker
+ namespace xSLx_Orbwalker
 {
     // ReSharper disable once InconsistentNaming
     public class xSLxOrbwalker
@@ -189,11 +189,11 @@ namespace xSLx_Orbwalker
                     lastRealAttack = Environment.TickCount;
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
-            Orbwalker.DisableAttacking = true;
-            Orbwalker.DisableMovement = true;
+            PortAIO.OrbwalkerManager.SetAttack(false);
+            PortAIO.OrbwalkerManager.SetMovement(false);
             CheckAutoWindUp();
             if (CurrentMode == Mode.None || MenuGUI.IsChatOpen || CustomOrbwalkMode)
                 return;

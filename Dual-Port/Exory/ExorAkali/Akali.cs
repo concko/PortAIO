@@ -7,7 +7,7 @@ using EloBuddy;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Akali
+ namespace ExorAIO.Champions.Akali
 {
     /// <summary>
     ///     The champion class.
@@ -84,7 +84,7 @@ namespace ExorAIO.Champions.Akali
                 Logics.Clear(args);
             }
         }
-
+        
         /// <summary>
         ///     Called on do-cast.
         /// </summary>

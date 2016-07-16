@@ -12,7 +12,7 @@ using Orbwalking = SebbyLib.Orbwalking;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace OneKeyToWin_AIO_Sebby
+ namespace OneKeyToWin_AIO_Sebby
 {
     internal class Urgot
     {
@@ -172,19 +172,19 @@ namespace OneKeyToWin_AIO_Sebby
                 SetMana();
             }
 
-            if (Program.LagFree(1) && !Orbwalker.IsAutoAttacking && E.IsReady())
+            if (Program.LagFree(1) && !ObjectManager.Player.Spellbook.IsAutoAttacking && E.IsReady())
                 LogicE();
 
             if (Program.LagFree(2) && W.IsReady() && getCheckBoxItem(w, "autoW"))
                 LogicW();
 
-            if (Program.LagFree(3) && !Orbwalker.IsAutoAttacking && Q.IsReady())
+            if (Program.LagFree(3) && !ObjectManager.Player.Spellbook.IsAutoAttacking && Q.IsReady())
             {
                 LogicQ();
                 LogicQ2();
             }
 
-            if (Program.LagFree(4) && !Orbwalker.IsAutoAttacking && R.IsReady())
+            if (Program.LagFree(4) && !ObjectManager.Player.Spellbook.IsAutoAttacking && R.IsReady())
                 LogicR();
         }
 
@@ -208,6 +208,7 @@ namespace OneKeyToWin_AIO_Sebby
                     W.Cast();
             }
         }
+        
 
         private static void LogicQ2()
         {

@@ -10,7 +10,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace Irelia.Common
+ namespace Irelia.Common
 {
     internal class CommonSummoner
     {
@@ -70,7 +70,7 @@ namespace Irelia.Common
 
             Game.OnUpdate += Game_OnUpdate;
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

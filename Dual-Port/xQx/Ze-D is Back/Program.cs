@@ -21,7 +21,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace Zed
+ namespace Zed
 {
     class Program
     {
@@ -194,7 +194,7 @@ namespace Zed
 
             }
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

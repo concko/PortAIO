@@ -9,7 +9,7 @@ using Color = System.Drawing.Color;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Notifications;
 
-namespace hVayne.Champions
+ namespace hVayne.Champions
 {
     public class Vayne
     {
@@ -29,9 +29,10 @@ namespace hVayne.Champions
             Game.OnUpdate += OnUpdate;
             Orbwalker.OnPostAttack += OnAction;
         }
-
-        private static void OnAction(AttackableUnit dgfg, EventArgs args)
+        
+        private static void OnAction(AttackableUnit target, EventArgs args)
         {
+            var dgfg = target;
             if (dgfg is AIHeroClient)
             {
                 var Target = dgfg as AIHeroClient;
@@ -77,7 +78,7 @@ namespace hVayne.Champions
 
             if (Target.Type == GameObjectType.obj_AI_Minion && 
                 Target.Team == GameObjectTeam.Neutral && ObjectManager.Player.ManaPercent >= Config.getSliderItem(Config.jungleMenu, "jungle.mana")
-                && Spells.Q.IsReady() && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                && Spells.Q.IsReady() && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Spells.Q.Cast(Game.CursorPos);
             }
@@ -91,11 +92,11 @@ namespace hVayne.Champions
             {
                 OnCombo();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnJungle();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnHybrid();
             }

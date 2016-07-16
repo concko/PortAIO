@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Quinn
+ namespace ExorAIO.Champions.Quinn
 {
     /// <summary>
     ///     The logics class.

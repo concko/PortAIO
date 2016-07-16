@@ -7,7 +7,7 @@ using System;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace SephKhazix
+ namespace SephKhazix
 {
     static class Extensions
     {

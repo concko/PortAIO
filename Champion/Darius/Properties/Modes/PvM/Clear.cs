@@ -13,6 +13,7 @@ namespace ExorAIO.Champions.Darius
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>

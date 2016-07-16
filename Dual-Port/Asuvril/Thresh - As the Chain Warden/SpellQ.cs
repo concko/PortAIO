@@ -15,7 +15,7 @@ using SkillshotType = SebbyLib.Prediction.SkillshotType;
 using SPrediction;
 using SebbyLib.Prediction;
 
-namespace ThreshWarden {
+ namespace ThreshWarden {
 
 	public enum QState
     {

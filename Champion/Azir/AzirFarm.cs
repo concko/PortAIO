@@ -20,6 +20,7 @@ using System.Security.AccessControl;
 using System;
 using System.Speech.Synthesis;
 
+
 namespace HeavenStrikeAzir
 {
     public static class AzirFarm
@@ -28,11 +29,12 @@ namespace HeavenStrikeAzir
         {
             Game.OnUpdate += Game_OnUpdate;
         }
+        
 
         private static void Game_OnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) &&
-                !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 return;
         }
     }

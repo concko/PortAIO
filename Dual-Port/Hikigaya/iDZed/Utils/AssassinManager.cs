@@ -23,7 +23,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using SharpDX.Direct3D9;
 
-namespace iDZed.Utils
+ namespace iDZed.Utils
 {
     internal class AssassinManager
     {

@@ -9,7 +9,7 @@ using SharpDX;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Vayne
+ namespace ExorAIO.Champions.Vayne
 {
     /// <summary>
     ///     The champion class.
@@ -41,7 +41,7 @@ namespace ExorAIO.Champions.Vayne
             /// </summary>
             PredictionDrawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>
@@ -210,14 +210,14 @@ namespace ExorAIO.Champions.Vayne
                         t.LSIsValidTarget(Vars.AARange) &&
                         t.GetBuffCount("vaynesilvereddebuff") == 2))
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                     return;
                 }
 
-                Orbwalker.ForcedTarget = GameObjects.EnemyHeroes.FirstOrDefault(
+                Orbwalker.ForcedTarget =(GameObjects.EnemyHeroes.FirstOrDefault(
                     t =>
                         t.LSIsValidTarget(Vars.AARange) &&
-                        t.GetBuffCount("vaynesilvereddebuff") == 2);
+                        t.GetBuffCount("vaynesilvereddebuff") == 2));
             }
         }
     }

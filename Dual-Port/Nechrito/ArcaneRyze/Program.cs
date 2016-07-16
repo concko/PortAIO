@@ -14,7 +14,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Arcane_Ryze
+ namespace Arcane_Ryze
 {
     internal class Program : Core
     {
@@ -38,7 +38,7 @@ namespace Arcane_Ryze
             Game.OnUpdate += OnUpdate;
             Drawing.OnEndScene += Drawing_OnEndScene;
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead || Player.LSIsRecalling())
@@ -58,7 +58,7 @@ namespace Arcane_Ryze
             {
                 Harass.HarassLogic();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Jungle.JungleLogic();
                 Lane.LaneLogic();

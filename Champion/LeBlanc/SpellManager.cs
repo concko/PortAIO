@@ -5,7 +5,7 @@ using LeagueSharp.Common;
 using System.Collections.Generic;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace PopBlanc
+ namespace PopBlanc
 {
     internal static class SpellManager
     {
@@ -48,7 +48,7 @@ namespace PopBlanc
         {
             _menu = menu;
         }
-
+        
         public static bool IsActive(this Spell spell, bool force = false)
         {
             if (force)

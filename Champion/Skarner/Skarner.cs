@@ -11,7 +11,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Environment = UnderratedAIO.Helpers.Environment;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Skarner
     {
@@ -49,14 +49,14 @@ namespace UnderratedAIO.Champions
         {
             if (SkarnerR)
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -69,13 +69,12 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
         }
-
+        
         private void Combo()
         {
             var target = TargetSelector.GetTarget(E.Range, DamageType.Physical);

@@ -17,7 +17,7 @@ using Environment = UnderratedAIO.Helpers.Environment;
 using Prediction = LeagueSharp.Common.Prediction;
 using EloBuddy.SDK;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Hecarim
     {
@@ -57,7 +57,7 @@ namespace UnderratedAIO.Champions
             DrawHelper.DrawCircle(getCheckBoxItem(drawMenu, "drawee"), getSliderItem(comboMenu, "useeRange"), Color.FromArgb(180, 255, 222, 5));
             LeagueSharp.Common.Utility.HpBarDamageIndicator.Enabled = getCheckBoxItem(drawMenu, "drawcombo");
         }
-
+        
         private void Game_OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -70,7 +70,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

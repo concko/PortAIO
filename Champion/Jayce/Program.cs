@@ -9,6 +9,7 @@ using SebbyLib;
 using SharpDX;
 using Color = System.Drawing.Color;
 using Orbwalking = SebbyLib.Orbwalking;
+
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
@@ -28,7 +29,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
         public static int Muramana = 3042;
         public static int Tear = 3070;
         public static int Manamune = 3004;
-
+        
         public static AIHeroClient Player
         {
             get { return ObjectManager.Player; }
@@ -250,9 +251,9 @@ namespace OneKeyToWin_AIO_Sebby.Champions
             {
                 if (getCheckBoxItem(wMenu, "autoWmove") && Orbwalker.LastTarget != null &&
                     Player.HasBuff("jaycehyperchargevfx"))
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                 else
-                    Orbwalker.DisableMovement = false;
+                    PortAIO.OrbwalkerManager.SetMovement(true);
 
                 if (Program.LagFree(1) && Q.IsReady() && getCheckBoxItem(qMenu, "autoQ"))
                     LogicQ();

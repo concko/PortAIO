@@ -10,7 +10,7 @@ using EloBuddy;
 using LeagueSharp.Common;
 using EloBuddy.SDK;
 
-namespace OAnnie
+ namespace OAnnie
 {
     internal class Tibbers
     {

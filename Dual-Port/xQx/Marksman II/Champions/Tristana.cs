@@ -17,7 +17,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Tristana : Champion
     {
@@ -115,7 +115,7 @@ namespace Marksman.Champions
                 }
             }
         }
-
+        
         public override void Game_OnGameUpdate(EventArgs args)
         {
             if (ObjectManager.Player.IsDead)
@@ -130,12 +130,12 @@ namespace Marksman.Champions
             var getEMarkedEnemy = TristanaData.GetEMarkedEnemy;
             if (getEMarkedEnemy != null)
             {
-                Orbwalker.ForcedTarget = (getEMarkedEnemy);
+                Orbwalker.ForcedTarget =((getEMarkedEnemy));
             }
             else
             {
                 var attackRange = Orbwalking.GetRealAutoAttackRange(Player);
-                Orbwalker.ForcedTarget = TargetSelector.GetTarget(attackRange, DamageType.Physical);
+                Orbwalker.ForcedTarget =(TargetSelector.GetTarget(attackRange, DamageType.Physical));
             }
 
             Q.Range = 600 + 5 * (Player.Level - 1);
@@ -168,7 +168,7 @@ namespace Marksman.Champions
                 if (TristanaData.GetEMarkedEnemy != null)
                 {
                     t = TristanaData.GetEMarkedEnemy;
-                    Orbwalker.ForcedTarget = TristanaData.GetEMarkedEnemy;
+                    Orbwalker.ForcedTarget =(TristanaData.GetEMarkedEnemy);
                 }
                 else
                 {

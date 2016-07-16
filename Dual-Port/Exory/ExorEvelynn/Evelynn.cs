@@ -4,7 +4,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Evelynn
+ namespace ExorAIO.Champions.Evelynn
 {
     /// <summary>
     ///     The champion class.
@@ -36,6 +36,7 @@ namespace ExorAIO.Champions.Evelynn
             /// </summary>
             Drawings.Initialize();
         }
+        
 
         /// <summary>
         ///     Fired when the game is updated.

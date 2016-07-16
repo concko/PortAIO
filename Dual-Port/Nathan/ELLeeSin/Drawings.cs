@@ -6,7 +6,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
-namespace ElLeeSin
+ namespace ElLeeSin
 {
     public class Drawings
     {

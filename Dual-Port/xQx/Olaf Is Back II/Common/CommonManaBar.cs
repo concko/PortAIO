@@ -5,7 +5,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using SharpDX.Direct3D9;
 
-namespace OlafxQx.Common
+ namespace OlafxQx.Common
 {
     using EloBuddy;
     using EloBuddy.SDK.Menu;

@@ -10,7 +10,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace KurisuMorgana
+ namespace KurisuMorgana
 {
     internal class KurisuMorgana
     {
@@ -110,7 +110,7 @@ namespace KurisuMorgana
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private void Orbwalker_OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (getCheckBoxItem(miscMenu, "support"))
@@ -154,7 +154,7 @@ namespace KurisuMorgana
                 Harass(getCheckBoxItem(menuQ, "useharassq"), getCheckBoxItem(menuW, "useharassw"));
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 if (getCheckBoxItem(wwmenu, "farmw") && _w.IsReady())
                 {

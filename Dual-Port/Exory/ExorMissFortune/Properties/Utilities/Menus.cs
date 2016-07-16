@@ -2,7 +2,7 @@ using EloBuddy.SDK.Menu.Values;
 using ExorAIO.Utilities;
 using LeagueSharp.SDK;
 
-namespace ExorAIO.Champions.MissFortune
+ namespace ExorAIO.Champions.MissFortune
 {
     /// <summary>
     ///     The menu class.
@@ -35,7 +35,6 @@ namespace ExorAIO.Champions.MissFortune
                 Vars.Q2Menu.Add("exlaneclear", new Slider("LaneClear / if Mana >= x%", 50, 0, 99));
                 Vars.Q2Menu.AddGroupLabel("Miscellaneous Exceptions List:");
                 Vars.Q2Menu.Add("excombokill", new CheckBox("Combo: Only if Minion Killable", true));
-                Vars.Q2Menu.Add("exkillstealkill", new CheckBox("KillSteal: Only if Champion Killable", true));
                 Vars.Q2Menu.Add("mixedkill", new CheckBox("Mixed: Only if Minion Killable", true));
                 Vars.Q2Menu.Add("exlaneclearkill", new CheckBox("LaneClear: Only if Minion Killable", true));
             }

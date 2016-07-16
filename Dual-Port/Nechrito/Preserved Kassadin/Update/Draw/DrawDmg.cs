@@ -5,7 +5,7 @@ using LeagueSharp.SDK;
 using SharpDX;
 using Preserved_Kassadin.Cores;
 
-namespace Preserved_Kassadin.Update.Draw
+ namespace Preserved_Kassadin.Update.Draw
 {
     class DrawDmg
     {

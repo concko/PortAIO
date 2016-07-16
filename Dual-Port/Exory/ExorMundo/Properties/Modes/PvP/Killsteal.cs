@@ -6,7 +6,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 
-namespace ExorAIO.Champions.DrMundo
+ namespace ExorAIO.Champions.DrMundo
 {
     /// <summary>
     ///     The logics class.

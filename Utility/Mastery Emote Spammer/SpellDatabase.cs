@@ -24,7 +24,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Mastery_Badge_Spammer
+ namespace Mastery_Badge_Spammer
 {
     public static class SpellDatabase
     {

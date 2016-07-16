@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using LeagueSharp.Common;
 
+
 namespace JaxQx
 {
     internal class Items
     {
+        
         public enum EnumItemTargettingType
         {
             Ally,

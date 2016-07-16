@@ -11,7 +11,7 @@ using Color = System.Drawing.Color;
 using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace ElTrundle
+ namespace ElTrundle
 {
     internal enum Spells
     {
@@ -374,7 +374,7 @@ namespace ElTrundle
                 spells[Spells.W].Cast(target.Position);
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead || Player.IsRecalling() || MenuGUI.IsChatOpen)
@@ -387,8 +387,7 @@ namespace ElTrundle
                 OnCombo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Laneclear();
                 Jungleclear();

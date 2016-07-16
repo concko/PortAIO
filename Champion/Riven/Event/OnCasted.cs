@@ -8,10 +8,11 @@ using NechritoRiven.Core;
 
 #endregion
 
-namespace NechritoRiven.Event
+ namespace NechritoRiven.Event
 {
     internal class OnCasted : Core.Core
     {
+        
         public static void OnCasting(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (!sender.IsEnemy || sender.Type != Player.Type) return;

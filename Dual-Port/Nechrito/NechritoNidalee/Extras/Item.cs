@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nechrito_Nidalee.Extras
+ namespace Nechrito_Nidalee.Extras
 { 
     // ITEMS | Smite
     class Item : Core

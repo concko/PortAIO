@@ -3,7 +3,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
-namespace Mordekaiser
+ namespace Mordekaiser
 {
     internal class Menu
     {

@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace Zac_The_Secret_Flubber
+ namespace Zac_The_Secret_Flubber
 {
     class Program
     {
@@ -251,13 +251,13 @@ namespace Zac_The_Secret_Flubber
                 }
             }
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
 
             if (E.IsCharging)
             {
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
 
 
@@ -266,7 +266,7 @@ namespace Zac_The_Secret_Flubber
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 JungleClear();
             }

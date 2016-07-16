@@ -24,7 +24,7 @@ using Evade;
 
 #endregion
 
-namespace EvadeB
+ namespace EvadeB
 {
     internal class EvadeSpellDatabase
     {

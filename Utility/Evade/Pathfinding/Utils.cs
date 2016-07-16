@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace EvadeSharp.Pathfinding
+ namespace EvadeSharp.Pathfinding
 {
     class Utils
     {

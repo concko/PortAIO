@@ -4,7 +4,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Corki
+ namespace ExorAIO.Champions.Corki
 {
     /// <summary>
     ///     The champion class.
@@ -36,7 +36,7 @@ namespace ExorAIO.Champions.Corki
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>

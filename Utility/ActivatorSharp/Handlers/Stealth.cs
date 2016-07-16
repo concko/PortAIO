@@ -15,7 +15,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace Activators.Handlers
+ namespace Activators.Handlers
 {
     public class Stealth
     {

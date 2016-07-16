@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Summoners
+﻿ namespace ElUtilitySuite.Summoners
 {
     using System;
     using System.Linq;
@@ -59,6 +59,12 @@
                 {
                     igniteMenu.Add($"igniteon{x.ChampionName}", new CheckBox("Use on " + x.ChampionName));
                 }
+
+                igniteMenu.AddGroupLabel("Do not use ignite when");
+                igniteMenu.Add("Block.Q", new CheckBox("Q is ready", false));
+                igniteMenu.Add("Block.W", new CheckBox("W is ready", false));
+                igniteMenu.Add("Block.E", new CheckBox("E is ready", false));
+                igniteMenu.Add("Block.R", new CheckBox("R is ready", false));
             }
 
             Menu = igniteMenu;
@@ -117,6 +123,27 @@
             try
             {
                 if (!getCheckBoxItem(Menu, "Ignite.Activated"))
+                {
+                    return;
+                }
+
+
+                if (getCheckBoxItem(Menu, "Block.Q") && this.Player.Spellbook.GetSpell(SpellSlot.Q).State == SpellState.Ready)
+                {
+                    return;
+                }
+
+                if (getCheckBoxItem(Menu, "Block.W") && this.Player.Spellbook.GetSpell(SpellSlot.W).State == SpellState.Ready)
+                {
+                    return;
+                }
+
+                if (getCheckBoxItem(Menu, "Block.E") && this.Player.Spellbook.GetSpell(SpellSlot.E).State == SpellState.Ready)
+                {
+                    return;
+                }
+
+                if (getCheckBoxItem(Menu, "Block.R") && this.Player.Spellbook.GetSpell(SpellSlot.R).State == SpellState.Ready)
                 {
                     return;
                 }

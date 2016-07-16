@@ -20,8 +20,6 @@ namespace PortAIO
 {
     internal static class Init
     {
-        public static LSOrbwalker LSOrbwalker;
-
         private static void Main()
         {
             Loading.OnLoadingComplete += Initialize;
@@ -29,11 +27,6 @@ namespace PortAIO
 
         private static void Game_OnUpdate(EventArgs args)
         {
-            if (Loader.useOrb)
-            {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
-            }
             if (Orbwalker.ForcedTarget != null)
             {
                 if (!Orbwalker.ForcedTarget.IsVisible || Orbwalker.ForcedTarget.IsDead || !Orbwalker.ForcedTarget.VisibleOnScreen || ObjectManager.Player.IsDead || ObjectManager.Player.LSIsRecalling())
@@ -63,6 +56,7 @@ namespace PortAIO
 
             Notifications.Show(new SimpleNotification("PortAIO", "Welcome to PortAIO, this is a complete AIO made for every single champion. If you experience bugs or have suggestions or just have something to report please go to the github and view the instructions to post a new issue. Enjoy using PortAIO and GLHF!"), 8000);
             Loader.Menu();
+
             Game.OnUpdate += Game_OnUpdate;
 
             /*
@@ -74,12 +68,6 @@ namespace PortAIO
                 LeagueSharp.Common.Utility.DelayAction.Add(5000, () => Intro.Remove());
             }
             */
-
-            if (Loader.useOrb)
-            {
-                LSTargetSelector.Initialize();
-                LSOrbwalker = new LSOrbwalker();
-            }
 
             if (!Loader.champOnly)
             {
@@ -118,6 +106,9 @@ namespace PortAIO
                     {
                         case 0:
                             NabbTracker.Program.Game_OnGameLoad();
+                            break;
+                        case 1:
+                            Tracker.Program.Game_OnGameLoad();
                             break;
                         default:
                             NabbTracker.Program.Game_OnGameLoad();
@@ -285,6 +276,11 @@ namespace PortAIO
                 if (Loader.randomult)
                 {
                     RandomUlt.Program.Main();
+                }
+
+                if (Loader.universalMinimap)
+                {
+                    UniversalMinimapHack.Program.Game_OnGameLoad();
                 }
 
                 //if (Loader.orbwalker)
@@ -774,6 +770,9 @@ namespace PortAIO
                             case 1:
                                 SebbyLib.Program.GameOnOnGameLoad();
                                 break;
+                            case 2:
+                                new KurisuDarius.KurisuDarius();
+                                break;
                             default:
                                 ExorAIO.AIO.OnLoad();
                                 break;
@@ -837,6 +836,9 @@ namespace PortAIO
                             case 4:
                                 RyzeAssembly.Program.Init();
                                 break;
+                            case 5:
+                                HeavenStrikeRyze.Program.Game_OnGameLoad();
+                                break;
                             default:
                                 ExorAIO.AIO.OnLoad();
                                 break;
@@ -850,6 +852,9 @@ namespace PortAIO
                                 break;
                             case 1:
                                 Nechrito_Diana.Program.Game_OnGameLoad();
+                                break;
+                            case 2:
+                                ExorAIO.AIO.OnLoad();
                                 break;
                             default:
                                 ElDiana.Diana.OnLoad();

@@ -5,10 +5,12 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
+
 namespace Kassawin
 {
     internal class Helper
     {
+        
         public const string Menuname = "Slutty Kassadin";
         public static Menu Config, comboMenu, harassMenu, farmMenu, ksMenu, drawMenu, miscMenu;
         private static readonly DateTime AssemblyLoadTime = DateTime.Now;

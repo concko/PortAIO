@@ -14,7 +14,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 #endregion
 
-namespace EmoteSpammer
+ namespace EmoteSpammer
 {
     internal class Program
     {

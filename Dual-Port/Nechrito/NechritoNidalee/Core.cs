@@ -20,7 +20,7 @@ using System.Security.AccessControl;
 using System;
 using System.Speech.Synthesis;
 
-namespace Nechrito_Nidalee
+ namespace Nechrito_Nidalee
 {
     class Core
     {

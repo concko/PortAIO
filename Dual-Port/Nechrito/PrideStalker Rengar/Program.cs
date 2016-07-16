@@ -9,7 +9,7 @@ using PrideStalker_Rengar.Handlers;
 using PrideStalker_Rengar.Draw;
 using EloBuddy.SDK;
 
-namespace PrideStalker_Rengar
+ namespace PrideStalker_Rengar
 {
     class Program : Core
     {
@@ -44,6 +44,7 @@ namespace PrideStalker_Rengar
                 Orbwalker.ResetAutoAttack();
             }
         }
+        
 
         private static void OnUpdate(EventArgs args)
         {
@@ -72,11 +73,11 @@ namespace PrideStalker_Rengar
                         break;
                 }
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Mode.Lane();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Mode.Jungle();
             }       

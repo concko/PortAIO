@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Caitlyn
+ namespace ExorAIO.Champions.Caitlyn
 {
     /// <summary>
     ///     The logics class.

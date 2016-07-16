@@ -7,7 +7,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace EvadeSharp
+ namespace EvadeSharp
 {
     static class Helpers
     {

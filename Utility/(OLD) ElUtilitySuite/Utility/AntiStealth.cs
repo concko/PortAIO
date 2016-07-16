@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Utility
+﻿ namespace ElUtilitySuite.Utility
 {
     using System;
     using System.Collections.Generic;

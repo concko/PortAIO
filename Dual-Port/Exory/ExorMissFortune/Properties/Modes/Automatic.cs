@@ -6,7 +6,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.MissFortune
+ namespace ExorAIO.Champions.MissFortune
 {
     /// <summary>
     ///     The logics class.
@@ -48,7 +48,7 @@ namespace ExorAIO.Champions.MissFortune
                 else if (GameObjects.Player.HasBuff("missfortunebulletsound") &&
                     !Vars.getKeyBindItem(Vars.RMenu, "key"))
                 {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                 }
             }
         }

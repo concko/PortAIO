@@ -2,7 +2,7 @@
 using System.Reflection;
 using LeagueSharp.Common;
 
-namespace KurisuRiven
+ namespace KurisuRiven
 {
     internal static class Program
     {

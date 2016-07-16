@@ -17,7 +17,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
 
     internal class Twitch : Champion
@@ -140,7 +140,7 @@ namespace Marksman.Champions
 
             //    foreach (var l in objAiMinions.Except(list).ToList())
             //    {
-            //        Program.ChampionClass.Orbwalker.ForceTarget(l);
+            //        Program.ChampionClass.Orbwalker.ForcedTarget =(l);
             //    }
             //}
         }

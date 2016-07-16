@@ -10,10 +10,11 @@ using SharpDX;
 using Geometry = LeagueSharp.Common.Geometry;
 using Prediction = LeagueSharp.Common.Prediction;
 
-namespace LCS_Lucian
+ namespace LCS_Lucian
 {
     internal class Program
     {
+        
         public static Menu Config, comboMenu, harassMenu, clearMenu, jungleMenu, killStealMenu, miscMenu, drawMenu;
 
         public static bool UltActive
@@ -202,21 +203,21 @@ namespace LCS_Lucian
             {
                 if (LucianSpells.Q.IsReady() && getCheckBoxItem(jungleMenu, "lucian.q.jungle") &&
                     ObjectManager.Player.LSDistance(args.Target.Position) < LucianSpells.Q.Range &&
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
+                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                     ObjectManager.Player.Buffs.Any(buff => buff.Name != "lucianpassivebuff"))
                 {
                     LucianSpells.Q.CastOnUnit((Obj_AI_Minion)args.Target);
                 }
                 if (LucianSpells.W.IsReady() && getCheckBoxItem(jungleMenu, "lucian.w.jungle") &&
                     ObjectManager.Player.LSDistance(args.Target.Position) < LucianSpells.W.Range &&
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
+                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                     ObjectManager.Player.Buffs.Any(buff => buff.Name != "lucianpassivebuff"))
                 {
                     LucianSpells.W.Cast(((Obj_AI_Minion)args.Target).Position);
                 }
                 if (LucianSpells.E.IsReady() && getCheckBoxItem(jungleMenu, "lucian.e.jungle") &&
                     ((Obj_AI_Minion)args.Target).LSIsValidTarget(1000) &&
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
+                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                     ObjectManager.Player.Buffs.Any(buff => buff.Name != "lucianpassivebuff"))
                 {
                     LucianSpells.E.Cast(Game.CursorPos);
@@ -243,11 +244,11 @@ namespace LCS_Lucian
 
             if (UltActive)
             {
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             if (getCheckBoxItem(killStealMenu, "lucian.q.ks") && (LucianSpells.Q.IsReady()))

@@ -7,7 +7,7 @@ using LeagueSharp.Common;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace DZAwarenessAIO.Modules.TFHelper
+ namespace DZAwarenessAIO.Modules.TFHelper
 {
     class TFHelperVariables
     {

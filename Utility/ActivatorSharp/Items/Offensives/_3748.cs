@@ -6,7 +6,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace Activators.Items.Offensives
+ namespace Activators.Items.Offensives
 {
     class _3748 : CoreItem
     {
@@ -37,12 +37,12 @@ namespace Activators.Items.Offensives
             var hero = target as AIHeroClient;
             if (hero.LSIsValidTarget(Range))
             {
-                if (Activator.omenu[Parent.UniqueMenuId + "useon" + hero.NetworkId] == null)
+                if (Activator.omenu[Activator.omenu.UniqueMenuId + "useon" + hero.NetworkId] == null)
                 {
                     return;
                 }
 
-                if (!Activator.omenu[Parent.UniqueMenuId + "useon" + hero.NetworkId].Cast<CheckBox>().CurrentValue)
+                if (!Activator.omenu[Activator.omenu.UniqueMenuId + "useon" + hero.NetworkId].Cast<CheckBox>().CurrentValue)
                     return;
 
                 if (hero.Health / hero.MaxHealth * 100 <= Menu["enemylowhp" + Name + "pct"].Cast<Slider>().CurrentValue)

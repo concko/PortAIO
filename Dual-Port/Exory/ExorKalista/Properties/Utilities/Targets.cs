@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Kalista
+ namespace ExorAIO.Champions.Kalista
 {
     /// <summary>
     ///     The settings class.

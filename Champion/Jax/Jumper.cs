@@ -6,10 +6,12 @@ using LeagueSharp.Common;
 using SharpDX;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace JaxQx
 {
     internal class Jumper
     {
+        
         public static Vector2 testSpellCast;
         public static Vector2 testSpellProj;
 

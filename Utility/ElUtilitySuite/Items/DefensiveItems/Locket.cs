@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Items.DefensiveItems
+﻿ namespace ElUtilitySuite.Items.DefensiveItems
 {
     using System;
     using System.Linq;

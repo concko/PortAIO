@@ -9,7 +9,7 @@ using static EloBuddy.SDK.Spell;
 using EloBuddy.SDK;
 using System.Linq;
 
-namespace EBPredictioner
+ namespace EBPredictioner
 {
     internal class SPredictioner
     {

@@ -2,7 +2,7 @@
 using EloBuddy;
 using LeagueSharp.SDK;
 
-namespace Preserved_Kassadin.Cores
+ namespace Preserved_Kassadin.Cores
 {
     class Dmg : Coree
     {

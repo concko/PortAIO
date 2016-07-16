@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 
-namespace KappaSeries
+ namespace KappaSeries
 {
     class Aatrox
     {
@@ -100,7 +100,7 @@ namespace KappaSeries
             Orbwalker.OnPostAttack += OrbwalkingAfterAttack;
 
         }
-
+        
         private static void OrbwalkingAfterAttack(AttackableUnit target, EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && comboMenu["UseItems"].Cast<CheckBox>().CurrentValue)

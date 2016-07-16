@@ -14,7 +14,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace DZAwarenessAIO.Modules.Ranges
+ namespace DZAwarenessAIO.Modules.Ranges
 {
     /// <summary>
     /// The Ranges Tracking Class

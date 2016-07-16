@@ -20,7 +20,7 @@ using LeagueSharp.Common;
 using Vector2 = SharpDX.Vector2;
 using GodJungleTracker.Classes;
 
-namespace GodJungleTracker
+ namespace GodJungleTracker
 {
     class Program
     {

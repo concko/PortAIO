@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu.Values;
 
 // using Beaving.s.Baseult;
 
-namespace RandomUlt.Helpers
+ namespace RandomUlt.Helpers
 {
     internal class LastPositions
     {

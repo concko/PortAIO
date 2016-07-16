@@ -24,6 +24,7 @@ namespace HeavenStrikeAzir
 {
     public static class GeoAndExten
     {
+        
         public static AIHeroClient Player { get{ return ObjectManager.Player; } }
         public static Vector2? GetFirstWallPoint(Vector2 from, Vector2 to, float step = 25)
         {

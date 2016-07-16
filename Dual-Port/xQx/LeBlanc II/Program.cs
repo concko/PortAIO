@@ -1,6 +1,6 @@
 using LeagueSharp;
 
-namespace Leblanc
+ namespace Leblanc
 {
     internal class Program
     {

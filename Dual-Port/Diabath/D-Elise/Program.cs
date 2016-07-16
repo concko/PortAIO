@@ -9,7 +9,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = System.Drawing.Color;
 
-namespace D_Elise
+ namespace D_Elise
 {
     class Program
     {
@@ -232,7 +232,7 @@ namespace D_Elise
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
 
         private static void Game_OnGameUpdate(EventArgs args)
         {
@@ -240,7 +240,7 @@ namespace D_Elise
 
             _player = ObjectManager.Player;
 
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
 
             CheckSpells();
             if (getKeyBindItem(smiteMenu, "Usesmite"))
@@ -248,10 +248,10 @@ namespace D_Elise
                 Smiteuse();
             }
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)
-                || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 FarmLane();
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 JungleFarm();
             }
@@ -325,7 +325,7 @@ namespace D_Elise
             if (_player.InFountain() || ObjectManager.Player.HasBuff("Recall")) return;
 
             if (ObjectManager.Player.CountEnemiesInRange(800) > 0
-                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && _smite != null))
+                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && _smite != null))
             {
                 if (iusepotionhp && iusehppotion
                     && !(ObjectManager.Player.HasBuff("RegenerationPotion")
@@ -582,7 +582,7 @@ namespace D_Elise
                         if (spiderjungleW && _spiderW.IsReady() && minion.LSIsValidTarget()
                             && _player.LSDistance(minion) <= 150)
                         {
-                            Orbwalker.DisableAttacking = false;
+                            PortAIO.OrbwalkerManager.SetAttack(true);
                             _spiderW.Cast();
                         }
                         if (_r.IsReady() && _humanQ.IsReady() && _spider && !switchR)
@@ -613,7 +613,7 @@ namespace D_Elise
                 MinionTeam.Enemy,
                 MinionOrderTypes.Health);
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     foreach (var minion in allminions)
                         if (_human)
@@ -707,7 +707,7 @@ namespace D_Elise
         //New map Monsters Name By SKO
         private static void Smiteuse()
         {
-            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
+            var jungle = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
             if (ObjectManager.Player.Spellbook.CanUseSpell(_smiteSlot) != SpellState.Ready) return;
             var useblue = getCheckBoxItem(smiteMenu, "Useblue");
             var usered = getCheckBoxItem(smiteMenu, "Usered");

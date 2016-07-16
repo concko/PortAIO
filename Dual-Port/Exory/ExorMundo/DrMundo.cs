@@ -6,7 +6,7 @@ using EloBuddy;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.DrMundo
+ namespace ExorAIO.Champions.DrMundo
 {
     /// <summary>
     ///     The champion class.
@@ -38,7 +38,7 @@ namespace ExorAIO.Champions.DrMundo
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>

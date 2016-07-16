@@ -13,6 +13,7 @@ namespace ExorAIO.Champions.Darius
     /// </summary>
     internal class Targets
     {
+        
         /// <summary>
         ///     The main hero target.
         /// </summary>

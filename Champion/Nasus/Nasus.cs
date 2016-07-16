@@ -1,4 +1,4 @@
-﻿namespace ElEasy.Plugins
+﻿ namespace ElEasy.Plugins
 {
     using System;
     using System.Collections.Generic;
@@ -176,7 +176,7 @@
         #endregion
 
         #region Methods
-
+        
         private static void AutoLastHit()
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) || Player.LSIsRecalling() || !spells[Spells.Q].IsReady())
@@ -202,7 +202,7 @@
                     }
                     else
                     {
-                        Orbwalker.ForcedTarget = minion;
+                        Orbwalker.ForcedTarget =(minion);
                     }
                     break;
                 }
@@ -483,7 +483,7 @@
             if (GetBonusDmg(minion) > minion.Health && spells[Spells.Q].IsReady())
             {
                 spells[Spells.Q].Cast();
-                Orbwalker.ForcedTarget = minion;
+                Orbwalker.ForcedTarget =(minion);
             }
         }
 

@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Graves
+ namespace ExorAIO.Champions.Graves
 {
     /// <summary>
     ///     The champion class.
@@ -39,7 +39,7 @@ namespace ExorAIO.Champions.Graves
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>

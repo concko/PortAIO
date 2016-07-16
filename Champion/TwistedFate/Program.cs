@@ -16,7 +16,7 @@ using Utility = LeagueSharp.Common.Utility;
 
 #endregion
 
-namespace TwistedFate
+ namespace TwistedFate
 {
     internal class Program
     {
@@ -334,7 +334,7 @@ namespace TwistedFate
 
             return (float)dmg;
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             if (getCheckBoxItem(misc, "PingLH"))

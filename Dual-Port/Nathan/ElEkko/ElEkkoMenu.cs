@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using System.Drawing;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
-namespace ElEkko
+ namespace ElEkko
 {
     public class ElEkkoMenu
     {

@@ -24,6 +24,7 @@ namespace HeavenStrikeAzir
 {
     public static class GameObjects
     {
+        
         #region Static Fields
 
         /// <summary>

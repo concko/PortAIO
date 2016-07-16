@@ -16,7 +16,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Corki : Champion
     {
@@ -40,7 +40,7 @@ namespace Marksman.Champions
             R1.SetSkillshot(0.2f, 40f, 2000f, true, SkillshotType.SkillshotLine);
             R2.SetSkillshot(0.2f, 40f, 2000f, true, SkillshotType.SkillshotLine);
         }
-
+        
         public override void Drawing_OnDraw(EventArgs args)
         {
             bool drawKillableMinions = Program.laneclear["Lane.UseQ.DrawKM"].Cast<CheckBox>().CurrentValue;

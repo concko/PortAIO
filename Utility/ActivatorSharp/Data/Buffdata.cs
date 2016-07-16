@@ -12,7 +12,7 @@ using EloBuddy;
 using LeagueSharp;
 using System.Collections.Generic;
 
-namespace Activators.Data
+ namespace Activators.Data
 {
     public class Buffdata
     {

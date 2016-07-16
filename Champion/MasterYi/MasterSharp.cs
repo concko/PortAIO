@@ -31,7 +31,7 @@ using Utility = LeagueSharp.Common.Utility;
  * */
 
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     internal class MasterSharp
     {
@@ -114,8 +114,8 @@ namespace MasterSharp
                         () =>
                         {
                             Orbwalker.ResetAutoAttack();
-                            Orbwalker.DisableMovement = false;
-                            Orbwalker.OrbwalkTo(Game.CursorPos);
+                            PortAIO.OrbwalkerManager.SetMovement(true);
+                            Orbwalker.MoveTo(Game.CursorPos);
                             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
                         }
                         );
@@ -127,15 +127,15 @@ namespace MasterSharp
                         () =>
                         {
                             Orbwalker.ResetAutoAttack();
-                            Orbwalker.DisableMovement = false;
-                            Orbwalker.OrbwalkTo(Game.CursorPos);
+                            PortAIO.OrbwalkerManager.SetMovement(true);
+                            Orbwalker.MoveTo(Game.CursorPos);
                             Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
                         }
                         );
                 }
             }
         }
-
+        
         private static void onDash(Obj_AI_Base sender, Dash.DashItem args)
         {
             if (Orbwalker.LastTarget != null && sender.NetworkId == Orbwalker.LastTarget.NetworkId &&
@@ -269,13 +269,13 @@ namespace MasterSharp
                 var target = TargetSelector.GetTarget(800, DamageType.Physical);
                 if (target != null)
                 {
-                    //Orbwalker.ForcedTarget = target;
+                    //Orbwalker.ForcedTarget =(target;
                     MasterYi.slayMaderDuker(target);
                 }
             }
             else
             {
-                //Orbwalker.ForcedTarget = null;
+                //Orbwalker.ForcedTarget =(null;
             }
 
             DetectedSkillshots.RemoveAll(skillshot => !skillshot.IsActive());

@@ -12,7 +12,7 @@ using Spell = LeagueSharp.Common.Spell;
 
 // ReSharper disable InconsistentNaming
 
-namespace yol0Thresh
+ namespace yol0Thresh
 {
     internal class Program
     {
@@ -178,6 +178,7 @@ namespace yol0Thresh
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+        
 
         public static void OnGameUpdate(EventArgs args)
         {
@@ -195,7 +196,7 @@ namespace yol0Thresh
 
             if (getKeyBindItem(flayMenu, "pullEnemy"))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
                 var target = TargetSelector.GetTarget(_E.Range, DamageType.Physical);
                 if (target != null)
                     PullFlay(target);
@@ -203,7 +204,7 @@ namespace yol0Thresh
 
             if (getKeyBindItem(flayMenu, "pushEnemy"))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
                 var target = TargetSelector.GetTarget(_E.Range, DamageType.Physical);
                 if (target != null)
                     PushFlay(target);

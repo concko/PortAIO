@@ -9,7 +9,7 @@ namespace iKalistaReborn.Utils
     /// </summary>
     internal static class Damages
     {
-
+        
         /// <summary>
         ///     TODO The player.
         /// </summary>

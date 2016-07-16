@@ -1,4 +1,4 @@
-﻿namespace Snitched
+﻿ namespace Snitched
 {
     using System;
     using System.Collections.Generic;
@@ -122,7 +122,7 @@
 
             this.StealObject(unit, StealType.ObjectiveSteal);
         }
-
+        
         /// <summary>
         ///     Steals the kills.
         /// </summary>

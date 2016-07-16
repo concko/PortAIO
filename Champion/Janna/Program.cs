@@ -7,6 +7,7 @@ using EloBuddy.SDK.Menu.Values;
 using LCS_Janna.Plugins;
 using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
+
 //using LCS_Janna.Plugins;
 
 namespace LCS_Janna
@@ -71,36 +72,25 @@ namespace LCS_Janna
             esettings = Config.AddSubMenu(":: E Settings", ":: E Settings");
             esettings.Add("Janna_AutoE", new CheckBox("Auto E"));
             esettings.AddGroupLabel(":: Protectable Skillshots");
-            foreach (
-                var spell in
-                    HeroManager.Enemies.SelectMany(
-                        enemy =>
-                            SpellDatabase.EvadeableSpells.Where(
-                                p => p.ChampionName == enemy.ChampionName && p.IsSkillshot)))
+            foreach (var spell in EntityManager.Heroes.Enemies.SelectMany(enemy => SpellDatabase.EvadeableSpells.Where(p => p.ChampionName == enemy.ChampionName && p.IsSkillshot)))
             {
-                esettings.Add(string.Format("e.protect.{0}", spell.SpellName),
-                    new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
+                esettings.Add(string.Format("e.protect.{0}", spell.SpellName), new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
             }
             esettings.AddSeparator();
             esettings.AddGroupLabel(":: Protectable Targetted Spells");
-            foreach (
-                var spell in
-                    HeroManager.Enemies.SelectMany(
-                        enemy =>
-                            SpellDatabase.TargetedSpells.Where(p => p.ChampionName == enemy.ChampionName && p.IsTargeted))
-                )
+            foreach (var spell in EntityManager.Heroes.Enemies.SelectMany(enemy => SpellDatabase.TargetedSpells.Where(p => p.ChampionName == enemy.ChampionName && p.IsTargeted)))
             {
                 esettings.Add(string.Format("e.protect.targetted.{0}", spell.SpellName), new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
             }
             esettings.AddSeparator();
             esettings.AddGroupLabel(":: Engage Spells");
-            foreach (var spell in HeroManager.Allies.SelectMany(ally => SpellDatabase.EscapeSpells.Where(p => p.ChampionName == ally.ChampionName)))
+            foreach (var spell in EntityManager.Heroes.Allies.SelectMany(ally => SpellDatabase.EscapeSpells.Where(p => p.ChampionName == ally.ChampionName)))
             {
                 esettings.Add(string.Format("e.engage.{0}", spell.SpellName), new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
             }
             esettings.AddSeparator();
             esettings.AddGroupLabel(":: Whitelist");
-            foreach (var ally in HeroManager.Allies.Where(x => x.IsValid))
+            foreach (var ally in EntityManager.Heroes.Allies.Where(x => x.IsValid))
             {
                 esettings.Add("e." + ally.ChampionName, new CheckBox("(E): " + ally.ChampionName, HighChamps.Contains(ally.ChampionName)));
             }
@@ -111,32 +101,56 @@ namespace LCS_Janna
 
             rsettings = Config.AddSubMenu(":: R Settings", ":: R Settings");
             rsettings.AddGroupLabel(":: Protectable Skillshots");
-            foreach (
-                var spell in
-                    HeroManager.Enemies.SelectMany(
-                        enemy =>
-                            SpellDatabase.EvadeableSpells.Where(
-                                p => p.ChampionName == enemy.ChampionName && p.IsSkillshot)))
+            foreach (var spell in EntityManager.Heroes.Enemies.SelectMany(enemy => SpellDatabase.EvadeableSpells.Where(p => p.ChampionName == enemy.ChampionName && p.IsSkillshot)))
             {
-                rsettings.Add(string.Format("r.protect.{0}", spell.SpellName),
-                    new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
+                rsettings.Add(string.Format("r.protect.{0}", spell.SpellName), new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
             }
             rsettings.AddGroupLabel(":: Protectable Targetted Spells");
-            foreach (
-                var spell in
-                    HeroManager.Enemies.SelectMany(
-                        enemy =>
-                            SpellDatabase.TargetedSpells.Where(p => p.ChampionName == enemy.ChampionName && p.IsTargeted))
-                )
+            foreach (var spell in EntityManager.Heroes.Enemies.SelectMany(enemy => SpellDatabase.TargetedSpells.Where(p => p.ChampionName == enemy.ChampionName && p.IsTargeted)))
             {
-                rsettings.Add(string.Format("r.protect.targetted.{0}", spell.SpellName),
-                    new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
+                rsettings.Add(string.Format("r.protect.targetted.{0}", spell.SpellName), new CheckBox(string.Format("{0} ({1})", spell.ChampionName, spell.Slot)));
             }
             rsettings.Add("spell.damage.percent", new Slider("Min. Spell Damage Percentage", 10, 1, 99));
 
             Obj_AI_Base.OnProcessSpellCast += OnProcess;
             AntiGapcloser.OnEnemyGapcloser += OnGapcloser;
+            AIHeroClient.OnBasicAttack += AIHeroClient_OnBasicAttack;
+            Obj_AI_Turret.OnBasicAttack += Obj_AI_Turret_OnBasicAttack;
             Game.OnUpdate += OnUpdate;
+        }
+
+        private static void Obj_AI_Turret_OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            if (ObjectManager.Player.ManaPercent >= getSliderItem(esettings, "min.mana.for.e") && args.Target.IsValid<AIHeroClient>())
+            {
+                if (sender.IsEnemy && E.IsInRange((AIHeroClient)args.Target) && ((AIHeroClient)args.Target).IsAlly && getCheckBoxItem(esettings, "e." + ((AIHeroClient)args.Target).ChampionName) && getCheckBoxItem(esettings, "protect.carry.from.turret"))
+                {
+                    E.Cast((AIHeroClient)args.Target);
+                }
+            }
+
+            if (ObjectManager.Player.ManaPercent >= getSliderItem(esettings, "min.mana.for.e"))
+            {
+                if (sender.IsAlly && E.IsInRange(sender) && sender.HealthPercent < getSliderItem(esettings, "turret.hp.percent"))
+                {
+                    E.Cast((AIHeroClient)args.Target);
+                }
+            }
+        }
+
+        private static void AIHeroClient_OnBasicAttack(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
+        {
+            if (!args.Target.IsValid<AIHeroClient>())
+            {
+                return;
+            }
+            if (ObjectManager.Player.ManaPercent >= getSliderItem(esettings, "min.mana.for.e"))
+            {
+                if (sender.IsEnemy && E.IsInRange((AIHeroClient)args.Target) && args.Target.IsAlly && getCheckBoxItem(esettings, "e." + ((AIHeroClient)args.Target).ChampionName))
+                {
+                    E.Cast((AIHeroClient)args.Target);
+                }
+            }
         }
 
         public static bool getCheckBoxItem(Menu m, string item)
@@ -172,68 +186,36 @@ namespace LCS_Janna
 
         private static void OnProcess(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (sender == null)
-            {
-                return;
-            }
-            if (E.IsReady())
+            if (E.IsReady() && ObjectManager.Player.ManaPercent >= getSliderItem(esettings, "min.mana.for.e"))
             {
                 if (esettings["e.engage." + args.SData.Name] != null)
                 {
-                    if (sender is AIHeroClient && sender.IsAlly && getCheckBoxItem(esettings, "e.engage." + args.SData.Name) && getCheckBoxItem(esettings, "e." + sender.BaseSkinName) && E.IsInRange((AIHeroClient)args.Target) && !sender.IsDead && !sender.IsZombie && sender.IsValid)
+                    if (sender.IsValid<AIHeroClient>() && sender.IsAlly && getCheckBoxItem(esettings, "e.engage." + args.SData.Name) && getCheckBoxItem(esettings, "e." + sender.BaseSkinName) && E.IsInRange(sender) && !sender.IsDead && !sender.IsZombie && sender.IsValid)
                     {
                         E.CastOnUnit(sender);
                     }
                 }
 
-                if (args.Target != null && !sender.IsMinion)
+                if (esettings["e.protect." + args.SData.Name] != null)
                 {
-                    if (args.Target.IsAlly && args.Target.IsValid)
-                    {
-                        if (esettings["e." + ((AIHeroClient)args.Target).ChampionName] != null)
-                            if (sender is AIHeroClient && sender.IsEnemy && args.Target.IsAlly && args.Target.Type == GameObjectType.AIHeroClient && args.SData.IsAutoAttack() && ObjectManager.Player.ManaPercent >= getSliderItem(esettings, "min.mana.for.e") && getCheckBoxItem(esettings, "e." + ((AIHeroClient)args.Target).ChampionName) && E.IsInRange((AIHeroClient)args.Target))
-                            {
-                                E.Cast((AIHeroClient)args.Target);
-                            }
-                    }
-                }
-
-                if (args.Target != null)
-                {
-                    if (args.Target.IsAlly && sender is Obj_AI_Turret)
-                    {
-                        if (esettings["e." + ((AIHeroClient)args.Target).ChampionName] != null)
-                        {
-                            if (sender is Obj_AI_Turret && args.Target.IsAlly && ObjectManager.Player.ManaPercent >= getSliderItem(esettings, "min.mana.for.e")
-                                && getCheckBoxItem(esettings, "e." + ((AIHeroClient)args.Target).ChampionName) && E.IsInRange((AIHeroClient)args.Target)
-                                && getCheckBoxItem(esettings, "protect.carry.from.turret"))
-                            {
-                                E.Cast((AIHeroClient)args.Target);
-                            }
-                        }
-                    }
-                }
-
-                if (esettings["e.protect." + args.SData.Name] != null || esettings["e.protect.targetted." + args.SData.Name] != null)
-                {
-                    if (sender is AIHeroClient && args.Target.IsAlly && args.Target.Type == GameObjectType.AIHeroClient
-                        && !args.SData.IsAutoAttack() && (getCheckBoxItem(esettings, "e.protect." + args.SData.Name) || getCheckBoxItem(esettings, "e.protect.targetted." + args.SData.Name))
-                        && sender.IsEnemy && sender.LSGetSpellDamage(((AIHeroClient)args.Target), args.SData.Name) > ((AIHeroClient)args.Target).Health)
+                    if (sender.IsValid<AIHeroClient>() && sender.IsEnemy && args.Target.IsValid<AIHeroClient>() && args.Target.IsAlly && E.IsInRange((AIHeroClient)args.Target) && getCheckBoxItem(esettings, "e.protect." + args.SData.Name) && getCheckBoxItem(esettings, "e." + sender.BaseSkinName))
                     {
                         E.Cast((AIHeroClient)args.Target);
                     }
                 }
 
-                 if (sender is AIHeroClient && sender.IsEnemy && args.Target.IsAlly && args.Target.Type == GameObjectType.obj_AI_Turret
-                    && args.SData.IsAutoAttack() && ObjectManager.Player.ManaPercent >= getSliderItem(esettings, "min.mana.for.e") && E.IsInRange((Obj_AI_Turret)args.Target)
-                    && ((Obj_AI_Turret)args.Target).HealthPercent < getSliderItem(esettings, "turret.hp.percent"))
+                if (esettings["e.protect.targetted." + args.SData.Name] != null)
                 {
-                    E.Cast((AIHeroClient)args.Target);
+                    if (sender.IsValid<AIHeroClient>() && sender.IsEnemy && args.Target.IsValid<AIHeroClient>() && args.Target.IsAlly && E.IsInRange((AIHeroClient)args.Target) && getCheckBoxItem(esettings, "e.protect.targetted." + args.SData.Name) && getCheckBoxItem(esettings, "e." + sender.BaseSkinName))
+                    {
+                        E.Cast((AIHeroClient)args.Target);
+                    }
                 }
             }
 
             if (args.Target is Obj_AI_Minion || !(sender is AIHeroClient))
                 return;
+
             if (getCheckBoxItem(esettings, "Janna_AutoE") && E.IsReady())
             {
                 if (sender.IsEnemy)
@@ -241,7 +223,7 @@ namespace LCS_Janna
                     var StartPos = args.Start;
                     var EndPos = args.End;
                     var NonTRange = new EloBuddy.SDK.Geometry.Polygon.Rectangle(StartPos, EndPos, sender.BoundingRadius + 30);
-                    var Target = HeroManager.Allies.FirstOrDefault(f => f.Position.LSDistance(Player.Position) <= E.Range && NonTRange.IsInside(f.Position));
+                    var Target = EntityManager.Heroes.Allies.FirstOrDefault(f => f.Position.LSDistance(Player.Position) <= E.Range && NonTRange.IsInside(f.Position));
                     if (Target != null)
                     {
                         E.Cast(Target, true);
@@ -249,7 +231,7 @@ namespace LCS_Janna
                     }
                     if (args.Target != null && args.Target.Position.LSDistance(Player.Position) <= E.Range && args.Target is AIHeroClient)
                     {
-                        var ShieldTarget = HeroManager.Allies.FirstOrDefault(f => f.Position.LSDistance(args.Target.Position) <= 10);
+                        var ShieldTarget = EntityManager.Heroes.Allies.FirstOrDefault(f => f.Position.LSDistance(args.Target.Position) <= 10);
                         E.Cast(ShieldTarget, true);
                         return;
                     }
@@ -275,12 +257,21 @@ namespace LCS_Janna
 
         private static void OnCombo()
         {
+            var target = TargetSelector.GetTarget(W.Range, DamageType.Magical);
+            if (target != null)
+            {
+                if (getCheckBoxItem(comboMenu, "w.combo") && W.IsReady())
+                {
+                    W.Cast(target);
+                }
+            }
+
             if (getCheckBoxItem(comboMenu, "q.combo"))
             {
                 switch (getBoxItem(qsettings, "q.settings"))
                 {
                     case 0:
-                        foreach (var enemy in HeroManager.Enemies.Where(x => x.LSIsValidTarget(Q.Range)))
+                        foreach (var enemy in EntityManager.Heroes.Enemies.Where(x => x.LSIsValidTarget(Q.Range)))
                         {
                             Q.CastIfHitchanceEquals(enemy, HikiChance("q.normal.hit.chance"));
                         }
@@ -288,19 +279,12 @@ namespace LCS_Janna
                     case 1:
                         if (ObjectManager.Player.CountEnemiesInRange(Q.Range) >= getSliderItem(qsettings, "q.hit.count"))
                         {
-                            foreach (var enemy in HeroManager.Enemies.Where(x => x.LSIsValidTarget(Q.Range) && Q.GetHitCount() >= getSliderItem(qsettings, "q.hit.count")))
+                            foreach (var enemy in EntityManager.Heroes.Enemies.Where(x => x.LSIsValidTarget(Q.Range) && Q.GetHitCount() >= getSliderItem(qsettings, "q.hit.count")))
                             {
                                 Q.CastIfWillHit(enemy, getSliderItem(qsettings, "q.hit.count"));
                             }
                         }
                         break;
-                }
-            }
-            if (getCheckBoxItem(comboMenu, "w.combo") && Q.IsReady())
-            {
-                foreach (var enemy in HeroManager.Enemies.Where(x => x.LSIsValidTarget(W.Range)))
-                {
-                    W.CastOnUnit(enemy);
                 }
             }
         }

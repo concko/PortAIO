@@ -6,12 +6,14 @@ using SharpDX;
 using System;
 using System.Linq;
 
-namespace Swiftly_Teemo.Handler
+ namespace Swiftly_Teemo.Handler
 {
     internal class AfterAa : Core
     {
-        public static void Orbwalker_OnPostAttack(AttackableUnit dgfg, EventArgs args)
+        
+        public static void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
+            var dgfg = target;
             if (dgfg is AIHeroClient)
             {
                 var Target = dgfg as AIHeroClient;
@@ -27,7 +29,7 @@ namespace Swiftly_Teemo.Handler
                         }
                     }
 
-                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear)) return;
+                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) return;
 
                     var mob = GameObjects.Jungle.Where(m => m != null && m.LSIsValidTarget(Player.AttackRange) && !GameObjects.JungleSmall.Contains(m));
 

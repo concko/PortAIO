@@ -14,7 +14,7 @@ using GamePath = System.Collections.Generic.List<SharpDX.Vector2>;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace VayneHunter_Reborn.Skills.Tumble.VHRQ
+ namespace VayneHunter_Reborn.Skills.Tumble.VHRQ
 {
     class QProvider
     {

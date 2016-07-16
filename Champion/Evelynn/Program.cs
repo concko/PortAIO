@@ -18,7 +18,7 @@ namespace Evelynn
     internal class Program
     {
         public const string ChampionName = "Evelynn";
-
+        
         //Spells
         public static List<Spell> SpellList = new List<Spell>();
 
@@ -111,8 +111,7 @@ namespace Evelynn
                 return;
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
                 JungleFarm();

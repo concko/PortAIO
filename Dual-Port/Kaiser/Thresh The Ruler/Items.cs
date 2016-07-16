@@ -7,7 +7,7 @@ using LCItems = LeagueSharp.Common.Items;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ThreshTherulerofthesoul
+ namespace ThreshTherulerofthesoul
 {
     class Items
     {

@@ -16,7 +16,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace VayneHunter_Reborn.Utility
+ namespace VayneHunter_Reborn.Utility
 {
     class DrawManager
     {

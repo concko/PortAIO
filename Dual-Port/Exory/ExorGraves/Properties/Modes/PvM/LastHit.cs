@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Graves
+ namespace ExorAIO.Champions.Graves
 {
     /// <summary>
     ///     The logics class.

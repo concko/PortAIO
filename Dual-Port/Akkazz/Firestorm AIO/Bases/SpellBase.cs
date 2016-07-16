@@ -1,7 +1,7 @@
 ﻿using Firestorm_AIO.Enums;
 using LeagueSharp.SDK;
 
-namespace Firestorm_AIO.Bases
+ namespace Firestorm_AIO.Bases
 {
     public class SpellBase
     {

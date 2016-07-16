@@ -1,7 +1,7 @@
 
 using EloBuddy.SDK.Menu.Values;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The managers class.

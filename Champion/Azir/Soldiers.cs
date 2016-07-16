@@ -27,7 +27,7 @@ namespace HeavenStrikeAzir
         public static AIHeroClient Player { get{ return ObjectManager.Player; } }
         private static int LastWTick;
         public static List<GameObject> soldier = new List<GameObject>();
-
+        
         public static List<AIHeroClient> enemies = new List<AIHeroClient>();
 
         public static List<Obj_AI_Minion> autoattackminions = new List<Obj_AI_Minion>();

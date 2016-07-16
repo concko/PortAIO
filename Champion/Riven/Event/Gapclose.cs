@@ -7,7 +7,7 @@ using LeagueSharp.Common;
 using NechritoRiven.Core;
 using NechritoRiven.Menus;
 
-namespace NechritoRiven.Event
+ namespace NechritoRiven.Event
 {
     class Gapclose : Core.Core
     {

@@ -1,4 +1,4 @@
-﻿namespace Flowers__Illaoi
+﻿ namespace Flowers__Illaoi
 {
     using EloBuddy;
     using EloBuddy.SDK.Menu;
@@ -155,7 +155,7 @@
                 }
             }
         }
-
+        
         private static void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -224,7 +224,7 @@
                         }
                     }
 
-                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                     {
                         if (Me.ManaPercent >= jungleMenu["Mana"].Cast<Slider>().CurrentValue)
                         {
@@ -347,7 +347,7 @@
                     if (W.IsReady() && harassMenu["W"].Cast<CheckBox>().CurrentValue)
                     {
                         W.Cast();
-                        Orbwalker.ForcedTarget = Ghost;
+                        Orbwalker.ForcedTarget =(Ghost);
                     }
                 }
             }

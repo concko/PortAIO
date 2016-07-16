@@ -9,7 +9,7 @@ using LeagueSharp.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace hJhin.Modes
+ namespace hJhin.Modes
 {
     class Combo
     {

@@ -10,7 +10,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace OlafxQx.Common
+ namespace OlafxQx.Common
 {
     internal class CommonSummoner
     {
@@ -70,6 +70,7 @@ namespace OlafxQx.Common
 
             Game.OnUpdate += Game_OnUpdate;
         }
+        
 
         private static void Game_OnUpdate(EventArgs args)
         {

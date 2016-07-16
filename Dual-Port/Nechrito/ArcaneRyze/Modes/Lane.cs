@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using static Arcane_Ryze.Core;
 
-namespace Arcane_Ryze.Modes
+ namespace Arcane_Ryze.Modes
 {
     class Lane
     {

@@ -567,7 +567,7 @@ namespace MoonDraven
                 return;
             }
 
-            if (useQ && this.QCount <  axeMenu["MaxAxes"].Cast<Slider>().CurrentValue - 1 && this.Q.IsReady()
+            if (useQ && this.QCount < axeMenu["MaxAxes"].Cast<Slider>().CurrentValue - 1 && this.Q.IsReady()
                 && Orbwalker.LastTarget is Obj_AI_Minion && !this.Player.Spellbook.IsAutoAttacking
                 && !Orbwalker.IsAutoAttacking)
             {

@@ -10,7 +10,7 @@ using Color = System.Drawing.Color;
 using CommonGeometry = Leblanc.Common.CommonGeometry;
 using Font = SharpDX.Direct3D9.Font;
 
-namespace Leblanc.Modes
+ namespace Leblanc.Modes
 {
     using System.Linq;
     using LeagueSharp;

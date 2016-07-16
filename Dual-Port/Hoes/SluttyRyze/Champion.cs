@@ -6,7 +6,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Slutty_ryze
+ namespace Slutty_ryze
 {
     class Champion
     {
@@ -105,71 +105,9 @@ namespace Slutty_ryze
             return m[item].Cast<ComboBox>().CurrentValue;
         }
 
-
-        public static void AutoPassive()
-        {
-            var minions = MinionManager.GetMinions(
-                GlobalManager.GetHero.ServerPosition, Q.Range, MinionTypes.All, MinionTeam.Enemy,
-                MinionOrderTypes.MaxHealth);
-
-            if (GlobalManager.GetHero.Mana < getSliderItem(MenuManager.passiveMenu, "ManapSlider")) return;
-
-            //Maybe check if any minons can be killed?
-            //foreach(var minion in minions)
-            //if(minion.Headth < Champion.Q.GetDamage)
-            //break;
-
-            if (GlobalManager.GetHero.IsRecalling()) return;
-
-            if (minions.Count >= 1) return;
-
-            var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
-            if (target != null) return;
-
-            var stackSliders = getSliderItem(MenuManager.passiveMenu, "stackSlider");
-            if (GlobalManager.GetHero.InFountain()) return;
-
-            if (GlobalManager.GetPassiveBuff >= stackSliders)
-                return;
-
-            if (Utils.TickCount - Q.LastCastAttemptT >=
-                getSliderItem(MenuManager.passiveMenu, "autoPassiveTimer") * 1000 - (100 + (Game.Ping / 2)) &&
-                Q.IsReady())
-            {
-                if (!Game.CursorPos.IsZero)
-                    Q.Cast(Game.CursorPos);
-            }
-        }
-
-
-
-        //        public static void Unit_OnDash(Obj_AI_Base sender, Dash.DashItem args)
-        //        {
-        //            if (!sender.IsEnemy) return;
-        //
-        //            var target = TargetSelector.GetTarget(Champion.Q.Range, TargetSelector.DamageType.Magical);
-        //            var qSpell = GlobalManager.Config.Item("useQW2D");
-        //
-        //            if (sender.NetworkId != target.NetworkId) return;
-        //            if (!qSpell) return;
-        //            if (!Champion.Q.IsReady() || !(args.EndPos.LSDistance(GlobalManager.GetHero) < Champion.Q.Range)) return;
-        //            var delay = (int)(args.EndTick - Game.Time - Champion.Q.Delay - 0.1f);
-        //
-        //            if (delay > 0)
-        //                Utility.DelayAction.Add(delay * 1000, () => Champion.Q.Cast(args.EndPos));
-        //            else
-        //                Champion.Q.Cast(args.EndPos);
-        //
-        //            if (!Champion.Q.IsReady() || !(args.EndPos.LSDistance(GlobalManager.GetHero) < Champion.Q.Range)) return;
-        //
-        //            if (delay > 0)
-        //                Utility.DelayAction.Add(delay * 1000, () => Champion.Q.Cast(args.EndPos));
-        //            else
-        //                Champion.W.CastOnUnit(target);
-        //        }
         public static void AABlock()
         {
-            Orbwalker.DisableAttacking = (getCheckBoxItem(MenuManager.combo1Menu, "AAblock"));
+            PortAIO.OrbwalkerManager.SetAttack(getCheckBoxItem(MenuManager.combo1Menu, "AAblock"));
         }
 
         public static void KillSteal()
@@ -196,7 +134,7 @@ namespace Slutty_ryze
                 && target.LSIsValidTarget(E.Range))
                 E.Cast(target);
         }
-
+        
         public static void Orbwalking_BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (W.IsReady() && W.Level > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

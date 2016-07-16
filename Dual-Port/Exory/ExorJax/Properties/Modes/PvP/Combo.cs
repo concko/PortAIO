@@ -3,7 +3,7 @@ using ExorAIO.Utilities;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 
-namespace ExorAIO.Champions.Jax
+ namespace ExorAIO.Champions.Jax
 {
     /// <summary>
     ///     The logics class.

@@ -13,7 +13,7 @@ namespace PortAIO.Champion.Brand
     {
         private static BrandCombo _comboProvider;
         private static Menu _mainMenu, rOptions, miscMenu, drawingMenu, laneclearMenu;
-
+        
         public static bool getMiscMenuCB(string item)
         {
             return miscMenu[item].Cast<CheckBox>().CurrentValue;

@@ -7,14 +7,14 @@ using EloBuddy.SDK.Enumerations;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
-using TargetSelector = LeagueSharp.Common.LSTargetSelector;
+
 
 namespace KogMaw
 {
     public static class Program
     {
 
-        private static LSOrbwalker Orbwalker = PortAIO.Init.LSOrbwalker;
+        
 
         private static EloBuddy.SDK.Spell.Skillshot Q, E, R;
         private static EloBuddy.SDK.Spell.Active W;
@@ -79,7 +79,7 @@ namespace KogMaw
 
             Drawing.OnDraw += OnDraw;
             Game.OnTick += OnTick;
-            LSEvents.BeforeAttack += OnPreAttack;
+            Orbwalker.OnPreAttack += OnPreAttack;
         }
 
         public static float getSpellMana(SpellSlot spell)
@@ -131,9 +131,9 @@ namespace KogMaw
             R = new EloBuddy.SDK.Spell.Skillshot(SpellSlot.R, (uint)(900 + R.Level * 300), SkillShotType.Circular, 1500, int.MaxValue,
                 225);
 
-            if (Orbwalker.CanMove(100))
+            if (Orbwalker.CanMove)
             {
-                if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                 {
                     if (useQ)
                     {
@@ -215,7 +215,7 @@ namespace KogMaw
                         }
                     }
                 }
-                else if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Mixed)
+                else if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
                 {
                     if (useQH)
                     {
@@ -256,7 +256,7 @@ namespace KogMaw
                         }
                     }
                 }
-                else if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.LaneClear)
+                else if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     foreach (
                         var minion in
@@ -434,41 +434,41 @@ namespace KogMaw
             if (dontw)
             {
                 var target = TargetSelector.GetTarget(myHero.GetAutoAttackRange(), DamageType.Physical);
-                if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo && target != null)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && target != null)
                 {
-                    Orbwalker.SetAttack(false);
+                    PortAIO.OrbwalkerManager.SetAttack(false);
                 }
                 else
                 {
-                    Orbwalker.SetAttack(true);
+                    PortAIO.OrbwalkerManager.SetAttack(true);
                 }
             }
             else
             {
-                Orbwalker.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
-            if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo && dontw)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && dontw)
             {
                 Drawing.DrawText(Drawing.Width * 0.5f, Drawing.Height * 0.3f, Color.Orange, "Not moving when W is active is on.", 50);
             }
         }
 
-        private static void OnPreAttack(BeforeAttackArgs args)
+        private static void OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (!args.Target.IsMe) return;
 
             if (IsZombie)
                 args.Process = false;
 
-            if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
                 if (WIsReadyPerfectly())
                     if (useW)
                         if (args.Target.IsValidTarget(W.Range))
                             W.Cast();
             }
-            if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.LaneClear)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 foreach (
                     var jungleMobs in

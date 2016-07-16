@@ -1,6 +1,10 @@
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using ExorAIO.Utilities;
+using LeagueSharp.Data.Enumerations;
+using LeagueSharp.SDK;
+using LeagueSharp.SDK.Core.Utils;
+using System.Linq;
 
 namespace ExorAIO.Champions.Sivir
 {
@@ -67,10 +71,50 @@ namespace ExorAIO.Champions.Sivir
                 Vars.EMenu.AddLabel("It has to be used in conjunction with Evade, else it will not shield Skillshots");
                 Vars.EMenu.AddLabel("It it meant to shield what Evade doesn't support, like targetted spells, AoE, etc.");
                 Vars.EMenu.Add("logical", new CheckBox("Logical", true));
-                Vars.EMenu.Add("minions", new CheckBox("Shield Dragon/Baron AAs", true));
                 Vars.EMenu.Add("delay", new Slider("E Delay (ms)", 0, 0, 250));
             }
 
+            /// <summary>
+            ///     Sets the menu for the E Whitelist.
+            /// </summary>
+            Vars.WhiteListMenu = Vars.Menu.AddSubMenu("Shield: Whitelist Menu");
+            {
+                Vars.WhiteListMenu.Add("minions", new CheckBox("Shield: Dragon/Baron Attacks"));
+                foreach (var enemy in GameObjects.EnemyHeroes)
+                {
+                    if (enemy.ChampionName.Equals("Alistar"))
+                    {
+                        Vars.WhiteListMenu.Add($"{enemy.ChampionName.ToLower()}.pulverize", new CheckBox($"Shield: {enemy.ChampionName}'s Q"));
+                    }
+
+                    if (enemy.ChampionName.Equals("Braum"))
+                    {
+                        Vars.WhiteListMenu.Add($"{enemy.ChampionName.ToLower()}.braumbasicattackpassiveoverride", new CheckBox($"Shield: {enemy.ChampionName}'s Passive Stun"));
+                    }
+
+                    if (enemy.ChampionName.Equals("Udyr"))
+                    {
+                        Vars.WhiteListMenu.Add($"{enemy.ChampionName.ToLower()}.udyrbearattack", new CheckBox($"Shield: {enemy.ChampionName}'s E Stun"));
+                    }
+
+                    foreach (var spell in SpellDatabase.Get().Where(
+                        s =>
+                            !s.SpellName.Equals("KatarinaE") &&
+                            !s.SpellName.Equals("TalonCutthroat") &&
+                            s.ChampionName.Equals(enemy.ChampionName) &&
+                            (s.CastType.Contains(CastType.EnemyChampions) ||
+                            ((s.CastType.Contains(CastType.Activate) &&
+                            AutoAttack.IsAutoAttackReset(s.SpellName))))))
+                    {
+                        if (spell.SpellType.HasFlag(SpellType.Targeted) ||
+                            spell.SpellType.HasFlag(SpellType.Activated) ||
+                            spell.SpellType.HasFlag(SpellType.TargetedMissile))
+                        {
+                            Vars.WhiteListMenu.Add($"{enemy.ChampionName.ToLower()}.{spell.SpellName.ToLower()}", new CheckBox($"Shield: {enemy.ChampionName}'s {spell.Slot}"));
+                        }
+                    }
+                }
+            }
 
             /// <summary>
             ///     Sets the drawings menu.

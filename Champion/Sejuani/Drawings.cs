@@ -3,7 +3,7 @@ using System.Drawing;
 using EloBuddy;
 using LeagueSharp.Common;
 
-namespace ElSejuani
+ namespace ElSejuani
 {
     internal class Drawings
     {

@@ -12,6 +12,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Environment = UnderratedAIO.Helpers.Environment;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace UnderratedAIO.Champions
 {
     internal class Kennen
@@ -21,7 +22,7 @@ namespace UnderratedAIO.Champions
         public static Spell Q, W, E, R;
         public static Obj_AI_Minion LastAttackedminiMinion;
         public static float LastAttackedminiMinionTime;
-
+        
         public static Menu drawMenu, comboMenu, harassMenu, clearMenu, miscMenu, autoHarassMenu;
 
         public Kennen()
@@ -37,15 +38,22 @@ namespace UnderratedAIO.Champions
         {
             if (target is Obj_AI_Minion)
             {
-                LastAttackedminiMinion = (Obj_AI_Minion) target;
+                LastAttackedminiMinion = (Obj_AI_Minion)target;
                 LastAttackedminiMinionTime = Utils.GameTimeTickCount;
             }
         }
 
         private void Game_OnGameUpdate(EventArgs args)
         {
-            Orbwalker.DisableMovement = false;
-            Orbwalker.DisableAttacking = player.HasBuff("KennenLightningRush");
+            PortAIO.OrbwalkerManager.SetMovement(true);
+            if (player.HasBuff("KennenLightningRush"))
+            {
+                PortAIO.OrbwalkerManager.SetAttack(false);
+            }
+            else
+            {
+                PortAIO.OrbwalkerManager.SetAttack(true);
+            }
 
             var target = getTarget();
 
@@ -60,8 +68,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -131,12 +138,12 @@ namespace UnderratedAIO.Champions
             {
                 if (moveTo == null)
                 {
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                     Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
                 }
                 else
                 {
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                     Player.IssueOrder(GameObjectOrder.MoveTo, moveTo);
                 }
             }
@@ -160,7 +167,7 @@ namespace UnderratedAIO.Champions
                             (m.NetworkId == LastAttackedminiMinion.NetworkId &&
                              Utils.GameTimeTickCount - LastAttackedminiMinionTime > 700)))
                 {
-                    if (target.LSDistance(player) < Orbwalking.GetRealAutoAttackRange(target) && !Orbwalker.CanAutoAttack && Orbwalker.CanMove)
+                    if (target.LSDistance(player) < Orbwalking.GetRealAutoAttackRange(target) && !ObjectManager.Player.Spellbook.IsAutoAttacking && Orbwalker.CanMove)
                     {
                         if (Q.Cast(target, getCheckBoxItem(config, "packets")).IsCasted())
                         {
@@ -208,7 +215,7 @@ namespace UnderratedAIO.Champions
             if (getCheckBoxItem(comboMenu, "usee") && player.HasBuff("KennenLightningRush") &&
                 player.Health > target.Health && !target.UnderTurret(true) && target.LSDistance(Game.CursorPos) < 250f)
             {
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 Player.IssueOrder(GameObjectOrder.MoveTo, target);
             }
 
@@ -235,9 +242,9 @@ namespace UnderratedAIO.Champions
             if (getCheckBoxItem(comboMenu, "usee") && !target.UnderTurret(true) && E.IsReady() &&
                 (player.LSDistance(target) < 80 ||
                  (!player.HasBuff("KennenLightningRush") && !Q.CanCast(target) &&
-                  getSliderItem(comboMenu, "useemin") < player.Health/player.MaxHealth*100 &&
+                  getSliderItem(comboMenu, "useemin") < player.Health / player.MaxHealth * 100 &&
                   MarkOfStorm(target) > 0 &&
-                  CombatHelper.IsPossibleToReachHim(target, 1f, new float[5] {2f, 2f, 2f, 2f, 2f}[Q.Level - 1]))))
+                  CombatHelper.IsPossibleToReachHim(target, 1f, new float[5] { 2f, 2f, 2f, 2f, 2f }[Q.Level - 1]))))
             {
                 E.Cast(getCheckBoxItem(config, "packets"));
             }
@@ -247,7 +254,7 @@ namespace UnderratedAIO.Champions
                  player.CountEnemiesInRange(getSliderItem(comboMenu, "userrange")) ||
                  (getCheckBoxItem(comboMenu, "usertarget") &&
                   player.CountEnemiesInRange(getSliderItem(comboMenu, "userrange")) == 1 &&
-                  combodamage + player.GetAutoAttackDamage(target)*3 > target.Health && !Q.CanCast(target) &&
+                  combodamage + player.GetAutoAttackDamage(target) * 3 > target.Health && !Q.CanCast(target) &&
                   player.LSDistance(target) < getSliderItem(comboMenu, "userrange"))) ||
                 (getSliderItem(comboMenu, "userLow") <=
                  HeroManager.Enemies.Count(
@@ -284,7 +291,7 @@ namespace UnderratedAIO.Champions
             double damage = 0;
             if (R.IsReady())
             {
-                damage += player.LSGetSpellDamage(hero, SpellSlot.R)*2;
+                damage += player.LSGetSpellDamage(hero, SpellSlot.R) * 2;
             }
             if (Q.IsReady())
             {
@@ -300,7 +307,7 @@ namespace UnderratedAIO.Champions
             {
                 damage += ignitedmg;
             }
-            return (float) damage;
+            return (float)damage;
         }
 
         private int MarkOfStorm(Obj_AI_Base target)

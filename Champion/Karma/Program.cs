@@ -11,6 +11,7 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
 
+
 #endregion
 
 namespace Karma
@@ -18,7 +19,7 @@ namespace Karma
     internal class Program
     {
         private const string ChampionName = "Karma";
-
+        
         private static readonly List<Spell> SpellList = new List<Spell>();
 
         private static Spell _q;

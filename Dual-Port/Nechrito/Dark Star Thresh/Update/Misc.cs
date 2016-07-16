@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using System;
 
-namespace Dark_Star_Thresh.Update
+ namespace Dark_Star_Thresh.Update
 {
     class Misc : Core.Core
     {

@@ -9,7 +9,7 @@ using SharpDX;
 using SharpDX.Direct3D9;
 using Color = System.Drawing.Color;
 
-namespace Warwick
+ namespace Warwick
 {
     internal class SpellR
     {

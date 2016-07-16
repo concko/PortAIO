@@ -2,7 +2,7 @@
 using Activators.Base;
 using LeagueSharp.Common;
 
-namespace Activators.Spells.Heals
+ namespace Activators.Spells.Heals
 {
     class triumphantroar : CoreSpell
     {

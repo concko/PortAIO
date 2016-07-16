@@ -12,7 +12,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace Jayce
+ namespace Jayce
 {
     internal class Jayce : Helper
     {
@@ -92,6 +92,7 @@ namespace Jayce
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+        
 
         private static void OnOrder(Obj_AI_Base sender, PlayerIssueOrderEventArgs args)
         {
@@ -199,7 +200,7 @@ namespace Jayce
                     || (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && getCheckBoxItem(MenuConfig.harass, "usewhr")))
                 {
                     W.Cast();
-                    Orbwalker.ForcedTarget = ((AIHeroClient)args.Target);
+                    Orbwalker.ForcedTarget =(((AIHeroClient)args.Target));
 
                     // Orbwalking.ResetAutoAttackTimer();
                 }
@@ -209,7 +210,7 @@ namespace Jayce
 
         private static void LaneClear(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) return;
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) return;
             if (!Orbwalking.IsAutoAttack(args.SData.Name)) return;
             if (!sender.IsMe) return;
             if (!args.SData.IsAutoAttack()) return;
@@ -221,7 +222,7 @@ namespace Jayce
             if (W.IsReady() && obj.Health > Player.GetAutoAttackDamage(obj) + 30)
             {
                 W.Cast();
-                Orbwalker.ForcedTarget = ((Obj_AI_Base)args.Target);
+                Orbwalker.ForcedTarget =(((Obj_AI_Base)args.Target));
             }
             var minions =
                 MinionManager.GetMinions(Player.Position, 300);
@@ -233,7 +234,7 @@ namespace Jayce
                     if (W.IsReady())
                     {
                         W.Cast();
-                        Orbwalker.ForcedTarget = min;
+                        Orbwalker.ForcedTarget =(min);
                     }
                 }
             }

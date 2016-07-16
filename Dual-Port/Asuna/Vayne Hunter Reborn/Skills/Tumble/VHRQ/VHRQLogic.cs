@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace VayneHunter_Reborn.Skills.Tumble.VHRQ
+ namespace VayneHunter_Reborn.Skills.Tumble.VHRQ
 {
     class VHRQLogic
     {

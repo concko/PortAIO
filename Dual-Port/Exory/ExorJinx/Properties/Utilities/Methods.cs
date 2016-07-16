@@ -2,7 +2,7 @@ using EloBuddy;
 using LeagueSharp;
 using LeagueSharp.SDK;
 
-namespace ExorAIO.Champions.Jinx
+ namespace ExorAIO.Champions.Jinx
 {
     /// <summary>
     ///     The methods class.

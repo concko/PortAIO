@@ -4,7 +4,7 @@ using System.Linq;
 using EloBuddy;
 using LeagueSharp.Common;
 
-namespace Elvarus
+ namespace Elvarus
 {
     internal class DrawDamage //by xSalice
     {

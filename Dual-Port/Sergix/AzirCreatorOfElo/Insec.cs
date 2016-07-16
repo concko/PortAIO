@@ -13,13 +13,23 @@ using Azir_Creator_of_Elo;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Azir_Free_elo_Machine
+ namespace Azir_Free_elo_Machine
 {
     class Insec
     {
+        public enum Steps
+        {
+            firstCalcs = 0,
+            w = 1,
+            e = 2,
+            q = 3,
+            R = 4,
+        }
+        private Steps steps;
         Azir_Creator_of_Elo.AzirMain azir;
         public Insec(AzirMain azir)
         {
+            steps = Steps.firstCalcs;
             Clickposition = new Vector3(0, 0, 0);
             this.azir = azir;
             Game.OnUpdate += Game_OnUpdate;
@@ -47,6 +57,8 @@ namespace Azir_Free_elo_Machine
             }
             else
             {
+                var pos = target.ServerPosition.LSExtend(Clickposition, -200);
+                Render.Circle.DrawCircle(pos, 100, System.Drawing.Color.GreenYellow);
                 Render.Circle.DrawCircle(Clickposition, 100, System.Drawing.Color.GreenYellow);
             }
 
@@ -79,17 +91,17 @@ namespace Azir_Free_elo_Machine
 
 
         }
-        Obj_AI_Minion soldier;
         private void Game_OnUpdate(EventArgs args)
         {
+            if (!azir.Spells.R.IsReady()) return;
             var insecPoint = new Vector3(0, 2, 3);
             if (Clickposition == new Vector3(0, 0, 0))
                 insecPoint = Game.CursorPos;
             else
                 insecPoint = Clickposition;
+
             if (!Menu._jumpMenu["inseckey"].Cast<KeyBind>().CurrentValue)
             {
-                soldier = null;
                 return;
             }
             azir.Orbwalk(Game.CursorPos);
@@ -98,57 +110,44 @@ namespace Azir_Free_elo_Machine
                 return;
             var target = TargetSelector.SelectedTarget;
             if (!target.IsValidTarget() || target.IsZombie)
-                return;
-            if (azir.Hero.LSDistance(target) <= azir.Spells.R.Range && !azir.Hero.LSIsDashing())
             {
 
-                if (Clickposition == new Vector3(0, 0, 0))
-                {
-                    var tower = ObjectManager.Get<Obj_AI_Turret>().FirstOrDefault(it => it.IsAlly && it.LSIsValidTarget(1000));
-
-                    if (tower != null)
-                    {
-                        if (azir.Spells.R.Cast(tower.ServerPosition)) return;
-                    }
-
-                    if (azir.Spells.R.Cast(Game.CursorPos)) return;
-                }
-                else
-                {
-                    azir.Spells.R.Cast(Clickposition);
-                }
-
-
-
-
+                steps = Steps.firstCalcs;
+                return;
             }
 
-            var pos = target.ServerPosition.Extend(Game.CursorPos, -200);
-            if (pos.Distance(azir.Hero.ServerPosition) <= 900)
+            var insecPos = new Vector3(0, 0, 0);
+            if (Clickposition == new Vector3(0, 0, 0))
             {
 
-                if (soldier == null)
-                    soldier = azir.soldierManager.ActiveSoldiers
-                .Where(x => x.LSDistance(pos) <= 900)
-                .OrderBy(x => x.Position.Distance(target.Position)).FirstOrDefault();
-                if (soldier == null)
-                {
-                    castWOnAngle(HeroManager.Player.ServerPosition.LSTo2D(), target.ServerPosition.To2D(), 45);
-                    return;
-                }
-                if (soldier != null)
-                {
-                    azir.Spells.E.Cast(soldier.Position);
-                }
-                if (!azir.Spells.E.IsReady())
-                {
-                    if (azir.Hero.LSDistance(soldier.ServerPosition) <= 150)
+                insecPos = target.ServerPosition.LSExtend(Game.CursorPos, -200);
+            }
+            else
+            {
+                insecPos = target.ServerPosition.LSExtend(insecPoint, -200);
+            }
+            switch (steps)
+            {
+                case Steps.firstCalcs:
+                    if (insecPoint.Distance(HeroManager.Player.ServerPosition) > azir.Spells.Q.Range)
                     {
-                        azir.Spells.Q.Cast(pos);
+                        azir._modes.jump.fleeTopos(insecPoint);
+                        steps = steps = Steps.R;
                     }
-
-                }
-
+                    break;
+                case Steps.w:
+                    break;
+                case Steps.e:
+                    break;
+                case Steps.q:
+                    break;
+                case Steps.R:
+                    if (HeroManager.Player.Distance(target) <= 200)
+                    {
+                        azir.Spells.R.Cast(Game.CursorPos);
+                        steps = Steps.firstCalcs;
+                    }
+                    break;
             }
 
 
@@ -162,8 +161,8 @@ namespace Azir_Free_elo_Machine
         }
         public Vector2 RotatePoint(Vector2 pointToRotate, Vector2 centerPoint, float angleInRadians)
         {
-            double cosTheta = Math.Cos(angleInRadians);
-            double sinTheta = Math.Sin(angleInRadians);
+            double cosTheta = System.Math.Cos(angleInRadians);
+            double sinTheta = System.Math.Sin(angleInRadians);
             return new Vector2
             {
                 X =

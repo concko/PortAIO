@@ -8,10 +8,12 @@ using iKalistaReborn.Utils;
 using LeagueSharp.Common;
 using EloBuddy.SDK;
 
+
 namespace iKalistaReborn.Modules
 {
     internal class AutoRendModule : IModule
     {
+        
         public static Menu
             comboMenu = Kalista.comboMenu,
             mixedMenu = Kalista.mixedMenu,

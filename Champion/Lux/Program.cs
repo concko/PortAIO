@@ -10,7 +10,7 @@ using SharpDX;
 using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace MoonLux
+ namespace MoonLux
 {
     internal class Program
     {
@@ -508,7 +508,7 @@ namespace MoonLux
                 Drawing.DrawLine(aonScreen.X, aonScreen.Y, bonScreen.X, bonScreen.Y, 1, Color.Aqua);
             }
         }
-
+        
         /// <summary>
         ///     Fired when the game is loaded.
         /// </summary>
@@ -520,8 +520,7 @@ namespace MoonLux
                 DoHarass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 DoLaneClear();
             }

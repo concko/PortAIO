@@ -22,7 +22,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace Mastery_Badge_Spammer
+ namespace Mastery_Badge_Spammer
 {
     public enum SkillShotType
     {

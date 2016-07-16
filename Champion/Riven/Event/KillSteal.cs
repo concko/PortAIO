@@ -10,7 +10,7 @@ using EloBuddy;
 
 #endregion
 
-namespace NechritoRiven.Event
+ namespace NechritoRiven.Event
 {
     internal class KillSteal : Core.Core
     {

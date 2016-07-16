@@ -11,10 +11,12 @@ using LeagueSharp.Common.Data;
 using ItemData = LeagueSharp.Common.Data.ItemData;
 using FioraProject.Evade;
 
+
 namespace FioraProject
 {
     public static class MathAndExtensions
     {
+        
         #region Math And Extensions
         public static int CountMinionsInRange(this Vector3 Position, float Range, bool JungleTrueEnemyFalse)
         {

@@ -12,7 +12,7 @@ using Geometry = LeagueSharp.Common.Geometry;
 using ItemData = LeagueSharp.Common.Data.ItemData;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace GFUELTalon
+ namespace GFUELTalon
 {
     internal class Talon
     {
@@ -522,7 +522,7 @@ namespace GFUELTalon
             {
                 float damage = 0;
 
-                if (!Orbwalker.IsAutoAttacking)
+                if (!ObjectManager.Player.Spellbook.IsAutoAttacking)
                 {
                     damage += Player.GetAutoAttackDamage(enemy, true);
                 }
@@ -639,7 +639,7 @@ namespace GFUELTalon
                 Console.WriteLine(exception);
             }
         }
-
+        
         /// <summary>
         ///     Called when the game updates
         /// </summary>
@@ -663,8 +663,7 @@ namespace GFUELTalon
                     DoHarass();
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     DoJungleclear();
                     DoLaneclear();
@@ -714,7 +713,7 @@ namespace GFUELTalon
         //Credits to Trees
         private static bool UseItems()
         {
-            if (Player.IsDashing() || Orbwalker.IsAutoAttacking)
+            if (Player.IsDashing() || ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 return false;
             }

@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     class Brand
     {
@@ -126,18 +126,18 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                     Q.Cast(t);
             }
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             if (Program.Combo)
             {
                 if (!E.IsReady())
-                    Orbwalker.DisableAttacking = false;
+                    PortAIO.OrbwalkerManager.SetAttack(true);
                 else
-                    Orbwalker.DisableAttacking = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
 
             if (Program.LagFree(0))
             {

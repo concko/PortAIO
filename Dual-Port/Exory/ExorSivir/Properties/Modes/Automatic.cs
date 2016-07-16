@@ -1,11 +1,10 @@
 using System;
 using System.Linq;
 using ExorAIO.Utilities;
-using LeagueSharp;
-using LeagueSharp.SDK;
-using LeagueSharp.Data.Enumerations;
 using EloBuddy;
+using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
+using LeagueSharp.Data.Enumerations;
 
 namespace ExorAIO.Champions.Sivir
 {
@@ -29,7 +28,7 @@ namespace ExorAIO.Champions.Sivir
             ///     The Automatic Q Logic.
             /// </summary>
             if (Vars.Q.IsReady() &&
-                Vars.getCheckBoxItem(Vars.QMenu, "logical"))
+                Menus.getCheckBoxItem(Vars.QMenu, "logical"))
             {
                 foreach (var target in GameObjects.EnemyHeroes.Where(
                     t =>
@@ -50,7 +49,8 @@ namespace ExorAIO.Champions.Sivir
         /// <param name="args">The <see cref="GameObjectProcessSpellCastEventArgs" /> instance containing the event data.</param>
         public static void AutoShield(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
-            if (args.Target == null)
+            if (sender == null ||
+                !sender.IsEnemy)
             {
                 return;
             }
@@ -65,82 +65,107 @@ namespace ExorAIO.Champions.Sivir
                     }
 
                     /// <summary>
-                    ///     Check for Special AoE Spells.
+                    ///     Block Gangplank's Barrels 1st Part.
                     /// </summary>
-                    if (!args.Target.IsMe)
+                    if ((sender as AIHeroClient).ChampionName.Equals("Gangplank"))
                     {
-                        /// <summary>
-                        ///     Block Gangplank's Barrels 1st Part.
-                        /// </summary>
-                        if ((sender as AIHeroClient).ChampionName.Equals("Gangplank"))
+                        if (args.Target == null ||
+                            !(args.Target is Obj_AI_Minion))
                         {
-                            if (AutoAttack.IsAutoAttack(args.SData.Name) ||
-                                args.SData.Name.Equals("GangplankQProceed"))
-                            {
-                                if ((args.Target as Obj_AI_Minion).Health == 1 &&
-                                    (args.Target as Obj_AI_Minion).CharData.BaseSkinName.Equals("gangplankbarrel"))
-                                {
-                                    if (GameObjects.Player.Distance(args.Target) < 450)
-                                    {
-                                        Vars.E.Cast();
-                                        return;
-                                    }
-                                }
-                            }
+                            return;
                         }
 
-                        /// <summary>
-                        ///     Block Gangplank's Barrels 2nd Part.
-                        /// </summary>
-                        if (args.SData.Name.Equals("GangplankEBarrelFuseMissile"))
+                        if (AutoAttack.IsAutoAttack(args.SData.Name) ||
+                            args.SData.Name.Equals("GangplankQProceed"))
                         {
-                            if (GameObjects.Player.Distance(args.End) < 450)
+                            if ((args.Target as Obj_AI_Minion).Health == 1 &&
+                                (args.Target as Obj_AI_Minion).DistanceToPlayer() < 450 &&
+                                (args.Target as Obj_AI_Minion).CharData.BaseSkinName.Equals("gangplankbarrel"))
                             {
                                 Vars.E.Cast();
-                                return;
                             }
                         }
                     }
 
                     /// <summary>
-                    ///     Check for Special AutoAttacks & Melee AutoAttack Resets.
+                    ///     Block Gangplank's Barrels 2nd Part.
+                    /// </summary>
+                    else if (GameObjects.Player.Distance(args.End) < 450 &&
+                        args.SData.Name.Equals("GangplankEBarrelFuseMissile"))
+                    {
+                        Vars.E.Cast();
+                    }
+
+                    /// <summary>
+                    ///     Check for Special On-Hit CC AutoAttacks & Melee AutoAttack Resets.
                     /// </summary>
                     if (AutoAttack.IsAutoAttack(args.SData.Name))
                     {
-                        if ((!sender.IsMelee && args.SData.Name.Contains("Card")) ||
-                            sender.Buffs.Any(b => AutoAttack.IsAutoAttackReset(args.SData.Name)))
+                        if (!args.Target.IsMe)
                         {
-                            Vars.E.Cast();
                             return;
                         }
-                    }
 
-                    /// <summary>
-                    ///     Report whenever a Targetted spell doesn't exist in LeagueSharp.Data.
-                    /// </summary>
-                    if (SpellDatabase.GetByName(args.SData.Name) == null)
-                    {
-                        Console.WriteLine($"{args.SData.Name} + is null in the SpellDatabase!");
-                        return;
+                        /// <summary>
+                        ///     Whitelist Block.
+                        /// </summary>
+                        if (Vars.WhiteListMenu[$"{(sender as AIHeroClient).ChampionName.ToLower()}.{(sender as AIHeroClient).Buffs.First(b => AutoAttack.IsAutoAttackReset(b.Name)).Name.ToLower()}"] == null)  
+                        {
+                            if (Vars.WhiteListMenu[$"{(sender as AIHeroClient).ChampionName.ToLower()}.{args.SData.Name.ToLower()}"] == null ||
+                                !Menus.getCheckBoxItem(Vars.WhiteListMenu, $"{(sender as AIHeroClient).ChampionName.ToLower()}.{args.SData.Name.ToLower()}"))
+                            {
+                                return;
+                            }
+                        }
+
+                        switch (args.SData.Name)
+                        {
+                            case "BraumBasicAttackPassiveOverride":
+                                Vars.E.Cast();
+                                break;
+
+                            case "UdyrBearAttack":
+                                if (!GameObjects.Player.HasBuff("udyrbearstuncheck"))
+                                {
+                                    Vars.E.Cast();
+                                }
+                                break;
+
+                            default:
+                                Vars.E.Cast();
+                                break;
+                        }
                     }
 
                     /// <summary>
                     ///     Shield all the Targetted Spells.
                     /// </summary>
-                    if (SpellDatabase.GetByName(args.SData.Name).CastType.Contains(CastType.EnemyChampions))
+                    else if (SpellDatabase.GetByName(args.SData.Name) != null)
                     {
+                        /// <summary>
+                        ///     Whitelist Block.
+                        /// </summary>
+                        if (Vars.WhiteListMenu[$"{(sender as AIHeroClient).ChampionName.ToLower()}.{args.SData.Name.ToLower()}"] == null ||
+                            !Menus.getCheckBoxItem(Vars.WhiteListMenu, $"{(sender as AIHeroClient).ChampionName.ToLower()}.{args.SData.Name.ToLower()}"))
+                        {
+                            return;
+                        }
+
                         switch (SpellDatabase.GetByName(args.SData.Name).SpellType)
                         {
+                            /// <summary>
+                            ///     Check for Targetted Spells.
+                            /// </summary>
                             case SpellType.Targeted:
                             case SpellType.TargetedMissile:
 
-                                if (args.SData.Name.Equals("KatarinaE") ||
-                                    args.SData.Name.Equals("TalonCutthroat"))
+                                if (!args.Target.IsMe ||
+                                    !SpellDatabase.GetByName(args.SData.Name).CastType.Contains(CastType.EnemyChampions))
                                 {
                                     return;
                                 }
 
-                                switch (sender.CharData.BaseSkinName)
+                                switch ((sender as AIHeroClient).ChampionName)
                                 {
                                     case "Zed":
                                         DelayAction.Add(200, () => { Vars.E.Cast(); });
@@ -155,7 +180,27 @@ namespace ExorAIO.Champions.Sivir
                                         break;
 
                                     default:
-                                        DelayAction.Add(Vars.getSliderItem(Vars.EMenu, "delay"), () => { Vars.E.Cast(); });
+                                        DelayAction.Add(Menus.getSliderItem(Vars.EMenu, "delay"), () => { Vars.E.Cast(); });
+                                        break;
+                                }
+                                break;
+
+                            /// <summary>
+                            ///     Check for AoE Spells.
+                            /// </summary>
+                            case SpellType.SkillshotCircle:
+
+                                switch ((sender as AIHeroClient).ChampionName)
+                                {
+                                    case "Alistar":
+                                        if ((sender as AIHeroClient).DistanceToPlayer() <
+                                                355 + GameObjects.Player.BoundingRadius)
+                                        {
+                                            Vars.E.Cast();
+                                        }
+                                        break;
+
+                                    default:
                                         break;
                                 }
                                 break;
@@ -163,24 +208,28 @@ namespace ExorAIO.Champions.Sivir
                             default:
                                 break;
                         }
+                        break;
                     }
-
                     break;
 
                 case GameObjectType.obj_AI_Minion:
 
+                    if (args.Target == null ||
+                        !args.Target.IsMe)
+                    {
+                        return;
+                    }
+
                     /// <summary>
                     ///     Block Dragon/Baron/RiftHerald's AutoAttacks.
                     /// </summary>
-                    if (args.Target.IsMe &&
-                        Vars.getCheckBoxItem(Vars.EMenu, "minions"))
+                    if (Menus.getCheckBoxItem(Vars.WhiteListMenu, "minions"))
                     {
                         if (sender.CharData.BaseSkinName.Equals("SRU_Baron") ||
                             sender.CharData.BaseSkinName.Contains("SRU_Dragon") ||
                             sender.CharData.BaseSkinName.Equals("SRU_RiftHerald"))
                         {
                             Vars.E.Cast();
-                            return;
                         }
                     }
                     break;

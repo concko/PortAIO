@@ -9,7 +9,7 @@ using SharpDX;
 using Color = System.Drawing.Color;
 using EloBuddy;
 
-namespace EvadeSharp.Pathfinding
+ namespace EvadeSharp.Pathfinding
 {
     public static class PathFollower
     {

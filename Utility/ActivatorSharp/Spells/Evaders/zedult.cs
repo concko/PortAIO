@@ -3,7 +3,7 @@ using Activators.Base;
 using LeagueSharp;
 using LeagueSharp.Common;
 
-namespace Activators.Spells.Evaders
+ namespace Activators.Spells.Evaders
 {
     class zedult : CoreSpell
     {

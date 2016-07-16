@@ -6,7 +6,7 @@ using SharpDX;
 using static Firestorm_AIO.Helpers.Helpers;
 using EloBuddy;
 
-namespace Firestorm_AIO.Champions.Yasuo
+ namespace Firestorm_AIO.Champions.Yasuo
 {
     public static class DashManager
     {

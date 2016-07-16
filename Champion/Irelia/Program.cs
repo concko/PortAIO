@@ -7,12 +7,13 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace Challenger_Series
 {
     public class Irelia
     {
         public static Spell Q, W, E, R;
-
+        
         private static int UseQComboStringList;
 
         private static bool UseWComboBool;
@@ -268,7 +269,7 @@ namespace Challenger_Series
                     }
                 }
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var farmMode = QFarmModeStringList;
                 switch (farmMode)

@@ -1,4 +1,4 @@
-﻿namespace SkyLv_Taric
+﻿ namespace SkyLv_Taric
 {
     using System.Linq;
 
@@ -53,7 +53,7 @@
         {
             CustomEvents.Unit.OnDash += Unit_OnDash;
         }
-
+        
         #region On Dash
         static void Unit_OnDash(Obj_AI_Base sender, Dash.DashItem args)
         {

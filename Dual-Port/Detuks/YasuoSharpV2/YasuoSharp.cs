@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using static EloBuddy.SDK.Spell;
 
-namespace YasuoSharpV2
+ namespace YasuoSharpV2
 {
     internal class YasuoSharp
     {
@@ -143,7 +143,7 @@ namespace YasuoSharpV2
             }
 
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             try

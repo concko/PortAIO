@@ -17,7 +17,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace HeavenStrikeReksaj
+ namespace HeavenStrikeReksaj
 {
     class Program
     {
@@ -108,9 +108,9 @@ namespace HeavenStrikeReksaj
         
         private static void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
         {
-            if (Orbwalker.ActiveModesFlags != Orbwalker.ActiveModes.None && !_q.IsReady() && HasItem())
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) && !_q.IsReady() && HasItem())
                 CastItem();
-            if (Orbwalker.ActiveModesFlags != Orbwalker.ActiveModes.None && _q.IsReady())
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) && _q.IsReady())
                 _q.Cast();
         }
 
@@ -125,7 +125,7 @@ namespace HeavenStrikeReksaj
                 Render.Circle.DrawCircle(Player.Position, _q2.Range, Color.Yellow);
         }
 
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             //get burrow state
@@ -134,13 +134,13 @@ namespace HeavenStrikeReksaj
             else burrowed = false;
             // set orbwalker 
             if (burrowed)
-                Orbwalker.DisableAttacking = true;           
-            else Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(false);           
+            else PortAIO.OrbwalkerManager.SetAttack(true);
             // ks
             KS();
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                 Combo();
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 Clear();
         }
         //ks

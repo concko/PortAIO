@@ -14,7 +14,7 @@ using Utility = LeagueSharp.Common.Utility;
 using Spell = LeagueSharp.Common.Spell;
 using EloBuddy.SDK.Menu.Values;
 
-namespace EkkoGod
+ namespace EkkoGod
 {
     class Program
     {
@@ -192,7 +192,7 @@ namespace EkkoGod
             }
             return (float)dmg;
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             LeagueSharp.Common.Utility.HpBarDamageIndicator.Enabled = getCheckBoxItem(drawMenu, "DamageAfterCombo");

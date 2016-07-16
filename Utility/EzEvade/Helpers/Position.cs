@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using LeagueSharp;
-using LeagueSharp.Common;
-using SharpDX;
 using EloBuddy;
+using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
+using SharpDX;
 
 namespace ezEvade
 {
     public static class Position
     {
-        private static AIHeroClient myHero { get { return ObjectManager.Player; } }
+        public static AIHeroClient myHero { get { return ObjectManager.Player; } }
 
         public static int CheckPosDangerLevel(this Vector2 pos, float extraBuffer)
         {
@@ -47,24 +46,24 @@ namespace ezEvade
                     return false;
                 }*/
 
-                var projection = position.LSProjectOn(spellPos, spellEndPos);
+                var projection = position.ProjectOn(spellPos, spellEndPos);
 
-                /*if (projection.SegmentPoint.LSDistance(spellEndPos) < 100) //Check Skillshot endpoints
+                /*if (projection.SegmentPoint.Distance(spellEndPos) < 100) //Check Skillshot endpoints
                 {
                     //unfinished
                 }*/
 
-                return projection.IsOnSegment && projection.SegmentPoint.LSDistance(position) <= spell.radius + radius;
+                return projection.IsOnSegment && projection.SegmentPoint.Distance(position) <= spell.radius + radius;
             }
             else if (spell.spellType == SpellType.Circular)
             {
                 if (spell.info.spellName == "VeigarEventHorizon")
                 {
-                    return position.LSDistance(spell.endPos) <= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius
-                        && position.LSDistance(spell.endPos) >= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius - 125;
+                    return position.Distance(spell.endPos) <= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius
+                        && position.Distance(spell.endPos) >= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius - 125;
                 }
 
-                return position.LSDistance(spell.endPos) <= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius;
+                return position.Distance(spell.endPos) <= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius;
             }
             else if (spell.spellType == SpellType.Arc)
             {
@@ -73,10 +72,10 @@ namespace ezEvade
                     return false;
                 }
 
-                var spellRange = spell.startPos.LSDistance(spell.endPos);
-                var midPoint = spell.startPos + spell.direction * (spellRange/2);
+                var spellRange = spell.startPos.Distance(spell.endPos);
+                var midPoint = spell.startPos + spell.direction * (spellRange / 2);
 
-                return position.LSDistance(midPoint) <= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius;
+                return position.Distance(midPoint) <= spell.radius + radius - ObjectCache.myHeroCache.boundingRadius;
             }
             else if (spell.spellType == SpellType.Cone)
             {
@@ -99,7 +98,7 @@ namespace ezEvade
                 var turret = entry.Value;
                 if (turret == null || !turret.IsValid || turret.IsDead)
                 {
-                    LeagueSharp.Common.Utility.DelayAction.Add(1, () => ObjectCache.turrets.Remove(entry.Key));
+                    Core.DelayAction(() => ObjectCache.turrets.Remove(entry.Key), 1);
                     continue;
                 }
 
@@ -108,7 +107,7 @@ namespace ezEvade
                     continue;
                 }
 
-                var distToTurret = pos.LSDistance(turret.Position.LSTo2D());
+                var distToTurret = pos.Distance(turret.Position.To2D());
 
                 minDist = Math.Min(minDist, distToTurret);
             }
@@ -120,12 +119,12 @@ namespace ezEvade
         {
             float minDist = float.MaxValue;
 
-            foreach (var hero in HeroManager.Enemies)
+            foreach (var hero in EntityManager.Heroes.Enemies)
             {
                 if (hero != null && hero.IsValid && !hero.IsDead && hero.IsVisible)
                 {
-                    var heroPos = hero.ServerPosition.LSTo2D();
-                    var dist = heroPos.LSDistance(pos);
+                    var heroPos = hero.ServerPosition.To2D();
+                    var dist = heroPos.Distance(pos);
 
                     minDist = Math.Min(minDist, dist);
                 }
@@ -151,36 +150,21 @@ namespace ezEvade
             return false;
         }
 
-        public static float GetEnemyPositionValue(this Vector2 pos)
+        public static float GetPositionValue(this Vector2 pos)
         {
-            float posValue = 0;
+            float posValue = pos.Distance(Game.CursorPos.To2D());
 
             if (ObjectCache.menuCache.cache["PreventDodgingNearEnemy"].Cast<CheckBox>().CurrentValue)
             {
                 var minComfortDistance = ObjectCache.menuCache.cache["MinComfortZone"].Cast<Slider>().CurrentValue;
+                var distanceToChampions = pos.GetDistanceToChampions();
 
-                foreach (var hero in HeroManager.Enemies)
+                if (minComfortDistance > distanceToChampions)
                 {
-                    if (hero != null && hero.IsValid && !hero.IsDead && hero.IsVisible)
-                    {
-                        var heroPos = hero.ServerPosition.LSTo2D();
-                        var dist = heroPos.LSDistance(pos);
-
-                        if (minComfortDistance > dist)
-                        {
-                            posValue += 2 * (minComfortDistance - dist);
-                        }
-                    }
-                }                
+                    posValue += 2 * (minComfortDistance - distanceToChampions);
+                }
             }
 
-            return posValue;
-        }
-
-        public static float GetPositionValue(this Vector2 pos)
-        {
-            float posValue = pos.LSDistance(Game.CursorPos.LSTo2D());
-                        
             if (ObjectCache.menuCache.cache["PreventDodgingUnderTower"].Cast<CheckBox>().CurrentValue)
             {
                 var turretRange = 875 + ObjectCache.myHeroCache.boundingRadius;
@@ -222,7 +206,7 @@ namespace ezEvade
             int radiusIndex = 0;
 
             Vector2 heroPoint = ObjectCache.myHeroCache.serverPos2D;
-            Vector2 lastMovePos = Game.CursorPos.LSTo2D();
+            Vector2 lastMovePos = Game.CursorPos.To2D();
 
             List<PositionInfo> posTable = new List<PositionInfo>();
 

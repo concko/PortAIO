@@ -7,7 +7,7 @@ using LeagueSharp.SDK;
 
 #endregion
 
-namespace Infected_Twitch.Event
+ namespace Infected_Twitch.Event
 {
     internal class Trinkets
     {

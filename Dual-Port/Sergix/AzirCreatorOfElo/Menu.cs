@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Azir_Creator_of_Elo
+ namespace Azir_Creator_of_Elo
 {
     class Menu
     {

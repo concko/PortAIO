@@ -5,7 +5,7 @@ using DZAwarenessAIO.Utility.MenuUtility;
 using LeagueSharp.Common;
 using EloBuddy.SDK.Menu;
 
-namespace DZAwarenessAIO.Modules.TFHelper
+ namespace DZAwarenessAIO.Modules.TFHelper
 {
     /// <summary>
     /// The Team fight helper base class

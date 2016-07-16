@@ -11,10 +11,12 @@ using SharpDX;
 using TreeLib.Extensions;
 using Color = System.Drawing.Color;
 
+
 namespace Staberina
 {
     internal class Katarina
     {
+        
         private const int RRange = 550;
         private static bool CastWAfterE;
         private static int LastWardPlacement;
@@ -180,8 +182,7 @@ namespace Staberina
                 OnCombo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
                 Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
                 OnFarm();
@@ -291,7 +292,7 @@ namespace Staberina
 
         private static bool Combo(AIHeroClient forcedTarget = null)
         {
-            //var mode = Orbwalker.ActiveModesFlags;
+            
             var comboMode = getBoxItem(miscMenu, "ComboMode");
             var d = comboMode == 0 ? E.Range : Q.Range;
             var forceTarget = forcedTarget.LSIsValidTarget();

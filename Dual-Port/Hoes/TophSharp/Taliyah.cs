@@ -13,6 +13,9 @@ using Spell = LeagueSharp.Common.Spell;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
+
+using LeagueSharp.SDK.Core.Utils;
+
 namespace TophSharp
 {
     internal class Taliyah 
@@ -96,19 +99,19 @@ namespace TophSharp
             if (_q.Level > 0 && drawq)
             {
                 var color = _q.IsReady() ? Color.CadetBlue : Color.Red;
-                Render.Circle.DrawCircle(Player.Position, _q.Range, color, 3);
+                LeagueSharp.Common.Render.Circle.DrawCircle(Player.Position, _q.Range, color, 3);
             }
 
             if (_w.Level > 0 && draww)
             {
                 var color = _w.IsReady() ? Color.Green : Color.Red;
-                Render.Circle.DrawCircle(Player.Position, _w.Range, color, 3);
+                LeagueSharp.Common.Render.Circle.DrawCircle(Player.Position, _w.Range, color, 3);
             }
 
             if (_e.Level > 0 && drawe)
             {
                 var color = _e.IsReady() ? Color.DarkOrchid : Color.Red;
-                Render.Circle.DrawCircle(Player.Position, _e.Range, color, 3);
+                LeagueSharp.Common.Render.Circle.DrawCircle(Player.Position, _e.Range, color, 3);
             }
         }
 
@@ -136,6 +139,7 @@ namespace TophSharp
                 _w.Cast(args.Unit);
             }
         }
+        
 
         private static void OnGameUpdate(EventArgs args)
         {
@@ -148,7 +152,7 @@ namespace TophSharp
             {
                 Mixed();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }
@@ -312,13 +316,13 @@ namespace TophSharp
             }
 
             if (Environment.TickCount - EJustUsed < 2500 && Environment.TickCount - EJustUsed > 500 &&
-                CanUse(_w, target) && !CanUse(_e, target) && usew && wpred.Hitchance >= HitChance.VeryHigh) 
+                CanUse(_w, target) && !CanUse(_e, target) && usew && _w.GetPrediction(target).Hitchance >= HitChance.VeryHigh) 
             {
                 _w.Cast(wpred.CastPosition);
             }
 
             if (!CanUse(_e, target) && CanUse(_w, target) && SpellUpSoon(SpellSlot.E) > 1f && usew &&
-                wpred.Hitchance >= HitChance.VeryHigh)
+                _w.GetPrediction(target).Hitchance >= HitChance.VeryHigh)
             {
                 if (CanUse(_e, target) && (CanUse(_w, target) || SpellUpSoon(SpellSlot.W) < 0.5f) && usee) return;
                 _w.Cast(wpred.CastPosition);

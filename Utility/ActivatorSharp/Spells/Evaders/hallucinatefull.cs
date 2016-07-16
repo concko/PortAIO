@@ -1,7 +1,7 @@
 ﻿using System; using EloBuddy.SDK.Menu.Values; using EloBuddy;
 using Activators.Base;
 
-namespace Activators.Spells.Evaders
+ namespace Activators.Spells.Evaders
 {
     internal class hallucinatefull : CoreSpell
     {

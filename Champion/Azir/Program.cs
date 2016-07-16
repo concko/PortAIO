@@ -26,7 +26,7 @@ namespace HeavenStrikeAzir
     class Program
     {
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
-
+        
         public static LeagueSharp.Common.Spell _q, _w, _e, _r , _q2, _r2;
 
         public static Menu _menu;

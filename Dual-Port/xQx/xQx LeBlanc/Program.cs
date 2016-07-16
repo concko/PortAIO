@@ -15,7 +15,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace LeblancOLD
+ namespace LeblancOLD
 {
     internal class Program
     {
@@ -804,7 +804,7 @@ namespace LeblancOLD
             if (useE && E.IsReady())
                 E.Cast(mob);
         }
-
+        
         private static void DoToggleHarass()
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

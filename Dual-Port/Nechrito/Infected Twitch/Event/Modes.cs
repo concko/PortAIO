@@ -10,10 +10,11 @@ using static Infected_Twitch.Core.Spells;
 using EloBuddy.SDK;
 #endregion
 
-namespace Infected_Twitch.Event
+ namespace Infected_Twitch.Event
 {
     internal class Modes : Core.Core
     {
+        
         public static void Update(EventArgs args)
         {
             AutoE();

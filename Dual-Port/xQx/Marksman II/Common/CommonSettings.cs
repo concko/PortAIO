@@ -10,7 +10,7 @@ using Marksman.Champions;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Marksman.Common
+ namespace Marksman.Common
 {
     internal static class CommonSettings
     {

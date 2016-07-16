@@ -20,6 +20,19 @@ namespace ExorAIO.Utilities
         /// </summary>
         public static void Initialize()
         {
+            Drawing.OnEndScene += delegate
+            {
+                /// <summary>
+                ///     Loads the R Minimap drawing.
+                /// </summary>
+                if (Vars.R != null &&
+                    Vars.R.IsReady() &&
+                    Vars.R.Range >= 1500)
+                {
+                    Geometry.DrawCircleOnMinimap(GameObjects.Player.Position, Vars.R.Range, Color.White);
+                }
+            };
+
             Drawing.OnDraw += delegate
             {
                 /// <summary>

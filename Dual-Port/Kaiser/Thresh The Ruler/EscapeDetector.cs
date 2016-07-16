@@ -7,7 +7,7 @@ using EloBuddy;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace ThreshTherulerofthesoul
+ namespace ThreshTherulerofthesoul
 {
     public class GameObjectEscapeDetectorEventArgs
     {

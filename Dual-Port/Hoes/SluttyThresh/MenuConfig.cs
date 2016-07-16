@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Slutty_Thresh
+ namespace Slutty_Thresh
 {
     internal class MenuConfig
     {

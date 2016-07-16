@@ -7,7 +7,7 @@ using EloBuddy;
 
 #endregion
 
-namespace NechritoRiven
+ namespace NechritoRiven
 {
     public class Program
     {

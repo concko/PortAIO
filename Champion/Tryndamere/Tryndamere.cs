@@ -3,7 +3,7 @@ using ExorAIO.Utilities;
 using LeagueSharp.SDK;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Tryndamere
+ namespace ExorAIO.Champions.Tryndamere
 {
     /// <summary>
     ///     The champion class.
@@ -35,7 +35,7 @@ namespace ExorAIO.Champions.Tryndamere
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>

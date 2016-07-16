@@ -1,4 +1,4 @@
-﻿namespace iTwitch
+﻿ namespace iTwitch
 {
     using System;
     using System.Linq;

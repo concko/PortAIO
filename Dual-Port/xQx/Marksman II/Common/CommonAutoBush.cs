@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Marksman.Common
+ namespace Marksman.Common
 {
     using System.Net;
 

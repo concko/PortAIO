@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ezEvade
+ namespace ezEvade
 {
     public static class ConsolePrinter
     {

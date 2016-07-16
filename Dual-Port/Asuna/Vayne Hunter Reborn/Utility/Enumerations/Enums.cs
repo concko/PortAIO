@@ -1,4 +1,4 @@
-﻿namespace VayneHunter_Reborn.Utility.Enumerations
+﻿ namespace VayneHunter_Reborn.Utility.Enumerations
 {
     public enum Skills
     {

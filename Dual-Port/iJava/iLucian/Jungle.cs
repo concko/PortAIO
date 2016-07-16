@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace iLucian.Utils
+ namespace iLucian.Utils
 {
     using System.Text.RegularExpressions;
 

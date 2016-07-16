@@ -6,7 +6,7 @@ using SharpDX;
 using System.Collections.Generic;
 using EloBuddy.SDK;
 
-namespace Nechrito_Diana
+ namespace Nechrito_Diana
 {
     class Program
     {
@@ -32,6 +32,7 @@ namespace Nechrito_Diana
             Drawing.OnDraw += Drawing_OnDraw;
             Drawing.OnEndScene += Drawing_OnEndScene;
         }
+        
         private static void OnTick(EventArgs args)
         {
             Modes.Flee();

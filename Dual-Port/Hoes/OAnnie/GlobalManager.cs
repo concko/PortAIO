@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace OAnnie
+ namespace OAnnie
 {
     class GlobalManager : Annie
     {

@@ -13,7 +13,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Spirit_Karma.Event
+ namespace Spirit_Karma.Event
 {
     internal class Mode : Core.Core
     {
@@ -56,6 +56,7 @@ namespace Spirit_Karma.Event
 
             }
         }
+        
         private static void OrbHandler()
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
@@ -71,7 +72,7 @@ namespace Spirit_Karma.Event
             {
                 Mixed();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Lane();
                 Jungle();

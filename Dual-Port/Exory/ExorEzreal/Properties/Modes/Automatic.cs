@@ -8,13 +8,14 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp.SDK.Core.Utils;
 
-namespace ExorAIO.Champions.Ezreal
+ namespace ExorAIO.Champions.Ezreal
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>

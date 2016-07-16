@@ -4,7 +4,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
-namespace ElUtilitySuite.Items.OffensiveItems
+ namespace ElUtilitySuite.Items.OffensiveItems
 {
     internal class Hydra : Item
     {

@@ -7,7 +7,7 @@ using SharpDX.Direct3D;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace OAnnie
+ namespace OAnnie
 {
     internal class Annie : MenuConfig
     {
@@ -156,7 +156,7 @@ namespace OAnnie
         }
 
         #endregion
-
+        
         /// <summary>
         ///     Every tick update
         /// </summary>
@@ -192,12 +192,12 @@ namespace OAnnie
                 LastHit();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Laneclear();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 JungleClear();
             }
@@ -208,11 +208,11 @@ namespace OAnnie
                 if (Player.LSDistance(target) > Q.Range &&
                     (( !Q.IsReady() || !W.IsReady() || !R.IsReady())) )
                 {
-                    Orbwalker.DisableAttacking = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
                 }
                 else
                 {
-                    Orbwalker.DisableAttacking = false;
+                    PortAIO.OrbwalkerManager.SetAttack(true);
                 }
             }
 

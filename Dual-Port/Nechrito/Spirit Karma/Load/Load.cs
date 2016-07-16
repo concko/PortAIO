@@ -9,7 +9,7 @@ using Spirit_Karma.Menus;
 
 #endregion
 
-namespace Spirit_Karma.Load
+ namespace Spirit_Karma.Load
 {
     internal class Load
     {

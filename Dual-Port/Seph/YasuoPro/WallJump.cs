@@ -7,7 +7,7 @@ using LeagueSharp.Common;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace YasuoPro
+ namespace YasuoPro
 {
     class WallJump
     {

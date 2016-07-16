@@ -34,7 +34,7 @@ using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace iDZed
+ namespace iDZed
 {
     /// <summary>
     ///     TODO The zed.
@@ -568,6 +568,7 @@ namespace iDZed
                 Render.Circle.DrawCircle(Player.Position, spell.Value.Range, Color.Aqua);
             }
         }
+        
 
         /// <summary>
         ///     TODO The game_ on update.
@@ -594,8 +595,8 @@ namespace iDZed
                 LastHit();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
+                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Laneclear();
             }
@@ -899,7 +900,7 @@ namespace iDZed
                 MinionTypes.All,
                 MinionTeam.NotAlly);
             if (getCheckBoxItem(laneclearMenu, "com.idz.zed.laneclear.useQ") && _spells[SpellSlot.Q].IsReady()
-                && !Orbwalker.IsAutoAttacking)
+                && !ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 var bestPositionQ =
                     MinionManager.GetBestLineFarmLocation(
@@ -913,7 +914,7 @@ namespace iDZed
             }
 
             if (getCheckBoxItem(laneclearMenu, "com.idz.zed.laneclear.useE") && _spells[SpellSlot.E].IsReady()
-                && !Orbwalker.IsAutoAttacking)
+                && !ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 var eLocation =
                     MinionManager.GetBestLineFarmLocation(

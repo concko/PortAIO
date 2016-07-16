@@ -7,7 +7,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Slutty_ryze
+ namespace Slutty_ryze
 {
     class DrawManager
     {
@@ -54,7 +54,6 @@ namespace Slutty_ryze
                     Drawing.DrawText(pos.X, pos.Y, System.Drawing.Color.SteelBlue, "Key Table");
 
                     Drawing.DrawText(pos.X, ++col * 25 + pos.Y, System.Drawing.Color.SteelBlue, "Stack Tear Key: " + MenuManager.itemMenu["tearS"].Cast<KeyBind>().KeyStrings.Item1, 13);
-                    Drawing.DrawText(pos.X, ++col * 25 + pos.Y, System.Drawing.Color.SteelBlue, "Auto Passive Key: " + MenuManager.passiveMenu["autoPassive"].Cast<KeyBind>().KeyStrings.Item1, 13);
                     Drawing.DrawText(pos.X, ++col * 25 + pos.Y, System.Drawing.Color.SteelBlue, "Disable Lane Clear Key: " + MenuManager.laneMenu["disablelane"].Cast<KeyBind>().KeyStrings.Item1, 13);
 
                     Drawing.DrawLine(new Vector2(pos.X - 25, ++col * 25 + pos.Y), new Vector2(pos.X + 150, col * 25 + pos.Y),
@@ -68,7 +67,6 @@ namespace Slutty_ryze
                     Drawing.DrawText(pos.X, pos.Y, System.Drawing.Color.LightBlue, "Key Table");
 
                     Drawing.DrawText(pos.X, ++col1 * 25 + pos.Y, System.Drawing.Color.LightBlue, "Stack Tear Key: " + MenuManager.itemMenu["tearS"].Cast<KeyBind>().KeyStrings.Item1, 13);
-                    Drawing.DrawText(pos.X, ++col1 * 25 + pos.Y, System.Drawing.Color.LightBlue, "Auto Passive Key: " + MenuManager.passiveMenu["autoPassive"].Cast<KeyBind>().KeyStrings.Item1, 13);
                     Drawing.DrawText(pos.X, ++col1 * 25 + pos.Y, System.Drawing.Color.LightBlue, "Disable Lane Clear Key: " + MenuManager.laneMenu["disablelane"].Cast<KeyBind>().KeyStrings.Item1, 13);
 
                     Drawing.DrawLine(new Vector2(pos.X - 25, ++col1 * 25 + pos.Y), new Vector2(pos.X + 150, col1 * 25 + pos.Y),
@@ -77,43 +75,6 @@ namespace Slutty_ryze
             }
         }
 
-        /*
-         static Point[] getPoints(Vector2 c, int R)
-         {
-             int X = (int)c.X;
-             int Y = (int)c.Y;
-
-             int R2 = (int)(R / Math.PI);
-
-             Point[] pt = new Point[5];
-
-             pt[0].X = X;
-             pt[0].Y = Y;
-
-             pt[1].X = X;
-             pt[1].Y = Y + R * 2;
-
-             pt[2].X = X + R * 2;
-             pt[2].Y = Y;
-
-             pt[3].X = X - R * 2;
-             pt[3].Y = Y;
-
-             pt[4].X = X;
-             pt[4].Y = Y - R * 2;
-
-             return pt;
-         }
-
-         private static void drawCircleThing(int radius, SharpDX.Vector2 center, Color c)
-         {
-             var lineWalls = getPoints(center,radius);
-             Drawing.DrawLine(lineWalls[0], lineWalls[1], 2, c);
-             Drawing.DrawLine(lineWalls[0], lineWalls[2], 2, c);
-             Drawing.DrawLine(lineWalls[0], lineWalls[3], 2, c);
-             Drawing.DrawLine(lineWalls[0], lineWalls[4], 2, c);
-         }
-         */
         #endregion
         #region Public Functions
         public static void Drawing_OnDraw(EventArgs args)
@@ -126,17 +87,10 @@ namespace Slutty_ryze
             if (getCheckBoxItem(MenuManager.drawMenu, "keyBindDisplay"))
                 DrawKeys(new Vector2(Drawing.Width - 250, (float)Drawing.Height / 2));
 
-            if (!GlobalManager.GetHero.Position.LSIsOnScreen())
-                return;
-            if (getCheckBoxItem(MenuManager.drawMenu, "stackDraw"))
-            {
-                Drawing.DrawText(Drawing.WorldToScreen(GlobalManager.GetHero.Position).X - 55,
-                    Drawing.WorldToScreen(GlobalManager.GetHero.Position).Y, System.Drawing.Color.Cyan,
-                    "Current Stacks " + GlobalManager.GetPassiveBuff);
-            }
-            // drawCircleThing((int)Champion.Q.Range/2, Drawing.WorldToScreen(GlobalManager.GetHero.Position), Color.Pink);
+           // if (!GlobalManager.GetHero.Position.LSIsOnScreen())
+            //    return;
+
             var tears = getKeyBindItem(MenuManager.itemMenu, "tearS");
-            var passive = getKeyBindItem(MenuManager.passiveMenu, "autoPassive");
             var laneclear = getKeyBindItem(MenuManager.laneMenu, "disablelane");
 
             var heroPosition = Drawing.WorldToScreen(GlobalManager.GetHero.Position);
@@ -158,9 +112,6 @@ namespace Slutty_ryze
                         GetColor(tears),
                         "Tear Stack: " + BoolToString(tears));
 
-                    Drawing.DrawText(heroPosition.X - 150, heroPosition.Y - 30, GetColor(passive),
-                        "Passive Stack: " + BoolToString(passive));
-
                     Drawing.DrawText(heroPosition.X + 20, heroPosition.Y - 30, GetColor(laneclear),
                         "Lane Clear: " + BoolToString(laneclear));
                     break;
@@ -177,9 +128,6 @@ namespace Slutty_ryze
                     Drawing.DrawText(heroPosition.X - textDimension, heroPosition.Y - textDimension,
                         GetColorblind(tears),
                         "Tear Stack: " + BoolToStringblind(tears));
-
-                    Drawing.DrawText(heroPosition.X - 150, heroPosition.Y - 30, GetColorblind(passive),
-                        "Passive Stack: " + BoolToStringblind(passive));
 
                     Drawing.DrawText(heroPosition.X + 20, heroPosition.Y - 30, GetColorblind(laneclear),
                         "Lane Clear: " + BoolToStringblind(laneclear));

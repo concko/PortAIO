@@ -12,7 +12,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Environment = UnderratedAIO.Helpers.Environment;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Nocturne
     {
@@ -42,7 +42,7 @@ namespace UnderratedAIO.Champions
         {
             get { return player.Buffs.Any(buff => buff.Name == "nocturneumbrablades"); }
         }
-
+        
         private void Game_OnGameUpdate(EventArgs args)
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
@@ -57,8 +57,7 @@ namespace UnderratedAIO.Champions
                 Harass(target);
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

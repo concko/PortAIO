@@ -7,7 +7,7 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace SKT_Series
+ namespace SKT_Series
 {
     internal class Program
     {
@@ -169,7 +169,7 @@ namespace SKT_Series
             {
             }
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             Getpixed();

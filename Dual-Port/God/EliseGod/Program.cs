@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu.Values;
 using Utility = LeagueSharp.Common.Utility;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
-namespace EliseGod
+ namespace EliseGod
 {
     internal class Program
     {
@@ -114,7 +114,7 @@ namespace EliseGod
         //    }
         //}
 
-
+        
         private static void OnUpdate(EventArgs args)
         {
             Killsteal();
@@ -129,11 +129,11 @@ namespace EliseGod
             {
                 Harass();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 JungleClear();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }
@@ -613,7 +613,7 @@ namespace EliseGod
                     Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
                     Utility.DelayAction.Add((int)aaDelay, () => W1.Cast());
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 if (getCheckBoxItem(jungleClearMenu, "jungleclear.w.spider")
                     && target.Type == GameObjectType.NeutralMinionCamp)

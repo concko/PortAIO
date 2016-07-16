@@ -1,4 +1,4 @@
-namespace EvadeSharp
+ namespace EvadeSharp
 {
     public enum EarlyObjects
     {

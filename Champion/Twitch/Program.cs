@@ -13,7 +13,7 @@ using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 using System.Collections.Generic;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     internal class Twitch
     {
@@ -168,9 +168,9 @@ namespace OneKeyToWin_AIO_Sebby.Champions
 
             if (Program.LagFree(1) && E.IsReady())
                 LogicE();
-            if (Program.LagFree(2) && Q.IsReady() && !Orbwalker.IsAutoAttacking)
+            if (Program.LagFree(2) && Q.IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking)
                 LogicQ();
-            if (Program.LagFree(3) && getCheckBoxItem(wMenu, "autoW") && W.IsReady() && !Orbwalker.IsAutoAttacking)
+            if (Program.LagFree(3) && getCheckBoxItem(wMenu, "autoW") && W.IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking)
                 LogicW();
             if (Program.LagFree(4) && R.IsReady() && Program.Combo)
                 LogicR();

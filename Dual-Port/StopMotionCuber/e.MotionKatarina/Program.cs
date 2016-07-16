@@ -12,7 +12,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace e.Motion_Katarina
+ namespace e.Motion_Katarina
 {
     class Program
     {
@@ -248,7 +248,7 @@ namespace e.Motion_Katarina
             }
         }
 
-
+        
         static void Game_OnUpdate(EventArgs args)
         {
             Demark();
@@ -259,21 +259,21 @@ namespace e.Motion_Katarina
             }
             if (HasRBuff())
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 if (getKeyBindItem(miscMenu, "motion.katarina.misc.cancelKey"))
                 {
-                    Orbwalker.DisableAttacking = false;
-                    Orbwalker.DisableMovement = false;
+                    PortAIO.OrbwalkerManager.SetAttack(true);
+                    PortAIO.OrbwalkerManager.SetMovement(true);
                     EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                 }
                 if (getCheckBoxItem(miscMenu, "motion.katarina.misc.cancelR") && Player.LSCountEnemiesInRange(R.Range + 50) == 0)
                 {
-                    Orbwalker.DisableAttacking = false;
-                    Orbwalker.DisableMovement = false;
+                    PortAIO.OrbwalkerManager.SetAttack(true);
+                    PortAIO.OrbwalkerManager.SetMovement(true);
                     EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                 }
                 if (getCheckBoxItem(miscMenu, "motion.katarina.misc.kswhileult"))
                     Killsteal();
@@ -287,8 +287,8 @@ namespace e.Motion_Katarina
                     ShallJumpNow = false;
                 }
             }
-            Orbwalker.DisableAttacking = false;
-            Orbwalker.DisableMovement = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
+            PortAIO.OrbwalkerManager.SetMovement(true);
 
             //Dev();
             Killsteal();
@@ -736,7 +736,7 @@ namespace e.Motion_Katarina
         #region LaneClear
         private static void LaneClear()
         {
-            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 return;
             Obj_AI_Base[] sourroundingMinions;
             if (getCheckBoxItem(laneclear, "motion.katarina.laneclear.usew") && W.IsReady())
@@ -768,7 +768,7 @@ namespace e.Motion_Katarina
         private static void JungleClear()
         {
             Obj_AI_Base[] sourroundingMinions;
-            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 return;
             if (getCheckBoxItem(jungleclear, "motion.katarina.jungleclear.useq") && Q.IsReady())
             {

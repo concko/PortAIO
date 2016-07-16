@@ -13,7 +13,7 @@ using KL = KurisuNidalee.KurisuLib;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace KurisuNidalee
+ namespace KurisuNidalee
 {
     internal class KurisuNidalee
     {
@@ -185,7 +185,7 @@ namespace KurisuNidalee
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (sender.IsEnemy || sender.Type != Player.Type || !args.SData.IsAutoAttack())
@@ -403,8 +403,7 @@ namespace KurisuNidalee
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -458,7 +457,7 @@ namespace KurisuNidalee
         {
             if (target != null && target.IsHPBarRendered && target.IsEnemy)
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
         }
 
@@ -466,7 +465,7 @@ namespace KurisuNidalee
         {
             var solo = getBoxItem(Root, "pstyle") == 0;
 
-            if (!Orbwalker.IsAutoAttacking)
+            if (!ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 CM.CastJavelin(
                     solo ? Target : TargetSelector.GetTarget(KL.Spells["Javelin"].Range, DamageType.Magical), "co");
@@ -686,13 +685,13 @@ namespace KurisuNidalee
 
                 if (!jumpTriggered)
                 {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                 }
             }
 
             else
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
                 if (KL.CatForm() && KL.SpellTimer["Pounce"].IsReady())
                     KL.Spells["Pounce"].Cast(Game.CursorPos);
             }

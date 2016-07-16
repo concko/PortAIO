@@ -6,7 +6,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace TwistedFate
+ namespace TwistedFate
 {
     public enum Cards
     {

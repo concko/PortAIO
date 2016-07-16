@@ -4,7 +4,7 @@ using EloBuddy;
 using LeagueSharp.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The drawings class.

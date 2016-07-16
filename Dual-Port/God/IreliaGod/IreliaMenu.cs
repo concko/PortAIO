@@ -3,7 +3,7 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
 
-namespace IreliaGod
+ namespace IreliaGod
 {
     class IreliaMenu
     {

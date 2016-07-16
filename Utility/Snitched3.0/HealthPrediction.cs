@@ -1,4 +1,4 @@
-﻿namespace Snitched
+﻿ namespace Snitched
 {
     using System;
     using System.Collections.Generic;

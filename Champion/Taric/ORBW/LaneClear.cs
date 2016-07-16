@@ -1,4 +1,4 @@
-﻿namespace SkyLv_Taric
+﻿ namespace SkyLv_Taric
 {
     using System;
     using System.Linq;
@@ -76,7 +76,7 @@
         {
             LaneClearLogic();
         }
-
+        
         public static void LaneClearLogic()
         {
             var PacketCast = getCheckBoxItem(SkyLv_Taric.Misc, "Taric.UsePacketCast");

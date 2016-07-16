@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Lux
+ namespace ExorAIO.Champions.Lux
 {
     /// <summary>
     ///     The logics class.

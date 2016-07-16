@@ -10,13 +10,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Azir_Creator_of_Elo
+ namespace Azir_Creator_of_Elo
 {
     internal class AzirMain
     {
         private Spells _spells;
         public Menu _menu;
-        public Modes _modes;
+        public AzirModes _modes;
         public Azir_Creator_of_Elo.Spells Spells
         {
             get { return _spells; }
@@ -52,7 +52,7 @@ namespace Azir_Creator_of_Elo
 
         public void Orbwalk(Vector3 pos)
         {
-            Orbwalker.OrbwalkTo(pos);
+            Orbwalker.MoveTo(pos);
         }
 
         private void Ondraw(EventArgs args)

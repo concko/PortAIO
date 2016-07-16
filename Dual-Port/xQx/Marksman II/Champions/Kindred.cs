@@ -12,7 +12,7 @@ using Font = SharpDX.Direct3D9.Font;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     using EloBuddy;
     using EloBuddy.SDK;
@@ -24,7 +24,7 @@ namespace Marksman.Champions
 
     internal interface IKindred
     {
-        void Orbwalking_AfterAttack(AttackableUnit unit, AttackableUnit target);
+        void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args);
         void Drawing_OnDraw(EventArgs args);
         void Game_OnGameUpdate(EventArgs args);
         bool ComboMenu(Menu config);
@@ -178,6 +178,7 @@ namespace Marksman.Champions
                 }
             }
         }
+        
 
         public override void Orbwalking_BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
@@ -188,7 +189,7 @@ namespace Marksman.Champions
                             e.IsValid && e.LSDistance(ObjectManager.Player) < Orbwalking.GetRealAutoAttackRange(null) + 65 &&
                             e.IsVisible).Where(targetA => targetA.HasBuff("kindredcharge")))
             {
-                Orbwalker.ForcedTarget = targetA;
+                Orbwalker.ForcedTarget =(targetA);
             }
         }
 

@@ -8,7 +8,7 @@ using EloBuddy.SDK;
 using System.Linq;
 using LeagueSharp.Data;
 
-namespace ExorAIO.Champions.MissFortune
+ namespace ExorAIO.Champions.MissFortune
 {
     /// <summary>
     ///     The champion class.
@@ -45,7 +45,7 @@ namespace ExorAIO.Champions.MissFortune
             /// </summary>
             ConeDrawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>
@@ -91,7 +91,7 @@ namespace ExorAIO.Champions.MissFortune
                 Logics.Harass(args);
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Logics.Clear(args);
             }
@@ -194,15 +194,15 @@ namespace ExorAIO.Champions.MissFortune
                             t.IsValidTarget(Vars.AARange) &&
                             t.NetworkId != Vars.PassiveTarget.NetworkId))
                     {
-                        Orbwalker.ForcedTarget = null;
+                        Orbwalker.ForcedTarget =(null);
                         return;
                     }
 
                     args.Process = false;
-                    Orbwalker.ForcedTarget = GameObjects.EnemyHeroes.Where(
+                    Orbwalker.ForcedTarget =(GameObjects.EnemyHeroes.Where(
                         t =>
                             t.IsValidTarget(Vars.AARange) &&
-                            t.NetworkId != Vars.PassiveTarget.NetworkId).OrderByDescending(o => TargetSelector.GetPriority(o)).First();
+                            t.NetworkId != Vars.PassiveTarget.NetworkId).OrderByDescending(o => TargetSelector.GetPriority(o)).First());
                 }
             }
         }

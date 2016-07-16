@@ -9,13 +9,13 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace Slutty_ryze
+ namespace Slutty_ryze
 {
     internal class Program
     {
         static readonly Random Seeder = new Random();
-        private static bool _casted;
-        private static int _lastw;
+
+        public static int rRange { get; private set; }
         #region onload
 
         public static void OnLoad()
@@ -129,55 +129,45 @@ namespace Slutty_ryze
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             try // lazy
             {
-                if (getKeyBindItem(MenuManager._config, "test"))
-                {
-                    EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-                    var targets = TargetSelector.GetTarget(Champion.W.Range, DamageType.Magical);
-                    if (targets == null)
-                        return;
-                    if (Champion.W.IsReady())
-                    {
-                        LaneOptions.CastW(targets);
-                        {
-                            _lastw = Environment.TickCount;
-                        }
-                    }
+                //var target2 = TargetSelector.GetTarget(Champion.Q.Range, TargetSelector.DamageType.Magical);
+                //if (target2.IsValidTarget())
+                //    Game.PrintChat(Champion.Q.GetPrediction(target2).CollisionObjects.Count.ToString());
 
-                    if (Environment.TickCount - _lastw >= 700 - Game.Ping)
-                    {
-                        if (Champion.Q.IsReady())
-                        {
-                            LaneOptions.CastQn(targets);
-                            _casted = true;
-                        }
-                    }
-
-                    if (_casted)
-                    {
-                        LaneOptions.CastE(targets);
-                        LaneOptions.CastQn(targets);
-                        _casted = false;
-                    }
-                }
 
                 if (getKeyBindItem(MenuManager.chase, "chase"))
                 {
+                    switch (Champion.R.Level)
+                    {
+                        case 1:
+                            rRange = 1500;
+                            break;
+                        case 2:
+                            rRange = 3000;
+                            break;
+                    }
                     EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
                     var targets = TargetSelector.GetTarget(Champion.W.Range + 200, DamageType.Magical);
                     if (targets == null)
                         return;
 
-                    if (getCheckBoxItem(MenuManager.chase, "usewchase"))
+                    if (getCheckBoxItem(MenuManager.chase, "usewchase") && targets.IsValidTarget(Champion.E.Range))
                         LaneOptions.CastW(targets);
 
+                    var target1 = TargetSelector.SelectedTarget;
+                    if (!target1.LSIsValidTarget(rRange)) return;
                     if (getCheckBoxItem(MenuManager.chase, "chaser") &&
-                        targets.LSDistance(GlobalManager.GetHero) > Champion.W.Range + 200)
-                        Champion.R.Cast();
+                        target1.LSDistance(GlobalManager.GetHero) > Champion.W.Range + 200 &&
+                        targets.LSDistance(GlobalManager.GetHero) < rRange
+                        && Champion.R.IsReady())
+                    {
+                        Champion.R.Cast(GlobalManager.GetHero.Position.LSExtend(target1.Position,
+                            target1.LSDistance(GlobalManager.GetHero.Position) + 260));
+                    }
                 }
 
                 if (GlobalManager.GetHero.IsDead)
@@ -186,9 +176,10 @@ namespace Slutty_ryze
                 if (GlobalManager.GetHero.IsRecalling())
                     return;
 
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
 
                 var target = TargetSelector.GetTarget(Champion.Q.Range, DamageType.Magical);
+
 
                 if (getCheckBoxItem(MenuManager.humanizerMenu, "doHuman"))
                 {
@@ -211,35 +202,31 @@ namespace Slutty_ryze
                              (Game.Time - 1));
                     if (Champion.W.IsReady() && !(CD < 2.5f))
                     {
-                        //MenuManager.Orbwalker.SetAttack(true);
-                        Orbwalker.DisableAttacking = false;
+                        //MenuManager.PortAIO.OrbwalkerManager.SetAttack(true);
+                        PortAIO.OrbwalkerManager.SetAttack(true);
                     }
                     else
                     {
-                        //MenuManager.Orbwalker.SetAttack(false);
-                        Orbwalker.DisableAttacking = true;
+                        //MenuManager.PortAIO.OrbwalkerManager.SetAttack(false);
+                        PortAIO.OrbwalkerManager.SetAttack(false);
                     }
 
                     Champion.AABlock();
-                    LaneOptions.ImprovedCombo();
+                    LaneOptions.Combo();
 
-                    Orbwalker.DisableAttacking = ((target.LSDistance(GlobalManager.GetHero) >= getSliderItem(MenuManager.combo1Menu, "minaarange")));
+                    PortAIO.OrbwalkerManager.SetAttack(!(target.LSDistance(GlobalManager.GetHero) >= getSliderItem(MenuManager.combo1Menu, "minaarange")));
                 }
 
                 if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
                 {
                     LaneOptions.Mixed();
-                    //MenuManager.Orbwalker.SetAttack(true);
-                    Orbwalker.DisableAttacking = false;
+                    //MenuManager.PortAIO.OrbwalkerManager.SetAttack(true);
+                    PortAIO.OrbwalkerManager.SetAttack(true);
                 }
 
                 if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
-                    LaneOptions.JungleClear();
-                    if (getKeyBindItem(MenuManager.laneMenu, "disablelane"))
-                    {
                         LaneOptions.LaneClear();
-                    }
                 }
 
                 if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
@@ -251,12 +238,9 @@ namespace Slutty_ryze
                     if (getKeyBindItem(MenuManager.itemMenu, "tearS"))
                         ItemManager.TearStack();
 
-                    if (getKeyBindItem(MenuManager.passiveMenu, "autoPassive"))
-                        Champion.AutoPassive();
-
                     ItemManager.Potion();
-                    //MenuManager.Orbwalker.SetAttack(true);
-                    Orbwalker.DisableAttacking = false;
+                    //MenuManager.PortAIO.OrbwalkerManager.SetAttack(true);
+                    PortAIO.OrbwalkerManager.SetAttack(true);
                 }
 
                 if (getCheckBoxItem(MenuManager.mixedMenu, "UseQauto") && target != null)

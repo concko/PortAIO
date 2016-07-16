@@ -9,7 +9,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using EloBuddy;
 
-namespace Firestorm_AIO.Champions.Rumble
+ namespace Firestorm_AIO.Champions.Rumble
 {
     public class Rumble :Bases.ChampionBase
     {

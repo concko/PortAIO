@@ -8,13 +8,14 @@ using LeagueSharp.SDK.Enumerations;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Lux
+ namespace ExorAIO.Champions.Lux
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>

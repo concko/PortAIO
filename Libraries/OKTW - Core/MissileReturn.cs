@@ -65,14 +65,14 @@ namespace OneKeyToWin_AIO_Sebby.Core
                 {
                     if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
                     {
-                        Orbwalker.OrbwalkTo(posPred);
+                        Orbwalker.MoveTo(posPred);
                     }
                 }
                 else
                 {
                     if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
                     {
-                        Orbwalker.OrbwalkTo(Game.CursorPos);
+                        Orbwalker.MoveTo(Game.CursorPos);
                     }
                 }
             }

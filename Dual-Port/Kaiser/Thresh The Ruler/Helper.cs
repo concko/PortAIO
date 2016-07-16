@@ -3,7 +3,7 @@ using System.Linq;
 using EloBuddy;
 using LeagueSharp.Common;
 
-namespace ThreshTherulerofthesoul
+ namespace ThreshTherulerofthesoul
 {
     class Helper
     {

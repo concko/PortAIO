@@ -11,6 +11,9 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
+
+using EloBuddy.SDK;
+
 namespace ezEvade
 {
     public class HeroInfo
@@ -39,11 +42,11 @@ namespace ezEvade
         {
             var extraDelayBuffer = ObjectCache.menuCache.cache["ExtraPingBuffer"].Cast<Slider>().CurrentValue;
 
-            serverPos2D = hero.ServerPosition.LSTo2D(); //CalculatedPosition.GetPosition(hero, Game.Ping);
+            serverPos2D = hero.ServerPosition.To2D(); //CalculatedPosition.GetPosition(hero, Game.Ping);
             serverPos2DExtra = EvadeUtils.GetGamePosition(hero, Game.Ping + extraDelayBuffer);
             serverPos2DPing = EvadeUtils.GetGamePosition(hero, Game.Ping);
             //CalculatedPosition.GetPosition(hero, Game.Ping + extraDelayBuffer);            
-            currentPosition = hero.Position.LSTo2D(); //CalculatedPosition.GetPosition(hero, 0); 
+            currentPosition = hero.Position.To2D(); //CalculatedPosition.GetPosition(hero, 0); 
             boundingRadius = hero.BoundingRadius;
             moveSpeed = hero.MoveSpeed;
             isMoving = hero.IsMoving;

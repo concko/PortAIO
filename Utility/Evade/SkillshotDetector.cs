@@ -26,7 +26,7 @@ using EloBuddy;
 
 #endregion
 
-namespace EvadeSharp
+ namespace EvadeSharp
 {
     internal static class SkillshotDetector
     {

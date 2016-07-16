@@ -18,7 +18,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Spells
+ namespace Activators.Spells
 {
     public class CoreSpell
     {

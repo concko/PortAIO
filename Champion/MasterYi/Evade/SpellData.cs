@@ -21,7 +21,7 @@ using EloBuddy;
 
 #endregion
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     public class SpellData
     {

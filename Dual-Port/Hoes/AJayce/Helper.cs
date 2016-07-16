@@ -3,7 +3,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace Jayce
+ namespace Jayce
 {
     internal class Helper
     {

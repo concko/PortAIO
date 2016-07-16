@@ -11,7 +11,7 @@ using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     internal class Malzahar
     {
@@ -19,7 +19,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
         private static Spell Q, Qr, W, E, R;
         private static float QMANA, WMANA, EMANA, RMANA;
         private static float Rtime;
-
+        
         public static Menu drawMenu, qMenu, wMenu, eMenu, rMenu, farmMenu;
 
         public static AIHeroClient Player
@@ -177,8 +177,8 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                 OktwCommon.blockMove = true;
                 OktwCommon.blockAttack = true;
                 OktwCommon.blockSpells = true;
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 Program.debug("cast R");
                 return;
             }
@@ -187,8 +187,8 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                 OktwCommon.blockSpells = false;
                 OktwCommon.blockMove = false;
                 OktwCommon.blockAttack = false;
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (R.IsReady() && getKeyBindItem(rMenu, "useR"))

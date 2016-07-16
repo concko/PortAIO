@@ -11,7 +11,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace Leblanc.Modes
+ namespace Leblanc.Modes
 {
     internal static class ModeJungle
     {
@@ -88,6 +88,7 @@ namespace Leblanc.Modes
             MenuLocal["MinMana.DontCheckEnemyBuff"].Cast<ComboBox>().CurrentValue = 2;
             MenuLocal["MinMana.DontCheckBlueBuff"].Cast<CheckBox>().CurrentValue = true;
         }
+        
 
         private static void OnUpdate(EventArgs args)
         {

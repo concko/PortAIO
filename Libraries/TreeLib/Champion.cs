@@ -26,7 +26,7 @@ namespace TreeLib.Objects
     {
         public static LeagueSharp.Common.Spell Q, W, E, R;
         public static Menu Menu;
-
+        
         public Champion()
         {
             Q = new LeagueSharp.Common.Spell(SpellSlot.Q);
@@ -100,7 +100,7 @@ namespace TreeLib.Objects
                 OnCombo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
                 OnFarm();
             }

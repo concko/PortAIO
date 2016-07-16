@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SharpDX;
 
-namespace EvadeSharp.Pathfinding
+ namespace EvadeSharp.Pathfinding
 {
     public class Node
     {

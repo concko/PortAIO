@@ -27,7 +27,7 @@ using SharpDX;
 
 #endregion
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     internal static class SkillshotDetector
     {

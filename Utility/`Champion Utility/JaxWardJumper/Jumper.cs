@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Color = System.Drawing.Color;
 
-namespace WardJumper
+ namespace WardJumper
 {
     internal class Jumper
     {

@@ -24,6 +24,7 @@ namespace HeavenStrikeAzir
 {
     public static class AzirHarass
     {
+        
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
         public static void Initialize()
         {

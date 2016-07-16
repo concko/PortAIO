@@ -2,7 +2,7 @@
 using LeagueSharp;
 using EloBuddy;
 
-namespace BlackFeeder
+ namespace BlackFeeder
 {
     public class ChampWrapper
     {

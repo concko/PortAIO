@@ -5,7 +5,7 @@ using EloBuddy;
 using SharpDX;
 using LeagueSharp.Common;
 
-namespace VayneHunter_Reborn.External.Evade
+ namespace VayneHunter_Reborn.External.Evade
 {
     internal class WindWall
     {

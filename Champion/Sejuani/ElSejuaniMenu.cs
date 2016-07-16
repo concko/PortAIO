@@ -2,7 +2,7 @@
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ElSejuani
+ namespace ElSejuani
 {
     public class ElSejuaniMenu
     {

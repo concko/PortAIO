@@ -22,7 +22,7 @@ using System.Speech.Synthesis;
 using Nechrito_Nidalee.Drawings;
 using Nechrito_Nidalee.Handlers;
 
-namespace Nechrito_Nidalee
+ namespace Nechrito_Nidalee
 {
     class Program : Core
     {
@@ -40,6 +40,7 @@ namespace Nechrito_Nidalee
             Extras.Item.SmiteCombo();
             Extras.Item.SmiteJungle();
         }
+        
         private static void OnUpdate(EventArgs args)
         {
             HealManager.Heal();

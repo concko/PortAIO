@@ -11,7 +11,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Maokai
     {
@@ -63,7 +63,7 @@ namespace UnderratedAIO.Champions
                 }
             }
         }
-
+        
         private void Game_OnGameUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -76,8 +76,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -166,16 +165,16 @@ namespace UnderratedAIO.Champions
                 target = CombatHelper.SetTarget(target, TargetSelector.SelectedTarget);
                 if (target != null)
                 {
-                    Orbwalker.ForcedTarget = target;
+                    Orbwalker.ForcedTarget =(target);
                 }
                 else
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                 }
             }
             else
             {
-                Orbwalker.ForcedTarget = null;
+                Orbwalker.ForcedTarget =(null);
             }
 
             var manaperc = player.Mana/player.MaxMana*100;

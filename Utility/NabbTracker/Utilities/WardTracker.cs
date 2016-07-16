@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace HTrackerSDK
+ namespace HTrackerSDK
 {
     class WardData
     {

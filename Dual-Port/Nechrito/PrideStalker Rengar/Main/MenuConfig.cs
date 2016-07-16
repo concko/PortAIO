@@ -5,7 +5,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 
 
-namespace PrideStalker_Rengar.Main
+ namespace PrideStalker_Rengar.Main
 {
     public class MenuConfig
     {

@@ -15,7 +15,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace Irelia.Modes
+ namespace Irelia.Modes
 {
     internal static class ModeCombo
     {
@@ -186,7 +186,7 @@ namespace Irelia.Modes
                 W.Cast();
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
 

@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace OKTWPredictioner
+ namespace OKTWPredictioner
 {
     public class OKTWPredictioner
     {

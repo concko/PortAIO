@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
 
-namespace ezEvade
+ namespace ezEvade
 {
     class SpecialEvadeSpell
     {

@@ -7,7 +7,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace OlafxQx.Common
+ namespace OlafxQx.Common
 {
     internal class CommonMath
     {

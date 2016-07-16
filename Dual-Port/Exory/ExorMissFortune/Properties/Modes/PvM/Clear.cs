@@ -8,7 +8,7 @@ using SharpDX;
 using Geometry = ExorAIO.Utilities.Geometry;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.MissFortune
+ namespace ExorAIO.Champions.MissFortune
 {
     /// <summary>
     ///     The logics class.
@@ -119,9 +119,10 @@ namespace ExorAIO.Champions.MissFortune
                 /// </summary>
                 else if (Targets.Minions.Any() &&
                     GameObjects.Player.ManaPercent >
-                        ManaManager.GetNeededMana(Vars.E.Slot, Vars.getSliderItem(Vars.EMenu, "laneclear")))
+                        ManaManager.GetNeededMana(Vars.E.Slot, Vars.getSliderItem(Vars.EMenu, "laneclear")) &&
+                        Vars.E.GetCircularFarmLocation(Targets.Minions, Vars.E.Width).MinionsHit >= 4)
                 {
-                    Vars.E.Cast(Targets.Minions[0]);
+                    Vars.E.Cast(Vars.E.GetCircularFarmLocation(Targets.Minions, Vars.E.Width).Position);
                 }
             }
         }

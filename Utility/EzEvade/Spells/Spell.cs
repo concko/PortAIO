@@ -6,8 +6,9 @@ using System.Text;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
+using EloBuddy.SDK;
+using EloBuddy.SDK.Menu.Values;
 
 namespace ezEvade
 {
@@ -56,9 +57,9 @@ namespace ezEvade
 
             if (spell.spellType == SpellType.Arc)
             {
-                var spellRange = spell.startPos.LSDistance(spell.endPos);
-                var arcRadius = spell.info.radius * (1 + spellRange/100) + extraRadius;
-                                
+                var spellRange = spell.startPos.Distance(spell.endPos);
+                var arcRadius = spell.info.radius * (1 + spellRange / 100) + extraRadius;
+
                 return arcRadius;
             }
 
@@ -67,7 +68,7 @@ namespace ezEvade
 
         public static int GetSpellDangerLevel(this Spell spell)
         {
-            var dangerStr = ObjectCache.menuCache.cache[spell.info.spellName + "DangerLevel"].Cast<ComboBox>().CurrentValue.ToString();
+            var dangerStr = ObjectCache.menuCache.cache[spell.info.spellName + "DangerLevel"].Cast<ComboBox>().SelectedText;
 
             var dangerlevel = 1;
 
@@ -120,11 +121,11 @@ namespace ezEvade
                     var spellPos = spell.currentSpellPosition;
                     var spellEndPos = spell.GetSpellEndPosition();
 
-                    return pos.LSProjectOn(spellPos, spellEndPos).SegmentPoint;
+                    return pos.ProjectOn(spellPos, spellEndPos).SegmentPoint;
                 }
                 else
                 {
-                    return pos.LSProjectOn(spell.startPos, spell.endPos).SegmentPoint;
+                    return pos.ProjectOn(spell.startPos, spell.endPos).SegmentPoint;
                 }
             }
             else if (spell.spellType == SpellType.Circular)
@@ -144,12 +145,12 @@ namespace ezEvade
 
             List<Obj_AI_Base> collisionCandidates = new List<Obj_AI_Base>();
             var spellPos = spell.currentSpellPosition;
-            var distanceToHero = spellPos.LSDistance(ObjectCache.myHeroCache.serverPos2D);
+            var distanceToHero = spellPos.Distance(ObjectCache.myHeroCache.serverPos2D);
 
             if (spell.info.collisionObjects.Contains(CollisionObjectType.EnemyChampions))
             {
                 foreach (var hero in HeroManager.Allies
-                    .Where(h => !h.IsMe && h.LSIsValidTarget(distanceToHero, false, spellPos.To3D())))
+                    .Where(h => !h.IsMe && h.IsValidTarget(distanceToHero, false, spellPos.To3D())))
                 {
                     collisionCandidates.Add(hero);
                 }
@@ -158,7 +159,7 @@ namespace ezEvade
             if (spell.info.collisionObjects.Contains(CollisionObjectType.EnemyMinions))
             {
                 foreach (var minion in ObjectManager.Get<Obj_AI_Minion>()
-                    .Where(h => h.Team == Evade.myHero.Team && h.LSIsValidTarget(distanceToHero, false, spellPos.To3D())))
+                    .Where(h => h.Team == Evade.myHero.Team && h.IsValidTarget(distanceToHero, false, spellPos.To3D())))
                 {
                     if (minion.CharData.BaseSkinName.ToLower() == "teemomushroom"
                         || minion.CharData.BaseSkinName.ToLower() == "shacobox")
@@ -170,11 +171,11 @@ namespace ezEvade
                 }
             }
 
-            var sortedCandidates = collisionCandidates.OrderBy(h => h.LSDistance(spellPos));
+            var sortedCandidates = collisionCandidates.OrderBy(h => h.Distance(spellPos));
 
             foreach (var candidate in sortedCandidates)
             {
-                if (candidate.ServerPosition.LSTo2D().InSkillShot(spell, candidate.BoundingRadius, false))
+                if (candidate.ServerPosition.To2D().InSkillShot(spell, candidate.BoundingRadius, false))
                 {
                     return candidate;
                 }
@@ -194,7 +195,7 @@ namespace ezEvade
                 }
 
                 var spellPos = spell.GetCurrentSpellPosition(true, ObjectCache.gamePing);
-                return 1000 * spellPos.LSDistance(pos) / spell.info.projectileSpeed;
+                return 1000 * spellPos.Distance(pos) / spell.info.projectileSpeed;
             }
             else if (spell.spellType == SpellType.Circular)
             {
@@ -206,10 +207,9 @@ namespace ezEvade
 
         public static bool CanHeroEvade(this Spell spell, Obj_AI_Base hero, out float rEvadeTime, out float rSpellHitTime)
         {
-            var heroPos = hero.ServerPosition.LSTo2D();
+            var heroPos = hero.ServerPosition.To2D();
             float evadeTime = 0;
             float spellHitTime = 0;
-
             float speed = hero.MoveSpeed;
 
             var moveBuff = EvadeSpell.evadeSpells.OrderBy(s => s.dangerlevel).FirstOrDefault(s => s.evadeType == EvadeType.MovementSpeedBuff);
@@ -220,13 +220,13 @@ namespace ezEvade
 
             if (spell.spellType == SpellType.Line)
             {
-                var projection = heroPos.LSProjectOn(spell.startPos, spell.endPos).SegmentPoint;
-                evadeTime = 1000 * (spell.radius - heroPos.LSDistance(projection) + hero.BoundingRadius) / speed;
+                var projection = heroPos.ProjectOn(spell.startPos, spell.endPos).SegmentPoint;
+                evadeTime = 1000 * (spell.radius - heroPos.Distance(projection) + hero.BoundingRadius) / speed;
                 spellHitTime = spell.GetSpellHitTime(projection);
             }
             else if (spell.spellType == SpellType.Circular)
             {
-                evadeTime = 1000 * (spell.radius - heroPos.LSDistance(spell.endPos)) / speed;
+                evadeTime = 1000 * (spell.radius - heroPos.Distance(spell.endPos)) / speed;
                 spellHitTime = spell.GetSpellHitTime(heroPos);
             }
 
@@ -240,7 +240,7 @@ namespace ezEvade
         {
             var myBoundingRadius = ObjectCache.myHeroCache.boundingRadius;
             var spellDir = spell.direction;
-            var pSpellDir = spell.direction.LSPerpendicular();
+            var pSpellDir = spell.direction.Perpendicular();
             var spellRadius = spell.radius;
             var spellPos = spell.currentSpellPosition - spellDir * myBoundingRadius; //leave some space at back of spell
             var endPos = spell.GetSpellEndPosition() + spellDir * myBoundingRadius; //leave some space at the front of spell
@@ -268,8 +268,8 @@ namespace ezEvade
                 var taric = HeroManager.Enemies.FirstOrDefault(x => x.ChampionName == "Taric");
                 if (taric != null)
                 {
-                    spell.currentSpellPosition = taric.ServerPosition.LSTo2D();
-                    spell.endPos = taric.ServerPosition.LSTo2D() + spell.direction * spell.info.range;
+                    spell.currentSpellPosition = taric.ServerPosition.To2D();
+                    spell.endPos = taric.ServerPosition.To2D() + spell.direction * spell.info.range;
                 }
             }
 
@@ -278,8 +278,8 @@ namespace ezEvade
                 var taliyah = HeroManager.Enemies.FirstOrDefault(x => x.ChampionName == "Taliyah");
                 if (taliyah != null)
                 {
-                    spell.currentSpellPosition = taliyah.ServerPosition.LSTo2D();
-                    spell.endPos = taliyah.ServerPosition.LSTo2D() + spell.direction * spell.info.range;
+                    spell.currentSpellPosition = taliyah.ServerPosition.To2D();
+                    spell.endPos = taliyah.ServerPosition.To2D() + spell.direction * spell.info.range;
                 }
             }
 
@@ -288,13 +288,13 @@ namespace ezEvade
                 var partner = HeroManager.Enemies.FirstOrDefault(x => x.HasBuff("taricwleashactive") && x.ChampionName != "Taric");
                 if (partner != null)
                 {
-                    spell.currentSpellPosition = partner.ServerPosition.LSTo2D();
-                    spell.endPos = partner.ServerPosition.LSTo2D() + spell.direction * spell.info.range;
+                    spell.currentSpellPosition = partner.ServerPosition.To2D();
+                    spell.endPos = partner.ServerPosition.To2D() + spell.direction * spell.info.range;
                 }
             }
         }
 
-        public static Vector2 GetCurrentSpellPosition(this Spell spell, bool allowNegative = false, float delay = 0, 
+        public static Vector2 GetCurrentSpellPosition(this Spell spell, bool allowNegative = false, float delay = 0,
             float extraDistance = 0)
         {
             Vector2 spellPos = spell.startPos;
@@ -317,9 +317,9 @@ namespace ezEvade
             }
 
             if (spell.spellObject != null && spell.spellObject.IsValid && spell.spellObject.IsVisible &&
-                spell.spellObject.Position.LSTo2D().LSDistance(ObjectCache.myHeroCache.serverPos2D) < spell.info.range + 1000)
+                spell.spellObject.Position.To2D().Distance(ObjectCache.myHeroCache.serverPos2D) < spell.info.range + 1000)
             {
-                spellPos = spell.spellObject.Position.LSTo2D();
+                spellPos = spell.spellObject.Position.To2D();
             }
 
             if (delay > 0 && spell.info.projectileSpeed != float.MaxValue
@@ -341,7 +341,7 @@ namespace ezEvade
         {
             var myBoundingRadius = ObjectManager.Player.BoundingRadius;
             var spellDir = spell.direction;
-            var pSpellDir = spell.direction.LSPerpendicular();
+            var pSpellDir = spell.direction.Perpendicular();
             var spellRadius = spell.radius;
             var spellPos = spell.currentSpellPosition;// -spellDir * myBoundingRadius; //leave some space at back of spell
             var endPos = spell.GetSpellEndPosition();// +spellDir * myBoundingRadius; //leave some space at the front of spell
@@ -368,7 +368,7 @@ namespace ezEvade
         {
             var myBoundingRadius = ObjectManager.Player.BoundingRadius;
             var spellDir = spell.direction;
-            var pSpellDir = spell.direction.LSPerpendicular();
+            var pSpellDir = spell.direction.Perpendicular();
             var spellRadius = spell.radius;
             var spellPos = spell.currentSpellPosition - spellDir * myBoundingRadius; //leave some space at back of spell
             var endPos = spell.GetSpellEndPosition() + spellDir * myBoundingRadius; //leave some space at the front of spell
@@ -378,15 +378,15 @@ namespace ezEvade
             var endRightPos = endPos + pSpellDir * (spellRadius + myBoundingRadius);
             var endLeftPos = endPos - pSpellDir * (spellRadius + myBoundingRadius);
 
-            List<Geometry.IntersectionResult> intersects = new List<Geometry.IntersectionResult>();
-            Vector2 heroPos = ObjectManager.Player.ServerPosition.LSTo2D();
+            List<EloBuddy.SDK.Geometry.IntersectionResult> intersects = new List<EloBuddy.SDK.Geometry.IntersectionResult>();
+            Vector2 heroPos = ObjectManager.Player.ServerPosition.To2D();
 
-            intersects.Add(a.LSIntersection(b, startRightPos, startLeftPos));
-            intersects.Add(a.LSIntersection(b, endRightPos, endLeftPos));
-            intersects.Add(a.LSIntersection(b, startRightPos, endRightPos));
-            intersects.Add(a.LSIntersection(b, startLeftPos, endLeftPos));
+            intersects.Add(a.Intersection(b, startRightPos, startLeftPos));
+            intersects.Add(a.Intersection(b, endRightPos, endLeftPos));
+            intersects.Add(a.Intersection(b, startRightPos, endRightPos));
+            intersects.Add(a.Intersection(b, startLeftPos, endLeftPos));
 
-            var sortedIntersects = intersects.Where(i => i.Intersects).OrderBy(i => i.Point.LSDistance(heroPos)); //Get first intersection
+            var sortedIntersects = intersects.Where(i => i.Intersects).OrderBy(i => i.Point.Distance(heroPos)); //Get first intersection
 
             if (sortedIntersects.Count() > 0)
             {

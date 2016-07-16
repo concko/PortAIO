@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Udyr
+ namespace ExorAIO.Champions.Udyr
 {
     /// <summary>
     ///     The logics class.

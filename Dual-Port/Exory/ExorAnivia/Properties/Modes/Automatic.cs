@@ -7,13 +7,14 @@ using EloBuddy;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Anivia
+ namespace ExorAIO.Champions.Anivia
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>
@@ -70,7 +71,6 @@ namespace ExorAIO.Champions.Anivia
                             target.ServerPosition, GameObjects.Player.Distance(target)+20f));
                 }
             }
-
             /// <summary>
             ///     The Q Missile Manager.
             /// </summary>

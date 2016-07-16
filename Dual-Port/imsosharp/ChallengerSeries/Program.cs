@@ -14,7 +14,7 @@ using EloBuddy;
 using LeagueSharp;
 using LeagueSharp.SDK;
 
-namespace Challenger_Series
+ namespace Challenger_Series
 {
     class Program
     {

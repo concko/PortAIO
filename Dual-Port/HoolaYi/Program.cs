@@ -13,7 +13,7 @@ using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 using Damage = LeagueSharp.Common.Damage;
 
-namespace HoolaMasterYi
+ namespace HoolaMasterYi
 {
     public class Program
     {
@@ -88,7 +88,7 @@ namespace HoolaMasterYi
         private static void DetectSpell(EventArgs args)
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Physical);
-            if (target.LSIsDashing() && (((Player.LSDistance(target.GetWaypoints().Last()) >= Q.Range) && AutoQOnly) || !AutoQOnly) && Q.IsReady() && AutoQ && Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Combo || Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.Harass)
+            if (target.LSIsDashing() && (((Player.LSDistance(target.GetWaypoints().Last()) >= Q.Range) && AutoQOnly) || !AutoQOnly) && Q.IsReady() && AutoQ && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
                 Q.Cast(target);
         }
 
@@ -117,7 +117,7 @@ namespace HoolaMasterYi
             }
             if (args.Target is Obj_AI_Minion)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     var Minions = MinionManager.GetMinions(ItemData.Ravenous_Hydra_Melee_Only.Range);
                     if (Minions[0].IsValid && Minions.Count != 0) if (LE) E.Cast();
@@ -131,7 +131,7 @@ namespace HoolaMasterYi
 
             if (args.Target is Obj_AI_Minion)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     var Mobs = MinionManager.GetMinions(ItemData.Ravenous_Hydra_Melee_Only.Range, MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth);
                     if (Mobs[0].IsValid && Mobs.Count != 0) if (JE) E.Cast();
@@ -207,7 +207,7 @@ namespace HoolaMasterYi
             if (args.Target is Obj_AI_Minion && args.Target.IsValid)
             {
                 var Minions = MinionManager.GetMinions(ItemData.Ravenous_Hydra_Melee_Only.Range);
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     if (Minions.Count != 0 && Minions[0].IsValid)
                     {
@@ -225,7 +225,7 @@ namespace HoolaMasterYi
             if (args.Target is Obj_AI_Minion && args.Target.IsValid)
             {
                 var Mobs = MinionManager.GetMinions(ItemData.Ravenous_Hydra_Melee_Only.Range, MinionTypes.All, MinionTeam.Neutral);
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     if (Mobs[0].IsValid && Mobs.Count != 0)
                     {

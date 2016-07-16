@@ -4,6 +4,7 @@ using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
+
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
@@ -13,7 +14,7 @@ namespace JaxQx
     {
         private static readonly Menu menuExtra = Program.Config;
         public static Menu menu;
-
+        
         public Extra()
         {
             menu = menuExtra.AddSubMenu("Extra", "Extra");

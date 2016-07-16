@@ -6,6 +6,7 @@ using SharpDX;
 using System.Linq;
 using EloBuddy;
 
+
 namespace SephKhazix
 {
     class Helper
@@ -18,16 +19,16 @@ namespace SephKhazix
 
         internal Spell Q, W, WE, E, R;
 
-        internal const float Wangle = 22 * (float) Math.PI / 180;
+        internal const float Wangle = 22 * (float)Math.PI / 180;
 
         internal static bool EvolvedQ, EvolvedW, EvolvedE;
 
         internal static List<AIHeroClient> HeroList;
-        internal static List<Vector3> EnemyTurretPositions = new List<Vector3>();
+        internal static List<Obj_AI_Turret> EnemyTurrets = new List<Obj_AI_Turret>();
         internal static Vector3 NexusPosition;
         internal static Vector3 Jumppoint1, Jumppoint2;
         internal static bool Jumping;
-        
+
         internal void InitSkills()
         {
             Q = new Spell(SpellSlot.Q, 325f);

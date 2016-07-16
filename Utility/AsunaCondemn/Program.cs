@@ -1,6 +1,6 @@
 ﻿using LeagueSharp.SDK;
 
-namespace AsunaCondemn
+ namespace AsunaCondemn
 {
     /// <summary>
     ///     The application class.

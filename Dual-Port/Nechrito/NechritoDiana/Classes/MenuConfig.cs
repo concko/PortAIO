@@ -19,7 +19,7 @@ using System.Linq;
 using System.Security.AccessControl;
 using System;
 using System.Speech.Synthesis;
-namespace Nechrito_Diana
+ namespace Nechrito_Diana
 {
     class MenuConfig
     {

@@ -13,7 +13,7 @@ using Spell = LeagueSharp.Common.Spell;
 
 #endregion
 
-namespace XinZhao
+ namespace XinZhao
 {
     internal class Program
     {
@@ -114,6 +114,7 @@ namespace XinZhao
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+        
 
         private static void OrbwalkingBeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
@@ -168,8 +169,7 @@ namespace XinZhao
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var existsMana = Player.MaxMana/100*getSliderItem(mLane, "Lane.Mana");
                 if (Player.Mana >= existsMana)

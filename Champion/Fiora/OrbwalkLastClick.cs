@@ -20,6 +20,7 @@ namespace FioraProject
     using EloBuddy.SDK;
     public static class OrbwalkLastClick
     {
+        
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
 
         private static Vector2 LastClickPoint = new Vector2();
@@ -55,7 +56,7 @@ namespace FioraProject
                 return;
             Combo();
             var target = GetTarget();
-            //Orbwalker.ForcedTarget = Orbwalking.InAutoAttackRange(target) ? target : null;
+            //PortAIO.OrbwalkerManager.ForcedTarget = Orbwalking.InAutoAttackRange(target) ? target : null;
             Orbwalker.MoveTo(LastClickPoint.IsValid() ? LastClickPoint.To3D() : Game.CursorPos);
         }
 

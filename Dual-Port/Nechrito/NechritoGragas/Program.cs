@@ -6,7 +6,7 @@ using SharpDX;
 using SPrediction;
 using EloBuddy.SDK;
 
-namespace Nechrito_Gragas
+ namespace Nechrito_Gragas
 {
     class Program
     {
@@ -55,7 +55,7 @@ namespace Nechrito_Gragas
                 GragasQ = sender;
             }
         }
-
+        
         private static void OnTick(EventArgs args)
         {
             SmiteJungle();
@@ -67,7 +67,7 @@ namespace Nechrito_Gragas
                 Mode.ComboLogic();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Mode.JungleLogic();
             }
@@ -84,7 +84,7 @@ namespace Nechrito_Gragas
 
             if (args.Target is Obj_AI_Minion)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     var minions = MinionManager.GetMinions(Player.ServerPosition, 600);
                     {

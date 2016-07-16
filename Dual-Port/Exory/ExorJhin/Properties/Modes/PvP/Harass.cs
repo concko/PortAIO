@@ -2,7 +2,7 @@ using System;
 using ExorAIO.Utilities;
 using LeagueSharp.SDK;
 
-namespace ExorAIO.Champions.Jhin
+ namespace ExorAIO.Champions.Jhin
 {
     /// <summary>
     ///     The logics class.

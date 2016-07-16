@@ -12,7 +12,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace FreshBooster.Champion
+ namespace FreshBooster.Champion
 {
     class LeeSin
     {
@@ -247,7 +247,7 @@ namespace FreshBooster.Champion
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             try

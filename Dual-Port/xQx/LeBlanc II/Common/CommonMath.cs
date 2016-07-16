@@ -7,7 +7,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace Leblanc.Common
+ namespace Leblanc.Common
 {
     internal class CommonMath
     {

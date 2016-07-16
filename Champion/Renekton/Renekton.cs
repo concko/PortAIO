@@ -6,7 +6,7 @@ using EloBuddy;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Renekton
+ namespace ExorAIO.Champions.Renekton
 {
     /// <summary>
     ///     The champion class.
@@ -80,7 +80,7 @@ namespace ExorAIO.Champions.Renekton
                 Logics.Clear(args);
             }
         }
-
+        
         /// <summary>
         ///     Called on do-cast.
         /// </summary>

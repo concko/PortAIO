@@ -10,10 +10,11 @@ using Nechrito_Rengar;
 using EloBuddy.SDK;
 using PrideStalker_Rengar.Handlers;
 
-namespace PrideStalker_Rengar.Draw
+ namespace PrideStalker_Rengar.Draw
 {
     class DRAW : Core
     {
+        
         public static HpBarDraw DrawHpBar = new HpBarDraw();
         public static void DrawAnimation()
         {

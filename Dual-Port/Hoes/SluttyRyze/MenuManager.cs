@@ -3,7 +3,7 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Slutty_ryze
+ namespace Slutty_ryze
 {
     internal class MenuManager
     {
@@ -48,7 +48,6 @@ namespace Slutty_ryze
             drawMenu.Add("qDraw", new CheckBox("Draw Q"));
             drawMenu.Add("eDraw", new CheckBox("Draw E"));
             drawMenu.Add("wDraw", new CheckBox("Draw W"));
-            drawMenu.Add("stackDraw", new CheckBox("Stack Count"));
             drawMenu.Add("notdraw", new CheckBox("Draw Floating Text"));
             drawMenu.Add("keyBindDisplay", new CheckBox("Display Keybinds"));  
         }
@@ -63,6 +62,8 @@ namespace Slutty_ryze
                 combo1Menu.Add("useE", new CheckBox("Use E (Spell Flux)"));
                 combo1Menu.Add("useR", new CheckBox("Use R (Desperate Power)"));
                 combo1Menu.Add("useRww", new CheckBox("Only Use R if Target is Rooted"));
+                combo1Menu.Add("combomode", new ComboBox("Combo Mode", 0, "Burst", "AOE/Shield/Tank"));
+                combo1Menu.Add("forcehpshield", new Slider("Force Q Shield Proc at low hp", 10, 0, 100));
                 combo1Menu.Add("AAblock", new CheckBox("Block Auto Attack in Combo", false));
                 combo1Menu.Add("minaarange", new Slider("Disable AA If Target Distance from target >", 550, 100, 550));
             }
@@ -85,7 +86,7 @@ namespace Slutty_ryze
         {
             laneMenu = _config.AddSubMenu("Lane Clear", "lanesettings");
             {
-                laneMenu.Add("disablelane", new KeyBind("Lane Clear Toggle", false, KeyBind.BindTypes.PressToggle, 'T'));
+                laneMenu.Add("disablelane", new KeyBind("Toggle Spell Usage in LaneClear", false, KeyBind.BindTypes.PressToggle, 'L'));
                 laneMenu.Add("useEPL", new Slider("Min. % Mana For Lane Clear", 50));
                 laneMenu.Add("passiveproc", new CheckBox("Don't Use Spells if Passive Will Proc"));
                 laneMenu.Add("useQlc", new CheckBox("Use Q to Last Hit"));

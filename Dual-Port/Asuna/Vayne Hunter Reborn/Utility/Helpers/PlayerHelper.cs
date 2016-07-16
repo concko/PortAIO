@@ -5,7 +5,7 @@ using SharpDX;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace VayneHunter_Reborn.Utility.Helpers
+ namespace VayneHunter_Reborn.Utility.Helpers
 {
     class PlayerHelper
     {

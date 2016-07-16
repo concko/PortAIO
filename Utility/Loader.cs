@@ -12,6 +12,7 @@ using Color = System.Drawing.Color;
 using LeagueSharp.Common;
 using LeagueSharp.Common.Data;
 
+
 namespace PortAIO.Utility
 {
     class Loader
@@ -139,7 +140,8 @@ namespace PortAIO.Utility
         public static int urgot { get { return Miscc["urgot"].Cast<ComboBox>().CurrentValue; } }
         public static int varus { get { return Miscc["varus"].Cast<ComboBox>().CurrentValue; } }
         public static int malzahar { get { return Miscc["malzahar"].Cast<ComboBox>().CurrentValue; } }
-        public static bool useOrb { get { return Miscc["useOrb"].Cast<CheckBox>().CurrentValue; } }
+        public static int orbwalkerCB { get { return Miscc["orbwalkerCB"].Cast<ComboBox>().CurrentValue; } }
+        public static bool universalMinimap { get { return Miscc["universalMinimap"].Cast<CheckBox>().CurrentValue; } }
 
         public static Menu Miscc;
 
@@ -266,7 +268,7 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[4]))
                 {
-                    Miscc.Add("diana", new ComboBox("Use addon for Diana : ", 0, "ElDiana", "Nechrito Diana"));
+                    Miscc.Add("diana", new ComboBox("Use addon for Diana : ", 0, "ElDiana", "Nechrito Diana", "ExorAIO"));
                 }
                 if (Player.ChampionName.Equals(Champion[5]))
                 {
@@ -334,7 +336,7 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[21]))
                 {
-                    Miscc.Add("darius", new ComboBox("Use addon for Darius : ", 0, "ExorAIO", "OKTW"));
+                    Miscc.Add("darius", new ComboBox("Use addon for Darius : ", 0, "ExorAIO", "OKTW", "KurisuDarius"));
                 }
                 if (Player.ChampionName.Equals(Champion[22]))
                 {
@@ -378,7 +380,7 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[32]))
                 {
-                    Miscc.Add("ryze", new ComboBox("Use addon for Ryze : ", 0, "ExorAIO", "ElEasy Ryze", "SluttyRyze", "Arcane Ryze", "Sergix Ryze"));
+                    Miscc.Add("ryze", new ComboBox("Use addon for Ryze : ", 0, "ExorAIO", "ElEasy Ryze", "SluttyRyze", "Arcane Ryze", "Sergix Ryze", "HeavenStrikeRyze"));
                 }
                 if (Player.ChampionName.Equals(Champion[33]))
                 {
@@ -597,15 +599,14 @@ namespace PortAIO.Utility
             Miscc.AddGroupLabel("Util Dual-Port :");
             Miscc.Add("evadeCB", new ComboBox("Which Evade?", 0, "ezEvade", "Evade#"));
             Miscc.Add("activatorCB", new ComboBox("Which Activator?", 0, "ElUtilitySuite", "NabbActivator", "Activator#"));
-            Miscc.Add("trackerCB", new ComboBox("Which Tracker?", 0, "NabbTracker"));
+            Miscc.Add("trackerCB", new ComboBox("Which Tracker?", 0, "NabbTracker", "Tracker#"));
             Miscc.Add("predictionerCB", new ComboBox("Which Predictioner?", 0, "EB", "SDK", "OKTW", "SPred", "L#"));
+            Miscc.Add("orbwalkerCB", new ComboBox("Which Orbwalk/TargetSelect?", 1, "NOPE", "L#"));
             Miscc.AddSeparator();
             Miscc.AddGroupLabel("Util Changes");
             Miscc.AddLabel("Please F5 after making any changes below >>");
             Miscc.Add("champ", new CheckBox("Champ only mode? (No utils will load)", false));
             Miscc.Add("util", new CheckBox("Util only mode? (No champs will load)", false));
-            Miscc.AddSeparator();
-            Miscc.Add("useOrb", new CheckBox("Enable L# ORB/TS [BETA]?", false));
             Miscc.AddSeparator();
             Miscc.Add("activator", new CheckBox("Enable Activator?"));
             Miscc.Add("tracker", new CheckBox("Enable Tracker?"));
@@ -644,6 +645,7 @@ namespace PortAIO.Utility
             Miscc.AddSeparator();
             Miscc.Add("cursor", new CheckBox("Enable VCursor?", false));
             Miscc.Add("condemn", new CheckBox("Enable Asuna Condemn (Vayne Only)?", false));
+            Miscc.Add("universalMinimap", new CheckBox("Enable UniversalMiniMapHack?", false));
 
             var credits = Miscc.AddSubMenu("Credits");
             credits.AddLabel("Nathan or jQuery");
@@ -696,8 +698,8 @@ namespace PortAIO.Utility
             credits.AddLabel("Kyon");
             credits.AddLabel("Doug");
             credits.AddLabel("LuNi");
-            credits.AddLabel("Berb", 10);
-            credits.AddLabel("Muse30", 10);
+            credits.AddLabel("Berb");
+            credits.AddLabel("Muse30");
 
             /*
             //Miscc.Add("orbwalker", new CheckBox("Enable L# Orbwalker (HIGHLY BETA)?", false));
@@ -714,14 +716,14 @@ namespace PortAIO.Utility
             }
             */
         }
-
+        
         private static void Loader_OnValueChange(ValueBase<bool> sender, ValueBase<bool>.ValueChangeArgs args)
         {
             if (args.NewValue)
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
-                Orbwalker.ForcedTarget = null;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
+                Orbwalker.ForcedTarget =(null);
                 Console.Clear();
                 Miscc["resetorb"].Cast<CheckBox>().CurrentValue = false;
             }

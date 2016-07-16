@@ -21,7 +21,7 @@ using LeagueSharp;
 
 #endregion
 
-namespace Irelia.Evade
+ namespace Irelia.Evade
 {
     public class SpellData
     {

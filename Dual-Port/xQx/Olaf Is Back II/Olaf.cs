@@ -13,7 +13,7 @@ using EloBuddy;
 
 #endregion
 
-namespace OlafxQx
+ namespace OlafxQx
 {
     internal class Olaf
     {

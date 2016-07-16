@@ -14,7 +14,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace OlafxQx.Modes
+ namespace OlafxQx.Modes
 {
     internal static class ModeJungle
     {
@@ -62,6 +62,7 @@ namespace OlafxQx.Modes
             }
             MenuLocal.Add("Jungle.Simple.UseE", new ComboBox("E:", 2, "Off", "On", "Just Big Mobs"));
         }
+        
 
         private static void OnUpdate(EventArgs args)
         {

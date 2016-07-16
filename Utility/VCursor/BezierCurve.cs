@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VCursor
+ namespace VCursor
 {
     internal class BezierCurve
     {

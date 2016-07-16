@@ -11,12 +11,13 @@ using PortAIO.Utility.AmumuSharp;
 using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace PortAIO.Champion.Amumu
 {
     public class Program
     {
         public static Menu Menu, comboMenu, farmMenu, drawMenu, miscMenu;
-
+        
         private static Spell _spellQ;
         private static Spell _spellW;
         private static Spell _spellE;
@@ -103,8 +104,7 @@ namespace PortAIO.Champion.Amumu
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }

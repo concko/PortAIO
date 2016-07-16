@@ -7,6 +7,7 @@ using ExorAIO.Champions.Cassiopeia;
 using ExorAIO.Champions.Corki;
 using ExorAIO.Champions.Darius;
 using ExorAIO.Champions.Draven;
+using ExorAIO.Champions.Diana;
 using ExorAIO.Champions.DrMundo;
 using ExorAIO.Champions.Evelynn;
 using ExorAIO.Champions.Ezreal;
@@ -76,6 +77,9 @@ namespace ExorAIO.Core
                     break;
                 case "Darius":
                     new Darius().OnLoad();
+                    break;
+                case "Diana":
+                    new Diana().OnLoad();
                     break;
                 case "Draven":
                     new Draven().OnLoad();

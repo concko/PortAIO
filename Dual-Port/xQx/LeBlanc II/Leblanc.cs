@@ -13,7 +13,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Leblanc
+ namespace Leblanc
 {
     internal class Leblanc
     {

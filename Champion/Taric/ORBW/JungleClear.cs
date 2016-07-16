@@ -1,4 +1,4 @@
-﻿namespace SkyLv_Taric
+﻿ namespace SkyLv_Taric
 {
     using System;
     using System.Linq;
@@ -77,7 +77,7 @@
         {
             JungleClearLogic();
         }
-
+        
         public static void JungleClearLogic()
         {
             var PacketCast = getCheckBoxItem(SkyLv_Taric.Misc, "Taric.UsePacketCast");

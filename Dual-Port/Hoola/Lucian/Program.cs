@@ -16,7 +16,7 @@ using Geometry = LeagueSharp.Common.Geometry;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace HoolaLucian
+ namespace HoolaLucian
 {
     public class Program
     {
@@ -148,18 +148,18 @@ namespace HoolaLucian
             if (args.Target is AIHeroClient)
             {
                 var target = (Obj_AI_Base)args.Target;
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.Combo)) && target.IsValid)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && target.IsValid)
                 {
                     Utility.DelayAction.Add(Humanizer, () => OnDoCastDelayed(args));
                 }
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.Harass)) && target.IsValid)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && target.IsValid)
                 {
                     Utility.DelayAction.Add(Humanizer, () => OnDoCastDelayed(args));
                 }
             }
             if (args.Target is Obj_AI_Minion)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.LaneClear)) && args.Target.IsValid)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && args.Target.IsValid)
                 {
                     Utility.DelayAction.Add(Humanizer, () => OnDoCastDelayed(args));
                 }
@@ -172,7 +172,7 @@ namespace HoolaLucian
 
             if (args.Target is Obj_AI_Minion)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.LaneClear)) && args.Target.IsValid)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && args.Target.IsValid)
                 {
                     Utility.DelayAction.Add(Humanizer, () => OnDoCastDelayedLC(args));
                 }
@@ -196,7 +196,7 @@ namespace HoolaLucian
             AAPassive = false;
             if (args.Target is Obj_AI_Minion && args.Target.IsValid)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.LaneClear)) && Player.ManaPercent > LMinMana)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && Player.ManaPercent > LMinMana)
                 {
                     var Minions = MinionManager.GetMinions(Orbwalking.GetRealAutoAttackRange(Player), MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.Health);
                     if (Minions[0].IsValid && Minions.Count != 0)
@@ -239,7 +239,7 @@ namespace HoolaLucian
             if (args.Target is AIHeroClient)
             {
                 var target = (Obj_AI_Base)args.Target;
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.Combo)) && target.IsValid)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && target.IsValid)
                 {
                     if (ItemData.Youmuus_Ghostblade.GetItem().IsReady()) ItemData.Youmuus_Ghostblade.GetItem().Cast();
                     if (E.IsReady() && !AAPassive && CE == 0) E.Cast((Deviation(Player.Position.LSTo2D(), target.Position.LSTo2D(), 65).To3D()));
@@ -248,7 +248,7 @@ namespace HoolaLucian
                     if (Q.IsReady() && (!E.IsReady() || (E.IsReady() && CE == 3)) && CQ && !AAPassive) Q.Cast(target);
                     if ((!E.IsReady() || (E.IsReady() && CE == 3)) && (!Q.IsReady() || (Q.IsReady() && !CQ)) && CW && W.IsReady() && !AAPassive) W.Cast(target.Position);
                 }
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.Harass)) && target.IsValid)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && target.IsValid)
                 {
                     if (Player.ManaPercent < HHMinMana) return;
 
@@ -261,7 +261,7 @@ namespace HoolaLucian
             }
             if (args.Target is Obj_AI_Minion && args.Target.IsValid)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.LaneClear)))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     var Mobs = MinionManager.GetMinions(Orbwalking.GetRealAutoAttackRange(Player), MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth);
                     if (Mobs[0].IsValid && Mobs.Count != 0)
@@ -345,9 +345,12 @@ namespace HoolaLucian
 
             if (ForceR) UseRTarget();
             killsteal();
-            if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.Harass))) Harass();
-            if (Orbwalker.ActiveModesFlags.HasFlag((Orbwalker.ActiveModes.LaneClear)))LaneClear();
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass)) Harass();
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) LaneClear();
         }
+
+        
+
         private static void Spellbook_OnCastSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
         {
             if (args.Slot == SpellSlot.Q || args.Slot == SpellSlot.W || args.Slot == SpellSlot.E) AAPassive = true;

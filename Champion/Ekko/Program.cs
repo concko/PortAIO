@@ -12,6 +12,7 @@ using Color = System.Drawing.Color;
 using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace PortAIO.Champion.Ekko
 {
     internal class Program
@@ -22,7 +23,7 @@ namespace PortAIO.Champion.Ekko
         private static float QMANA, WMANA, EMANA, RMANA, Wtime, Wtime2;
         private static GameObject RMissile, WMissile2, WMissile;
         public static MissileReturn missileManager;
-
+        
         private static AIHeroClient Player
         {
             get { return ObjectManager.Player; }

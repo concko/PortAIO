@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LeagueSharp;
 using LeagueSharp.Common;
 
-namespace Marksman.Common
+ namespace Marksman.Common
 {
     using EloBuddy;
     using EloBuddy.SDK.Menu;

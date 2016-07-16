@@ -6,7 +6,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Cassiopeia
+ namespace ExorAIO.Champions.Cassiopeia
 {
     /// <summary>
     ///     The champion class.
@@ -38,6 +38,7 @@ namespace ExorAIO.Champions.Cassiopeia
             /// </summary>
             Drawings.Initialize();
         }
+        
 
         /// <summary>
         ///     Called when the game updates itself.

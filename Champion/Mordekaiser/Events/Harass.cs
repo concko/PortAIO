@@ -3,7 +3,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp.Common;
 
-namespace Mordekaiser.Events
+ namespace Mordekaiser.Events
 {
     internal class Harass
     {
@@ -25,7 +25,7 @@ namespace Mordekaiser.Events
                 ExecuteE();
             }
         }
-
+        
         private static void ExecuteE()
         {
             if (Utils.Player.Self.HealthPercent <= Menu.getSliderItem(Menu.MenuE, "UseE.Harass.MinHeal"))

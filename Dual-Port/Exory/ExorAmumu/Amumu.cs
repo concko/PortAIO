@@ -4,7 +4,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Amumu
+ namespace ExorAIO.Champions.Amumu
 {
     /// <summary>
     ///     The champion class.
@@ -36,7 +36,7 @@ namespace ExorAIO.Champions.Amumu
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>

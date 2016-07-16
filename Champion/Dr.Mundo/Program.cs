@@ -12,6 +12,7 @@ namespace Mundo
 {
     internal class Mundo : Spells
     {
+        
         public static Menu config, comboMenu, harassMenu, ksMenu, miscMenu, lastHitMenu, clearMenu, drawMenu;
 
         public static void OnLoad()
@@ -55,7 +56,7 @@ namespace Mundo
                 }
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 if (getCheckBoxItem(clearMenu, "useEj") && e.IsReady() && target is Obj_AI_Minion && target.LSIsValidTarget(e.Range))
                 {
@@ -74,7 +75,7 @@ namespace Mundo
                 }
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 if ((getCheckBoxItem(miscMenu, "titanicF") || getCheckBoxItem(miscMenu, "ravenousF") ||
                      getCheckBoxItem(miscMenu, "tiamatF")) && !e.IsReady() && target is Obj_AI_Minion &&
@@ -187,8 +188,7 @@ namespace Mundo
                 LastHit();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
                 JungleClear();

@@ -13,7 +13,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Vayne : Champion
     {
@@ -75,10 +75,10 @@ namespace Marksman.Champions
             }
             return false;
         }
-
+        
         public override void Game_OnGameUpdate(EventArgs args)
         {
-            Orbwalker.DisableAttacking = !(Game.Time > rqTumbleBuffEndOfTime);
+            PortAIO.OrbwalkerManager.SetAttack(Game.Time > rqTumbleBuffEndOfTime);
 
             if (JungleClearActive)
             {
@@ -92,12 +92,12 @@ namespace Marksman.Champions
                     var silverBuffMarkedEnemy = VayneData.GetSilverBuffMarkedEnemy;
                     if (silverBuffMarkedEnemy != null)
                     {
-                        Orbwalker.ForcedTarget = (silverBuffMarkedEnemy);
+                        Orbwalker.ForcedTarget =((silverBuffMarkedEnemy));
                     }
                     else
                     {
                         var attackRange = Orbwalking.GetRealAutoAttackRange(ObjectManager.Player);
-                        Orbwalker.ForcedTarget = (TargetSelector.GetTarget(attackRange, DamageType.Physical));
+                        Orbwalker.ForcedTarget =((TargetSelector.GetTarget(attackRange, DamageType.Physical)));
                     }
                 }
 
@@ -120,7 +120,7 @@ namespace Marksman.Champions
                                     VayneData.GetSilverBuffMarkedCount == 2)
                                 {
                                     Q.Cast(Game.CursorPos);
-                                    Orbwalker.ForcedTarget = (t);
+                                    Orbwalker.ForcedTarget =((t));
                                 }
                                 break;
                             }
@@ -135,7 +135,7 @@ namespace Marksman.Champions
                                 {
                                     Q.Cast(Game.CursorPos);
                                 }
-                                Orbwalker.ForcedTarget = (t);
+                                Orbwalker.ForcedTarget =((t));
                                 break;
                             }
                     }

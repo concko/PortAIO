@@ -1,4 +1,4 @@
-﻿namespace Irelia_Reloaded
+﻿ namespace Irelia_Reloaded
 {
     using System;
     using System.Collections.Generic;
@@ -503,7 +503,7 @@
 
             Flee();
         }
-
+        
 
         public static void Flee()
         {

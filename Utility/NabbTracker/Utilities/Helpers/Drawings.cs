@@ -12,7 +12,7 @@ using Color = System.Drawing.Color;
 using LeagueSharp.Common;
 using LeagueSharp.Common.Data;
 
-namespace NabbTracker
+ namespace NabbTracker
 {
     using System.Linq;
     using SharpDX;

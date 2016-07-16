@@ -6,7 +6,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.Data.Enumerations;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Kalista
+ namespace ExorAIO.Champions.Kalista
 {
     /// <summary>
     ///     The drawings class.

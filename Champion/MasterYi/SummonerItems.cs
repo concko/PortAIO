@@ -3,7 +3,7 @@ using EloBuddy;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     internal class SummonerItems
     {

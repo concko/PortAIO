@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace BlackFeeder.SRShopAI
+ namespace BlackFeeder.SRShopAI
 {
     class Item
     {

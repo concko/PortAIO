@@ -10,7 +10,7 @@ using EloBuddy.SDK;
 
 //gg
 
-namespace D_Jarvan
+ namespace D_Jarvan
 {
     internal class Program
     {
@@ -176,6 +176,7 @@ namespace D_Jarvan
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+        
 
         private static void Game_OnGameUpdate(EventArgs args)
         {
@@ -230,7 +231,7 @@ namespace D_Jarvan
 
             _player = ObjectManager.Player;
 
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
 
             KillSteal();
         }
@@ -355,7 +356,7 @@ namespace D_Jarvan
 
             if (_haveulti)
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
         }
 
@@ -401,7 +402,7 @@ namespace D_Jarvan
 
             if (_haveulti)
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             if (_w.IsReady())
@@ -488,7 +489,7 @@ namespace D_Jarvan
 
             if (_haveulti)
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
         }
 

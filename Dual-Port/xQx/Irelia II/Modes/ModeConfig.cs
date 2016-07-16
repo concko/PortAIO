@@ -12,7 +12,7 @@ using Color = SharpDX.Color;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Irelia.Modes
+ namespace Irelia.Modes
 {
     internal class ModeConfig
     {

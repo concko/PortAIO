@@ -14,7 +14,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace ChewyMoonsShaco
+ namespace ChewyMoonsShaco
 {
     internal class ChewyMoonShaco
     {
@@ -254,6 +254,7 @@ namespace ChewyMoonsShaco
                 Harass();
             }
         }
+        
 
         public static void Escape()
         {

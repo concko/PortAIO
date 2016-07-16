@@ -8,7 +8,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace UniversalPings
+ namespace UniversalPings
 {
     internal class Program
     {

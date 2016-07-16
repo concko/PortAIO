@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using RandomUlt.Helpers;
 using EloBuddy;
 
-namespace RandomUlt
+ namespace RandomUlt
 {
     internal class Program
     {

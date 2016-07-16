@@ -17,7 +17,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Jinx : Champion
     {
@@ -125,7 +125,7 @@ namespace Marksman.Champions
                 }
             }
         }
-
+        
         public override void Game_OnGameUpdate(EventArgs args)
         {
             if (Program.combo["PingCH"].Cast<CheckBox>().CurrentValue)
@@ -345,8 +345,9 @@ namespace Marksman.Champions
             }
         }
 
-        public override void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
+        public override void Orbwalking_AfterAttack(AttackableUnit targetA, EventArgs args)
         {
+            var target = targetA;
             if ((ComboActive || HarassActive) && (target is AIHeroClient))
             {
                 var useQ = ComboActive ? Program.combo["UseQC"].Cast<CheckBox>().CurrentValue : Program.harass["UseQH"].Cast<CheckBox>().CurrentValue;

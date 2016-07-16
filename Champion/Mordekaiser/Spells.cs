@@ -2,7 +2,7 @@
 using EloBuddy;
 using LeagueSharp.Common;
 
-namespace Mordekaiser
+ namespace Mordekaiser
 {
     public class Spells
     {

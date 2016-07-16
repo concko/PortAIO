@@ -10,7 +10,7 @@ using Spirit_Karma.Menus;
 
 #endregion
 
-namespace Spirit_Karma.Draw 
+ namespace Spirit_Karma.Draw 
 {
     internal class DrawDmg : Core.Core
     {

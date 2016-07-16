@@ -4,7 +4,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
 
-namespace VCursor
+ namespace VCursor
 {
     internal static class Utility
     {

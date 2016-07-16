@@ -56,7 +56,7 @@ namespace UnderratedAIO.Helpers
             {
                 return
                     MinionManager.GetMinions(
-                        player.Position, player.AttackRange, MinionTypes.All, MinionTeam.Enemy, MinionOrderTypes.None)
+                        player.Position, player.AttackRange, MinionTypes.All, MinionTeam.NotAlly, MinionOrderTypes.None)
                         .Any(
                             minion =>
                                 HealthPrediction.GetHealthPrediction(minion, 3000) <=

@@ -12,6 +12,7 @@ namespace ExorAIO.Champions.Darius
     /// </summary>
     internal class Spells
     {
+        
         /// <summary>
         ///     Sets the spells.
         /// </summary>

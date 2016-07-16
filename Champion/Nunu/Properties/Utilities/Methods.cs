@@ -2,7 +2,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp;
 
-namespace ExorAIO.Champions.Nunu
+ namespace ExorAIO.Champions.Nunu
 {
     /// <summary>
     ///     The methods class.

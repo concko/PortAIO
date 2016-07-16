@@ -26,7 +26,7 @@
 
 #endregion
 
-namespace ElUtilitySuite.Vendor.SFX
+ namespace ElUtilitySuite.Vendor.SFX
 {
     using System.Collections.Generic;
 

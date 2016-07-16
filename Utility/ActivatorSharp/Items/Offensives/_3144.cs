@@ -3,7 +3,7 @@ using Activators.Base;
 using LeagueSharp.Common;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Items.Offensives
+ namespace Activators.Items.Offensives
 {
     class _3144 : CoreItem
     {
@@ -21,16 +21,21 @@ namespace Activators.Items.Offensives
         public override void OnTick(EventArgs args)
         {
             if (!Menu["use" + Name].Cast<CheckBox>().CurrentValue || !IsReady())
+            {
                 return;
+            }
 
             if (Tar != null)
             {
-                if (Activator.omenu[Parent.UniqueMenuId + "useon" + Tar.Player.NetworkId] == null)
+                if (Activator.omenu[Activator.omenu.UniqueMenuId + "useon" + Tar.Player.NetworkId] == null)
                 {
                     return;
                 }
-                if (!Activator.omenu[Parent.UniqueMenuId + "useon" + Tar.Player.NetworkId].Cast<CheckBox>().CurrentValue)
+
+                if (!Activator.omenu[Activator.omenu.UniqueMenuId + "useon" + Tar.Player.NetworkId].Cast<CheckBox>().CurrentValue)
+                {
                     return;
+                }
 
                 if ((Tar.Player.Health / Tar.Player.MaxHealth * 100) <= Menu["enemylowhp" + Name + "pct"].Cast<Slider>().CurrentValue)
                 {

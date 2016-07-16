@@ -19,7 +19,7 @@
 //   Sprite Handler
 // </summary>
 // --------------------------------------------------------------------------------------------------------------------
-namespace IKalista
+ namespace IKalista
 {
     using System.Linq;
 

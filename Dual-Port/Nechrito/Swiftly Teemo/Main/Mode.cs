@@ -9,7 +9,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Swiftly_Teemo.Main
+ namespace Swiftly_Teemo.Main
 {
     internal class Mode : Core
     {
@@ -42,13 +42,14 @@ namespace Swiftly_Teemo.Main
                 Spells.W.Cast();
             }
         }
+        
         public static void OnCastSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
         {
             if (args.Slot != SpellSlot.Q) return;
             if (sender.Owner != Player) return;
 
-            Orbwalker.DisableAttacking = true;
-            DelayAction.Add(200, () => Orbwalker.DisableAttacking = false);
+            PortAIO.OrbwalkerManager.SetAttack(false);
+            DelayAction.Add(200, () => PortAIO.OrbwalkerManager.SetAttack(true));
         }
         public static void Lane()
         {

@@ -2,7 +2,7 @@
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace hJhin.Extensions
+ namespace hJhin.Extensions
 {
     class Config
     {

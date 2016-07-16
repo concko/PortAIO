@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace ThreshWarden {
+ namespace ThreshWarden {
 	class ThreshWarden {
 
 		public static AIHeroClient Player = ObjectManager.Player;
@@ -114,13 +114,14 @@ namespace ThreshWarden {
 
                if (getCheckBoxItem(SupportConfig, "SupportMode")
                 && GetAdc(getSliderItem(SupportConfig, "SupportModeRange")) != null
-				&& (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)))
+				&& (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)))
 			{
 				args.Process = false;
 			}
 		}
+        
 
-		private static void Game_OnWndProc(WndEventArgs args) {
+        private static void Game_OnWndProc(WndEventArgs args) {
 			if (args.Msg == 'Q')
 			{
 				var Qtarget = Q.GetTarget(0, Qignored);
@@ -266,14 +267,14 @@ namespace ThreshWarden {
 			AutoPushTower();
 
 			AutoBox();
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 LaneClear();
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                 Combo();
 
             if (getKeyBindItem(SpellConfig, "FlayPush") || getKeyBindItem(SpellConfig, "FlayPull"))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
 
             if (getKeyBindItem(SpellConfig, "FlayPush") && Etarget != null &&

@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 using Damage = LeagueSharp.Common.Damage;
-using TargetSelector = LeagueSharp.Common.LSTargetSelector;
+
 
 
 namespace KurisuRiven
@@ -36,7 +36,7 @@ namespace KurisuRiven
         private static bool canaa;
         private static bool canws;
         private static bool canhd;
-        private static LSOrbwalker Orbwalker = PortAIO.Init.LSOrbwalker;
+        
         private static bool didq;
         private static bool didw;
         private static bool dide;
@@ -234,7 +234,7 @@ namespace KurisuRiven
             {
                 if ((args.Slot == SpellSlot.W) && sender.IsMe)
                 {
-                    Orbwalker.ResetAutoAttackTimer();
+                    Orbwalker.ResetAutoAttack();
                 }
 
                 if (sender.IsMe && args.SData.IsAutoAttack())
@@ -265,11 +265,11 @@ namespace KurisuRiven
                                 Item.UseItem(3074);
                             if (Item.CanUseItem(3748))
                                 Item.UseItem(3748);
-                            Orbwalker.ResetAutoAttackTimer();
+                            Orbwalker.ResetAutoAttack();
                         }
                     }
 
-                    if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo)
+                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                     {
                         if (riventarget().LSIsValidTarget(e.Range + 200))
                         {
@@ -286,7 +286,7 @@ namespace KurisuRiven
                                             Item.UseItem(3074);
                                         if (Item.CanUseItem(3748))
                                             Item.UseItem(3748);
-                                        Orbwalker.ResetAutoAttackTimer();
+                                        Orbwalker.ResetAutoAttack();
                                     }
                                     else
                                     {
@@ -297,14 +297,14 @@ namespace KurisuRiven
                                             Item.UseItem(3074);
                                         if (Item.CanUseItem(3748))
                                             Item.UseItem(3748);
-                                        Orbwalker.ResetAutoAttackTimer();
+                                        Orbwalker.ResetAutoAttack();
                                     }
                                 }
                             }
                         }
                     }
 
-                    if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo)
+                    if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                     {
                         if (Utils.GameTimeTickCount - lasthd < 1600)
                         {
@@ -317,7 +317,7 @@ namespace KurisuRiven
                                     Item.UseItem(3074);
                                 if (Item.CanUseItem(3748))
                                     Item.UseItem(3748);
-                                Orbwalker.ResetAutoAttackTimer();
+                                Orbwalker.ResetAutoAttack();
                             }
                         }
 
@@ -331,12 +331,12 @@ namespace KurisuRiven
                                     Item.UseItem(3074);
                                 if (Item.CanUseItem(3748))
                                     Item.UseItem(3748);
-                                Orbwalker.ResetAutoAttackTimer();
+                                Orbwalker.ResetAutoAttack();
                             }
                         }
                     }
 
-                    else if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.LaneClear)
+                    else if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                     {
                         if (!player.UnderTurret(true) || !HeroManager.Enemies.Any(x => x.LSIsValidTarget(1400)))
                         {
@@ -345,6 +345,7 @@ namespace KurisuRiven
                                 if (w.IsReady() && args.Target.Position.LSDistance(player.ServerPosition) <= w.Range + 25)
                                 {
                                     w.Cast();
+                                    Orbwalker.ResetAutoAttack();
                                 }
                             }
 
@@ -356,7 +357,7 @@ namespace KurisuRiven
                                     Item.UseItem(3074);
                                 if (Item.CanUseItem(3748))
                                     Item.UseItem(3748);
-                                Orbwalker.ResetAutoAttackTimer();
+                                Orbwalker.ResetAutoAttack();
                             }
                         }
                     }
@@ -382,7 +383,7 @@ namespace KurisuRiven
         private static void Game_OnUpdate(EventArgs args)
         {
             // harass active
-            didhs = Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Mixed;
+            didhs = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass);
 
             // ulti check
             uo = player.GetSpell(SpellSlot.R).Name != "RivenFengShuiEngine";
@@ -402,7 +403,7 @@ namespace KurisuRiven
 
             if (!canmv && didq)
             {
-                if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.None ||
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) ||
                     Getkeybindvalue(keybindsMenu, "shycombo"))
                 {
                 }
@@ -435,7 +436,7 @@ namespace KurisuRiven
 
             if (riventarget().LSIsValidTarget())
             {
-                if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo)
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                 {
                     ComboTarget(riventarget());
                     TryIgnote(riventarget());
@@ -454,6 +455,7 @@ namespace KurisuRiven
                     {
                         checkr();
                         w.Cast();
+                        Orbwalker.ResetAutoAttack();
                     }
 
                     else if (q.IsReady() && riventarget().LSDistance(player.ServerPosition) <= truerange + 100)
@@ -482,13 +484,13 @@ namespace KurisuRiven
                 HarassTarget(riventarget());
             }
 
-            if (player.IsValid && Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.LaneClear)
+            if (player.IsValid && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
                 Wave();
             }
 
-            if (player.IsValid && Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Flee)
+            if (player.IsValid && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
             {
                 Flee();
             }
@@ -758,7 +760,7 @@ namespace KurisuRiven
                             Item.UseItem(3074);
                         if (Item.CanUseItem(3748))
                             Item.UseItem(3748);
-                        Orbwalker.ResetAutoAttackTimer();
+                        Orbwalker.ResetAutoAttack();
                     }
                 }
             }
@@ -782,7 +784,7 @@ namespace KurisuRiven
                                 Item.UseItem(3074);
                             if (Item.CanUseItem(3748))
                                 Item.UseItem(3748);
-                            Orbwalker.ResetAutoAttackTimer();
+                            Orbwalker.ResetAutoAttack();
                         }
                     }
 
@@ -795,7 +797,7 @@ namespace KurisuRiven
                             Item.UseItem(3074);
                         if (Item.CanUseItem(3748))
                             Item.UseItem(3748);
-                        Orbwalker.ResetAutoAttackTimer();
+                        Orbwalker.ResetAutoAttack();
                     }
                 }
 
@@ -809,7 +811,7 @@ namespace KurisuRiven
                             Item.UseItem(3077);
                         if (Item.CanUseItem(3074))
                             Item.UseItem(3074);
-                        Orbwalker.ResetAutoAttackTimer();
+                        Orbwalker.ResetAutoAttack();
                     }
                 }
 
@@ -819,7 +821,7 @@ namespace KurisuRiven
                         Item.UseItem(3077);
                     if (Item.CanUseItem(3074))
                         Item.UseItem(3074);
-                    Orbwalker.ResetAutoAttackTimer();
+                    Orbwalker.ResetAutoAttack();
                 }
             }
 
@@ -837,6 +839,7 @@ namespace KurisuRiven
                              Getcheckboxvalue(wMenu, "w" + target.ChampionName))
                         {
                             w.Cast();
+                            Orbwalker.ResetAutoAttack();
                         }
                     }
                 }
@@ -874,7 +877,7 @@ namespace KurisuRiven
                                 Item.UseItem(3074);
                             if (Item.CanUseItem(3748))
                                 Item.UseItem(3748);
-                            Orbwalker.ResetAutoAttackTimer();
+                            Orbwalker.ResetAutoAttack();
                         }
                     }
 
@@ -887,7 +890,7 @@ namespace KurisuRiven
                             Item.UseItem(3074);
                         if (Item.CanUseItem(3748))
                             Item.UseItem(3748);
-                        Orbwalker.ResetAutoAttackTimer();
+                        Orbwalker.ResetAutoAttack();
                     }
                 }
             }
@@ -907,7 +910,7 @@ namespace KurisuRiven
                                 Item.UseItem(3074);
                             if (Item.CanUseItem(3748))
                                 Item.UseItem(3748);
-                            Orbwalker.ResetAutoAttackTimer();
+                            Orbwalker.ResetAutoAttack();
                         }
                     }
                 }
@@ -928,7 +931,7 @@ namespace KurisuRiven
                                 Item.UseItem(3074);
                             if (Item.CanUseItem(3748))
                                 Item.UseItem(3748);
-                            Orbwalker.ResetAutoAttackTimer();
+                            Orbwalker.ResetAutoAttack();
                         }
                     }
                 }
@@ -971,8 +974,8 @@ namespace KurisuRiven
             {
                 if (!e.IsReady())
                 {
-                    Orbwalker.SetAttack(false);
-                    Orbwalker.SetMovement(false);
+                    PortAIO.OrbwalkerManager.SetAttack(false);
+                    PortAIO.OrbwalkerManager.SetMovement(false);
 
                     canaa = false;
                     canmv = false;
@@ -983,8 +986,8 @@ namespace KurisuRiven
                           {
                               q.Cast(qpos);
 
-                              Orbwalker.SetAttack(true);
-                              Orbwalker.SetMovement(true);
+                              PortAIO.OrbwalkerManager.SetAttack(true);
+                              PortAIO.OrbwalkerManager.SetMovement(true);
 
                               canaa = true;
                               canmv = true;
@@ -1033,6 +1036,7 @@ namespace KurisuRiven
                     if (Getcheckboxvalue(harassMenu, "useharassw") && canw)
                     {
                         w.Cast();
+                        Orbwalker.ResetAutoAttack();
                     }
                 }
             }
@@ -1196,7 +1200,7 @@ namespace KurisuRiven
                             Item.UseItem(3077);
                         if (Item.CanUseItem(3074))
                             Item.UseItem(3074);
-                        Orbwalker.ResetAutoAttackTimer();
+                        Orbwalker.ResetAutoAttack();
                     }
                 }
 
@@ -1214,6 +1218,7 @@ namespace KurisuRiven
                     if (unit.LSDistance(player.ServerPosition) <= w.Range + 25)
                     {
                         w.Cast();
+                        Orbwalker.ResetAutoAttack();
                     }
                 }
 
@@ -1261,8 +1266,8 @@ namespace KurisuRiven
                                 Item.UseItem(3077);
                             if (Item.CanUseItem(3074))
                                 Item.UseItem(3074);
-                            Orbwalker.ResetAutoAttackTimer();
                             w.Cast();
+                            Orbwalker.ResetAutoAttack();
                         }
                     }
                 }
@@ -1322,6 +1327,7 @@ namespace KurisuRiven
             {
                 if (w.IsReady())
                     w.Cast();
+                Orbwalker.ResetAutoAttack();
             }
 
             if (ssfl)
@@ -1369,18 +1375,18 @@ namespace KurisuRiven
                     if (q.IsReady() && Utils.GameTimeTickCount - lastaa < 1200 && qtarg != null)
                     {
                         if (qtarg.LSIsValidTarget(q.Range + 100) &&
-                            Orbwalker.ActiveMode != LSOrbwalker.OrbwalkingMode.LaneClear &&
-                            Orbwalker.ActiveMode != LSOrbwalker.OrbwalkingMode.Mixed &&
-                            Orbwalker.ActiveMode != LSOrbwalker.OrbwalkingMode.Combo &&
+                            !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
+                            !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) &&
+                            !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) &&
                             !Getkeybindvalue(keybindsMenu, "shycombo"))
                         {
                             if (qtarg.IsValid<AIHeroClient>() && !qtarg.UnderTurret(true))
                                 q.Cast(qtarg.ServerPosition);
                         }
 
-                        if (Orbwalker.ActiveMode != LSOrbwalker.OrbwalkingMode.Mixed &&
-                            Orbwalker.ActiveMode != LSOrbwalker.OrbwalkingMode.LaneClear &&
-                            Orbwalker.ActiveMode != LSOrbwalker.OrbwalkingMode.Combo &&
+                        if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) &&
+                            !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
+                            !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) &&
                             !Getkeybindvalue(keybindsMenu, "shycombo"))
                         {
                             if (qtarg.LSIsValidTarget(q.Range + 100) && !qtarg.Name.Contains("Mini"))
@@ -1517,7 +1523,7 @@ namespace KurisuRiven
 
                         if (getBoxItem(r2Menu, "wsmode") == 1 || Getkeybindvalue(keybindsMenu, "shycombo"))
                         {
-                            if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo)
+                            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                             {
                                 if (canburst() && uo)
                                 {
@@ -1553,9 +1559,9 @@ namespace KurisuRiven
 
                         Utility.DelayAction.Add(dd[Math.Max(cc, 1) - 1], () =>
                         {
-                            Orbwalker.ResetAutoAttackTimer();
+                            Orbwalker.ResetAutoAttack();
 
-                            if (Orbwalker.ActiveMode != LSOrbwalker.OrbwalkingMode.None ||
+                            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) ||
                                 Getkeybindvalue(keybindsMenu, "shycombo"))
                                 Chat.Say("/d");
 
@@ -1585,7 +1591,7 @@ namespace KurisuRiven
                         laste = Utils.GameTimeTickCount;
                         cane = false;
 
-                        if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Flee)
+                        if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
                         {
                             if (uo && r.IsReady() && cc == 2 && q.IsReady())
                             {
@@ -1606,7 +1612,7 @@ namespace KurisuRiven
                             }
                         }
 
-                        if (Orbwalker.ActiveMode == LSOrbwalker.OrbwalkingMode.Combo)
+                        if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                         {
                             if (cc == 2 && !uo && r.IsReady() && riventarget() != null)
                             {
@@ -1635,7 +1641,10 @@ namespace KurisuRiven
                         canws = false;
 
                         if (w.IsReady() && riventarget().LSIsValidTarget(w.Range + 55))
+                        {
                             w.Cast();
+                            Orbwalker.ResetAutoAttack();
+                        }
 
                         else if (q.IsReady() && riventarget().LSIsValidTarget())
                         {
@@ -1646,7 +1655,7 @@ namespace KurisuRiven
                                 Item.UseItem(3074);
                             if (Item.CanUseItem(3748))
                                 Item.UseItem(3748);
-                            Orbwalker.ResetAutoAttackTimer();
+                            Orbwalker.ResetAutoAttack();
                         }
 
                         break;
@@ -1853,7 +1862,7 @@ namespace KurisuRiven
                 if (Getkeybindvalue(keybindsMenu, "shycombo"))
                 {
                     if (target.LSIsValidTarget(truerange + 100))
-                        Orbwalker.Orbwalk(null, Game.CursorPos);
+                        Orbwalker.MoveTo(Game.CursorPos);
 
                     else
                         Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);

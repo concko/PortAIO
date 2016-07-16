@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using ShineCommon;
 using EloBuddy;
 
-namespace ShineCommon
+ namespace ShineCommon
 {
     public static class Utility
     {

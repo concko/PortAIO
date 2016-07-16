@@ -5,7 +5,7 @@ using LeagueSharp.Common;
 using EloBuddy;
 using EloBuddy.SDK.Menu;
 
-namespace Slutty_ryze
+ namespace Slutty_ryze
 {
     class GlobalManager
     {

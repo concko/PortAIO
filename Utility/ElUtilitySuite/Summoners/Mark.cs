@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Summoners
+﻿ namespace ElUtilitySuite.Summoners
 {
     using System;
     using System.Linq;
@@ -66,7 +66,7 @@
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         /// <summary>
         ///     Gets a value indicating whether the combo mode is active.
         /// </summary>

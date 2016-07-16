@@ -5,7 +5,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ElVi
+ namespace ElVi
 {
     public class ElViMenu
     {

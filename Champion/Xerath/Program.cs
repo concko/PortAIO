@@ -11,7 +11,7 @@ using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     internal class Xerath
     {
@@ -147,7 +147,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
 
         private static void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
         {
-            Orbwalker.ForcedTarget = null; // BERB - not even sure what this is even suppose to do lmfao
+            Orbwalker.ForcedTarget =(null); // BERB - not even sure what this is even suppose to do lmfao
         }
 
         private static void Spellbook_OnCastSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
@@ -201,7 +201,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                 E.Cast(sender);
             }
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             if (Program.LagFree(3) && R.IsReady())
@@ -209,13 +209,13 @@ namespace OneKeyToWin_AIO_Sebby.Champions
 
             if (IsCastingR || Player.IsChannelingImportantSpell())
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (Q.IsCharging && (int)(Game.Time * 10) % 2 == 0)
@@ -229,7 +229,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                 Jungle();
                 int[] mana = { 0, 30, 33, 36, 42, 48, 54, 63, 72, 81, 90, 102, 114, 126, 138, 150, 165, 180, 195 };
                 if (!Player.HasBuff("xerathascended2onhit") || Player.Mana + mana[Player.Level] > Player.MaxMana)
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                 else if ((Program.Combo || Program.Farm) && getCheckBoxItem(miscMenu, "force") &&
                          Orbwalker.LastTarget == null)
                 {
@@ -239,15 +239,15 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                             .FirstOrDefault();
 
                     if (minion != null && OktwCommon.CanHarras())
-                        Orbwalker.ForcedTarget = minion;
+                        Orbwalker.ForcedTarget =(minion);
                 }
             }
 
             if (E.IsReady() && getCheckBoxItem(eMenu, "autoE"))
                 LogicE();
-            if (Program.LagFree(2) && W.IsReady() && !Orbwalker.IsAutoAttacking && getCheckBoxItem(wMenu, "autoW"))
+            if (Program.LagFree(2) && W.IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking && getCheckBoxItem(wMenu, "autoW"))
                 LogicW();
-            if (Program.LagFree(4) && Q.IsReady() && !Orbwalker.IsAutoAttacking && getCheckBoxItem(qMenu, "autoQ"))
+            if (Program.LagFree(4) && Q.IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking && getCheckBoxItem(qMenu, "autoQ"))
                 LogicQ();
         }
 

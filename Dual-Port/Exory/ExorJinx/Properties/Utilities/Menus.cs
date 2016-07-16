@@ -1,7 +1,7 @@
 using EloBuddy.SDK.Menu.Values;
 using ExorAIO.Utilities;
 
-namespace ExorAIO.Champions.Jinx
+ namespace ExorAIO.Champions.Jinx
 {
     /// <summary>
     ///     The menu class.
@@ -40,9 +40,9 @@ namespace ExorAIO.Champions.Jinx
             /// </summary>
             Vars.EMenu = Vars.Menu.AddSubMenu("Use E to:");
             {
-                Vars.EMenu.Add("combo", new CheckBox("Combo", true));
                 Vars.EMenu.Add("gapcloser", new CheckBox("Anti-Gapcloser", true));
                 Vars.EMenu.Add("logical", new CheckBox("Logical", true));
+                Vars.EMenu.Add("aoe", new Slider("AoE / If can hit >= x enemies", 2, 1, 6));
             }
 
             /// <summary>
@@ -59,7 +59,7 @@ namespace ExorAIO.Champions.Jinx
             /// </summary>
             Vars.MiscMenu = Vars.Menu.AddSubMenu("Miscellaneous");
             {
-                Vars.MiscMenu.Add("blockq", new CheckBox("Block Manual Q Casting in LC", true));
+                Vars.MiscMenu.Add("blockq", new CheckBox("Stop Manual Q Cast when Low Mana", true));
             }
 
             /// <summary>

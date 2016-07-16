@@ -7,7 +7,7 @@ using LeagueSharp.Data.Enumerations;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Anivia
+ namespace ExorAIO.Champions.Anivia
 {
     /// <summary>
     ///     The logics class.

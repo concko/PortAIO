@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Jinx
+ namespace ExorAIO.Champions.Jinx
 {
     /// <summary>
     ///     The logics class.

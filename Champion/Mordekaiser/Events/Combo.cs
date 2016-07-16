@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp.Common;
 
-namespace Mordekaiser.Events
+ namespace Mordekaiser.Events
 {
     internal class Combo
     {
@@ -52,7 +52,7 @@ namespace Mordekaiser.Events
             }
         }
 
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             if (Utils.Player.Self.IsDead)

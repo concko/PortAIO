@@ -20,7 +20,7 @@ namespace PortAIO.Champion.Blitzcrank
         public static AIHeroClient Player;
         public static Spell _Q, _W, _E, _R;
         private static SpellSlot FlashSlot;
-
+        
         public static Menu _Menu, ComboMenu, HarassMenu, KSMenu, MiscMenu, DrawMenu;
         // Default Setting
 

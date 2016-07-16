@@ -14,7 +14,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Zac
     {
@@ -84,13 +84,13 @@ namespace UnderratedAIO.Champions
         {
             if (E.IsCharging || eActive)
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
 
@@ -104,13 +104,12 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
         }
-
+        
         private void Harass()
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
@@ -171,9 +170,9 @@ namespace UnderratedAIO.Champions
                                 o.LSDistance(player) < Orbwalking.GetRealAutoAttackRange(player))
                         .OrderBy(o => o.LSDistance(player))
                         .FirstOrDefault();
-                if (blob != null && !Orbwalker.CanAutoAttack && !Orbwalker.IsAutoAttacking)
+                if (blob != null && !Orbwalker.CanAutoAttack && !ObjectManager.Player.Spellbook.IsAutoAttacking)
                 {
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                     Player.IssueOrder(GameObjectOrder.MoveTo, blob.Position);
                 }
             }
@@ -230,7 +229,7 @@ namespace UnderratedAIO.Champions
 
             if (rActive)
             {
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
                 return;
             }
 

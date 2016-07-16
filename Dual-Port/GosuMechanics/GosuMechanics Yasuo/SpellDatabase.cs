@@ -24,7 +24,7 @@ using EloBuddy;
 
 #endregion
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     public static class SpellDatabase
     {

@@ -5,7 +5,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
-namespace ElSinged
+ namespace ElSinged
 {
     internal class Drawings
     {

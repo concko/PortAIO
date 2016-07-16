@@ -27,7 +27,7 @@ using EloBuddy;
 
 #endregion
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     internal static class SkillshotDetector
     {

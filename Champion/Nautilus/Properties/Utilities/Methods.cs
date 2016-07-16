@@ -2,7 +2,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp;
 
-namespace ExorAIO.Champions.Nautilus
+ namespace ExorAIO.Champions.Nautilus
 {
     /// <summary>
     ///     The methods class.

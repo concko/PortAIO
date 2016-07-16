@@ -6,7 +6,7 @@ using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.MissFortune
+ namespace ExorAIO.Champions.MissFortune
 {
     /// <summary>
     ///     The targets class.
@@ -26,7 +26,7 @@ namespace ExorAIO.Champions.MissFortune
                 GameObjects.EnemyMinions.Where(
                     m =>
                         m.IsMinion() &&
-                        m.LSIsValidTarget(Vars.E.Range)).ToList();
+                        m.LSIsValidTarget(Vars.Q2.Range)).ToList();
 
         /// <summary>
         ///     The jungle minion targets.

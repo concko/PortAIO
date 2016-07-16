@@ -8,7 +8,7 @@ using EloBuddy.SDK;
 using System.Collections.Generic;
 using Valvrave_Sharp.Evade;
 
-namespace YasuoPro
+ namespace YasuoPro
 {
 
     //Credits to Kortatu/Esk0r for his work on Evade which this assembly relies on heavily!
@@ -52,7 +52,7 @@ namespace YasuoPro
         {
             return ObjectManager.Player.ServerPosition.LSExtend(target.ServerPosition, Spells[E].Range);
         }
-
+        
         void OnUpdate(EventArgs args)
         {
             if (Yasuo.IsDead || Yasuo.LSIsRecalling())
@@ -103,29 +103,25 @@ namespace YasuoPro
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
                 Mixed();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
                 LHSkills();
             }
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
                 Waveclear();
             }
 
@@ -543,7 +539,7 @@ namespace YasuoPro
 
         void Flee()
         {
-            Orbwalker.DisableAttacking = true; // BERB
+            PortAIO.OrbwalkerManager.SetAttack(false); // BERB
             if (GetBool("Flee.UseQ2", YasuoMenu.MiscM) && !Yasuo.LSIsDashing() && SpellSlot.Q.IsReady() && TornadoReady)
             {
                 var qtarg = TargetSelector.GetTarget(Spells[Q2].Range, DamageType.Physical);
@@ -555,7 +551,7 @@ namespace YasuoPro
 
             if (FleeMode == FleeType.ToCursor)
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
 
                 var smart = GetBool("Flee.Smart", YasuoMenu.MiscM);
 
@@ -655,7 +651,7 @@ namespace YasuoPro
                 var nexus = shop;
                 if (nexus != null)
                 {
-                    Orbwalker.OrbwalkTo(nexus.Position);
+                    Orbwalker.MoveTo(nexus.Position);
                     var bestminion = ObjectManager.Get<Obj_AI_Base>().Where(x => x.IsDashable()).MinOrDefault(x => GetDashPos(x).LSDistance(nexus.Position));
                     if (bestminion != null && (!GetBool("Flee.Smart", YasuoMenu.MiscM) || GetDashPos(bestminion).LSDistance(nexus.Position) < Yasuo.LSDistance(nexus.Position)))
                     {
@@ -681,7 +677,7 @@ namespace YasuoPro
 
                 if (bestally != null)
                 {
-                    Orbwalker.OrbwalkTo(bestally.ServerPosition);
+                    Orbwalker.MoveTo(bestally.ServerPosition);
                     if (Spells[E].IsReady())
                     {
                         var besttarget =
@@ -704,7 +700,7 @@ namespace YasuoPro
                     var nexus = shop;
                     if (nexus != null)
                     {
-                        Orbwalker.OrbwalkTo(nexus.Position);
+                        Orbwalker.MoveTo(nexus.Position);
                         var bestminion = ObjectManager.Get<Obj_AI_Base>().Where(x => x.IsDashable()).MinOrDefault(x => GetDashPos(x).LSDistance(nexus.Position));
                         if (bestminion != null && GetDashPos(bestminion).LSDistance(nexus.Position) < Yasuo.LSDistance(nexus.Position))
                         {
@@ -736,7 +732,7 @@ namespace YasuoPro
         {
             if (SpellSlot.Q.IsReady() && !Yasuo.LSIsDashing() && !InDash)
             {
-                if (!TornadoReady && GetBool("Waveclear.UseQ", YasuoMenu.WaveclearM) && Orbwalker.IsAutoAttacking)
+                if (!TornadoReady && GetBool("Waveclear.UseQ", YasuoMenu.WaveclearM) && ObjectManager.Player.Spellbook.IsAutoAttacking)
                 {
                     var minion =
                         ObjectManager.Get<Obj_AI_Minion>()

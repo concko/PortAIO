@@ -20,7 +20,7 @@
 
 #endregion License
 
-namespace ElUtilitySuite.Trackers
+ namespace ElUtilitySuite.Trackers
 {
     using System;
     using System.Collections.Generic;

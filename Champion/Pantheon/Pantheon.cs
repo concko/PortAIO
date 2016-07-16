@@ -6,7 +6,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Pantheon
+ namespace ExorAIO.Champions.Pantheon
 {
     /// <summary>
     ///     The champion class.
@@ -52,13 +52,13 @@ namespace ExorAIO.Champions.Pantheon
 
             if (GameObjects.Player.HasBuff("pantheonesound"))
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             /// <summary>
@@ -84,7 +84,7 @@ namespace ExorAIO.Champions.Pantheon
                 Logics.Clear(args);
             }
         }
-
+        
         /// <summary>
         ///     Called on interruptable spell.
         /// </summary>

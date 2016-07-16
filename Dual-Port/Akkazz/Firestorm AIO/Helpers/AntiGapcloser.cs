@@ -3,7 +3,7 @@ using System.Linq;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Enumerations;
 
-namespace Firestorm_AIO.Helpers
+ namespace Firestorm_AIO.Helpers
 {
     public static class AntiGapcloser
     {

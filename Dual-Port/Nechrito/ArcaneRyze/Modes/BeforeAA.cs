@@ -3,12 +3,14 @@ using EloBuddy.SDK;
 using EloBuddy;
 using System;
 
-namespace Arcane_Ryze.Modes
+ namespace Arcane_Ryze.Modes
 {
     class BeforeAA : Core
     {
-        public static void OnAction(AttackableUnit fdf, EventArgs args)
+        
+        public static void OnAction(AttackableUnit targetA, EventArgs args)
         {
+            var fdf = targetA;
             if (fdf is AIHeroClient)
             {
                 var target = fdf as AIHeroClient;

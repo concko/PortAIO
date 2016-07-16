@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Items.OffensiveItems
+﻿ namespace ElUtilitySuite.Items.OffensiveItems
 {
     using System.Linq;
 

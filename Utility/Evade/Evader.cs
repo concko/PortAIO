@@ -27,7 +27,7 @@ using EloBuddy;
 
 #endregion
 
-namespace EvadeSharp
+ namespace EvadeSharp
 {
     public static class Evader
     {

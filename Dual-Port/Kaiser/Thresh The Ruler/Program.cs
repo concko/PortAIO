@@ -10,7 +10,7 @@ using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ThreshTherulerofthesoul
+ namespace ThreshTherulerofthesoul
 {
     class Program
     {
@@ -145,7 +145,7 @@ namespace ThreshTherulerofthesoul
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         static void Combo()
         {
             var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
@@ -181,7 +181,7 @@ namespace ThreshTherulerofthesoul
 
             if (getKeyBindItem(comboMenu, "FlayPush") || getKeyBindItem(comboMenu, "FlayPull"))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
 
             if (getKeyBindItem(comboMenu, "FlayPush") && Etarget != null && 

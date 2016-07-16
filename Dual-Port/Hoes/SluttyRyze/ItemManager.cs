@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using ItemData = LeagueSharp.Common.Data.ItemData;
 
-namespace Slutty_ryze
+ namespace Slutty_ryze
 {
     class ItemManager
     {

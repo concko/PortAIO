@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using ItemData = LeagueSharp.Common.Data.ItemData;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace Elvarus
+ namespace Elvarus
 {
     internal enum Spells
     {
@@ -403,7 +403,7 @@ namespace Elvarus
                 }
             }
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -411,8 +411,7 @@ namespace Elvarus
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
                 JungleClear();

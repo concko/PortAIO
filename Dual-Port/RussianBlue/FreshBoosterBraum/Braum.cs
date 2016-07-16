@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 
-namespace FreshBooster.Champion
+ namespace FreshBooster.Champion
 {
     class Braum
     {
@@ -204,7 +204,7 @@ namespace FreshBooster.Champion
             GameObject.OnCreate += GameObject_OnCreate;
             GameObject.OnDelete += GameObject_OnDelete;
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             try

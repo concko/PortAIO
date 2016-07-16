@@ -14,6 +14,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
+
 namespace Leblanc.Modes
 {
 
@@ -21,13 +22,17 @@ namespace Leblanc.Modes
     {
         Mode2xQ,
         Mode2xW,
+        ModeAuto
     }
 
     enum ComboMode
     {
         Mode2xQ = 0,
         Mode2xW = 1,
+        ModeAuto = 2
+
     }
+
 
 
 
@@ -98,7 +103,18 @@ namespace Leblanc.Modes
 
             MenuLocal = Modes.ModeConfig.MenuConfig.AddSubMenu("Combo", "Combo");
             {
-                MenuLocal.Add("Combo.Mode", new ComboBox("Combo Mode:", 1, "Q:R", "W:R"));
+                MenuLocal.Add("Combo.Mode", new ComboBox("Combo Mode:", 1, "Q : R", "W : R", "Auto")).OnValueChange += ModeCombo_OnValueChange;
+
+                string[] strWrKill = new string[3];
+                {
+                    for (var i = 1; i < 4; i++)
+                    {
+                        strWrKill[i - 1] = "Min. Hit Enemy >= " + (i + 1);
+                    }
+
+                    MenuLocal.Add("Combo.Mode.Auto", new ComboBox("W : R for Multi Targets:", 0, strWrKill));
+                }
+
                 MenuLocal.Add("Combo.UseW", new ComboBox("W:", 1, "Off", "On"));
                 MenuLocal.Add("Combo.UseW.Far", new ComboBox("W: Jump for killable distant enemy", 1, "Off", "On"));
                 MenuLocal.Add("Combo.UseE", new ComboBox("E:", 1, "Off", "On"));
@@ -109,6 +125,11 @@ namespace Leblanc.Modes
             Game.OnWndProc += Game_OnWndProc;
             Drawing.OnDraw += DrawingOnOnDraw;
             Drawing.OnDraw += DrawingHutMode;
+        }
+
+        private static void ModeCombo_OnValueChange(ValueBase<int> sender, ValueBase<int>.ValueChangeArgs args)
+        {
+            //MenuLocal.Item("Combo.Mode.Auto").Show(args.GetNewValue<StringList>().SelectedIndex == 2);
         }
 
         private static int GetWHits(Obj_AI_Base target, List<Obj_AI_Base> targets = null)
@@ -250,14 +271,15 @@ namespace Leblanc.Modes
 
             string[] vComboString = new[]
             {
-                "Q > R", "W > R"
+                "Q : R", "W : R", "Auto"
             };
 
             System.Drawing.Color[] vComboColor = new[]
             {
                 System.Drawing.Color.FromArgb(255, 4, 0, 255),
-                System.Drawing.Color.Red,
-                System.Drawing.Color.FromArgb(255, 46, 47, 46),
+                System.Drawing.Color.FromArgb(198, 255, 0, 0),
+                System.Drawing.Color.FromArgb(198, 71, 255, 31),
+
             };
 
             var nComboMode = MenuLocal["Combo.Mode"].Cast<ComboBox>().CurrentValue;
@@ -347,6 +369,12 @@ namespace Leblanc.Modes
                         {
                             ActiveComboMode = ActiveComboMode.Mode2xW;
                             ExecuteMode2xW();
+                            break;
+                        }
+                    case ComboMode.ModeAuto:
+                        {
+                            ActiveComboMode = ActiveComboMode.ModeAuto;
+                            ExecuteModeAuto();
                             break;
                         }
                 }
@@ -485,7 +513,7 @@ namespace Leblanc.Modes
 
             if (ComboMode == ComboMode.Mode2xW && !W.IsReady() && W2.IsReady() && !W2.StillJumped())
             {
-                Champion.PlayerSpells.W2.Cast(Target);
+                PlayerSpells.CastW2(Target.Position);
             }
         }
 
@@ -508,52 +536,20 @@ namespace Leblanc.Modes
 
         private static void ExecuteModeAuto()
         {
-            if (!R.IsReady())
+            if (!R.IsReady() || !Target.IsValidTarget())
             {
                 return;
             }
 
-            var find = HeroManager.Enemies.Find(e => e.NetworkId != Target.NetworkId && e.LSDistance(Target) <= W.Width);
-            if (find == null)
-                return;
-            if (find != null && CanCastCombo(ComboMode.Mode2xW))
-            {
-                var wComboHits = GetWHits(Target, HeroManager.Enemies.Where(e => e.LSIsValidTarget(W.Range + W.Width)).Cast<Obj_AI_Base>().ToList());
+            var nCount = HeroManager.Enemies.Count(e => e.Distance(Target) <= W.Width);
 
-                if (wComboHits >= 2)
-                {
-                    ExecuteMode2xW();
-                }
-                return;
-            }
-
-            if (find == null && CanCastCombo(ComboMode.Mode2xQ))
-            {
-                ExecuteMode2xQ();
-            }
-
-            if (Q.IsReady() && !W.IsReady())
-            {
-                ExecuteMode2xQ();
-                return;
-            }
-
-            if (!Q.IsReady() && W.IsReady())
+            if (nCount >= MenuLocal["Combo.Mode.Auto"].Cast<ComboBox>().CurrentValue + 2 && Target.IsValidTarget(W.Range))
             {
                 ExecuteMode2xW();
-                return;
             }
-
-            if (Target.LSIsValidTarget(Q.Range) && CommonHelper.SpellRStatus == CommonHelper.SpellRName.R2xQ)
+            else if (nCount == 1 && Target.IsValidTarget(Q.Range))
             {
-                Q2.CastOnUnit(Target);
-                return;
-            }
-
-            if (Target.LSIsValidTarget(W.Range) && CommonHelper.SpellRStatus == CommonHelper.SpellRName.R2xW)
-            {
-                W2.Cast(Target);
-                return;
+                ExecuteMode2xQ();
             }
         }
 

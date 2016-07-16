@@ -25,7 +25,7 @@ using EloBuddy;
 
 #endregion
 
-namespace SPredictioner
+ namespace SPredictioner
 {
     public static class SpellDatabase
     {

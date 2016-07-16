@@ -8,7 +8,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using System.Linq;
 
-namespace ExorAIO.Champions.Quinn
+ namespace ExorAIO.Champions.Quinn
 {
     /// <summary>
     ///     The champion class.
@@ -40,7 +40,7 @@ namespace ExorAIO.Champions.Quinn
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>
@@ -137,14 +137,14 @@ namespace ExorAIO.Champions.Quinn
                         t.LSIsValidTarget(Vars.AARange) &&
                         t.HasBuff("quinnw")))
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                     return;
                 }
 
-                Orbwalker.ForcedTarget = GameObjects.EnemyHeroes.FirstOrDefault(
+                Orbwalker.ForcedTarget =(GameObjects.EnemyHeroes.FirstOrDefault(
                     t =>
                         t.LSIsValidTarget(Vars.AARange) &&
-                        t.HasBuff("quinnw"));
+                        t.HasBuff("quinnw")));
             }
         }
     }

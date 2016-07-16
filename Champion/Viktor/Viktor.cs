@@ -11,6 +11,7 @@ using EloBuddy;
 using LeagueSharp.Common;
 using SharpDX;
 
+
 namespace Viktor
 {
     public class Program
@@ -74,11 +75,17 @@ namespace Viktor
             // Register events
             Game.OnUpdate += Game_OnGameUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
-            Orbwalker.OnUnkillableMinion += Orbwalker_OnUnkillableMinion;
+            Orbwalker.OnUnkillableMinion += Orbwalker_OnUnkillableMinionEB;
+
             Orbwalker.OnPreAttack += OrbwalkingOnBeforeAttack;
 
             EloBuddy.SDK.Events.Gapcloser.OnGapcloser += Gapcloser_OnGapcloser;
             EloBuddy.SDK.Events.Interrupter.OnInterruptableSpell += Interrupter_OnInterruptableSpell;
+        }
+
+        private static void Orbwalker_OnUnkillableMinionEB(Obj_AI_Base target, Orbwalker.UnkillableMinionArgs args)
+        {
+            QLastHit((Obj_AI_Base)target);
         }
 
         private static void Gapcloser_OnGapcloser(AIHeroClient sender, EloBuddy.SDK.Events.Gapcloser.GapcloserEventArgs e)
@@ -118,13 +125,13 @@ namespace Viktor
             }
         }
 
-        private static void Orbwalker_OnUnkillableMinion(Obj_AI_Base target, Orbwalker.UnkillableMinionArgs args)
+        private static void Orbwalker_OnUnkillableMinion(AttackableUnit minion)
         {
-            QLastHit((Obj_AI_Base)target);
+            QLastHit((Obj_AI_Base)minion);
         }
         private static void QLastHit(Obj_AI_Base minion)
         {
-            bool castQ = ((getKeyBindItem(waveClear, "waveUseQLH")) || getCheckBoxItem(waveClear, "waveUseQ") && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear));
+            bool castQ = ((getKeyBindItem(waveClear, "waveUseQLH")) || getCheckBoxItem(waveClear, "waveUseQ") && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear));
             if (castQ)
             {
                 var distance = LeagueSharp.Common.Geometry.LSDistance(player, minion);

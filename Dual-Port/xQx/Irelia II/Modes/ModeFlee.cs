@@ -12,12 +12,12 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace Irelia.Modes
+ namespace Irelia.Modes
 {
     internal static class ModeFlee
     {
         public static Menu MenuLocal { get; private set; }
-
+        
         public static void Init(Menu ParentMenu)
         {
             MenuLocal = ParentMenu.AddSubMenu("Flee", "Flee");
@@ -70,7 +70,7 @@ namespace Irelia.Modes
             }
 
             EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-            Orbwalker.DisableAttacking = (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo));
+            PortAIO.OrbwalkerManager.SetAttack(!(Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo)));
             
 
             var t = TargetSelector.GetTarget(Champion.PlayerSpells.Q.Range, DamageType.Physical);

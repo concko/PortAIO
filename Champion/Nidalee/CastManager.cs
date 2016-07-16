@@ -12,7 +12,7 @@ using PredictionInput = SebbyLib.Prediction.PredictionInput;
 using SkillshotType = SebbyLib.Prediction.SkillshotType;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace KurisuNidalee
+ namespace KurisuNidalee
 {
     internal class CastManager
     {
@@ -181,7 +181,7 @@ namespace KurisuNidalee
             }
         }
 
-
+        
         // Cougar Q Logic
         internal static void CastTakedown(Obj_AI_Base target, string mode)
         {

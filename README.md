@@ -1,3 +1,4 @@
+# PLEASE FUCKING READ THIS, IF YOU REPORT AN ISSUE THAT CAN BE ANSWERED HERE YOU WILL BE BLOCKED FROM MY GIT.
 # Welcome to PortAIO's Official Github
 - https://github.com/berbb/PortAIO is the official GitHub.
 - https://discord.gg/0zNgmm6ziPDoOfbZ is the official PortAIO discord channel.
@@ -7,9 +8,9 @@
 ###### - SidaRevamped : Active Supporter and bug fixer
 
 ### - Compile Errors
-Make sure you have Berb.Common installed @ https://github.com/berbb/Berb.Common
+####Make sure you have Berb.Common installed @ https://github.com/berbb/Berb.Common
 
-If you are still recieve compile errors refer here : https://www.elobuddy.net/topic/21274-installing-ms-build-tools-140/
+####If you are still recieve compile errors refer here : https://www.elobuddy.net/topic/21274-installing-ms-build-tools-140/
 
 ---
 

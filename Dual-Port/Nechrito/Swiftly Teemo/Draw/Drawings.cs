@@ -8,7 +8,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Swiftly_Teemo.Draw
+ namespace Swiftly_Teemo.Draw
 {
     internal class Drawings : Core
     {

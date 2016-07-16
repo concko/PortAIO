@@ -8,7 +8,7 @@ using LeagueSharp;
 using iDZEzreal.MenuHelper;
 using EloBuddy;
 
-namespace iDZEzreal
+ namespace iDZEzreal
 {
     class EzrealBootstrap
     {

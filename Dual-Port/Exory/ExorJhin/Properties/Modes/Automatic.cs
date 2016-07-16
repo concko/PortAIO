@@ -8,13 +8,14 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 using SharpDX;
 
-namespace ExorAIO.Champions.Jhin
+ namespace ExorAIO.Champions.Jhin
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>

@@ -2,7 +2,7 @@
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace hVayne.Extensions
+ namespace hVayne.Extensions
 {
     class Config
     {

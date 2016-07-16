@@ -7,10 +7,11 @@ using static Firestorm_AIO.Helpers.Helpers;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace Firestorm_AIO.Helpers
+ namespace Firestorm_AIO.Helpers
 {
     public static class SmartCaster
     {
+        
         public static void SmartCast(this LeagueSharp.SDK.Spell spell, Obj_AI_Base target = null, HitChance hitchance = HitChance.Medium,
             int minimunHits = 0)
         {

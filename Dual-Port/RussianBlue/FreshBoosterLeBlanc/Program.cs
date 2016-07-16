@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace FreshBooster.Champion
+ namespace FreshBooster.Champion
 {
     class Leblanc
     {
@@ -269,7 +269,7 @@ namespace FreshBooster.Champion
             Orbwalker.OnPreAttack += Orbwalking_BeforeAttack;
             EloBuddy.Player.OnIssueOrder += Obj_AI_Base_OnIssueOrder;
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             try

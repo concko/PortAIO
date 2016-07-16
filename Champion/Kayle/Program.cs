@@ -9,6 +9,7 @@ using LeagueSharp.Common;
 using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace SephKayle
 {
     internal class Program
@@ -17,7 +18,7 @@ namespace SephKayle
         private static AIHeroClient Player;
         private static readonly float incrange = 525;
         private static Spell Q, W, E, R;
-
+        
         private static bool Eon
         {
             get { return ObjectManager.Player.AttackRange > 400f; }
@@ -237,11 +238,11 @@ namespace SephKayle
                 var bestminion = vminions.MaxOrDefault(x => x.MaxHealth);
                 if (bestminion != null)
                 {
-                    //Orbwalker.SetAttack(false);
-                    Orbwalker.DisableAttacking = true;
+                    //PortAIO.OrbwalkerManager.SetAttack(false);
+                    PortAIO.OrbwalkerManager.SetAttack(false);
                     Q.CastOnUnit(bestminion);
-                    Orbwalker.DisableAttacking = false;
-                    //Orbwalker.SetAttack(true);
+                    PortAIO.OrbwalkerManager.SetAttack(true);
+                    //PortAIO.OrbwalkerManager.SetAttack(true);
                 }
             }
         }
@@ -407,8 +408,7 @@ namespace SephKayle
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 WaveClear();
             }
@@ -454,9 +454,9 @@ namespace SephKayle
                 var bestminion = vminions.MaxOrDefault(x => x.MaxHealth);
                 if (bestminion != null)
                 {
-                    Orbwalker.DisableAttacking = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
                     Q.CastOnUnit(bestminion);
-                    Orbwalker.DisableAttacking = false;
+                    PortAIO.OrbwalkerManager.SetAttack(true);
                 }
             }
 
@@ -511,9 +511,9 @@ namespace SephKayle
                 var bestminion = vminions.MaxOrDefault(x => x.MaxHealth);
                 if (bestminion != null)
                 {
-                    Orbwalker.DisableAttacking = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
                     Q.CastOnUnit(bestminion);
-                    Orbwalker.DisableAttacking = false;
+                    PortAIO.OrbwalkerManager.SetAttack(true);
                 }
             }
 

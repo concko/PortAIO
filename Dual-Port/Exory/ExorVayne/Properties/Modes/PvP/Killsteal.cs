@@ -6,13 +6,14 @@ using LeagueSharp.SDK;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Vayne
+ namespace ExorAIO.Champions.Vayne
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>
@@ -39,7 +40,7 @@ namespace ExorAIO.Champions.Vayne
                                 : 0)))
                 {
                     Vars.Q.Cast(target.ServerPosition);
-                    Orbwalker.ForcedTarget = target;
+                    Orbwalker.ForcedTarget =(target);
                 }
             }
 

@@ -12,7 +12,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class MissFortune : Champion
     {
@@ -82,18 +82,18 @@ namespace Marksman.Champions
                 Q.CastOnUnit(t);
             }
         }
+        
 
         public override void Game_OnGameUpdate(EventArgs args)
         {
             var ultCasting = Game.Time - UltiCastedTime < 0.2 || ObjectManager.Player.IsChannelingImportantSpell();
 
-            Orbwalker.DisableAttacking = ultCasting;
-            Orbwalker.DisableMovement = ultCasting;
-
+            PortAIO.OrbwalkerManager.SetAttack(!ultCasting);
+            PortAIO.OrbwalkerManager.SetMovement(!ultCasting);
             if (ultCasting)
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
 
             if (Q.IsReady() && Program.harass["UseQTH"].Cast<KeyBind>().CurrentValue)

@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     class Jhin
     {
@@ -182,6 +182,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                 }
             }
         }
+        
 
         private static void Game_OnGameUpdate(EventArgs args)
         {
@@ -197,14 +198,14 @@ namespace OneKeyToWin_AIO_Sebby.Champions
 
             if (IsCastingR)
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 return;
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
 

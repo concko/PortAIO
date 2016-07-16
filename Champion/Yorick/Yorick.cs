@@ -13,7 +13,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Yorick
     {
@@ -57,7 +57,7 @@ namespace UnderratedAIO.Champions
                 LastAATick = Utils.GameTimeTickCount;
             }
         }
-
+        
         private void Game_OnGameUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -70,8 +70,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -138,8 +137,7 @@ namespace UnderratedAIO.Champions
         private void beforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (Q.IsReady() &&
-                (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                 Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) &&
+                (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) &&
                 getCheckBoxItem(menuLC, "useqLC") && !(args.Target is AIHeroClient) && (args.Target.Health > 700))
             {
                 Q.Cast(getCheckBoxItem(config, "packets"));

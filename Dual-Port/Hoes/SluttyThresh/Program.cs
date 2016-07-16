@@ -17,7 +17,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace Slutty_Thresh
+ namespace Slutty_Thresh
 {
     internal class SluttyThresh : MenuConfig
     {
@@ -87,6 +87,7 @@ namespace Slutty_Thresh
                 W.Cast(NearAllies.Position);
             }
         }
+        
 
         private static void Game_OnUpdate(EventArgs args)
         {
@@ -99,7 +100,7 @@ namespace Slutty_Thresh
 
             if (getKeyBindItem(comboMenu, "FlayPush") || getKeyBindItem(comboMenu, "FlayPull"))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
 
             if (getKeyBindItem(comboMenu, "FlayPush") && Etarget != null &&
@@ -119,7 +120,7 @@ namespace Slutty_Thresh
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }
@@ -273,9 +274,9 @@ namespace Slutty_Thresh
 
             if (target.HasBuff("threshQ")
                 || (Player.LSDistance(target) <= 650 && E.IsReady()))
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
             else
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
 
             if (target.HasBuff("threshQ"))
             {

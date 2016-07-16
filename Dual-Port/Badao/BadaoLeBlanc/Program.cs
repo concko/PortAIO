@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace BLeblanc
+ namespace BLeblanc
 {
     class Program
     {
@@ -95,7 +95,7 @@ namespace BLeblanc
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         public static bool WgapCombo { get { return getCheckBoxItem(spellMenu, "Wgap"); } }
         public static void Game_OnGameUpdate(EventArgs args)
         {

@@ -2,7 +2,7 @@ using System;
 using ExorAIO.Utilities;
 using LeagueSharp.SDK;
 
-namespace ExorAIO.Champions.Olaf
+ namespace ExorAIO.Champions.Olaf
 {
     /// <summary>
     ///     The logics class.

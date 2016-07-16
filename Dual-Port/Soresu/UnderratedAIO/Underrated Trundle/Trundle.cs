@@ -17,7 +17,7 @@ using Environment = UnderratedAIO.Helpers.Environment;
 using Prediction = LeagueSharp.Common.Prediction;
 using EloBuddy.SDK;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Trundle
     {
@@ -99,14 +99,14 @@ namespace UnderratedAIO.Champions
                 E.Cast(dashIntPoint);
             }
         }
-
+        
         private void AfterAttack(AttackableUnit target, EventArgs args)
         {
             AIHeroClient targetO = TargetSelector.GetTarget(E.Range, DamageType.Physical);
 
             if (Q.IsReady() && target != null)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                     getCheckBoxItem(farmMenu, "useqLC"))
                 {
                     var minis = MinionManager.GetMinions(
@@ -192,7 +192,7 @@ namespace UnderratedAIO.Champions
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

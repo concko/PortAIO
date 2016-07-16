@@ -2,7 +2,7 @@
 using EloBuddy;
 using LeagueSharp.Common;
 
-namespace KarthusSharp
+ namespace KarthusSharp
 {
     class Program
     {

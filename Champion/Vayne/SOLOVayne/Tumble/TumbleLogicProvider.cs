@@ -9,7 +9,7 @@ using WardTracker;
 using Geometry = LeagueSharp.Common.Geometry;
 using WardType = WardTracker.WardType;
 
-namespace SoloVayne.Skills.Tumble
+ namespace SoloVayne.Skills.Tumble
 {
     internal class TumbleLogicProvider
     {
@@ -247,7 +247,7 @@ namespace SoloVayne.Skills.Tumble
 
             return endPosition;
         }
-
+        
         /// <summary>
         ///     Gets the QE position for the Tumble-Condemn combo.
         /// </summary>

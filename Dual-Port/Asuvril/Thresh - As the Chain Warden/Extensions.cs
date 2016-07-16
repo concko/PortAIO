@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Color = System.Drawing.Color;
 
-namespace ThreshWarden
+ namespace ThreshWarden
 {
 	public static class Extensions
     {

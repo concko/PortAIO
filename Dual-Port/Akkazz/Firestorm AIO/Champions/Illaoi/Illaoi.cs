@@ -12,7 +12,7 @@ using static Firestorm_AIO.Helpers.Helpers;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace Firestorm_AIO.Champions.Illaoi
+ namespace Firestorm_AIO.Champions.Illaoi
 {
     public class Illaoi : Bases.ChampionBase
     {
@@ -31,6 +31,7 @@ namespace Firestorm_AIO.Champions.Illaoi
 
         private void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
+            var Target = target;
             //AA Cancel
             if (Target != null && Target.LSIsValidTarget(Me.GetRealAutoAttackRange()))
             {

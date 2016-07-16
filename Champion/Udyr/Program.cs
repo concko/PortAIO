@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace D_Udyr
+ namespace D_Udyr
 {
     internal class Program
     {
@@ -153,8 +153,7 @@ namespace D_Udyr
                 StunCycle();
             }
 
-            if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                 Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) &&
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                 100*(_player.Mana/_player.MaxMana) > getSliderItem(farm, "Farm-Mana"))
             {
                 Farm();
@@ -173,10 +172,10 @@ namespace D_Udyr
                 Forest();
             }
 
-            Orbwalker.DisableAttacking = false;
-            Orbwalker.DisableMovement = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
+            PortAIO.OrbwalkerManager.SetMovement(true);
         }
-
+        
         private static void Farm()
         {
             var minions = MinionManager.GetMinions(_player.ServerPosition, 500.0F);

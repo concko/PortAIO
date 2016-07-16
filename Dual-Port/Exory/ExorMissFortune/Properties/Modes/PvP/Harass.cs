@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Core.Utils;
 using SharpDX;
 using Geometry = ExorAIO.Utilities.Geometry;
 
-namespace ExorAIO.Champions.MissFortune
+ namespace ExorAIO.Champions.MissFortune
 {
     /// <summary>
     ///     The logics class.

@@ -2,7 +2,7 @@ using EloBuddy;
 using ExorAIO.Utilities;
 using LeagueSharp;
 
-namespace ExorAIO.Champions.Corki
+ namespace ExorAIO.Champions.Corki
 {
     /// <summary>
     ///     The logics class.

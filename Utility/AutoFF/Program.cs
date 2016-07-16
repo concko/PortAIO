@@ -1,4 +1,4 @@
-namespace AutoFF
+ namespace AutoFF
 {
     using System;
 

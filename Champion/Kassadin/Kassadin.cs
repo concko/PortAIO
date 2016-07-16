@@ -10,10 +10,12 @@ using Geometry = LeagueSharp.Common.Geometry;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
+
 namespace Kassawin
 {
     internal class Kassadin : Helper
     {
+        
         public delegate float DamageToUnitDelegate(AIHeroClient hero);
 
         private const int XOffset = 10;
@@ -173,7 +175,7 @@ namespace Kassawin
 
             if (!usew) return;
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var minions = MinionManager.GetMinions(Player.Position, 300);
 
@@ -251,8 +253,7 @@ namespace Kassawin
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
                 JungleClear();
@@ -289,7 +290,7 @@ namespace Kassawin
             var mana = getSliderItem(farmMenu, "minmanajungleclear");
             var rslider = getSliderItem(farmMenu, "rcountj");
             if (Player.ManaPercent < mana) return;
-            if (Orbwalker.IsAutoAttacking) return;
+            if (ObjectManager.Player.Spellbook.IsAutoAttacking) return;
 
             if (useq)
             {
@@ -520,7 +521,7 @@ namespace Kassawin
             var usee = getCheckBoxItem(comboMenu, "usee");
             var userturret = getCheckBoxItem(comboMenu, "usert");
             var ignite = getCheckBoxItem(comboMenu, "useignite");
-            if (Orbwalker.IsAutoAttacking) return;
+            if (ObjectManager.Player.Spellbook.IsAutoAttacking) return;
 
             SetIgniteSlot(Player.GetSpellSlot("summonerdot"));
 

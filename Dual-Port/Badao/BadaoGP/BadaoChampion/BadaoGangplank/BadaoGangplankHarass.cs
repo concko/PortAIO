@@ -10,7 +10,7 @@ using Color = System.Drawing.Color;
 using EloBuddy.SDK;
 using EloBuddy;
 
-namespace BadaoKingdom.BadaoChampion.BadaoGangplank
+ namespace BadaoKingdom.BadaoChampion.BadaoGangplank
 {
     public static class BadaoGangplankHarass
     {

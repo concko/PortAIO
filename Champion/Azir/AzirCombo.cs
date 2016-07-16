@@ -20,10 +20,12 @@ using System.Security.AccessControl;
 using System;
 using System.Speech.Synthesis;
 
+
 namespace HeavenStrikeAzir
 {
     public static class AzirCombo
     {
+        
         public static AIHeroClient Player { get{ return ObjectManager.Player; } }
         public static void Initialize()
         {

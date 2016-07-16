@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace VayneHunter_Reborn.External
+ namespace VayneHunter_Reborn.External
 {
     public delegate void OnGapcloseH(ActiveGapcloser gapcloser, SpellSlot skill);
 

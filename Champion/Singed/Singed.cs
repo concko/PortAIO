@@ -1,4 +1,4 @@
-﻿namespace ElSinged
+﻿ namespace ElSinged
 {
     using System;
     using System.Collections.Generic;
@@ -258,7 +258,7 @@
                 spells[Spells.Q].Cast();
             }
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
 

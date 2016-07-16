@@ -20,7 +20,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace GodJungleTracker.Classes
+ namespace GodJungleTracker.Classes
 {
     public class Jungle
     {

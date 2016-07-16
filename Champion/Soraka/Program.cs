@@ -31,7 +31,7 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace Sophies_Soraka
+ namespace Sophies_Soraka
 {
     /// <summary>
     ///     The sophies soraka.
@@ -395,7 +395,7 @@ namespace Sophies_Soraka
                 AutoR();
             }
         }
-
+        
         /// <summary>
         ///     The harass.
         /// </summary>

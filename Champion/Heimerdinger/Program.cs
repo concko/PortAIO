@@ -30,10 +30,12 @@ using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
+
 namespace Two_Girls_One_Donger
 {
     internal class Program
     {
+        
         private const string Champion = "Heimerdinger";
         private static Spell Q;
         private static Spell W;
@@ -151,13 +153,13 @@ namespace Two_Girls_One_Donger
             var Wfarmpos = W.GetLineFarmLocation(MinionsW, W.Width);
             var Efarmpos = E.GetCircularFarmLocation(MinionsE, E.Width);
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) && Wfarmpos.MinionsHit >= 3 &&
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && Wfarmpos.MinionsHit >= 3 &&
                 getCheckBoxItem(laneClearMenu, "LaneclearW")
                 && Player.ManaPercent >= lanemana)
             {
                 W.Cast(Wfarmpos.Position);
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) && Efarmpos.MinionsHit >= 3 &&
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && Efarmpos.MinionsHit >= 3 &&
                 MinionsE.Count >= 1 && getCheckBoxItem(laneClearMenu, "LaneclearE")
                 && Player.ManaPercent >= lanemana)
             {

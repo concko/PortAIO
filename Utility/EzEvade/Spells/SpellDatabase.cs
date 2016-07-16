@@ -329,7 +329,6 @@ namespace ezEvade
             //    spellType = SpellType.Line,
             //    usePackets = true,
             //    isSpecial = true,
-
             //});
             #endregion Azir
 
@@ -3582,7 +3581,6 @@ namespace ezEvade
                 spellKey = SpellSlot.E,
                 spellName = "ZyraE",
                 spellType = SpellType.Line,
-
             });
 
             Spells.Add(

@@ -5,7 +5,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using System.Linq;
 
-namespace Nechrito_Nidalee.Extras
+ namespace Nechrito_Nidalee.Extras
 {
     static class FleeLogic
     {

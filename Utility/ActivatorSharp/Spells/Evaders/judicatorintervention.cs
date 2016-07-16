@@ -2,7 +2,7 @@
 using Activators.Base;
 using LeagueSharp.Common;
 
-namespace Activators.Spells.Evaders
+ namespace Activators.Spells.Evaders
 {
     class judicatorintervention : CoreSpell
     {

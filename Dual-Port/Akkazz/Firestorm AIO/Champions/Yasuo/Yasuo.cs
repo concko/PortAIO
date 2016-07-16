@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace Firestorm_AIO.Champions.Yasuo
+ namespace Firestorm_AIO.Champions.Yasuo
 {
     public class Yasuo : Bases.ChampionBase
     {
@@ -171,7 +171,7 @@ namespace Firestorm_AIO.Champions.Yasuo
         }
 
         #region Modes
-
+        
         public override void Active()
         {
             Target = TargetSelector.GetTarget(R.Range, DamageType.Physical);

@@ -2,7 +2,7 @@
 using LeagueSharp;
 using LeagueSharp.Common;
 
-namespace IreliaGod
+ namespace IreliaGod
 {
     class Spells
     {

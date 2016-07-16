@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace SurvivorMalzahar
+ namespace SurvivorMalzahar
 {
     class Program
     {
@@ -117,6 +117,7 @@ namespace SurvivorMalzahar
                 Render.Circle.DrawCircle(Player.Position, E.Range, System.Drawing.Color.LightPink, 3);
             }
         }
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead || Player.LSIsRecalling())
@@ -126,14 +127,14 @@ namespace SurvivorMalzahar
 
             if (Player.IsChannelingImportantSpell() || Game.Time - Rtime < 2.5 || Player.HasBuff("malzaharrsound"))
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 return;
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
             if (E.IsReady() && miscMenu["ksE"].Cast<CheckBox>().CurrentValue)
             {
@@ -175,14 +176,14 @@ namespace SurvivorMalzahar
         {
             if (Player.IsChannelingImportantSpell() || Game.Time - Rtime < 2.5 || Player.HasBuff("malzaharrsound"))
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 return;
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
             if (!miscMenu["interruptQ"].Cast<CheckBox>().CurrentValue || !Q.IsReady())
                 return;
@@ -217,14 +218,14 @@ namespace SurvivorMalzahar
         {
             if (Player.IsChannelingImportantSpell() || Game.Time - Rtime < 2.5 || Player.HasBuff("malzaharrsound"))
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 return;
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
             // Improved AntiGap Closer
             var sender = gapcloser.Sender;
@@ -349,14 +350,14 @@ namespace SurvivorMalzahar
 
             if (Player.IsChannelingImportantSpell() || Game.Time - Rtime < 2.5 || Player.HasBuff("malzaharrsound"))
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 return;
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             Orbwalker.MoveTo(Game.CursorPos);
@@ -412,7 +413,7 @@ namespace SurvivorMalzahar
             if (lc["laneclearQ"].Cast<CheckBox>().CurrentValue && Q.IsReady())
             {
                 var allMinionsQ = MinionManager.GetMinions(Player.ServerPosition, Q.Range);
-                var farmPos = Q.GetCircularFarmLocation(allMinions, 150);
+                var farmPos = Q.GetCircularFarmLocation(allMinionsQ, 150);
                 if (farmPos.MinionsHit > lc["LaneClearMinions"].Cast<Slider>().CurrentValue)
                     Q.Cast(farmPos.Position);
             }

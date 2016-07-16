@@ -9,7 +9,7 @@ using LeagueSharp.Data.Enumerations;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Kalista
+ namespace ExorAIO.Champions.Kalista
 {
     /// <summary>
     ///     The champion class.
@@ -46,7 +46,7 @@ namespace ExorAIO.Champions.Kalista
             /// </summary>
             Healthbars.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>
@@ -117,14 +117,14 @@ namespace ExorAIO.Champions.Kalista
                         t.LSIsValidTarget(Vars.AARange) &&
                         t.HasBuff("kalistacoopstrikemarkally")))
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                     return;
                 }
 
-                Orbwalker.ForcedTarget = GameObjects.EnemyHeroes.FirstOrDefault(
+                Orbwalker.ForcedTarget =(GameObjects.EnemyHeroes.FirstOrDefault(
                     t =>
                         t.LSIsValidTarget(Vars.AARange) &&
-                        t.HasBuff("kalistacoopstrikemarkally"));
+                        t.HasBuff("kalistacoopstrikemarkally")));
                 return;
             }
         }

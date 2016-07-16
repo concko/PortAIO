@@ -7,7 +7,7 @@ using Color = System.Drawing.Color;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace AsunaCondemn
+ namespace AsunaCondemn
 {
     /// <summary>
     ///     The drawings class.

@@ -10,10 +10,11 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace NechritoRiven.Event
+ namespace NechritoRiven.Event
 {
     internal class AlwaysUpdate : Core.Core
     {
+        
         public static void Update(EventArgs args)
         {
             if (Player.IsDead || Player.LSIsRecalling())

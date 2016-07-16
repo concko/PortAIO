@@ -1,4 +1,4 @@
-﻿namespace ElXerath
+﻿ namespace ElXerath
 {
     using System;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using LeagueSharp;
 
-namespace Firestorm_AIO.Enums
+ namespace Firestorm_AIO.Enums
 {
     public enum Champion
     {

@@ -16,7 +16,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Lucian : Champion
     {
@@ -554,7 +554,7 @@ namespace Marksman.Champions
                     E.Cast(Game.CursorPos);
                     //Orbwalking.ResetAutoAttackTimer();
                 }
-                //Orbwalker.ForceTarget(t);
+                //Orbwalker.ForcedTarget =(t);
 
                 //if (t.LSIsValidTarget(Q.Range))
                 //{

@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Anivia
+ namespace ExorAIO.Champions.Anivia
 {
     /// <summary>
     ///     The logics class.

@@ -8,10 +8,12 @@ using LeagueSharp.Common;
 using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace GFUELElise
 {
     internal class Elise
     {
+        
         #region Public Methods and Operators
 
         /// <summary>
@@ -721,8 +723,7 @@ namespace GFUELElise
                     DoHarass();
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     DoJungleclear();
                     DoLaneclear();
@@ -746,7 +747,7 @@ namespace GFUELElise
 
         private static void SemiE()
         {
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
 
             var target = TargetSelector.GetTarget(E.Range, DamageType.Magical);
             if (target == null || !target.LSIsValidTarget())

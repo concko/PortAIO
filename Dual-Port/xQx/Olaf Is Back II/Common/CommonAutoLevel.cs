@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 
-namespace OlafxQx.Common
+ namespace OlafxQx.Common
 {
     internal class CommonAutoLevel
     {

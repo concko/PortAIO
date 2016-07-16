@@ -13,7 +13,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace iDZEzreal
+ namespace iDZEzreal
 {
     internal class Ezreal
     {
@@ -91,9 +91,11 @@ namespace iDZEzreal
                 Variables.Spells[SpellSlot.E].Cast(extendedPosition);
             }
         }
+        
 
-        private static void OrbwalkingOnAfterAttack(AttackableUnit target1, EventArgs args)
+        private static void OrbwalkingOnAfterAttack(AttackableUnit targetA, EventArgs args)
         {
+            var target1 = targetA;
             if (!(target1 is AIHeroClient))
             {
                 return;

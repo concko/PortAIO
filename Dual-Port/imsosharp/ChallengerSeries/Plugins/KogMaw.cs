@@ -25,7 +25,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.SDK.Enumerations;
 
-namespace Challenger_Series.Plugins
+ namespace Challenger_Series.Plugins
 {
     public class Humanizer
     {
@@ -81,9 +81,11 @@ namespace Challenger_Series.Plugins
         private Humanizer _humanizer;
         private int _attacksSoFar;
         private Random _rand;
+        
 
-        private void OnAction(AttackableUnit asd, EventArgs args)
+        private void OnAction(AttackableUnit targetA, EventArgs args)
         {
+            var asd = targetA;
             if (asd is AIHeroClient)
             {
                 var target = asd as AIHeroClient;
@@ -99,6 +101,7 @@ namespace Challenger_Series.Plugins
             }
             if (asd is Obj_AI_Minion)
             {
+                var tg = asd as Obj_AI_Base;
                 if (GetJungleCampsOnCurrentMap() != null && (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)))
                 {
                     var targetName = (asd as Obj_AI_Minion).CharData.BaseSkinName;
@@ -106,6 +109,10 @@ namespace Challenger_Series.Plugins
                     if (!targetName.Contains("Mini") && GetJungleCampsOnCurrentMap().Contains(targetName) && JungleclearMenu[targetName].Cast<CheckBox>().CurrentValue)
                     {
                         W.Cast();
+                    }
+                    if (!targetName.Contains("Mini") && GetJungleCampsOnCurrentMap().Contains(targetName) && JungleclearMenu[targetName].Cast<CheckBox>().CurrentValue)
+                    {
+                        Q.Cast(tg);
                     }
                 }
             }
@@ -162,14 +169,15 @@ namespace Challenger_Series.Plugins
                 {
                     _humanizer = null;
                 }
-                Orbwalker.DisableAttacking = CanMove();
-                Orbwalker.DisableMovement = CanAttack();
+                
+                PortAIO.OrbwalkerManager.SetMovement(CanMove());
+                PortAIO.OrbwalkerManager.SetAttack(CanAttack());
             }
             else
             {
                 _humanizer = null;
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
             #endregion Humanizer
         }
@@ -191,25 +199,25 @@ namespace Challenger_Series.Plugins
 
         private bool CanAttack()
         {
-            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return false;
+            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return true;
             if (IsWActive())
             {
                 return _humanizer == null;
             }
-            return false;
+            return true;
         }
         private bool CanMove()
         {
-            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return false;
+            if (!getCheckBoxItem(HumanizerMenu, "koggiehumanizerenabled")) return true;
             if (IsWActive() && ObjectManager.Player.AttackSpeedMod / 2 > _rand.Next(167, 230) / 100)
             {
                 if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && ObjectManager.Player.CountEnemyHeroesInRange(GetAttackRangeAfterWIsApplied() - 25) < 1) || (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && (!GameObjects.EnemyMinions.Any(m => m.IsHPBarRendered && m.Distance(ObjectManager.Player) < GetAttackRangeAfterWIsApplied() - 25) && !GameObjects.Jungle.Any(m => m.IsHPBarRendered && m.Distance(ObjectManager.Player) < GetAttackRangeAfterWIsApplied() - 25))))
                 {
-                    return false;
+                    return true;
                 }
                 return _humanizer != null;
             }
-            return false;
+            return true;
         }
 
         #endregion Events
@@ -235,7 +243,7 @@ namespace Challenger_Series.Plugins
             HarassMenu.Add("koggieuserharass", new CheckBox("Use R", true));
 
             JungleclearMenu = MainMenu.AddSubMenu("Jungleclear Settings: ", "koggiejgclearmenu");
-            JungleclearMenu.AddGroupLabel("W if TARGET is: ");
+            JungleclearMenu.AddGroupLabel("W & Q if TARGET is: ");
             if (GetJungleCampsOnCurrentMap() != null)
             {
                 foreach (var mob in GetJungleCampsOnCurrentMap())

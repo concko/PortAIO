@@ -15,7 +15,7 @@
 
 #endregion
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     internal static class Config
     {

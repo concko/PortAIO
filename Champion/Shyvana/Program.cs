@@ -13,7 +13,7 @@ using Utility = LeagueSharp.Common.Utility;
 
 #endregion
 
-namespace D_Shyvana
+ namespace D_Shyvana
 {
     internal class Program
     {
@@ -106,7 +106,7 @@ namespace D_Shyvana
             Interrupter.OnPossibleToInterrupt += Interrupter_OnPosibleToInterrupt;
             Obj_AI_Base.OnProcessSpellCast += OnProcessSpellCast;
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -121,8 +121,7 @@ namespace D_Shyvana
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Laneclear();
                 JungleClear();
@@ -139,7 +138,7 @@ namespace D_Shyvana
             }
 
             _player = ObjectManager.Player;
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
             KillSteal();
         }
 

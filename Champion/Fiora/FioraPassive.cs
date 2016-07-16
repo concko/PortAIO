@@ -16,6 +16,7 @@ namespace FioraProject
 {
     public static class FioraPassive
     {
+        
         #region FioraPassive
         public static List<Vector2> GetRadiusPoints(Vector2 targetpredictedpos, Vector2 passivepredictedposition)
         {

@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 using Marksman.Common;
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Reticles
     {
@@ -184,7 +184,7 @@ namespace Marksman.Champions
                 Render.Circle.DrawCircle(ObjectManager.Player.Position, maxRRange, Color.DarkMagenta, 2);
             }
         }
-
+        
         public override void Game_OnGameUpdate(EventArgs args)
         {
             var orbwalkPos = GetOrbwalkPos();
@@ -194,11 +194,11 @@ namespace Marksman.Champions
             {
                 if (orbwalkPos != cursor)
                 {
-                    Orbwalker.OrbwalkTo(orbwalkPos);
+                    Orbwalker.MoveTo(orbwalkPos);
                 }
                 else
                 {
-                    Orbwalker.OrbwalkTo(cursor);
+                    Orbwalker.MoveTo(cursor);
                 }
             }
 

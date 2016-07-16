@@ -2,7 +2,7 @@
 using System.Linq;
 using LeagueSharp.Common;
 
-namespace Slutty_ryze
+ namespace Slutty_ryze
 {
     //By 0x0539
     class Humanizer

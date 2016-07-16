@@ -4,7 +4,7 @@ using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 
-namespace AsunaCondemn
+ namespace AsunaCondemn
 {
     /// <summary>
     ///     The Vars class.

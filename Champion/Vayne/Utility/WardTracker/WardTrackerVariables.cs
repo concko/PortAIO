@@ -5,7 +5,7 @@ using EloBuddy.SDK.Rendering;
 using SharpDX;
 using Sprite = SharpDX.Direct3D9.Sprite;
 
-namespace WardTracker
+ namespace WardTracker
 {
     /// <summary>
     ///     The WardTracker Variables class

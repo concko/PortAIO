@@ -13,7 +13,7 @@ using Activators.Base;
 using System.Collections.Generic;
 using EloBuddy;
 
-namespace Activators.Data
+ namespace Activators.Data
 {
     public class Gametroydata
     {

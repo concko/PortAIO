@@ -12,7 +12,7 @@ using Environment = UnderratedAIO.Helpers.Environment;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class TahmKench
     {
@@ -71,7 +71,7 @@ namespace UnderratedAIO.Champions
 
         private void Game_OnGameUpdate(EventArgs args)
         {
-            Orbwalker.DisableMovement = false;
+            PortAIO.OrbwalkerManager.SetMovement(true);
 
             blockW = false;
 
@@ -90,8 +90,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -101,7 +100,7 @@ namespace UnderratedAIO.Champions
                 UseShield();
             }
         }
-
+        
         private void UseShield()
         {
             var playerData = Program.IncDamages.GetAllyData(player.NetworkId);
@@ -226,7 +225,7 @@ namespace UnderratedAIO.Champions
                 !target.HasBuffOfType(BuffType.Stun) && !target.HasBuffOfType(BuffType.Snare) && !Q.CanCast(target) &&
                 !justQ && !Program.IncDamages.GetEnemyData(target.NetworkId).IncSkillShot)
             {
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 if (Game.CursorPos.LSDistance(target.Position) < 300)
                 {
                     Player.IssueOrder(GameObjectOrder.MoveTo, target.Position.LSExtend(player.Position, 100));

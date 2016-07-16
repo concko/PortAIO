@@ -12,7 +12,7 @@ using LeagueSharp.SDK;
 using SharpDX;
 using EloBuddy;
 
-namespace Challenger_Series.Utils.Logic
+ namespace Challenger_Series.Utils.Logic
 {
 
     /// <summary>

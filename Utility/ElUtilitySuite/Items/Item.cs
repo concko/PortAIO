@@ -1,4 +1,4 @@
-namespace ElUtilitySuite.Items
+ namespace ElUtilitySuite.Items
 {
     using System.Linq;
 
@@ -13,6 +13,7 @@ namespace ElUtilitySuite.Items
                  /// </summary>
     internal abstract class Item
     {
+        
         #region Public Properties
 
         /// <summary>

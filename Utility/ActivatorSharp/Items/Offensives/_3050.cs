@@ -4,7 +4,7 @@ using Activators.Base;
 using LeagueSharp.Common;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Items.Offensives
+ namespace Activators.Items.Offensives
 {
     class _3050 : CoreItem
     {

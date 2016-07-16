@@ -7,7 +7,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Infected_Twitch
+ namespace Infected_Twitch
 {
     internal class LoadAssembly
     {

@@ -12,7 +12,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace Leblanc.Modes
+ namespace Leblanc.Modes
 {
     internal static class ModeFlee
     {
@@ -46,7 +46,7 @@ namespace Leblanc.Modes
                 }
             };
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))

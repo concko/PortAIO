@@ -11,10 +11,11 @@ using NechritoRiven.Menus;
 
 #endregion
 
-namespace NechritoRiven.Load
+ namespace NechritoRiven.Load
 {
     internal class Load
     {
+        
         public static void LoadAssembly()
         {
             MenuConfig.LoadMenu();

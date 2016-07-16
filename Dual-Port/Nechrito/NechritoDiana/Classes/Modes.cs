@@ -5,7 +5,7 @@ using SPrediction;
 using System;
 using System.Linq;
 
-namespace Nechrito_Diana
+ namespace Nechrito_Diana
 {
     class Modes
     {
@@ -85,9 +85,10 @@ namespace Nechrito_Diana
                 }
             }
         }
+        
         public static void JungleLogic()
         {
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var mobs = MinionManager.GetMinions(800 + ObjectManager.Player.AttackRange, MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth);
                 if (mobs.Count == 0) return;
@@ -126,7 +127,7 @@ namespace Nechrito_Diana
         }
         public static void LaneLogic()
         {
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var minions = MinionManager.GetMinions(800f).FirstOrDefault();
                 if (minions == null)

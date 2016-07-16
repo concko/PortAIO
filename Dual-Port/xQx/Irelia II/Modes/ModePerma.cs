@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using EloBuddy.SDK;
 using EloBuddy;
 
-namespace Irelia.Modes
+ namespace Irelia.Modes
 {
     internal class ModePerma
     {
@@ -21,7 +21,7 @@ namespace Irelia.Modes
         {
             //Game.OnUpdate += GameOnOnUpdate;
         }
-
+        
         private static void GameOnOnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

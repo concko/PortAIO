@@ -5,7 +5,7 @@ using LeagueSharp.SDK;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Anivia
+ namespace ExorAIO.Champions.Anivia
 {
     /// <summary>
     ///     The champion class.
@@ -143,7 +143,7 @@ namespace ExorAIO.Champions.Anivia
                 Logics.Clear(args);
             }
         }
-
+        
         /// <summary>
         ///     Fired on an incoming gapcloser.
         /// </summary>

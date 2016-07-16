@@ -1,7 +1,7 @@
 ﻿using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ElLeeSin
+ namespace ElLeeSin
 {
     public class InitMenu
     {
@@ -31,6 +31,7 @@ namespace ElLeeSin
             comboMenu.Add("ElLeeSin.Combo.W2", new CheckBox("Use W"));
             comboMenu.Add("ElLeeSin.Combo.E", new CheckBox("Use E"));
             comboMenu.Add("ElLeeSin.Combo.R", new CheckBox("Use R"));
+            comboMenu.Add("ElLeeSin.Combo.StarKill", new CheckBox("Use starcombo to kill"));
             comboMenu.Add("ElLeeSin.Combo.PassiveStacks", new Slider("Min Stacks", 1, 1, 2));
             comboMenu.Add("ElLeeSin.Combo.W", new CheckBox("Wardjump in combo", false));
             comboMenu.Add("ElLeeSin.Combo.Mode.WW", new CheckBox("Out of AA range", false));
@@ -47,6 +48,7 @@ namespace ElLeeSin
             kickMenu = Menu.AddSubMenu("Kick (R)", "Kick");
             kickMenu.Add("ElLeeSin.Combo.New", new CheckBox("Kick multiple targets:"));
             kickMenu.Add("ElLeeSin.Combo.R.Count", new Slider("R target hit count", 3, 2, 4));
+            kickMenu.Add("ElLeeSin.Combo.New.R.Kill", new CheckBox("Kill enemy behind", false));
 
             waveclearMenu = Menu.AddSubMenu("Clear", "Clear");
             waveclearMenu.AddGroupLabel("Wave Clear");

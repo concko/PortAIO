@@ -17,7 +17,7 @@
 using EloBuddy;
 using LeagueSharp;
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     public class SpellData
     {

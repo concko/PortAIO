@@ -27,7 +27,7 @@ using SharpDX;
 
 #endregion
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     public enum SkillShotType
     {

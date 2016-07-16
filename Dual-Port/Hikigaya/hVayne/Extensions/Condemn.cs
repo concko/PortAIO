@@ -7,7 +7,7 @@ using EloBuddy;
 using LeagueSharp.SDK;
 using SharpDX;
 
-namespace hVayne.Extensions
+ namespace hVayne.Extensions
 {
     class Condemn : Spells
     {

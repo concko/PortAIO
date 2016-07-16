@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace OlafxQx.Modes
+ namespace OlafxQx.Modes
 {
     internal static class ModeUlti
     {

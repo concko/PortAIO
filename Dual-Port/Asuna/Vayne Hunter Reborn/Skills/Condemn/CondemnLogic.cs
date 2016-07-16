@@ -11,7 +11,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using System.Linq;
 
-namespace VayneHunter_Reborn.Skills.Condemn
+ namespace VayneHunter_Reborn.Skills.Condemn
 {
     class CondemnLogic
     {
@@ -33,7 +33,7 @@ namespace VayneHunter_Reborn.Skills.Condemn
         public static void Execute(EventArgs args)
         {
 
-            if (!E.IsEnabledAndReady(Orbwalker.ActiveModesFlags.ToString()))
+            if (!E.IsEnabledAndReady(PortAIO.OrbwalkerManager.GetActiveMode()))
             {
                 return;
             }

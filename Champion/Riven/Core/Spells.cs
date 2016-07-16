@@ -2,7 +2,7 @@
 using LeagueSharp;
 using LeagueSharp.Common;
 
-namespace NechritoRiven.Core
+ namespace NechritoRiven.Core
 {
     internal class Spells : Core
     {

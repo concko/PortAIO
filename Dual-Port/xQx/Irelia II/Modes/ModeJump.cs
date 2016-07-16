@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace Irelia.Modes
+ namespace Irelia.Modes
 {
     internal class DangerousSpells
     {
@@ -128,7 +128,7 @@ namespace Irelia.Modes
 
             MenuLocal["Jump.Mode"].Cast<ComboBox>().CurrentValue = newValue;
         }
-
+        
         private static void GameOnOnUpdate(EventArgs args)
         {
             JumpTarget = TargetSelector.GetTarget(Q.Range*3, DamageType.Physical);

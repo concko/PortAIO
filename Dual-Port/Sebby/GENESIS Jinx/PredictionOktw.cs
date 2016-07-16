@@ -32,7 +32,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace Jinx_Genesis.Core
+ namespace Jinx_Genesis.Core
 {
     public enum HitChance
     {

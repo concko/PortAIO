@@ -7,7 +7,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Swiftly_Teemo.Handler
+ namespace Swiftly_Teemo.Handler
 {
     internal class Killsteal : Core
     {

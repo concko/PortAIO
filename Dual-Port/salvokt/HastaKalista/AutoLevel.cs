@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using System;
 
-namespace HastaKalistaBaby
+ namespace HastaKalistaBaby
 {
     internal class AutoLevel
     {

@@ -9,7 +9,7 @@ using EloBuddy.SDK.Menu.Values;
 using System.Security;
 using System.Security.Permissions;
 
-namespace VCursor
+ namespace VCursor
 {
     internal static class VirtualCursor
     {

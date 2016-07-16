@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using SPrediction;
 using EloBuddy;
 
-namespace OKTWPredictioner
+ namespace OKTWPredictioner
 {
     class Program
     {

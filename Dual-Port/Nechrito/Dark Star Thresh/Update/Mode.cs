@@ -11,7 +11,7 @@ using LeagueSharp.Common.Data;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace Dark_Star_Thresh.Update
+ namespace Dark_Star_Thresh.Update
 {
     class Mode : Core.Core
     {
@@ -26,6 +26,7 @@ namespace Dark_Star_Thresh.Update
 
             return pos.To3D2();
         }
+        
 
         public static void GetActiveMode(EventArgs args)
         {
@@ -33,7 +34,7 @@ namespace Dark_Star_Thresh.Update
             {
                 FlashCombo();
                 Flee();
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -171,11 +172,11 @@ namespace Dark_Star_Thresh.Update
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && MenuConfig.HarassAA)
             {
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else // Not needed, but you'll never know.
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             var qTarget = TargetSelector.GetTarget(Spells.Q.Range, DamageType.Physical);

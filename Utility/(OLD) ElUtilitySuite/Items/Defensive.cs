@@ -7,7 +7,7 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 using ExorAIO.Utilities;
 
-namespace ElUtilitySuite.Items
+ namespace ElUtilitySuite.Items
 {
     internal static class DefensiveExtensions
     {

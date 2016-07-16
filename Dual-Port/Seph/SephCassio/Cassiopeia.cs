@@ -12,7 +12,7 @@ using Spell = LeagueSharp.Common.Spell;
 #endregion;
 
 
-namespace SephCassiopeia
+ namespace SephCassiopeia
 {
 
     #region Initiliazation
@@ -76,10 +76,10 @@ namespace SephCassiopeia
 
         #endregion
 
-    #endregion
+        #endregion
 
         #region BeforeAuto
-
+        
         private static void BeforeAuto(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (!CassioUtils.getCheckBoxItem(CassiopeiaMenu.Combo, "Combo.Useauto") && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -96,7 +96,7 @@ namespace SephCassiopeia
                     return;
                 }
             }
-            if (!CassioUtils.getCheckBoxItem(CassiopeiaMenu.Waveclear, "Waveclear.Useauto") && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (!CassioUtils.getCheckBoxItem(CassiopeiaMenu.Waveclear, "Waveclear.Useauto") && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 args.Process = false;
                 return;
@@ -270,7 +270,7 @@ namespace SephCassiopeia
             {
                 MixedModeLogic(target, true);
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 WaveClear();
             }

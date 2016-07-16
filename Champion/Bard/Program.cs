@@ -11,12 +11,13 @@ using SharpDX;
 using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace PortAIO.Champion.Bard
 {
     internal class Program
     {
         public static Menu BardMenu, comboMenu, harassMenu, miscMenu;
-
+        
         public static Dictionary<SpellSlot, Spell> spells = new Dictionary<SpellSlot, Spell>
         {
             {SpellSlot.Q, new Spell(SpellSlot.Q, 950f)},

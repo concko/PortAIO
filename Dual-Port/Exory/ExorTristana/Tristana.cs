@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Enumerations;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Tristana
+ namespace ExorAIO.Champions.Tristana
 {
     /// <summary>
     ///     The champion class.
@@ -34,7 +34,7 @@ namespace ExorAIO.Champions.Tristana
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>
@@ -131,14 +131,14 @@ namespace ExorAIO.Champions.Tristana
                         t.LSIsValidTarget(Vars.AARange) &&
                         t.HasBuff("TristanaECharge")))
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                     return;
                 }
 
-                Orbwalker.ForcedTarget = GameObjects.EnemyHeroes.FirstOrDefault(
+                Orbwalker.ForcedTarget =(GameObjects.EnemyHeroes.FirstOrDefault(
                     t =>
                         t.IsValidTarget(Vars.AARange) &&
-                        t.HasBuff("TristanaECharge"));
+                        t.HasBuff("TristanaECharge")));
             }
         }
     }

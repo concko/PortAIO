@@ -1,6 +1,6 @@
 using LeagueSharp;
 
-namespace OlafxQx
+ namespace OlafxQx
 {
     internal class Program
     {

@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using LeagueSharp.Common;
 
-namespace LCS_Lucian
+ namespace LCS_Lucian
 {
     internal class LucianSpells
     {

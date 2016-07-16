@@ -10,10 +10,12 @@ using Damage = LeagueSharp.Common.Damage;
 using Geometry = LeagueSharp.Common.Geometry;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace ElAurelion_Sol
 {
     internal class AurelionSol
     {
+        
         #region Public Properties
 
         /// <summary>
@@ -610,8 +612,7 @@ namespace ElAurelion_Sol
                     OnHarass();
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     OnLaneclear();
                     OnJungleclear();

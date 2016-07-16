@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace Irelia.Modes
+ namespace Irelia.Modes
 {
     internal static class ModeLane
     {
@@ -82,6 +82,7 @@ namespace Irelia.Modes
                 return 0f;
             }
         }
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))

@@ -12,10 +12,12 @@ using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
+
 namespace OneKeyToWin_AIO_Sebby.Champions
 {
     internal class Ahri
     {
+        
         private static readonly Menu Config = Program.Config;
         private static Spell Q, W, E, R;
         private static float QMANA, WMANA, EMANA, RMANA;

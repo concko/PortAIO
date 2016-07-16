@@ -373,8 +373,8 @@ namespace SAutoCarry.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
+                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }
@@ -426,7 +426,7 @@ namespace SAutoCarry.Champions
 
         public void Jump(Vector3 pos, bool juke = false, bool castq = true)
         {
-            Orbwalker.OrbwalkTo(pos);
+            Orbwalker.MoveTo(pos);
             if (Math.Abs(Spells[E].Cooldown) < 0.00001)
             {
                 var extended = ObjectManager.Player.ServerPosition.LSTo2D().LSExtend(pos.LSTo2D(), 800f);
@@ -516,12 +516,12 @@ namespace SAutoCarry.Champions
                 }
                 else
                 {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                 }
             }
             else
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
         }
 

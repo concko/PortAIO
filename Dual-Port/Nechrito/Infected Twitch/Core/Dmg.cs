@@ -7,7 +7,7 @@ using LeagueSharp.SDK;
 
 #endregion
 
-namespace Infected_Twitch.Core
+ namespace Infected_Twitch.Core
 {
     internal class Dmg : Core
     {

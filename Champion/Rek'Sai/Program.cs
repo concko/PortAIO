@@ -12,7 +12,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace D_RekSai
+ namespace D_RekSai
 {
     internal static class Program
     {
@@ -129,12 +129,12 @@ namespace D_RekSai
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             _player = ObjectManager.Player;
 
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
@@ -148,8 +148,7 @@ namespace D_RekSai
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Farm();
                 JungleClear();
@@ -165,8 +164,7 @@ namespace D_RekSai
                  !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) ||
                  !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) ||
                  !getKeyBindItem(harassMenu, "harasstoggle") ||
-                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
+                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
                  !getKeyBindItem(extraMenu, "escapeterino") ||
                  !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee)))
             {
@@ -181,8 +179,7 @@ namespace D_RekSai
             if ((!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) ||
                  !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) ||
                  !getKeyBindItem(harassMenu, "harasstoggle") ||
-                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
+                 !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
                  !getKeyBindItem(extraMenu, "escapeterino") ||
                  !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee)) &&
                 getCheckBoxItem(extraMenu, "turnburrowed") && !IsBurrowed())
@@ -327,14 +324,14 @@ namespace D_RekSai
                 // Check if the loop triggered the jump, if not just orbwalk
                 if (!jumpTriggered)
                 {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                 }
             }
 
             // Either no wall or W on cooldown, just move towards to wall then
             else
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
                 if (IsBurrowed() && _be.IsReady()) _be.Cast(Game.CursorPos);
             }
         }

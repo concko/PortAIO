@@ -14,7 +14,7 @@ using SharpDX.Direct3D9;
 
 #endregion
 
-namespace Marksman
+ namespace Marksman
 {
     using EloBuddy;
     using EloBuddy.SDK;
@@ -367,6 +367,7 @@ namespace Marksman
                 windUp = 40;
             }
         }
+        
 
         private static void Drawing_OnDraw(EventArgs args)
         {

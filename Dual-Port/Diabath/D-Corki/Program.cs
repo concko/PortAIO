@@ -8,6 +8,7 @@ using Utility = LeagueSharp.Common.Utility;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
+
 namespace D_Corki
 {
     internal class Program
@@ -157,7 +158,7 @@ namespace D_Corki
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             _r.Range = _player.HasBuff("CorkiMissileBarrageCounterBig") ? _r2.Range : _r1.Range;
@@ -174,16 +175,16 @@ namespace D_Corki
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear)
-                && (100 * (_player.Mana / _player.MaxMana)) > getSliderItem(clearMenu, "Lanemana"))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
-                Laneclear();
-            }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)
-                && (100 * (_player.Mana / _player.MaxMana)) > getSliderItem(jungleMenu, "Junglemana"))
-            {
-                JungleClear();
+                if ((100 * (_player.Mana / _player.MaxMana)) > getSliderItem(jungleMenu, "Junglemana"))
+                {
+                    JungleClear();
+                }
+
+                if ((100 * (_player.Mana / _player.MaxMana)) > getSliderItem(clearMenu, "Lanemana"))
+                    Laneclear();
             }
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)
@@ -194,7 +195,7 @@ namespace D_Corki
 
             _player = ObjectManager.Player;
 
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
 
             Usecleanse();
             KillSteal();
@@ -351,7 +352,7 @@ namespace D_Corki
             var useQ = getCheckBoxItem(harassMenu, "UseQH");
             var useE = getCheckBoxItem(harassMenu, "UseEH");
             var useR = getCheckBoxItem(harassMenu, "UseRH");
-            var rlimH = getSliderItem(harassMenu, "RlimH");       
+            var rlimH = getSliderItem(harassMenu, "RlimH");
             var Qdelay = Environment.TickCount - Qcast;
             var Rdelay = Environment.TickCount - Rcast;
             if (useQ && _q.IsReady() && Rdelay >= getSliderItem(miscMenu, "delaycombo"))
@@ -378,7 +379,7 @@ namespace D_Corki
         private static void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
         {
             var combo = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo);
-            var useQ = getCheckBoxItem(comboMenu, "UseQC"); 
+            var useQ = getCheckBoxItem(comboMenu, "UseQC");
             var useE = getCheckBoxItem(comboMenu, "UseEC");
             var useR = getCheckBoxItem(comboMenu, "UseRC");
             var Qdelay = Environment.TickCount - Qcast;
@@ -648,7 +649,7 @@ namespace D_Corki
             if (_player.InFountain() || ObjectManager.Player.HasBuff("Recall")) return;
 
             if (ObjectManager.Player.CountEnemiesInRange(800) > 0
-                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear)))
+                || (mobs.Count > 0 && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)))
             {
                 if (iusepotionhp && iusehppotion
                     && !(ObjectManager.Player.HasBuff("RegenerationPotion")

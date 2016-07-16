@@ -3,10 +3,11 @@ using LeagueSharp.Common.Data;
 using NechritoRiven.Menus;
 using EloBuddy.SDK;
 
-namespace NechritoRiven.Core
+ namespace NechritoRiven.Core
 {
     class Usables : Core
     {
+        
         public static void CastHydra()
         {
             if (ItemData.Ravenous_Hydra_Melee_Only.GetItem().IsReady())

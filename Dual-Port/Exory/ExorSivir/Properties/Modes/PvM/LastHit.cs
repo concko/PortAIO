@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Sivir
+ namespace ExorAIO.Champions.Sivir
 {
     /// <summary>
     ///     The logics class.

@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace SDK_SkinChanger
+ namespace SDK_SkinChanger
 {
     class MenuConfig
     {

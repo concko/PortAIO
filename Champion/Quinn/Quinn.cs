@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using ItemData = LeagueSharp.Common.Data.ItemData;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace GFUELQuinn
+ namespace GFUELQuinn
 {
     internal class Quinn
     {
@@ -157,7 +157,7 @@ namespace GFUELQuinn
             }
 
             var passiveTarget = HeroManager.Enemies.Find(x => x.HasBuff("quinnw") && x.LSIsValidTarget(Q.Range));
-            Orbwalker.ForcedTarget = passiveTarget ?? null;
+            Orbwalker.ForcedTarget =(passiveTarget ?? null);
 
             if (getCheckBoxItem(comboMenu, "GFUELQuinn.Combo.Ghostblade"))
             {
@@ -174,7 +174,7 @@ namespace GFUELQuinn
             {
                 if (!isBirdForm)
                 {
-                    Orbwalker.ForcedTarget = enemy;
+                    Orbwalker.ForcedTarget =(enemy);
                     return;
                 }
             }
@@ -228,7 +228,7 @@ namespace GFUELQuinn
                 }
 
                 var passiveTarget = HeroManager.Enemies.Find(x => x.HasBuff("quinnw") && x.LSIsValidTarget(Q.Range));
-                Orbwalker.ForcedTarget = passiveTarget ?? null;
+                Orbwalker.ForcedTarget =(passiveTarget ?? null);
 
                 if (getCheckBoxItem(harassMenu, "GFUELQuinn.Harass.Q") && target.LSDistance(Player.Position) < Q.Range &&
                     Q.IsReady())
@@ -271,7 +271,7 @@ namespace GFUELQuinn
                 var passiveTarget =
                     MinionManager.GetMinions(Player.Position, Q.Range + Q.Width)
                         .Find(x => x.HasBuff("quinnw") && x.LSIsValidTarget(Q.Range));
-                Orbwalker.ForcedTarget = passiveTarget ?? null;
+                Orbwalker.ForcedTarget =(passiveTarget ?? null);
 
                 if (getCheckBoxItem(jungleclearMenu, "GFUELQuinn.jungleclear.Q"))
                 {
@@ -327,7 +327,7 @@ namespace GFUELQuinn
                 var passiveTarget =
                     MinionManager.GetMinions(Player.Position, Q.Range + Q.Width)
                         .Find(x => x.HasBuff("quinnw") && x.LSIsValidTarget(Q.Range));
-                Orbwalker.ForcedTarget = passiveTarget ?? null;
+                Orbwalker.ForcedTarget =(passiveTarget ?? null);
 
                 if (getCheckBoxItem(laneclearMenu, "GFUELQuinn.laneclear.Q"))
                 {
@@ -531,8 +531,7 @@ namespace GFUELQuinn
                     DoHarass();
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     DoJungleclear();
                     DoLaneclear();
@@ -548,7 +547,7 @@ namespace GFUELQuinn
                 Console.WriteLine(exception);
             }
         }
-
+        
         private static bool isBirdForm
         {
             get
@@ -577,17 +576,17 @@ namespace GFUELQuinn
                     }
                     if (Orbwalking.InAutoAttackRange(targeta))
                     {
-                        Orbwalker.ForcedTarget = targeta;
+                        Orbwalker.ForcedTarget =(targeta);
                     }
                 }
 
                 if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)
-                    || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                    || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     var minion = args.Target as Obj_AI_Minion;
                     if (minion != null && minion.HasBuff("quinnw"))
                     {
-                        Orbwalker.ForcedTarget = minion;
+                        Orbwalker.ForcedTarget =(minion);
                     }
                 }
             }

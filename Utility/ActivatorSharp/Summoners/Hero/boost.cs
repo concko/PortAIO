@@ -5,7 +5,7 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 
-namespace Activators.Summoners
+ namespace Activators.Summoners
 {
     internal class boost : CoreSum
     {

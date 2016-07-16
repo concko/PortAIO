@@ -30,7 +30,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace EvadeSharp
+ namespace EvadeSharp
 {
     public enum SkillShotType
     {

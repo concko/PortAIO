@@ -8,13 +8,14 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
+using EloBuddy.SDK;
 
 namespace AhriSharp
 {
     internal static class Ahri
     {
 
-        private static Spell _spellQ, _spellW, _spellE, _spellR;
+        private static LeagueSharp.Common.Spell _spellQ, _spellW, _spellE, _spellR;
         const float _spellQSpeed = 2600;
         const float _spellQSpeedMin = 400;
         const float _spellQFarmSpeed = 1600;
@@ -99,15 +100,15 @@ namespace AhriSharp
                 return;
             }
 
-            if (EloBuddy.SDK.Orbwalker.ActiveModesFlags.HasFlag(EloBuddy.SDK.Orbwalker.ActiveModes.Combo))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
                 Combo();
             }
-            if (EloBuddy.SDK.Orbwalker.ActiveModesFlags.HasFlag(EloBuddy.SDK.Orbwalker.ActiveModes.Harass))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                 Harass();
             }
-            if (EloBuddy.SDK.Orbwalker.ActiveModesFlags.HasFlag(EloBuddy.SDK.Orbwalker.ActiveModes.LaneClear) || EloBuddy.SDK.Orbwalker.ActiveModesFlags.HasFlag(EloBuddy.SDK.Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }
@@ -160,7 +161,7 @@ namespace AhriSharp
             var predE = _spellQ.GetPrediction(target);
             if (target != null && !target.CanMove && predE.Hitchance >= HitChance.VeryHigh && ObjectManager.Player.LSDistance(target) < Misc["charmRange"].Cast<Slider>().CurrentValue)
             {
-                return _spellE.Cast(target) == Spell.CastStates.SuccessfullyCasted;
+                return _spellE.Cast(target) == LeagueSharp.Common.Spell.CastStates.SuccessfullyCasted;
             }
             else if (target != null && predE.Hitchance >=  HitChance.VeryHigh && _spellE.WillHit(target,predE.CastPosition) && ObjectManager.Player.LSDistance(target) < Misc["charmRange"].Cast<Slider>().CurrentValue)
             {

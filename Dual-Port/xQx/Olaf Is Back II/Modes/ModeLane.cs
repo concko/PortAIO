@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace OlafxQx.Modes
+ namespace OlafxQx.Modes
 {
     internal static class ModeLane
     {
@@ -55,7 +55,7 @@ namespace OlafxQx.Modes
 
             Game.OnUpdate += OnUpdate;
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))

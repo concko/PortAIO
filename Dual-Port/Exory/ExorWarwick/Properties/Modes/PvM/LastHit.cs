@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Warwick
+ namespace ExorAIO.Champions.Warwick
 {
     /// <summary>
     ///     The logics class.

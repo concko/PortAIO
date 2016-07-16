@@ -2,7 +2,7 @@ using EloBuddy;
 using LeagueSharp;
 using LeagueSharp.SDK;
 
-namespace AsunaCondemn
+ namespace AsunaCondemn
 {
     /// <summary>
     ///     The methods class.

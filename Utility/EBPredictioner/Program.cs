@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using SPrediction;
 using EloBuddy;
 
-namespace EBPredictioner
+ namespace EBPredictioner
 {
     class Program
     {

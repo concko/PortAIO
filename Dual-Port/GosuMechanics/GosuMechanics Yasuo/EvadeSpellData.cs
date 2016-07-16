@@ -22,7 +22,7 @@ using LeagueSharp;
 
 #endregion
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     public enum SpellValidTargets
     {

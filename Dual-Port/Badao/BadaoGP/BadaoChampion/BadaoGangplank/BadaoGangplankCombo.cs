@@ -10,7 +10,7 @@ using Color = System.Drawing.Color;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace BadaoKingdom.BadaoChampion.BadaoGangplank
+ namespace BadaoKingdom.BadaoChampion.BadaoGangplank
 {
     public static class BadaoGangplankCombo
     {
@@ -43,12 +43,12 @@ namespace BadaoKingdom.BadaoChampion.BadaoGangplank
                                 var pos = mbarrels.Bottle.Position.LSExtend(pred, 660);
                                 if (Player.LSDistance(pos) < BadaoMainVariables.E.Range)
                                 {
-                                    Orbwalker.DisableAttacking = true;
-                                    Orbwalker.DisableMovement = true;
+                                    PortAIO.OrbwalkerManager.SetAttack(false);
+                                    PortAIO.OrbwalkerManager.SetMovement(false);
                                     LeagueSharp.Common.Utility.DelayAction.Add(100 + Game.Ping, () =>
                                     {
-                                        Orbwalker.DisableAttacking = false;
-                                        Orbwalker.DisableMovement = false;
+                                        PortAIO.OrbwalkerManager.SetAttack(true);
+                                        PortAIO.OrbwalkerManager.SetMovement(true);
                                     });
                                     BadaoMainVariables.E.Cast(pos);
                                     LastCondition = Environment.TickCount;
@@ -69,12 +69,12 @@ namespace BadaoKingdom.BadaoChampion.BadaoGangplank
                             if (nbarrels.Any(x => x.Bottle.LSDistance(pred) <= 660 /*+ hero.BoundingRadius*/)
                                 && !nbarrels.Any(x => x.Bottle.LSDistance(pred) <= 330 /*+ hero.BoundingRadius*/))
                             {
-                                Orbwalker.DisableAttacking = true;
-                                Orbwalker.DisableMovement = true;
+                                PortAIO.OrbwalkerManager.SetAttack(false);
+                                PortAIO.OrbwalkerManager.SetMovement(false);
                                 LeagueSharp.Common.Utility.DelayAction.Add(100 + Game.Ping, () =>
                                 {
-                                    Orbwalker.DisableAttacking = false;
-                                    Orbwalker.DisableMovement = false;
+                                    PortAIO.OrbwalkerManager.SetAttack(true);
+                                    PortAIO.OrbwalkerManager.SetMovement(true);
                                 });
                                 var mbarrels = nbarrels.FirstOrDefault(x => x.Bottle.LSDistance(pred) <= 660);
                                 var pos = mbarrels.Bottle.Position.LSExtend(pred, 660);
@@ -95,12 +95,12 @@ namespace BadaoKingdom.BadaoChampion.BadaoGangplank
                             var nbarrels = BadaoGangplankBarrels.ChainedBarrels(barrel);
                             if (nbarrels.Any(x => x.Bottle.LSDistance(pred) <= 330 /*+ hero.BoundingRadius*/))
                             {
-                                Orbwalker.DisableMovement = true;
-                                Orbwalker.DisableAttacking = true;
+                                PortAIO.OrbwalkerManager.SetMovement(false);
+                                PortAIO.OrbwalkerManager.SetAttack(false);
                                 LeagueSharp.Common.Utility.DelayAction.Add(100 + Game.Ping, () =>
                                 {
-                                    Orbwalker.DisableMovement = false;
-                                    Orbwalker.DisableAttacking = false;
+                                    PortAIO.OrbwalkerManager.SetMovement(true);
+                                    PortAIO.OrbwalkerManager.SetAttack(true);
                                 });
                                 BadaoMainVariables.Q.Cast(barrel.Bottle);
                                 if (BadaoMainVariables.Q.Cast(barrel.Bottle) == LeagueSharp.Common.Spell.CastStates.SuccessfullyCasted)
@@ -122,16 +122,16 @@ namespace BadaoKingdom.BadaoChampion.BadaoGangplank
                         if (nbarrels.Any(x => x.Bottle.LSDistance(pred) <= 330 /*+ hero.BoundingRadius*/))
                         {
                             Console.WriteLine("1");
-                            Orbwalker.DisableMovement = true;
-                            Orbwalker.DisableAttacking = true;
+                            PortAIO.OrbwalkerManager.SetMovement(false);
+                            PortAIO.OrbwalkerManager.SetAttack(false);
                             Console.WriteLine("2");
                             LeagueSharp.Common.Utility.DelayAction.Add(300 + Game.Ping, () =>
                             {
-                                Orbwalker.DisableMovement = false;
-                                Orbwalker.DisableAttacking = false;
+                                PortAIO.OrbwalkerManager.SetMovement(true);
+                                PortAIO.OrbwalkerManager.SetAttack(true);
                             });
                             Console.WriteLine("3");
-                            Orbwalker.ForcedTarget = barrel.Bottle;
+                            Orbwalker.ForcedTarget =(barrel.Bottle;
                             EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, barrel.Bottle);
                             Console.WriteLine("4");
                             if (EloBuddy.Player.IssueOrder(GameObjectOrder.AttackUnit, barrel.Bottle))

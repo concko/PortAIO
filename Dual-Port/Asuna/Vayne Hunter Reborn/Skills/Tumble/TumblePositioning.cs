@@ -13,7 +13,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace VayneHunter_Reborn.Skills.Tumble
+ namespace VayneHunter_Reborn.Skills.Tumble
 {
     static class TumblePositioning
     {
@@ -122,7 +122,7 @@ namespace VayneHunter_Reborn.Skills.Tumble
         public static Vector3 GetSmartQPosition()
         {
             if (!getCheckBoxItem(MenuGenerator.miscMenu, "dz191.vhr.misc.tumble.smartq") ||
-                !Variables.spells[SpellSlot.E].IsEnabledAndReady(Orbwalker.ActiveModesFlags.ToString().ToLower()))
+                !Variables.spells[SpellSlot.E].IsEnabledAndReady(PortAIO.OrbwalkerManager.GetActiveMode()))
             {
                 return Vector3.Zero;
             }

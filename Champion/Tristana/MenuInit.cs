@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ElTristana
+ namespace ElTristana
 {
     public class MenuInit
     {
@@ -20,7 +20,7 @@ namespace ElTristana
             comboMenu.Add("ElTristana.Combo.R", new CheckBox("Use R"));
             comboMenu.Add("ElTristana.Combo.OnlyQ", new CheckBox("Only Q if target has E"));
             comboMenu.Add("ElTristana.Combo.Focus.E", new CheckBox("Focus E target"));
-            comboMenu.Add("ElTristana.Combo.Always.RE", new CheckBox("Use E + R finisher"));
+            comboMenu.Add("ElTristana.Combo.Always.RE", new CheckBox("Use E + R finisher", false));
             comboMenu.Add("ElTristana.Combo.E.Mana", new Slider("Minimum mana for E", 25));
             comboMenu.AddSeparator();
             comboMenu.Add("ElTristana.Combo.E.KeyBind", new KeyBind("Semi-Manual E", false, KeyBind.BindTypes.HoldActive, 'E'));

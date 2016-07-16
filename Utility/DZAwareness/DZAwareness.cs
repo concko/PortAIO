@@ -5,7 +5,7 @@ using DZAwarenessAIO.Utility.HudUtility;
 using LeagueSharp;
 using EloBuddy;
 
-namespace DZAwarenessAIO
+ namespace DZAwarenessAIO
 {
     /// <summary>
     /// The DZAwareness Class

@@ -1,12 +1,15 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
+using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
+
 
 namespace Staberina
 {
     internal static class SpellManager
     {
+        
         public static Spell Q;
         public static Spell W;
         public static Spell E;

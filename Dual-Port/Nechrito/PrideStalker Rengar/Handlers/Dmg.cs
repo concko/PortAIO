@@ -6,7 +6,7 @@ using System;
 using System.Linq;
 using PrideStalker_Rengar.Main;
 
-namespace PrideStalker_Rengar.Handlers
+ namespace PrideStalker_Rengar.Handlers
 {
     class Dmg : Core
     {

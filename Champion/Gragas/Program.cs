@@ -10,6 +10,7 @@ using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 using UnderratedAIO.Helpers;
 
+
 namespace GragasTheDrunkCarry
 {
 
@@ -32,6 +33,7 @@ namespace GragasTheDrunkCarry
 
     internal class Gragas
     {
+        
         public static AIHeroClient Player;
         public static Spell Q, W, E, R;
         public static Menu Config, comboMenu, ksMenu, jungleMenu, clearMenu, harassMenu, drawMenu;
@@ -179,7 +181,7 @@ namespace GragasTheDrunkCarry
         private static void Game_OnUpdate(EventArgs args)
         {
             var vTarget = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 JungleFarm();
                 WaveClear();

@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace Jinx_Genesis
+ namespace Jinx_Genesis
 {
     class Program
     {
@@ -223,7 +223,7 @@ namespace Jinx_Genesis
                 }
             }
         }
-
+        
         private static void BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (!FishBoneActive)
@@ -241,7 +241,7 @@ namespace Jinx_Genesis
             if (!Combo && args.Target is Obj_AI_Minion)
             {
                 var t = (Obj_AI_Minion)args.Target;
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) && Player.ManaPercent > getSliderItem(manaMenu, "QmanaLC") && CountMinionsInRange(250, t.Position) >= getSliderItem(qMenu, "Qlaneclear"))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && Player.ManaPercent > getSliderItem(manaMenu, "QmanaLC") && CountMinionsInRange(250, t.Position) >= getSliderItem(qMenu, "Qlaneclear"))
                 {
                     
                 }
@@ -528,7 +528,7 @@ namespace Jinx_Genesis
             if (FishBoneActive)
             {
                 var orbT = Orbwalker.LastTarget;
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) && Player.ManaPercent > getSliderItem(manaMenu, "QmanaLC") && orbT.IsValid<Obj_AI_Minion>())
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && Player.ManaPercent > getSliderItem(manaMenu, "QmanaLC") && orbT.IsValid<Obj_AI_Minion>())
                 {
                     
                 }
@@ -571,12 +571,12 @@ namespace Jinx_Genesis
                         foreach (var minion in MinionManager.GetMinions(Q.Range + 30).Where(
                         minion => !Orbwalking.InAutoAttackRange(minion) && minion.Health < Player.LSGetAutoAttackDamage(minion) * 1.2 && GetRealPowPowRange(minion) < GetRealDistance(minion) && Q.Range < GetRealDistance(minion)))
                         {
-                            Orbwalker.ForcedTarget = minion;
+                            Orbwalker.ForcedTarget =(minion);
                             Q.Cast();
                             return;
                         }
                     }
-                    if(Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) && Player.ManaPercent > getSliderItem(manaMenu, "QmanaLC"))
+                    if(Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && Player.ManaPercent > getSliderItem(manaMenu, "QmanaLC"))
                     {
                         var orbT = Orbwalker.LastTarget;
                         if (orbT.IsValid<Obj_AI_Minion>() && CountMinionsInRange(250, orbT.Position) >= getSliderItem(qMenu, "Qlaneclear"))
@@ -586,7 +586,7 @@ namespace Jinx_Genesis
                     }
                 }
             }
-            Orbwalker.ForcedTarget = null;
+            Orbwalker.ForcedTarget =(null);
         }
 
         private static int CountMinionsInRange(float range, Vector3 pos)
@@ -792,7 +792,7 @@ namespace Jinx_Genesis
                 Combo = false;
 
             if (
-                (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) && getCheckBoxItem(harassMenu, "LaneClearHarass")) ||
+                (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && getCheckBoxItem(harassMenu, "LaneClearHarass")) ||
                 (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) && getCheckBoxItem(harassMenu, "LastHitHarass")) || 
                 (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && getCheckBoxItem(harassMenu, "MixedHarass"))
                )

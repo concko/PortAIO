@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using SharpDX;
 
-namespace EBPredictioner
+ namespace EBPredictioner
 {
     public static class YasuoWallManager
     {

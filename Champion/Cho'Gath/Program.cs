@@ -13,6 +13,7 @@ using Environment = UnderratedAIO.Helpers.Environment;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
+
 namespace UnderratedAIO.Champions
 {
     internal class Chogath
@@ -23,7 +24,7 @@ namespace UnderratedAIO.Champions
         public static List<int> silence = new List<int>(new[] { 1500, 1750, 2000, 2250, 2500 });
         public static int knockUp = 1000;
         public static bool flashRblock;
-
+        
         private static bool VorpalSpikes
         {
             get { return player.Buffs.Any(buff => buff.Name == "VorpalSpikes"); }
@@ -83,8 +84,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

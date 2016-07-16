@@ -5,7 +5,7 @@ using EloBuddy.SDK;
 using EloBuddy;
 using System.Linq;
 
-namespace ExorAIO.Champions.Nunu
+ namespace ExorAIO.Champions.Nunu
 {
     /// <summary>
     ///     The champion class.
@@ -83,7 +83,7 @@ namespace ExorAIO.Champions.Nunu
             }
 
         }
-
+        
         /// <summary>
         ///     Called on orbwalker action.
         /// </summary>

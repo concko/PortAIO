@@ -13,7 +13,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace OlafxQx.Modes
+ namespace OlafxQx.Modes
 {
     internal static class ModeCombo
     {
@@ -52,7 +52,7 @@ namespace OlafxQx.Modes
                 W.Cast();
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

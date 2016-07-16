@@ -9,7 +9,7 @@ using SharpDX;
 using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace Kindred___YinYang
+ namespace Kindred___YinYang
 {
     internal class Program
     {
@@ -95,8 +95,7 @@ namespace Kindred___YinYang
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
                 Jungle();
@@ -117,7 +116,7 @@ namespace Kindred___YinYang
                 Helper.SpellBreaker();
             }
         }
-
+        
         private static void Combo()
         {
             var useQ = getCheckBoxItem(Language.comboMenu, "q.combo");

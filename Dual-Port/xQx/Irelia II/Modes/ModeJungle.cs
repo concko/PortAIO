@@ -11,7 +11,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace Irelia.Modes
+ namespace Irelia.Modes
 {
     internal static class ModeJungle
     {
@@ -78,6 +78,7 @@ namespace Irelia.Modes
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+        
 
         private static void OnUpdate(EventArgs args)
         {

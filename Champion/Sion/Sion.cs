@@ -16,7 +16,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Sion
     {
@@ -84,18 +84,18 @@ namespace UnderratedAIO.Champions
             E.SetSkillshot(0.25f, 80f, 1800, false, SkillshotType.SkillshotLine);
             R = new Spell(SpellSlot.R);
         }
-
+        
         private void Game_OnGameUpdate(EventArgs args)
         {
             if (Q.IsCharging || activatedR)
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -108,7 +108,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -134,7 +134,7 @@ namespace UnderratedAIO.Champions
         private void Harass()
         {
             var perc = getSliderItem(menuH, "minmanaH")/100f;
-            if (player.Mana < player.MaxMana*perc || Orbwalker.IsAutoAttacking)
+            if (player.Mana < player.MaxMana*perc || ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 return;
             }
@@ -191,7 +191,7 @@ namespace UnderratedAIO.Champions
                 }
                 checkCastedQ(target);
             }
-            else if (Q.CanCast(target) && !Orbwalker.IsAutoAttacking && target != null)
+            else if (Q.CanCast(target) && !ObjectManager.Player.Spellbook.IsAutoAttacking && target != null)
             {
                 var qPred = Prediction.GetPrediction(target, 0.3f);
                 var qPred2 = Prediction.GetPrediction(target, 0.6f);
@@ -206,7 +206,7 @@ namespace UnderratedAIO.Champions
         private void Clear()
         {
             var perc = getSliderItem(menuLC, "minmana")/100f;
-            if (player.Mana < player.MaxMana*perc || Orbwalker.IsAutoAttacking)
+            if (player.Mana < player.MaxMana*perc || ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 return;
             }
@@ -325,12 +325,12 @@ namespace UnderratedAIO.Champions
             {
                 return;
             }
-            if (getCheckBoxItem(menuC, "usee") && E.IsReady() && !Orbwalker.IsAutoAttacking)
+            if (getCheckBoxItem(menuC, "usee") && E.IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 CastEHero(target);
                 return;
             }
-            if (getCheckBoxItem(menuC, "useq") && !Orbwalker.IsAutoAttacking)
+            if (getCheckBoxItem(menuC, "useq") && !ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 castQ(target);
             }

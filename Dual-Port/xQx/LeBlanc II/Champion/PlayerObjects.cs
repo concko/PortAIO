@@ -10,7 +10,7 @@ using Geometry = Leblanc.Common.CommonGeometry;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Leblanc.Champion
+ namespace Leblanc.Champion
 {
     internal static class PlayerObjects
     {

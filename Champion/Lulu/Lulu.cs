@@ -11,7 +11,7 @@ using TreeLib.Core;
 using TreeLib.Core.Extensions;
 using TreeLib.Managers;
 
-namespace LuluLicious
+ namespace LuluLicious
 {
     internal class Lulu : TreeLib.Objects.Champion
     {
@@ -239,7 +239,7 @@ namespace LuluLicious
             Console.WriteLine("[Pix] Cast E");
             return true;
         }
-
+        
         private static bool PixCombo()
         {
             string s = "";
@@ -262,7 +262,7 @@ namespace LuluLicious
                 return;
             }
 
-            var condition = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ? getCheckBoxItem(qMenu, "QLC") : getCheckBoxItem(qMenu, "QLH");
+            var condition = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ? getCheckBoxItem(qMenu, "QLC") : getCheckBoxItem(qMenu, "QLH");
 
             if (qMenu["QLC"] == null || qMenu["QLH"] == null || !condition)
             {
@@ -618,8 +618,7 @@ namespace LuluLicious
                 return;
             }
 
-            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) &&
-                !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
+            if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
                 return;
             }

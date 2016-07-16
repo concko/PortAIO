@@ -13,6 +13,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
+
 namespace ezEvade
 {
     public class SpecialSpellEventArgs : EventArgs
@@ -75,6 +76,26 @@ namespace ezEvade
 
             LoadSpellDictionary();
             InitChannelSpells();
+        }
+
+        public static Menu newSpellMenu;
+
+        public static void LoadDummySpell(SpellData spell)
+        {
+            string menuName = spell.charName + " (" + spell.spellKey.ToString() + ") Settings";
+
+            var enableSpell = !spell.defaultOff;
+
+            newSpellMenu = menu.AddSubMenu(menuName, spell.charName + spell.spellName + "Settings");
+            newSpellMenu.Add(spell.spellName + "DodgeSpell", new CheckBox("Dodge Spell", enableSpell));
+            newSpellMenu.Add(spell.spellName + "DrawSpell", new CheckBox("Draw Spell", enableSpell));
+            newSpellMenu.Add(spell.spellName + "SpellRadius", new Slider("Spell Radius", (int)spell.radius, (int)spell.radius - 100, (int)spell.radius + 100));
+            newSpellMenu.Add(spell.spellName + "FastEvade", new CheckBox("Force Fast Evade", spell.dangerlevel == 4));
+            newSpellMenu.Add(spell.spellName + "DodgeIgnoreHP", new Slider("Ignore above HP %", spell.dangerlevel == 1 ? 80 : 100));
+            newSpellMenu.Add(spell.spellName + "DangerLevel", new ComboBox("Danger Level", spell.dangerlevel - 1, "Low", "Normal", "High", "Extreme"));
+
+
+            ObjectCache.menuCache.AddMenuToCache(newSpellMenu);
         }
 
         private void Game_OnEnterVisiblity(AttackableUnit sender, EventArgs args)
@@ -140,7 +161,6 @@ namespace ezEvade
                                             Console.WriteLine("Wrong radius " + spell.info.spellName + ": "
                                             + spell.info.radius + " vs " + missile.SData.LineWidth);
                                         }
-
                                         if (missile.SData.MissileSpeed != spell.info.projectileSpeed)
                                         {
                                             Console.WriteLine("Wrong speed " + spell.info.spellName + ": "
@@ -182,7 +202,7 @@ namespace ezEvade
             foreach (var spell in spells.Values.ToList().Where(
                     s => (s.spellObject != null && s.spellObject.NetworkId == obj.NetworkId))) //isAlive
             {
-                //Console.WriteLine("Distance: " + obj.Position.LSDistance(myHero.Position));
+                //Console.WriteLine("Distance: " + obj.Position.Distance(myHero.Position));
 
                 DelayAction.Add(1, () => DeleteSpell(spell.spellID));
             }

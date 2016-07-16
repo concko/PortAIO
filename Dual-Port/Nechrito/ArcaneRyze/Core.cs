@@ -9,7 +9,7 @@ using EloBuddy.SDK;
 using LeagueSharp.SDK.Enumerations;
 #endregion
 
-namespace Arcane_Ryze
+ namespace Arcane_Ryze
 {
     internal class Core
     {

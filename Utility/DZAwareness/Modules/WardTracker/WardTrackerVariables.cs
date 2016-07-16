@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using PortAIO.Properties;
 
-namespace DZAwarenessAIO.Modules.WardTracker
+ namespace DZAwarenessAIO.Modules.WardTracker
 {
     /// <summary>
     /// The WardTracker Variables class

@@ -3,7 +3,7 @@ using System;
 using LeagueSharp;
 using LeagueSharp.Common;
 
-namespace AhriSharp
+ namespace AhriSharp
 {
     class Program
     {

@@ -7,7 +7,7 @@ using Marksman.Common;
 using SharpDX;
 using Color = System.Drawing.Color;
 
-namespace Marksman.Common
+ namespace Marksman.Common
 {
     public class CommonObjectDetector
     {

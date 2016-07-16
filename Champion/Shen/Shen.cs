@@ -12,7 +12,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Shen
     {
@@ -154,7 +154,7 @@ namespace UnderratedAIO.Champions
 
             Drawing.DrawLine(xPos, barPos.Y + YOffset, xPos, barPos.Y + YOffset + Height, 3, color);
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             Ulti();
@@ -174,8 +174,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -368,7 +367,7 @@ namespace UnderratedAIO.Champions
             var poly = CombatHelper.GetPoly(blade.LSExtend(player.Position, 30), player.LSDistance(blade), 150);
             if (((pred.Hitchance >= HitChance.VeryHigh && poly.IsInside(pred.UnitPosition)) ||
                  (target.LSDistance(blade) < 100) || (target.LSDistance(blade) < 500 && poly.IsInside(target.Position)) ||
-                 player.LSDistance(target) < Orbwalking.GetRealAutoAttackRange(target) || Orbwalker.IsAutoAttacking) &&
+                 player.LSDistance(target) < Orbwalking.GetRealAutoAttackRange(target) || ObjectManager.Player.Spellbook.IsAutoAttacking) &&
                 CheckQDef())
             {
                 Q.Cast();
@@ -447,7 +446,7 @@ namespace UnderratedAIO.Champions
                     player.Spellbook.CastSpell(player.GetSpellSlot("SummonerFlash"), getPosToEflash(target.Position));
                 }
             }
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
         }
 
 

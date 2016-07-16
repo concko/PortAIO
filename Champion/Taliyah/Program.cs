@@ -11,7 +11,7 @@ using LeagueSharp.SDK.Core.Utils;
 using SkillshotType = LeagueSharp.SDK.Enumerations.SkillshotType;
 using LeagueSharp.SDK.Enumerations;
 
-namespace Taliyah
+ namespace Taliyah
 {
     class Program
     {
@@ -162,8 +162,7 @@ namespace Taliyah
         {
             if (W.Instance.Name == "TaliyahWNoClick")
             {
-                if (Environment.TickCount - lastETick < 3000)
-                    ObjectManager.Player.Spellbook.CastSpell(SpellSlot.W, lastE, false);
+                //
             }
             else
             {
@@ -174,7 +173,7 @@ namespace Taliyah
                     {
                         var pred = W.GetPrediction(target);
                         if (pred.Hitchance >= HitChance.High)
-                            W.Cast(pred.UnitPosition);
+                            W.Cast(pred.UnitPosition, ObjectManager.Player.ServerPosition);
                     }
 
                 }
@@ -194,7 +193,7 @@ namespace Taliyah
                                 {
                                     lastE = ObjectManager.Player.ServerPosition;
                                     E.Cast(ObjectManager.Player.ServerPosition.ToVector2() + (pred.CastPosition.ToVector2() - ObjectManager.Player.ServerPosition.ToVector2()).Normalized() * (E.Range - 200));
-                                    DelayAction.Add(250, () => W.Cast(pred.UnitPosition));
+                                    DelayAction.Add(250, () => { W.Cast(pred.UnitPosition, lastE); EWCasting = false; });
                                     EWCasting = true;
                                 }
                             }
@@ -218,7 +217,7 @@ namespace Taliyah
                     {
                         var pred = W.GetPrediction(target);
                         if (pred.Hitchance >= HitChance.High)
-                            W.Cast(pred.UnitPosition);
+                            W.Cast(pred.UnitPosition, pred.UnitPosition);
                     }
                 }
             }
@@ -261,21 +260,20 @@ namespace Taliyah
                     E.Cast(farm.Position);
                     lastE = ObjectManager.Player.ServerPosition;
                     if (W.Instance.Name == "TaliyahW")
-                        W.Cast(farm.Position);
-                    DelayAction.Add(250, () => ObjectManager.Player.Spellbook.CastSpell(SpellSlot.W, lastE, false));
+                        W.Cast(farm.Position, lastE.ToVector2());
                 }
             }
         }
 
         private static void CheckKeyBindings()
         {
-            if (!pull_push_enemy && TargetSelector.SelectedTarget != null && TargetSelector.SelectedTarget.IsValidTarget(W.Range))
+            if (main_menu["taliyah.pullenemy"].Cast<KeyBind>().CurrentValue || main_menu["taliyah.pushenemy"].Cast<KeyBind>().CurrentValue)
             {
-                Vector3 push_position = ObjectManager.Player.ServerPosition;
-
-                if (main_menu["taliyah.pullenemy"].Cast<KeyBind>().CurrentValue || main_menu["taliyah.pushenemy"].Cast<KeyBind>().CurrentValue)
+                Orbwalker.MoveTo(Game.CursorPos);
+                if (!pull_push_enemy && TargetSelector.SelectedTarget != null && TargetSelector.SelectedTarget.IsValidTarget(W.Range))
                 {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Vector3 push_position = ObjectManager.Player.ServerPosition;
+
                     if (main_menu["taliyah.pushenemy"].Cast<KeyBind>().CurrentValue)
                     {
                         if (selectedGObj != null && selectedGObj.Distance(ObjectManager.Player) < 1000)
@@ -287,8 +285,8 @@ namespace Taliyah
                     if (pred.Hitchance >= HitChance.High)
                     {
                         pull_push_enemy = true;
-                        W.Cast(pred.UnitPosition);
-                        DelayAction.Add(250, () => { ObjectManager.Player.Spellbook.CastSpell(SpellSlot.W, push_position, false); pull_push_enemy = false; });
+                        W.Cast(pred.UnitPosition, push_position);
+                        DelayAction.Add(250, () => pull_push_enemy = false);
                     }
                 }
             }
@@ -306,7 +304,7 @@ namespace Taliyah
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }
@@ -322,7 +320,7 @@ namespace Taliyah
             }
 
         }
-
+        
         private static void Events_OnInterruptableTarget(object sender, Events.InterruptableTargetEventArgs e)
         {
             if (getCheckBoxItem(main_menu, "taliyah.interrupt"))

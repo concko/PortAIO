@@ -24,7 +24,7 @@ using EloBuddy;
 
 #endregion
 
-namespace EvadeA
+ namespace EvadeA
 {
     internal class EvadeSpellDatabase
     {

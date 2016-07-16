@@ -1,4 +1,4 @@
-﻿namespace ElRumble
+﻿ namespace ElRumble
 {
     using System;
     using System.Collections.Generic;
@@ -479,7 +479,7 @@
                 }
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead)
@@ -495,11 +495,11 @@
             {
                 OnHarass();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnClear();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnJungleClear();
             }

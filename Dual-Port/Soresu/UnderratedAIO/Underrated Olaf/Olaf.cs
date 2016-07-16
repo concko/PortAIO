@@ -20,7 +20,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Olaf
     {
@@ -88,10 +88,10 @@ namespace UnderratedAIO.Champions
             DrawHelper.DrawCircle(getCheckBoxItem(drawMenu, "drawee"), E.Range, Color.FromArgb(180, 255, 222, 5));
             Utility.HpBarDamageIndicator.Enabled = getCheckBoxItem(drawMenu, "drawcombo");
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
-            Orbwalker.OrbwalkTo(Vector3.Zero);
+            Orbwalker.MoveTo(Vector3.Zero);
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
@@ -103,7 +103,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -243,7 +243,7 @@ namespace UnderratedAIO.Champions
             if (player.LSDistance(lastQpos) < maxDist && !lastQpos.UnderTurret(true))
             //ext - orig < maxDist && Orbwalking.CanMove(100)
             {
-                Orbwalker.OrbwalkTo(lastQpos);
+                Orbwalker.MoveTo(lastQpos);
                 //player.IssueOrder(GameObjectOrder.MoveTo, lastQpos);
             }
         }

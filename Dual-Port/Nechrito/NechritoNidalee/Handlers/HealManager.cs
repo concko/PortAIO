@@ -4,7 +4,7 @@ using System.Linq;
 using LeagueSharp;
 using EloBuddy;
 
-namespace Nechrito_Nidalee.Handlers
+ namespace Nechrito_Nidalee.Handlers
 {
     class HealManager : Core
     {

@@ -25,7 +25,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     internal class EvadeSpellDatabase
     {

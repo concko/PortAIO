@@ -7,7 +7,7 @@ using SharpDX;
 
 #endregion
 
-namespace NechritoRiven.Event
+ namespace NechritoRiven.Event
 {
     internal class FleeLogic
     {

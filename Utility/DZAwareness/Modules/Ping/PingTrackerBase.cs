@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace DZAwarenessAIO.Modules.Ping
+ namespace DZAwarenessAIO.Modules.Ping
 {
     /// <summary>
     /// The Ping Drawing base Class

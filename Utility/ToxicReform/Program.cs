@@ -6,7 +6,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace Toxic_Player_Reform_Program
+ namespace Toxic_Player_Reform_Program
 {
     public static class Program
     {

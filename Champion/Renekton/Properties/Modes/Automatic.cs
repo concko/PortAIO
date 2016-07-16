@@ -6,13 +6,14 @@ using ExorAIO.Utilities;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Renekton
+ namespace ExorAIO.Champions.Renekton
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>

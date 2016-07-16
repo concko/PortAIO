@@ -5,7 +5,7 @@ using SharpDX.Direct3D9;
 using Color = System.Drawing.Color;
 
 
-namespace Preserved_Kassadin
+ namespace Preserved_Kassadin
 {
     internal class HpBarIndicator
     {

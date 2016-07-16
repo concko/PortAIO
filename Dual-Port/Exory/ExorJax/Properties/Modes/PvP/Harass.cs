@@ -1,6 +1,6 @@
 using System;
 
-namespace ExorAIO.Champions.Jax
+ namespace ExorAIO.Champions.Jax
 {
     /// <summary>
     ///     The logics class.

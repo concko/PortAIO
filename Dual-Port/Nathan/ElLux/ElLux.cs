@@ -1,4 +1,4 @@
-﻿namespace ElLux
+﻿ namespace ElLux
 {
     using System;
     using System.Collections.Generic;
@@ -171,17 +171,26 @@
             return cast.Hitchance >= HitChance.High && spells[Spells.E].Cast(castPos);
         }
 
+
         private static void CastQ(AIHeroClient target)
         {
-            if (!spells[Spells.Q].IsReady() || !target.LSIsValidTarget(spells[Spells.Q].Range))
+            if (!spells[Spells.Q].IsReady() || !target.IsValidTarget(spells[Spells.Q].Range))
             {
                 return;
             }
 
-            var prediction = spells[Spells.Q].GetPrediction(target);
+            var prediction = spells[Spells.Q].GetPrediction(target, false, -1, new[] { CollisionableObjects.YasuoWall });
+            if (prediction.Hitchance < HitChance.VeryHigh)
+            {
+                return;
+            }
+
             var collision = spells[Spells.Q].GetCollision(
                 Player.ServerPosition.LSTo2D(),
-                new List<Vector2> { prediction.CastPosition.LSTo2D() });
+                new List<Vector2>
+                    {
+                        prediction.CastPosition.LSTo2D()
+                    });
 
             if (collision.Count == 1 || (collision.Count == 1 && collision.ElementAt(0).IsChampion())
                 || collision.Count <= 1
@@ -189,12 +198,9 @@
             {
                 spells[Spells.Q].Cast(prediction.CastPosition);
             }
-            else
+            else if (prediction.Hitchance >= HitChance.VeryHigh)
             {
-                if (prediction.Hitchance >= HitChance.VeryHigh)
-                {
-                    spells[Spells.Q].Cast(prediction.CastPosition);
-                }
+                spells[Spells.Q].Cast(prediction.CastPosition);
             }
         }
 
@@ -206,11 +212,26 @@
                 return;
             }
 
+
             if (getCheckBoxItem(cMenu, "ElLux.Combo.R.AOE"))
             {
-                spells[Spells.R].CastIfWillHit(
-                    target,
-                    getSliderItem(cMenu, "ElLux.Combo.R.Count"));
+                const float LuxRDistance = 3340;
+                const float LuxRWidth = 70;
+                var minREnemies = getSliderItem(cMenu, "ElLux.Combo.R.Count")
+;
+                foreach (var enemy in HeroManager.Enemies)
+                {
+                    var startPos = enemy.ServerPosition;
+                    var endPos = Player.ServerPosition.LSExtend(
+                        startPos,
+                        Player.Distance(enemy) + LuxRDistance);
+
+                    var rectangle = new LeagueSharp.Common.Geometry.Polygon.Rectangle(startPos, endPos, LuxRWidth);
+                    if (HeroManager.Enemies.Count(x => rectangle.IsInside(x)) >= minREnemies)
+                    {
+                        spells[Spells.R].Cast(enemy);
+                    }
+                }
             }
 
             if (getCheckBoxItem(cMenu, "ElLux.Combo.R.Rooted"))
@@ -220,7 +241,7 @@
                     var prediction = spells[Spells.Q].GetPrediction(target);
                     if (prediction.Hitchance >= HitChance.High)
                     {
-                        spells[Spells.R].Cast(target.Position);
+                        spells[Spells.R].Cast(prediction.CastPosition);
                     }
                 }
             }
@@ -230,7 +251,7 @@
                 var prediction = spells[Spells.R].GetPrediction(target);
                 if (prediction.Hitchance >= HitChance.High)
                 {
-                    spells[Spells.R].Cast(target.Position);
+                    spells[Spells.R].Cast(prediction.CastPosition);
                 }
             }
         }
@@ -566,7 +587,7 @@
                 }
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead)

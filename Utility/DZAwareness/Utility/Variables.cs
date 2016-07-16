@@ -16,7 +16,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace DZAwarenessAIO.Utility
+ namespace DZAwarenessAIO.Utility
 {
     class Variables
     {

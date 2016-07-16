@@ -17,7 +17,7 @@ namespace PortAIO.Champion.Braum
         public static Menu drawMenu, qMenu, ewMenu, rMenu, harassMenu;
         public static Spell Q, W, E, R;
         public static float QMANA = 0, WMANA = 0, EMANA = 0, RMANA = 0;
-
+        
         public static AIHeroClient Player
         {
             get { return ObjectManager.Player; }

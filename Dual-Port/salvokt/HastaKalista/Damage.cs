@@ -4,7 +4,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using System.Linq;
 
-namespace HastaKalistaBaby
+ namespace HastaKalistaBaby
 {
     class Damage
     {

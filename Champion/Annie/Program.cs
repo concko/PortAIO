@@ -10,6 +10,7 @@ using SebbyLib;
 using HealthPrediction = SebbyLib.HealthPrediction;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace PortAIO.Champion.Annie
 {
     internal class Program
@@ -22,7 +23,7 @@ namespace PortAIO.Champion.Annie
         public static Obj_AI_Base Tibbers;
         public static float TibbersTimer = 0;
         private static bool HaveStun;
-
+        
         private static AIHeroClient Player
         {
             get { return ObjectManager.Player; }

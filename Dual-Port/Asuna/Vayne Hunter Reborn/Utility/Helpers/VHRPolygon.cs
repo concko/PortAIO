@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace iSeriesReborn.Utility.Positioning
+ namespace iSeriesReborn.Utility.Positioning
 {
     class VHRPolygon
     {

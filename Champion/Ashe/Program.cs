@@ -13,6 +13,7 @@ using PredictionInput = SebbyLib.Prediction.PredictionInput;
 using Spell = LeagueSharp.Common.Spell;
 using System.Collections.Generic;
 
+
 namespace PortAIO.Champion.Ashe
 {
     internal class Program
@@ -22,7 +23,7 @@ namespace PortAIO.Champion.Ashe
         public static Spell Q, W, E, R;
         public static float QMANA, WMANA, EMANA, RMANA;
         private static Menu drawMenu, QMenu, EMenu, RMenu, FarmMenu, harassMenu;
-
+        
         public static AIHeroClient Player
         {
             get { return ObjectManager.Player; }

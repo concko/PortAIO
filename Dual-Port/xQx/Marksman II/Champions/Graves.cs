@@ -13,7 +13,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Graves : Champion
     {
@@ -160,6 +160,7 @@ namespace Marksman.Champions
 
         public override void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
         {
+
             var t = target as AIHeroClient;
             if (t != null && (ComboActive || HarassActive))
             {

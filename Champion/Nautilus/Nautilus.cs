@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 using System.Linq;
 
-namespace ExorAIO.Champions.Nautilus
+ namespace ExorAIO.Champions.Nautilus
 {
     /// <summary>
     ///     The champion class.
@@ -76,7 +76,7 @@ namespace ExorAIO.Champions.Nautilus
                 Logics.Clear(args);
             }
         }
-
+        
         /// <summary>
         ///     Called on do-cast.
         /// </summary>

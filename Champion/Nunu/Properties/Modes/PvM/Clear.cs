@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.SDK;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Nunu
+ namespace ExorAIO.Champions.Nunu
 {
     /// <summary>
     ///     The logics class.

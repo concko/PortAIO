@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using SharpDX;
 using EloBuddy;
 
-namespace Azir_Creator_of_Elo
+ namespace Azir_Creator_of_Elo
 {
     class SoldierManager
     {
@@ -56,14 +56,16 @@ namespace Azir_Creator_of_Elo
                 if (!m.IsDead)
                     foreach (AIHeroClient h in HeroManager.Enemies)
                     {
-                        if (m.LSDistance(h) < 315)
-                        {
-
-                        }
-                        else
+                        if (!h.IsDead)
+                        if (m.LSDistance(h) > 315)
                         {
                             soldiersa++;
                             break;
+                        }
+                        else
+                        {
+
+
                         }
                     }
             }

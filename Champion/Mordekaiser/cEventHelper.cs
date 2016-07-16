@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 
-namespace Mordekaiser
+ namespace Mordekaiser
 {
     public static class cEventHelper
     {

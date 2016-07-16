@@ -12,7 +12,7 @@ using Geometry = LeagueSharp.Common.Geometry;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace Warwick
+ namespace Warwick
 {
     internal class Program
     {
@@ -247,6 +247,7 @@ namespace Warwick
             sum = vectors.Aggregate(sum, (current, vec) => current + vec);
             return sum / vectors.Length;
         }
+        
 
         private static void Game_OnUpdate(EventArgs args)
         {

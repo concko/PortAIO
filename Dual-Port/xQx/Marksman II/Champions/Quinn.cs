@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     using EloBuddy.SDK;
     using EloBuddy.SDK.Menu;
@@ -50,8 +50,9 @@ namespace Marksman.Champions
                 E.CastOnUnit(gapcloser.Sender);
         }
 
-        public override void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
+        public override void Orbwalking_AfterAttack(AttackableUnit targetA, EventArgs args)
         {
+            var target = targetA;
             var t = target as AIHeroClient;
             if (t == null || (!ComboActive && !HarassActive)) return;
 
@@ -125,7 +126,7 @@ namespace Marksman.Champions
                 ValorMaxDamage += ObjectManager.Player.BaseAttackDamage*100;
             }
         }
-
+        
         public override void Game_OnGameUpdate(EventArgs args)
         {
             var enemy =
@@ -137,7 +138,7 @@ namespace Marksman.Champions
                 {
                     EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, enemy);
                 }
-                Orbwalker.ForcedTarget = enemy;
+                Orbwalker.ForcedTarget =(enemy);
             }
 
             if (Q.IsReady() && Program.harass["UseQTH"].Cast<KeyBind>().CurrentValue)

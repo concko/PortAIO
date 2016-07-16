@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite
+﻿ namespace ElUtilitySuite
 {
     using System;
     using System.Linq;

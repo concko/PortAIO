@@ -27,7 +27,7 @@ using EloBuddy;
 
 #endregion
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     public enum SkillShotType
     {

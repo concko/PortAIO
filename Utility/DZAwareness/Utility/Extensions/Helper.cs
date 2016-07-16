@@ -10,7 +10,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
 
-namespace DZAwarenessAIO.Utility.Extensions
+ namespace DZAwarenessAIO.Utility.Extensions
 {
     /// <summary>
     /// The Helper Class

@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 
-namespace ExorAIO.Champions.KogMaw
+ namespace ExorAIO.Champions.KogMaw
 {
     /// <summary>
     ///     The logics class.
@@ -33,7 +33,7 @@ namespace ExorAIO.Champions.KogMaw
                     t =>
                         Bools.IsImmobile(t) &&
                         !Invulnerable.Check(t) &&
-                        t.LSIsValidTarget(Vars.Q.Range)))
+                        t.LSIsValidTarget(Vars.Q.Range) && t.IsVisible && t.IsHPBarRendered))
                 {
                     if (!Vars.Q.GetPrediction(Targets.Target).CollisionObjects.Any(c => Targets.Minions.Contains(c)))
                     {

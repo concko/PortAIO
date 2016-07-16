@@ -9,7 +9,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace jesuisFiora
+ namespace jesuisFiora
 {
     internal static class Dispeller
     {

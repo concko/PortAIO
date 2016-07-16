@@ -8,10 +8,12 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
+
 namespace iKalistaReborn.Utils
 {
     public static class SentinelManager
     {
+        
         private enum SentinelLocations
         {
             Baron,
@@ -128,7 +130,7 @@ namespace iKalistaReborn.Utils
             // Auto sentinel management
             if (getCheckBoxItem(Kalista.miscMenu, "enabled") && W.IsReady() && Player.Instance.ManaPercent >= getSliderItem(Kalista.miscMenu, "mana") && !Player.Instance.IsRecalling())
             {
-                if (!getCheckBoxItem(Kalista.miscMenu, "noMode") || Orbwalker.ActiveModesFlags == Orbwalker.ActiveModes.None)
+                if (!getCheckBoxItem(Kalista.miscMenu, "noMode") || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
                 {
                     if (OpenLocations.Count > 0 && SentLocation == null)
                     {

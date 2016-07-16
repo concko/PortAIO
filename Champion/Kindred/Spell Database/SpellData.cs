@@ -1,4 +1,4 @@
-﻿namespace Kindred___YinYang.Spell_Database
+﻿ namespace Kindred___YinYang.Spell_Database
 {
     public enum SpellType
     {

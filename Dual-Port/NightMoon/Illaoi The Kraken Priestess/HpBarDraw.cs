@@ -1,4 +1,4 @@
-﻿namespace Flowers__Illaoi
+﻿ namespace Flowers__Illaoi
 {
     using EloBuddy;
     using SharpDX;

@@ -8,6 +8,7 @@ using Utility = LeagueSharp.Common.Utility;
 
 //using DetuksSharp;
 
+
 namespace MasterSharp
 {
     internal class MasterYi
@@ -72,7 +73,7 @@ namespace MasterSharp
                 {
                     sumItems.cast(SummonerItems.ItemIds.Cutlass, target);
                 }
-                if (target.LSDistance(player) < 500 && player.Health/player.MaxHealth*100 < 85)
+                if (target.LSDistance(player) < 500 && player.Health / player.MaxHealth * 100 < 85)
                 {
                     sumItems.cast(SummonerItems.ItemIds.BotRK, target);
                 }
@@ -125,7 +126,7 @@ namespace MasterSharp
                 if (msDif <= 0 && !ObjectManager.Player.IsInAutoAttackRange(target) && Orbwalker.CanAutoAttack)
                     Q.Cast(target);
 
-                var reachIn = dist/msDif;
+                var reachIn = dist / msDif;
                 if (reachIn > 4)
                     Q.Cast(target);
             }
@@ -139,7 +140,7 @@ namespace MasterSharp
         {
             if (smite != SpellSlot.Unknown && player.Spellbook.CanUseSpell(smite) == SpellState.Ready)
             {
-                if (target.LSDistance(player, true) <= 700*700 &&
+                if (target.LSDistance(player, true) <= 700 * 700 &&
                     (yiGotItemRange(3714, 3718) || yiGotItemRange(3706, 3710)))
                 {
                     player.Spellbook.CastSpell(smite, target);
@@ -149,29 +150,29 @@ namespace MasterSharp
 
         public static bool iAmLow(float lownes = .25f)
         {
-            return player.Health/player.MaxHealth < lownes;
+            return player.Health / player.MaxHealth < lownes;
         }
 
         public static int aaToKill(Obj_AI_Base target)
         {
-            return 1 + (int) (target.Health/player.GetAutoAttackDamage(target));
+            return 1 + (int)(target.Health / player.GetAutoAttackDamage(target));
         }
 
         public static void evadeBuff(BuffInstance buf, TargetedSkills.TargSkill skill)
         {
-            if (Q.IsReady() && jumpEnesAround() != 0 && buf.EndTime - Game.Time < skill.delay/1000)
+            if (Q.IsReady() && jumpEnesAround() != 0 && buf.EndTime - Game.Time < skill.delay / 1000)
             {
                 useQonBest();
             }
             else if (W.IsReady() && (!Q.IsReady() || jumpEnesAround() != 0) && buf.EndTime - Game.Time < 0.4f)
             {
                 var dontMove = 400;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 W.Cast();
-                Utility.DelayAction.Add(dontMove, () => Orbwalker.DisableMovement = false);
+                Utility.DelayAction.Add(dontMove, () => PortAIO.OrbwalkerManager.SetMovement(true));
             }
         }
-
+        
         public static void evadeDamage(int useQ, int useW, GameObjectProcessSpellCastEventArgs psCast, int delay = 250)
         {
             if (useQ != 0 && Q.IsReady() && jumpEnesAround() != 0 &&
@@ -185,9 +186,9 @@ namespace MasterSharp
             else if (useW != 0 && W.IsReady() && MasterSharp.getCheckBoxItem(MasterSharp.evadeMenu, "smartW"))
             {
                 var dontMove = 500;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 W.Cast();
-                Utility.DelayAction.Add(dontMove, () => Orbwalker.DisableMovement = false);
+                Utility.DelayAction.Add(dontMove, () => PortAIO.OrbwalkerManager.SetMovement(true));
             }
         }
 
@@ -206,7 +207,7 @@ namespace MasterSharp
                 (MasterSharp.skillShotMustBeEvaded(sd.MenuItemName) ||
                  MasterSharp.skillShotMustBeEvadedW(sd.MenuItemName)))
             {
-                var spellDamage = (float) sShot.Unit.LSGetSpellDamage(player, sd.SpellName);
+                var spellDamage = (float)sShot.Unit.LSGetSpellDamage(player, sd.SpellName);
                 var willKill = player.Health <= spellDamage;
                 if (Q.IsReady() && jumpEnesAround() != 0 && MasterSharp.skillShotMustBeEvaded(sd.MenuItemName) ||
                     willKill)
@@ -217,9 +218,9 @@ namespace MasterSharp
                          (MasterSharp.skillShotMustBeEvadedW(sd.MenuItemName) || willKill))
                 {
                     var dontMove = 500;
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                     W.Cast();
-                    Utility.DelayAction.Add(dontMove, () => Orbwalker.DisableMovement = false);
+                    Utility.DelayAction.Add(dontMove, () => PortAIO.OrbwalkerManager.SetMovement(true));
                 }
             }
 
@@ -227,7 +228,7 @@ namespace MasterSharp
                 (MasterSharp.skillShotMustBeEvadedAllways(sd.MenuItemName) ||
                  MasterSharp.skillShotMustBeEvadedWAllways(sd.MenuItemName)))
             {
-                var spellDamage = (float) sShot.Unit.LSGetSpellDamage(player, sd.SpellName);
+                var spellDamage = (float)sShot.Unit.LSGetSpellDamage(player, sd.SpellName);
                 var willKill = player.Health <= spellDamage;
                 if (Q.IsReady() && jumpEnesAround() != 0 &&
                     (MasterSharp.skillShotMustBeEvadedAllways(sd.MenuItemName) || willKill))
@@ -238,9 +239,9 @@ namespace MasterSharp
                          (MasterSharp.skillShotMustBeEvadedWAllways(sd.MenuItemName) || willKill))
                 {
                     var dontMove = 500;
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                     W.Cast();
-                    Utility.DelayAction.Add(dontMove, () => Orbwalker.DisableMovement = false);
+                    Utility.DelayAction.Add(dontMove, () => PortAIO.OrbwalkerManager.SetMovement(true));
                 }
             }
         }
@@ -311,7 +312,7 @@ namespace MasterSharp
 
         public static bool yiGotItemRange(int from, int to)
         {
-            return player.InventoryItems.Any(item => (int) item.Id >= @from && (int) item.Id <= to);
+            return player.InventoryItems.Any(item => (int)item.Id >= @from && (int)item.Id <= to);
         }
     }
 }

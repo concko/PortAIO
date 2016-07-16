@@ -16,7 +16,7 @@ using EloBuddy.SDK.Menu.Values;
 #endregion
 
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Caitlyn : Champion
     {
@@ -617,7 +617,7 @@ namespace Marksman.Champions
             //var useQ = GetValue<bool>("UseQ" + (ComboActive ? "C" : "H"));
             //if (useQ) Q.Cast(t, false, true);
 
-            base.Orbwalking_AfterAttack(target, args);
+            base.Orbwalking_AfterAttack(target,args);
         }
 
         public override bool ComboMenu(Menu config)

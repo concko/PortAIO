@@ -14,7 +14,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using ezEvade;
 
-namespace jesuisFiora
+ namespace jesuisFiora
 {
     internal static class Program
     {
@@ -83,7 +83,7 @@ namespace jesuisFiora
 
         public static bool CastItems(Obj_AI_Base target)
         {
-            if (Player.LSIsDashing() || Orbwalker.IsAutoAttacking)
+            if (Player.LSIsDashing() || ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 return false;
             }
@@ -273,7 +273,7 @@ namespace jesuisFiora
 
         public static bool IsFarmMode()
         {
-            return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear);
+            return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
         }
 
         public static void Farm()
@@ -490,7 +490,7 @@ namespace jesuisFiora
             var point = path.Length < 3 ? pos : path.Skip(path.Length / 2).FirstOrDefault();
             //  Console.WriteLine(path.Length);
             Console.WriteLine("ORBWALK TO PASSIVE: " + Player.LSDistance(pos));
-            Orbwalker.OrbwalkTo(target.IsMoving ? point : pos);
+            Orbwalker.MoveTo(target.IsMoving ? point : pos);
         }
 
         public static AIHeroClient GetTarget(bool aaTarget = false)
@@ -526,14 +526,14 @@ namespace jesuisFiora
                 return;
             }
 
-            //Orbwalker.OrbwalkTo(Vector3.Zero);
+            //Orbwalker.MoveTo(Vector3.Zero);
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
                 return;
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) && !getKeyBindItem(farm, "FarmEnabled"))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) && !getKeyBindItem(farm, "FarmEnabled"))
             {
                 return;
             }
@@ -747,7 +747,7 @@ namespace jesuisFiora
 
         private static void Game_OnGameUpdate(EventArgs args)
         {
-            //Orbwalker.SetOrbwalkingPoint(Vector3.Zero);
+            //PortAIO.OrbwalkerManager.SetOrbwalkingPoint(Vector3.Zero);
 
             if (Player.IsDead || Flee())
             {
@@ -759,7 +759,7 @@ namespace jesuisFiora
             DuelistMode();
             Farm();
 
-            if (Player.LSIsDashing() || Orbwalker.IsAutoAttacking || Player.Spellbook.IsCastingSpell)
+            if (Player.LSIsDashing() || ObjectManager.Player.Spellbook.IsAutoAttacking || Player.Spellbook.IsCastingSpell)
             {
                 return;
             }
@@ -794,7 +794,7 @@ namespace jesuisFiora
                         OrbwalkToPassive(aaTarget, passive);
                     }
                 }
-                Orbwalker.ForcedTarget = aaTarget;
+                Orbwalker.ForcedTarget =(aaTarget;
             }
 
             var target = GetTarget();

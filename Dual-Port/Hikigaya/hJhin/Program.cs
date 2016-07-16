@@ -7,7 +7,7 @@ using hJhin.Champions;
 using EloBuddy;
 using LeagueSharp.SDK;
 
-namespace hJhin
+ namespace hJhin
 {
     class Program
     {

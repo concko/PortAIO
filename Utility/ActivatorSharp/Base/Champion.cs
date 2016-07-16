@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using LeagueSharp;
 using EloBuddy;
 
-namespace Activators.Base
+ namespace Activators.Base
 {
     public class Champion
     {

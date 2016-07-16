@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace Marksman.Utils
+ namespace Marksman.Utils
 {
 
     public static class CData

@@ -15,7 +15,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Shaco
     {
@@ -70,7 +70,7 @@ namespace UnderratedAIO.Champions
                 lastBox = Environment.TickCount;
             }
         }
-
+        
         private void Game_OnGameUpdate(EventArgs args)
         {
             var target = TargetSelector.GetTarget(Q.Range + player.MoveSpeed*3, DamageType.Physical);
@@ -78,11 +78,11 @@ namespace UnderratedAIO.Champions
                 CombatHelper.IsFacing(target, player.Position) &&
                 Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             if (!ShacoClone)
@@ -104,8 +104,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

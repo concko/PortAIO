@@ -2,7 +2,7 @@
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
-namespace Jayce
+ namespace Jayce
 {
     class MenuConfig : Helper
     {

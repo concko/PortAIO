@@ -6,7 +6,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace AutoLevelup
+ namespace AutoLevelup
 {
     class Program
     {

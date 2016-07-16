@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace FreshBooster.Champion
+ namespace FreshBooster.Champion
 {
     class Bard
     {
@@ -210,7 +210,7 @@ namespace FreshBooster.Champion
             GameObject.OnDelete += GameObject_OnDelete;
             Spellbook.OnCastSpell += Spellbook_OnCastSpell;
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             try

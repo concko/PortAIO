@@ -10,7 +10,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Syndra
+ namespace Syndra
 {
     public static class OrbManager
     {

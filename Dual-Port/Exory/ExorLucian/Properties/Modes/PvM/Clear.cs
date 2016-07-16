@@ -9,7 +9,7 @@ using Geometry = ExorAIO.Utilities.Geometry;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Lucian
+ namespace ExorAIO.Champions.Lucian
 {
     /// <summary>
     ///     The logics class.

@@ -14,7 +14,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Poppy
     {
@@ -44,7 +44,7 @@ namespace UnderratedAIO.Champions
             }
         }
 
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             var targetf = TargetSelector.GetTarget(1000, DamageType.Magical);
@@ -67,7 +67,7 @@ namespace UnderratedAIO.Champions
                     else if (!hasFlash)
                     {
                         Combo();
-                        Orbwalker.OrbwalkTo(Game.CursorPos);
+                        Orbwalker.MoveTo(Game.CursorPos);
                         //Orbwalking.Orbwalk(targetf, Game.CursorPos, 90, 90);
                     }
                 }
@@ -83,8 +83,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

@@ -6,7 +6,7 @@ using LeagueSharp.Common;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Handlers
+ namespace Activators.Handlers
 {
     internal class Trinkets
     {

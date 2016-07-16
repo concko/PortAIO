@@ -20,7 +20,7 @@ namespace OneKeyToWin_AIO_Sebby
         private static readonly Menu Config = Program.Config;
         private static Spell E, Q, R, W, R1;
         private static float QMANA, WMANA, EMANA, RMANA;
-
+        
         public static bool Esmart = false;
         public static float OverKill;
         public static OKTWdash Dash;
@@ -152,10 +152,10 @@ namespace OneKeyToWin_AIO_Sebby
 
             if (!getCheckBoxItem(miscMenu, "QWlogic") || !Player.HasBuff("gravesbasicattackammo1"))
             {
-                if (Program.LagFree(2) && Q.IsReady() && !Orbwalker.IsAutoAttacking && getCheckBoxItem(qMenu, "autoQ"))
+                if (Program.LagFree(2) && Q.IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking && getCheckBoxItem(qMenu, "autoQ"))
                     //BERB
                     LogicQ();
-                if (Program.LagFree(3) && W.IsReady() && !Orbwalker.IsAutoAttacking && getCheckBoxItem(wMenu, "autoW"))
+                if (Program.LagFree(3) && W.IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking && getCheckBoxItem(wMenu, "autoW"))
                     LogicW();
             }
             if (Program.LagFree(4) && R.IsReady() && getCheckBoxItem(rMenu, "autoR"))

@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using PortAIO.Champion.Teemo;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace SharpShooter.Plugins
+ namespace SharpShooter.Plugins
 {
     public class Teemo
     {
@@ -97,7 +97,7 @@ namespace SharpShooter.Plugins
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
         {
             if (target.Type == GameObjectType.AIHeroClient)
@@ -168,7 +168,7 @@ namespace SharpShooter.Plugins
                             }
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     //Laneclear
                     if (getCheckBoxItem(laneClearMenu, "qClear"))

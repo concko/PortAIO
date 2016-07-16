@@ -12,7 +12,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace NoobJaxReloaded
+ namespace NoobJaxReloaded
 {
     class Program
     {
@@ -137,7 +137,7 @@ namespace NoobJaxReloaded
             }
             Combo();
         }
-
+        
         private static void Combo(bool anyTarget = false)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

@@ -4,7 +4,7 @@ using EloBuddy;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace OAnnie
+ namespace OAnnie
 {
     internal class DrawManager : Annie
     {

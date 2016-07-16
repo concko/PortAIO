@@ -30,7 +30,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace yol0Thresh
+ namespace yol0Thresh
 {
     public delegate void OnGapcloseH(ActiveGapcloser gapcloser);
 

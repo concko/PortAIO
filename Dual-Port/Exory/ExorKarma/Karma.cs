@@ -6,7 +6,7 @@ using LeagueSharp.SDK;
 using EloBuddy.SDK;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Karma
+ namespace ExorAIO.Champions.Karma
 {
     /// <summary>
     ///     The champion class.
@@ -80,7 +80,7 @@ namespace ExorAIO.Champions.Karma
                 Logics.Clear(args);
             }
         }
-
+        
         /// <summary>
         ///     Called when a <see cref="AttackableUnit" /> takes/gives damage.
         /// </summary>

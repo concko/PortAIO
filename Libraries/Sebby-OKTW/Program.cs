@@ -18,6 +18,7 @@ using Spell = LeagueSharp.Common.Spell;
 using SPrediction;
 using EloBuddy.SDK.Spells;
 
+
 namespace SebbyLib
 {
     internal class Program
@@ -32,13 +33,11 @@ namespace SebbyLib
         private static float dodgeTime = Game.Time;
         public static List<AIHeroClient> Enemies = new List<AIHeroClient>(), Allies = new List<AIHeroClient>();
         public static AIHeroClient jungler = ObjectManager.Player;
-
         public static bool Farm
         {
             get
             {
-                return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                       Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
+                return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
                        Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass);
             }
         }
@@ -52,12 +51,7 @@ namespace SebbyLib
         {
             get
             {
-                return !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
-                       !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
-                       !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) &&
-                       !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) &&
-                       !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee) &&
-                       !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit);
+                return Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None);
             }
         }
 

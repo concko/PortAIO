@@ -25,7 +25,7 @@ using Utility = LeagueSharp.Common.Utility;
 // ReSharper disable MergeConditionalExpression
 // ReSharper disable FunctionRecursiveOnAllPaths
 
-namespace iDZed.Utils
+ namespace iDZed.Utils
 {
     internal static class ShadowManager
     {
@@ -148,7 +148,7 @@ namespace iDZed.Utils
                 }
             }
         }
-
+        
         /// <summary>
         ///     Checks if the player can go to the selected Shadow.
         /// </summary>

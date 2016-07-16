@@ -7,7 +7,7 @@ using LeagueSharp.SDK;
 
 #endregion
 
-namespace Arcane_Ryze.Handler
+ namespace Arcane_Ryze.Handler
 {
     internal class Usables
     {

@@ -13,7 +13,7 @@ namespace iKalistaReborn.Utils
         private static int height;
 
         private static int width;
-
+        
         private static int xOffset;
 
         private static int yOffset;

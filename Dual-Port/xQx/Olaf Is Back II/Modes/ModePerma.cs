@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace OlafxQx.Modes
+ namespace OlafxQx.Modes
 {
     internal class ModePerma
     {
@@ -21,7 +21,7 @@ namespace OlafxQx.Modes
         {
             Game.OnUpdate += GameOnOnUpdate;
         }
-
+        
         private static void GameOnOnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && !ObjectManager.Player.LSIsRecalling())

@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace UniversalGankAlerter
+ namespace UniversalGankAlerter
 {
     internal class Program
     {

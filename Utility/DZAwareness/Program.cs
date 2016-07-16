@@ -1,7 +1,7 @@
 ﻿using System;
 using LeagueSharp.Common;
 
-namespace DZAwarenessAIO
+ namespace DZAwarenessAIO
 {
     class Program
     {

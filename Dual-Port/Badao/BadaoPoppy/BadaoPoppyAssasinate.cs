@@ -10,7 +10,7 @@ using Color = System.Drawing.Color;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace BadaoKingdom.BadaoChampion.BadaoPoppy
+ namespace BadaoKingdom.BadaoChampion.BadaoPoppy
 {
     public static class BadaoPoppyAssasinate
     {
@@ -53,7 +53,7 @@ namespace BadaoKingdom.BadaoChampion.BadaoPoppy
             if (!BadaoPoppyHelper.AssasinateActive())
                 return;
             var selectedTarget = TargetSelector.SelectedTarget;
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             if (!selectedTarget.BadaoIsValidTarget())
                 return;
             if (BadaoPoppyHelper.UseRComboKillable())

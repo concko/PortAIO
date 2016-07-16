@@ -9,10 +9,11 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace HastaKalistaBaby
+ namespace HastaKalistaBaby
 {
     internal class Helper
     {
+        
         private static Menu r = Program.r;
         private static readonly Dictionary<float, float> IncDamage = new Dictionary<float, float>();
         private static readonly Dictionary<float, float> InstDamage = new Dictionary<float, float>();

@@ -16,7 +16,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace HeavenStrikeRiven
+ namespace HeavenStrikeRiven
 {
     public class Program
     {
@@ -88,7 +88,7 @@ namespace HeavenStrikeRiven
 
             Game.OnUpdate += Game_OnGameUpdate;
             Orbwalker.OnPostAttack += AfterAttack;
-            Orbwalker.OnAttack += OnAttack;
+            Orbwalker.OnPreAttack += OnAttack;
             Obj_AI_Base.OnProcessSpellCast += oncast;
             Obj_AI_Base.OnPlayAnimation += Obj_AI_Base_OnPlayAnimation;
             Interrupter2.OnInterruptableTarget += interrupt;
@@ -185,7 +185,7 @@ namespace HeavenStrikeRiven
                 fastharass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -221,7 +221,6 @@ namespace HeavenStrikeRiven
         }
         private static void AfterAttack(AttackableUnit target, EventArgs args)
         {
-            TTTar = target;
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
                 if (HasItem())
@@ -256,7 +255,7 @@ namespace HeavenStrikeRiven
                     E.Cast(target.Position);
                 }
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 if (HasItem() && UseTiamatClear)
                 {
@@ -368,6 +367,7 @@ namespace HeavenStrikeRiven
                 if (target.LSIsValidTarget(125 + Player.BoundingRadius + target.BoundingRadius)) W.Cast();
             }
         }
+        
         private static void oncast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             var spell = args.SData;
@@ -441,7 +441,7 @@ namespace HeavenStrikeRiven
            EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Player.Position.LSExtend(Game.CursorPos, Player.LSDistance(Game.CursorPos) + 500));
             if (Qstrangecancel) Chat.Say("/d");
         }
-        public static void OnAttack(AttackableUnit target, EventArgs args)
+        public static void OnAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
@@ -453,8 +453,8 @@ namespace HeavenStrikeRiven
         private static void Burst()
         {
             var target = TargetSelector.SelectedTarget;
-            Orbwalker.ForcedTarget = target;
-            Orbwalker.OrbwalkTo(target.ServerPosition);
+            Orbwalker.ForcedTarget =(target);
+            Orbwalker.MoveTo(target.ServerPosition);
             if (target != null && target.LSIsValidTarget() && !target.IsZombie)
             {
                 if (Orbwalking.InAutoAttackRange(target) && (!R.IsReady() || (R.IsReady() && R.Instance.Name == R1name)))
@@ -639,7 +639,7 @@ namespace HeavenStrikeRiven
             if (waitQ == true && TTTar.LSIsValidTarget())
             {
                 //if (Utils.GameTimeTickCount - cQ >= 350 + Player.AttackCastDelay - Game.Ping / 2)
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     if (Qmode == 0 && TTTar != null)
                         Q.Cast(TTTar.Position);

@@ -15,7 +15,7 @@ using SkillshotType = LeagueSharp.SDK.Enumerations.SkillshotType;
 using Spell = LeagueSharp.SDK.Spell;
 using EloBuddy;
 
-namespace Challenger_Series.Utils
+ namespace Challenger_Series.Utils
 {
     public static class Prediction
     {

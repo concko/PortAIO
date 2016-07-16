@@ -3,7 +3,7 @@ using EloBuddy.SDK;
 using SharpDX;
 using System;
 
-namespace EBPredictioner
+ namespace EBPredictioner
 {
     public enum SpellType
     {
@@ -140,7 +140,7 @@ namespace EBPredictioner
 
         public AIHeroClient Target
         {
-            get { return TargetSelector.GetTarget(Range, DamageType.Physical, null, true); }
+            get { return TargetSelector.GetTarget(Range, DamageType.Physical); }
         }
 
         internal static AIHeroClient MyHero

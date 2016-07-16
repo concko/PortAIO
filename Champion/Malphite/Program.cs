@@ -10,7 +10,7 @@ using LeagueSharp.Common;
 using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace ElEasy.Plugins
+ namespace ElEasy.Plugins
 {
     public class Malphite
     {
@@ -502,7 +502,7 @@ namespace ElEasy.Plugins
                 }
             }
         }
-
+        
         private void OnUpdate(EventArgs args)
         {
             if (Player.IsDead)
@@ -515,8 +515,7 @@ namespace ElEasy.Plugins
                 OnCombo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnLaneclear();
                 OnJungleclear();

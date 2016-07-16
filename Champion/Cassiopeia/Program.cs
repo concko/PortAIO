@@ -7,12 +7,13 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 using Champion = SCommon.PluginBase.Champion;
 using Spell = LeagueSharp.Common.Spell;
-using TargetSelector = SCommon.TS.TargetSelector;
+
 
 namespace SAutoCarry.Champions
 {
     public class Cassiopeia : Champion
     {
+        
         public static Menu rootMenu, comboMenu, harassMenu, laneClearMenu, miscMenu;
 
         public Cassiopeia() : base("Cassiopeia", "SAutoCarry - Cassiopeia")
@@ -166,8 +167,7 @@ namespace SAutoCarry.Champions
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }

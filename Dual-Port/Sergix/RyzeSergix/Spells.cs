@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using SharpDX;
 using EloBuddy;
 
-namespace RyzeAssembly
+ namespace RyzeAssembly
 {
     class Spells
     {

@@ -18,6 +18,7 @@ namespace Slutty_Gnar_Reworked
         private static readonly AIHeroClient Player = ObjectManager.Player;
         public static int rcast { get; set; }
         public static int lastq { get; set; }
+        
 
         public static bool getCheckBoxItem(Menu m, string item)
         {
@@ -209,8 +210,7 @@ namespace Slutty_Gnar_Reworked
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
                 JungleClear();
@@ -232,11 +232,11 @@ namespace Slutty_Gnar_Reworked
                                                         en.Buffs.Any(buff => buff.Name == "gnarwproc" && buff.Count == 2));
             if (qSpell && target != null)
             {
-                Orbwalker.ForcedTarget = target;
+                Orbwalker.ForcedTarget =(target);
             }
             else
             {
-                Orbwalker.ForcedTarget = null;
+                Orbwalker.ForcedTarget =(null);
             }
 
             #endregion

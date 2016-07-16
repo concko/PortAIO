@@ -12,7 +12,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace OlafxQx.Modes
+ namespace OlafxQx.Modes
 {
     internal static class ModeFlee
     {
@@ -41,7 +41,7 @@ namespace OlafxQx.Modes
                 }
             };
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))
@@ -50,7 +50,7 @@ namespace OlafxQx.Modes
             }
 
             EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-            Orbwalker.DisableAttacking = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee);
+            PortAIO.OrbwalkerManager.SetAttack(!(Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee)));
             
 
             var t = TargetSelector.GetTarget(Champion.PlayerSpells.Q.Range, DamageType.Physical);

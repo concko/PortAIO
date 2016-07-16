@@ -7,7 +7,7 @@ using Activators.Base;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Handlers
+ namespace Activators.Handlers
 {
     public class Projections
     {

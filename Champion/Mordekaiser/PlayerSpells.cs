@@ -7,7 +7,7 @@ using LeagueSharp.Common;
 using Damage = LeagueSharp.Common.Damage;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace Mordekaiser
+ namespace Mordekaiser
 {
     internal class PlayerSpells
     {
@@ -107,7 +107,7 @@ namespace Mordekaiser
                 IgniteOnTarget(t);
             }
         }
-
+        
         private static void SetSmiteSlot()
         {
             foreach (var spell in

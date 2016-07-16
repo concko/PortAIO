@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace Thresh___The_Chain_Warden
+ namespace Thresh___The_Chain_Warden
 {
     class Program
     {
@@ -282,6 +282,7 @@ namespace Thresh___The_Chain_Warden
             {
             }
         }
+        
 
         private static void OnBeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {

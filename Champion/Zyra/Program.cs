@@ -11,7 +11,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace D_Zyra
+ namespace D_Zyra
 {
     internal class Program
     {
@@ -152,8 +152,7 @@ namespace D_Zyra
             {
                 Harass();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var lc = 100*(_player.Mana/_player.MaxMana) > getSliderItem(farmMenu, "lanemana");
                 if (lc)
@@ -169,9 +168,11 @@ namespace D_Zyra
             }
 
             _player = ObjectManager.Player;
-            Orbwalker.DisableAttacking = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
             KillSteal();
         }
+
+        
 
         private static HitChance Echange()
         {

@@ -35,11 +35,31 @@ namespace Slutty_ryze
             return m[item].Cast<ComboBox>().CurrentValue;
         }
 
-        private static bool QSpell { get { return getCheckBoxItem(MenuManager.combo1Menu, "useQ"); } }
-        private static bool ESpell { get { return getCheckBoxItem(MenuManager.combo1Menu, "useE"); } }
-        private static bool WSpell { get { return getCheckBoxItem(MenuManager.combo1Menu, "useW"); } }
-        private static bool RSpell { get { return getCheckBoxItem(MenuManager.combo1Menu, "useR"); } }
-        private static bool RwwSpell { get { return getCheckBoxItem(MenuManager.combo1Menu, "useRww"); } }
+        private static bool QSpell
+        {
+            get { return getCheckBoxItem(MenuManager.combo1Menu, "useQ"); }
+        }
+
+        private static bool ESpell
+        {
+            get { return getCheckBoxItem(MenuManager.combo1Menu, "useE"); }
+        }
+
+        private static bool WSpell
+        {
+            get { return getCheckBoxItem(MenuManager.combo1Menu, "useW"); }
+        }
+
+        private static bool RSpell
+        {
+            get { return getCheckBoxItem(MenuManager.combo1Menu, "useR"); }
+        }
+
+        private static bool RwwSpell
+        {
+            get { return getCheckBoxItem(MenuManager.combo1Menu, "useRww"); }
+        }
+
         private static readonly Random Seeder = new Random();
 
         //struct MinionHealthPerSecond
@@ -77,21 +97,17 @@ namespace Slutty_ryze
 
         public static void LaneClear()
         {
-            if (GlobalManager.GetPassiveBuff == 4
-                && !GlobalManager.GetHero.HasBuff("RyzeR")
-                && getCheckBoxItem(MenuManager.laneMenu, "passiveproc"))
+            if (!getKeyBindItem(MenuManager.laneMenu, "disablelane"))
                 return;
 
             var qlchSpell = getCheckBoxItem(MenuManager.laneMenu, "useQlc");
             var elchSpell = getCheckBoxItem(MenuManager.laneMenu, "useElc");
             var wlchSpell = getCheckBoxItem(MenuManager.laneMenu, "useWlc");
 
-            var q2LSpell = getCheckBoxItem(MenuManager.laneMenu, "useQ2L");
-            var e2LSpell = getCheckBoxItem(MenuManager.laneMenu, "useE2L");
-            var w2LSpell = getCheckBoxItem(MenuManager.laneMenu, "useW2L");
+            var qlcSpell = getCheckBoxItem(MenuManager.laneMenu, "useQ2L");
+            var elcSpell = getCheckBoxItem(MenuManager.laneMenu, "useE2L");
+            var wlcSpell = getCheckBoxItem(MenuManager.laneMenu, "useW2L");
 
-            var rSpell = getCheckBoxItem(MenuManager.laneMenu, "useRl");
-            var rSlider = getSliderItem(MenuManager.laneMenu, "rMin");
             var minMana = getSliderItem(MenuManager.laneMenu, "useEPL");
 
             var minionCount = MinionManager.GetMinions(GlobalManager.GetHero.Position, Champion.Q.Range, MinionTypes.All,
@@ -101,14 +117,24 @@ namespace Slutty_ryze
 
             foreach (var minion in minionCount)
             {
-                if (!GlobalManager.CheckMinion(minion)) continue;
 
-                var minionHp = minion.Health;// Reduce Calls and add in randomization buffer.
-                //if (GlobalManager.Config.Item("doHuman"))
-                //    minionHp = minion.Health * (1 + (Seeder.Next(GlobalManager.Config.Item("minCreepHPOffset").GetValue<Slider>().Value, GlobalManager.Config.Item("maxCreepHPOffset").GetValue<Slider>().Value) / 100.0f));//Randomioze Minion Hp from min to max hp less than damage
+                if (qlcSpell && Champion.Q.IsReady())
+                {
+                    Champion.Q.Cast(minion);
+                }
+
+                if (elcSpell && Champion.E.IsReady() && minion.IsValidTarget(Champion.E.Range))
+                {
+                    Champion.E.Cast(minion);
+                }
+
+                if (wlcSpell && Champion.W.IsReady() && minion.IsValidTarget(Champion.W.Range))
+                {
+                    Champion.W.Cast(minion);
+                }
+                var minionHp = minion.Health; // Reduce Calls and add in randomization buffer.
+
                 if (minion.IsDead) return;
-
-                SpellSequence(minion, "useQ2L", "useE2L", "useW2L", "useRl");
 
                 if (qlchSpell
                     && Champion.Q.IsReady()
@@ -126,13 +152,7 @@ namespace Slutty_ryze
                          && Champion.E.IsReady()
                          && minion.LSIsValidTarget(Champion.E.Range)
                          && minionHp <= Champion.E.GetDamage(minion) && GlobalManager.CheckMinion(minion))
-                    Champion.E.CastOnUnit(minion);
-
-                if (rSpell
-                    && Champion.R.IsReady()
-                    && minion.LSIsValidTarget(Champion.Q.Range)
-                    && minionCount.Count > rSlider && GlobalManager.CheckMinion(minion))
-                    Champion.R.Cast();
+                    Champion.E.Cast(minion);
 
 
             }
@@ -141,18 +161,35 @@ namespace Slutty_ryze
         //get assembly version
         public static void JungleClear()
         {
+
+            var qlchSpell = getCheckBoxItem(MenuManager.jungleMenu, "useQj");
+            var elchSpell = getCheckBoxItem(MenuManager.jungleMenu, "useEj");
+            var wlchSpell = getCheckBoxItem(MenuManager.jungleMenu, "useWj");
             //Convert to use new system later
             var mSlider = getSliderItem(MenuManager.jungleMenu, "useJM");
 
-            //  if (GlobalManager.GetHero.ManaPercent < mSlider)
-            //    return;
+            if (GlobalManager.GetHero.ManaPercent < mSlider)
+                return;
 
 
             var jungle = MinionManager.GetMinions(Champion.Q.Range, MinionTypes.All, MinionTeam.Neutral,
                 MinionOrderTypes.MaxHealth);
             foreach (var jung in jungle)
             {
-                SpellSequence(jung, "useQj", "useWj", "useEj", "useRj");
+                if (qlchSpell && Champion.Q.IsReady())
+                {
+                    Champion.Q.Cast(jung);
+                }
+
+                if (elchSpell && Champion.E.IsReady())
+                {
+                    Champion.E.Cast(jung);
+                }
+
+                if (wlchSpell && Champion.W.IsReady())
+                {
+                    Champion.W.Cast(jung);
+                }
             }
 
         }
@@ -161,6 +198,7 @@ namespace Slutty_ryze
         public static void LastHit()
         {
             #region Old
+
             var qlchSpell = getCheckBoxItem(MenuManager.lastMenu, "useQl2h");
             var elchSpell = getCheckBoxItem(MenuManager.lastMenu, "useEl2h");
             var wlchSpell = getCheckBoxItem(MenuManager.lastMenu, "useWl2h");
@@ -170,9 +208,7 @@ namespace Slutty_ryze
 
             foreach (var minion in minionCount)
             {
-                var minionHp = minion.Health;// Reduce Calls and add in randomization buffer.
-                //if (GlobalManager.Config.Item("doHuman"))
-                //    minionHp = minion.Health * (1 + (Seeder.Next(GlobalManager.Config.Item("minCreepHPOffset").GetValue<Slider>().Value, GlobalManager.Config.Item("maxCreepHPOffset").GetValue<Slider>().Value) / 100.0f));//Randomioze Minion Hp from min to max hp less than damage
+                var minionHp = minion.Health; // Reduce Calls and add in randomization buffer.
 
                 if (qlchSpell
                     && Champion.Q.IsReady()
@@ -184,34 +220,15 @@ namespace Slutty_ryze
                     && Champion.W.IsReady()
                     && minion.LSIsValidTarget(Champion.W.Range - 10)
                     && minionHp < Champion.W.GetDamage(minion))
-                    Champion.W.CastOnUnit(minion);
+                    Champion.W.Cast(minion);
 
                 if (elchSpell
                     && Champion.E.IsReady()
                     && minion.LSIsValidTarget(Champion.E.Range - 10)
                     && minionHp < Champion.E.GetDamage(minion))
-                    Champion.E.CastOnUnit(minion);
+                    Champion.E.Cast(minion);
             }
-            #endregion
-            #region New
-            //New verion
-            //var bSpells = new bool[3];
-            //bSpells[0] = GlobalManager.Config.Item("useQl2h");
-            //bSpells[1] = GlobalManager.Config.Item("useEl2h");
-            //bSpells[2] = GlobalManager.Config.Item("useWl2h");
 
-
-            //var minionCount = MinionManager.GetMinions(GlobalManager.GetHero.Position, Champion.Q.Range, MinionTypes.All,
-            //    MinionTeam.NotAlly);
-
-            //var minionHpOffset = 1.0f;
-            //if (GlobalManager.Config.Item("doHuman"))
-            //    minionHpOffset = (1 + (Seeder.Next(GlobalManager.Config.Item("minCreepHPOffset").GetValue<Slider>().Value, GlobalManager.Config.Item("maxCreepHPOffset").GetValue<Slider>().Value) / 100.0f));//Randomioze Minion Hp from min to max hp less than damage
-
-            //foreach (var minion in minionCount)
-            //{
-            //    StartComboSequence(minion, bSpells, new[] { 'Q', 'W', 'E' }, minionHpOffset);
-            //}
             #endregion
         }
 
@@ -237,12 +254,12 @@ namespace Slutty_ryze
             if (wSpell
                 && Champion.W.IsReady()
                 && target.LSIsValidTarget(Champion.W.Range))
-                Champion.W.CastOnUnit(target);
+                Champion.W.Cast(target);
 
             if (eSpell
                 && Champion.E.IsReady()
                 && target.LSIsValidTarget(Champion.E.Range))
-                Champion.E.CastOnUnit(target);
+                Champion.E.Cast(target);
 
             var minionCount = MinionManager.GetMinions(GlobalManager.GetHero.Position, Champion.Q.Range, MinionTypes.All,
                 MinionTeam.NotAlly);
@@ -260,6 +277,7 @@ namespace Slutty_ryze
                     Champion.Q.Cast(minion);
                 }
             }
+
             #endregion
 
 
@@ -310,408 +328,150 @@ namespace Slutty_ryze
             }
         }
 
-        public static void SpellSequence(Obj_AI_Base target, string Q, string W, string E, string R)
+        public static bool HasPassive1()
         {
-            var menu = MenuManager.jungleMenu;
-
-            var qSpell = false;
-            var wSpell = false;
-            var eSpell = false;
-            var rSpell = false;
-
-            if (Q.Contains("2"))
-            {
-                menu = MenuManager.laneMenu;
-                qSpell = getCheckBoxItem(MenuManager.laneMenu, "useQ2L");
-                wSpell = getCheckBoxItem(MenuManager.laneMenu, "useW2L");
-                eSpell = getCheckBoxItem(MenuManager.laneMenu, "useE2L");
-                rSpell = getCheckBoxItem(MenuManager.laneMenu, "useRl");
-            }
-            else
-            {
-                menu = MenuManager.jungleMenu;
-                qSpell = getCheckBoxItem(MenuManager.jungleMenu, "useQj");
-                wSpell = getCheckBoxItem(MenuManager.jungleMenu, "useWj");
-                eSpell = getCheckBoxItem(MenuManager.jungleMenu, "useEj");
-                rSpell = getCheckBoxItem(MenuManager.jungleMenu, "useRj");
-            }
-
-            switch (getBoxItem(MenuManager.combo1Menu, "combooptions"))
-            {
-                case 0:
-                    if (target.LSIsValidTarget(Champion.Q.Range))
-                    {
-                        if (GlobalManager.GetPassiveBuff <= 1 && !GlobalManager.GetHero.HasBuff("ryzepassivecharged"))
-                        {
-                            if (qSpell)
-                                CastQ(target, false);
-                            if (eSpell)
-                                CastE(target, false);
-                            if (wSpell)
-                                CastW(target, false);
-                            if (rSpell)
-                                CastR(target, false);
-                        }
-
-                        if (GlobalManager.GetPassiveBuff == 2)
-                        {
-                            if (qSpell)
-                                CastQn(target, false);
-                            if (wSpell)
-                                CastW(target, false);
-                            if (eSpell)
-                                CastE(target, false);
-                            if (rSpell)
-                                CastR(target, false);
-
-                        }
-
-
-                        if (GlobalManager.GetPassiveBuff == 3)
-                        {
-                            if (qSpell)
-                                CastQn(target, false);
-                            if (eSpell)
-                                CastE(target, false);
-                            if (wSpell)
-                                CastW(target, false);
-                            if (rSpell)
-                                CastR(target, false);
-                        }
-
-                        if (GlobalManager.GetPassiveBuff == 4)
-                        {
-                            if (wSpell)
-                                CastW(target, false);
-                            if (qSpell)
-                                CastQn(target, false);
-                            if (eSpell)
-                                CastE(target, false);
-                            if (rSpell)
-                                CastR(target, false);
-                        }
-
-                        if (GlobalManager.GetHero.HasBuff("ryzepassivecharged"))
-                        {
-                            if (wSpell)
-                                CastW(target, false);
-                            if (qSpell)
-                                CastQn(target, false);
-                            if (eSpell)
-                                CastE(target, false);
-                            if (rSpell)
-                                CastR(target, false);
-                        }
-
-                        if (Champion.R.IsReady() &&
-                            (GlobalManager.GetPassiveBuff == 4 || GlobalManager.GetHero.HasBuff("ryzepassivecharged")) &&
-                            rSpell)
-                        {
-                            if (!Champion.Q.IsReady() && !Champion.W.IsReady() && !Champion.E.IsReady())
-                            {
-                                Champion.R.Cast();
-                            }
-                        }
-                    }
-                    break;
-
-                case 1:
-                    if (target.LSIsValidTarget(Champion.Q.Range))
-                    {
-                        if (Champion.R.IsReady() || !Champion.R.IsReady())
-                        {
-                            if (GlobalManager.GetPassiveBuff <= 1 &&
-                                !GlobalManager.GetHero.HasBuff("ryzepassivecharged"))
-                            {
-                                if (rSpell)
-                                    CastR(target, false);
-                                if (eSpell)
-                                    CastE(target, false);
-                                if (qSpell)
-                                    CastQ(target, false);
-                                if (wSpell)
-                                    CastW(target, false);
-                            }
-
-                            if (GlobalManager.GetPassiveBuff == 2)
-                            {
-                                if (rSpell)
-                                    CastR(target, false);
-                                if (eSpell)
-                                    CastE(target, false);
-                                if (wSpell)
-                                    CastW(target, false);
-                                if (qSpell)
-                                    CastQn(target, false);
-                            }
-
-
-                            if (GlobalManager.GetPassiveBuff == 3)
-                            {
-                                if (wSpell)
-                                    CastW(target, false);
-                                if (rSpell)
-                                    CastR(target, false);
-                                if (qSpell)
-                                    CastQn(target, false);
-                                if (eSpell)
-                                    CastE(target, false);
-                            }
-
-                            if (GlobalManager.GetPassiveBuff == 4)
-                            {
-                                if (eSpell)
-                                    CastE(target, false);
-                                if (rSpell)
-                                    CastR(target, false);
-                                if (wSpell)
-                                    CastW(target, false);
-                                if (qSpell)
-                                    CastQn(target, false);
-                            }
-
-                            if (GlobalManager.GetHero.HasBuff("ryzepassivecharged"))
-                            {
-                                if (rSpell)
-                                    CastR(target, false);
-                                if (wSpell)
-                                    CastW(target, false);
-                                if (qSpell)
-                                    CastQn(target, false);
-                                if (eSpell)
-                                    CastE(target, false);
-                            }
-                        }
-
-                        if (Champion.R.IsReady() &&
-                            (GlobalManager.GetPassiveBuff == 4 ||
-                             GlobalManager.GetHero.HasBuff("ryzepassivecharged")) &&
-                            rSpell)
-                        {
-                            if (!Champion.Q.IsReady() && !Champion.W.IsReady() && !Champion.E.IsReady())
-                            {
-                                Champion.R.Cast();
-                            }
-                        }
-                    }
-                    break;
-            }
+            return Champion.Player.HasBuff("ryzeqiconnocharge");
         }
 
-        public static void ImprovedCombo()
+        public static bool HasPassive2()
         {
-            if (GlobalManager.GetHero.GetSpellSlot("summonerdot") == SpellSlot.Summoner1 || GlobalManager.GetHero.GetSpellSlot("summonerdot") == SpellSlot.Summoner2)
+            return Champion.Player.HasBuff("ryzeqiconhalfcharge");
+        }
+
+        public static bool HasPassive3()
+        {
+            return Champion.Player.HasBuff("ryzeqiconfullcharge");
+        }
+
+        public static void Combo()
+        {
+            var target = TargetSelector.GetTarget(Champion.Q.Range, DamageType.Magical);
+
+            if (!target.IsValidTarget())
+                return;
+            switch (getBoxItem(MenuManager.combo1Menu, "combomode"))
             {
-                Champion.SetIgniteSlot(GlobalManager.GetHero.GetSpellSlot("summonerdot"));
-            }
-            var target = TargetSelector.GetTarget(Champion.W.Range, DamageType.Magical);
-
-            if (!target.LSIsValidTarget(Champion.Q.Range) || !GlobalManager.CheckTarget(target)) return;
-
-            if (GlobalManager.GetHero.GetSpellSlot("summonerdot") == SpellSlot.Summoner1 || GlobalManager.GetHero.GetSpellSlot("summonerdot") == SpellSlot.Summoner2)
-            {
-                if (target.LSIsValidTarget(Champion.W.Range) && (target.Health < Champion.IgniteDamage(target) + Champion.W.GetDamage(target)))
-                    GlobalManager.GetHero.Spellbook.CastSpell(Champion.GetIgniteSlot(), target);
-            }
-
-            var bSpells = new bool[5];
-            var qSpell = getCheckBoxItem(MenuManager.combo1Menu, "useQ");
-            var eSpell = getCheckBoxItem(MenuManager.combo1Menu, "useE");
-            var wSpell = getCheckBoxItem(MenuManager.combo1Menu, "useW");
-            var rSpell = getCheckBoxItem(MenuManager.combo1Menu, "useR");
-            var rwwSpell = getCheckBoxItem(MenuManager.combo1Menu, "useRww");
-
-            if (target.LSIsValidTarget(Champion.Q.Range))
-            {
-                if (Champion.R.IsReady())
-                {
-                    if (GlobalManager.GetPassiveBuff < 1 && !GlobalManager.GetHero.HasBuff("ryzepassivecharged"))
+                case 1:
+                    if (Champion.Q.Level >= 1 && Champion.E.Level >= 1 && Champion.W.Level >= 1)
                     {
-                        CastQn(target);
-                        CastE(target);
-                        CastW(target);
-                        CastR(target);
-                    }
-
-                    if (GlobalManager.GetPassiveBuff == 1)
-                    {
-                        CastR(target);
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                    }
-
-                    if (GlobalManager.GetPassiveBuff == 2)
-                    {
-                        CastR(target);
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                    }
-
-                    if (GlobalManager.GetPassiveBuff == 3)
-                    {
-                        if (Champion.Q.IsReady())
+                        if (!target.IsValidTarget(Champion.E.Range - 20) && Champion.Q.IsReady())
                         {
-                            CastQn(target);
-                            CastW(target);
-                            CastQn(target);
-                            CastE(target);
-                            CastQn(target);
-                            CastW(target);
-                            CastQn(target);
-                            CastE(target);
+                            Champion.Q.Cast(target);
+                        }
+
+                        if (Champion.Q.IsReady() && HasPassive2() && (Champion.W.IsReady() || Champion.E.IsReady()))
+                        {
+                            if (Champion.E.IsReady())
+                            {
+                                Champion.E.Cast(target);
+                            }
+                            if (Champion.W.IsReady())
+                            {
+                                Champion.W.Cast(target);
+                            }
+                        }
+                        var expires = (Champion.Player.Spellbook.GetSpell(SpellSlot.E)).CooldownExpires;
+                        var CD =
+                            (expires -
+                             (Game.Time - 1));
+
+                        var expires1 = (Champion.Player.Spellbook.GetSpell(SpellSlot.W)).CooldownExpires;
+                        var CD1 =
+                            (expires1 -
+                             (Game.Time - 1));
+
+                        if (HasPassive2() && !Champion.E.IsReady() && !Champion.W.IsReady() && CD > 1.3 && CD1 > 1.3)
+                        {
+                            Champion.Qn.Cast(target);
+                        }
+
+                        if (HasPassive1() && !Champion.E.IsReady() && !Champion.W.IsReady())
+                        {
+                            Champion.Qn.Cast(target);
+                        }
+
+                        if (!HasPassive3())
+                        {
+
+                            Champion.E.Cast(target);
+                            Champion.W.Cast(target);
                         }
                         else
                         {
-                            CastR(target);
-                            CastW(target);
-                            CastQn(target);
-                            CastE(target);
-                            CastQn(target);
-                            CastW(target);
-                            CastQn(target);
-                            CastE(target);
+                            Champion.Qn.Cast(target);
                         }
                     }
-
-                    if (GlobalManager.GetPassiveBuff == 4)
+                    else
                     {
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                    }
-
-                }
-                else
-                {
-                    if (GlobalManager.GetPassiveBuff <= 2 && !GlobalManager.GetHero.HasBuff("ryzepassivecharged"))
-                    {
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                    }
-
-                    if (GlobalManager.GetPassiveBuff == 3)
-                    {
-                        CastQn(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                        CastQ(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                    }
-
-                    if (GlobalManager.GetPassiveBuff == 4)
-                    {
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                        CastQn(target);
-                        CastW(target);
-                        CastQn(target);
-                        CastE(target);
-                    }
-                }
-
-                if (GlobalManager.GetHero.HasBuff("ryzepassivecharged"))
-                {
-                    CastW(target);
-                    CastQn(target);
-                    CastE(target);
-                }
-            }
-
-            if (Champion.R.IsReady() && (GlobalManager.GetPassiveBuff == 4 || GlobalManager.GetHero.HasBuff("ryzepassivecharged")) && rSpell)
-            {
-                if (!Champion.Q.IsReady() && !Champion.W.IsReady() && !Champion.E.IsReady())
-                {
-                    Champion.R.Cast();
-                }
-            }
-        }
-
-        private static void StartComboSequence(Obj_AI_Base target, IReadOnlyList<bool> bSpells, IEnumerable<char> seq, float hpOffset = 1)
-        {
-            foreach (var com in seq)
-            {
-                var isMinion = target.IsMinion;
-                switch (com)
-                {
-                    case 'Q':
-                        if (!bSpells[0]) continue;
-
-                        if (target.IsValidTarget(Champion.Q.Range) && Champion.Q.IsReady() && !target.IsInvulnerable)
+                        if (target.IsValidTarget(Champion.Q.Range) && Champion.Q.IsReady())
                         {
-                            if (isMinion &&
-                                !(target.Health * hpOffset < Champion.Q.GetDamage(target) &&
-                                  GlobalManager.CheckMinion(target)))
-                                continue;
-                            if (GlobalManager.GetPassiveBuff > 2 ||
-                                GlobalManager.GetHero.HasBuff("RyzePassiveStack") && Champion.Q.IsReady())
-                                Champion.Qn.Cast(target);
-                            else
-                                Champion.Q.Cast(target);
+                            Champion.Q.Cast(target);
                         }
 
-                        continue;
+                        if (target.IsValidTarget(Champion.W.Range) && Champion.W.IsReady())
+                        {
+                            Champion.W.Cast(target);
+                        }
 
-                    case 'W':
-                        if (!bSpells[1]) continue;
+                        if (target.IsValidTarget(Champion.E.Range) && Champion.E.IsReady())
+                        {
+                            Champion.E.Cast(target);
+                        }
+                    }
+                    break;
 
-                        if (target.IsValidTarget(Champion.W.Range) && bSpells[1] && Champion.W.IsReady() && !target.IsInvulnerable)
-                            if (isMinion && !(target.Health * hpOffset < Champion.W.GetDamage(target) && GlobalManager.CheckMinion(target))) continue;
-                        Champion.W.Cast(target);
+                case 0:
+                    if (HasPassive3() && target.IsValidTarget(Champion.Q.Range) && Champion.Q.IsReady())
+                    {
+                        Champion.Qn.Cast(target);
+                    }
 
-                        continue;
+                    if (Champion.Player.HealthPercent <= getSliderItem(MenuManager.combo1Menu, "forcehpshield"))
+                    {
+                        if (!HasPassive3())
+                        {
 
-                    case 'E':
-                        if (!bSpells[2]) continue;
+                            Champion.E.Cast(target);
+                            Champion.W.Cast(target);
+                        }
+                        else
+                        {
+                            Champion.Qn.Cast(target);
+                        }
+                        return;
+                    }
+                    if (Champion.Player.HealthPercent >
+                        getSliderItem(MenuManager.combo1Menu, "forcehpshield"))
+                    {
+                        if (Champion.E.IsReady() && Champion.W.IsReady() && !Champion.Q.IsReady())
+                        {
+                            Champion.E.Cast(target);
+                        }
+                        if (Champion.Q.IsReady())
+                        {
+                            Champion.Q.Cast(target);
+                        }
 
-                        if (target.IsValidTarget(Champion.E.Range) && bSpells[2] && Champion.E.IsReady() && !target.IsInvulnerable)
-                            if (isMinion && !(target.Health * hpOffset < Champion.E.GetDamage(target) && GlobalManager.CheckMinion(target))) continue;
-                        Champion.E.Cast(target);
+                        if (Champion.E.IsReady() && target.IsValidTarget(Champion.E.Range) &&
+                            (!Champion.Q.IsReady() || Champion.Q.GetPrediction(target).CollisionObjects.Count != 0))
+                        {
+                            Champion.E.Cast(target);
+                        }
 
-
-                        continue;
-
-                    case 'R':
-                        if (!bSpells[3]) continue;
-                        if (!target.IsValidTarget(Champion.W.Range) || !(target.Health > (Champion.Q.GetDamage(target) + Champion.E.GetDamage(target))) || target.IsInvulnerable)
-                            continue;
-                        if (!Champion.R.IsReady()) continue;
-                        if (bSpells[4] && target.HasBuff("RyzeW") || !bSpells[4])
-                            Champion.R.Cast();
-                        continue;
-                }
-
+                        if (Champion.W.IsReady() && target.IsValidTarget(Champion.W.Range) &&
+                            (!Champion.Q.IsReady() || Champion.Q.GetPrediction(target).CollisionObjects.Count != 0))
+                        {
+                            if (Champion.E.IsReady() && Champion.W.IsReady() && !Champion.Q.IsReady())
+                                return;
+                            Champion.W.Cast(target);
+                        }
+                    }
+                    break;
             }
-
-            if (!Champion.R.IsReady() || GlobalManager.GetPassiveBuff != 4 || !bSpells[4]) return;
-            if (Champion.Q.IsReady() || Champion.W.IsReady() || Champion.E.IsReady()) return;
-
-            Champion.R.Cast();
         }
     }
 }
+
+
+
 #endregion

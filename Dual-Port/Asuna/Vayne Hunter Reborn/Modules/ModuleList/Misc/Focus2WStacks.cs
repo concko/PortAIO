@@ -8,7 +8,7 @@ using VayneHunter_Reborn.Modules.ModuleHelpers;
 using VayneHunter_Reborn.Utility.Helpers;
 using VayneHunter_Reborn.Utility.MenuUtility;
 
-namespace VayneHunter_Reborn.Modules.ModuleList.Misc
+ namespace VayneHunter_Reborn.Modules.ModuleList.Misc
 {
     class Focus2WStacks : IModule
     {
@@ -26,17 +26,17 @@ namespace VayneHunter_Reborn.Modules.ModuleList.Misc
         {
             return ModuleType.OnUpdate;
         }
-
+        
         public void OnExecute()
         {
             var target = HeroManager.Enemies.Find(en => en.LSIsValidTarget(ObjectManager.Player.AttackRange + 65f + 65f) && en.Has2WStacks());
             if (target != null)
             {
-                Orbwalker.ForcedTarget = target;
+                Orbwalker.ForcedTarget =(target);
             }
             else
             {
-                Orbwalker.ForcedTarget = null;
+                Orbwalker.ForcedTarget =(null);
             }
 
             if (Game.Time < 25 * 60 * 1000)
@@ -45,11 +45,11 @@ namespace VayneHunter_Reborn.Modules.ModuleList.Misc
 
                 if (ADC != null && Orbwalking.InAutoAttackRange(ADC))
                 {
-                    Orbwalker.ForcedTarget = target;
+                    Orbwalker.ForcedTarget =(target);
                 }
                 else
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                 }
             }
         }

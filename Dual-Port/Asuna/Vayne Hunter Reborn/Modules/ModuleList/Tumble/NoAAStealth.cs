@@ -8,7 +8,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace VayneHunter_Reborn.Modules.ModuleList.Tumble
+ namespace VayneHunter_Reborn.Modules.ModuleList.Tumble
 {
     class NoAAStealth : IModule
     {

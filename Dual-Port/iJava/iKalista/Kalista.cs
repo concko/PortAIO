@@ -22,6 +22,7 @@
 
 using System.Security.Cryptography.X509Certificates;
 
+
 namespace IKalista
 {
     using System;
@@ -50,9 +51,9 @@ namespace IKalista
         /// </summary>
         public static readonly Dictionary<SpellSlot, LeagueSharp.Common.Spell> spells = new Dictionary<SpellSlot, LeagueSharp.Common.Spell>
                                                                    {
-                                                                       { SpellSlot.Q, new LeagueSharp.Common.Spell(SpellSlot.Q, 1150) }, 
-                                                                       { SpellSlot.W, new LeagueSharp.Common.Spell(SpellSlot.W, 5200) }, 
-                                                                       { SpellSlot.E, new LeagueSharp.Common.Spell(SpellSlot.E, 950) }, 
+                                                                       { SpellSlot.Q, new LeagueSharp.Common.Spell(SpellSlot.Q, 1150) },
+                                                                       { SpellSlot.W, new LeagueSharp.Common.Spell(SpellSlot.W, 5200) },
+                                                                       { SpellSlot.E, new LeagueSharp.Common.Spell(SpellSlot.E, 950) },
                                                                        { SpellSlot.R, new LeagueSharp.Common.Spell(SpellSlot.R, 1200) }
                                                                    };
 
@@ -245,12 +246,12 @@ namespace IKalista
         private IEnumerable<Obj_AI_Base> GetCollisionMinions(Obj_AI_Base source, Vector3 targetPosition)
         {
             var input = new PredictionInput
-                            {
-                                Unit = source,
-                                Radius = spells[SpellSlot.Q].Width,
-                                Delay = spells[SpellSlot.Q].Delay,
-                                Speed = spells[SpellSlot.Q].Speed
-                            };
+            {
+                Unit = source,
+                Radius = spells[SpellSlot.Q].Width,
+                Delay = spells[SpellSlot.Q].Delay,
+                Speed = spells[SpellSlot.Q].Speed
+            };
 
             input.CollisionObjects[0] = CollisionableObjects.Minions;
 
@@ -338,7 +339,8 @@ namespace IKalista
 
             Obj_AI_Base.OnProcessSpellCast += this.OnProcessSpell;
 
-            Orbwalker.OnUnkillableMinion += Orbwalker_OnUnkillableMinion;
+            Orbwalker.OnUnkillableMinion += Orbwalker_OnUnkillableMinionEB;
+
 
             Drawing.OnDraw += args =>
                 {
@@ -434,9 +436,23 @@ namespace IKalista
                 };
         }
 
-        void Orbwalker_OnUnkillableMinion(Obj_AI_Base target, Orbwalker.UnkillableMinionArgs args)
+        void Orbwalker_OnUnkillableMinionEB(Obj_AI_Base target, Orbwalker.UnkillableMinionArgs args)
         {
             var killableMinion = target as Obj_AI_Base;
+            if (killableMinion == null || !spells[SpellSlot.E].IsReady())
+            {
+                return;
+            }
+
+            if (getCheckBoxItem(laneClearMenu, "eUnkillable") && Extensions.GetRendDamage(killableMinion) > killableMinion.GetTotalHealth() + 10 && spells[SpellSlot.E].CanCast(killableMinion) && killableMinion.HasBuff("KalistaExpungeMarker"))
+            {
+                spells[SpellSlot.E].Cast();
+            }
+        }
+
+        void Orbwalker_OnUnkillableMinion(AttackableUnit minion)
+        {
+            var killableMinion = minion as Obj_AI_Base;
             if (killableMinion == null || !spells[SpellSlot.E].IsReady())
             {
                 return;
@@ -627,7 +643,7 @@ namespace IKalista
             }
 
             if (spells[SpellSlot.Q].IsReady() && getCheckBoxItem(comboMenu, "useQ") && !ObjectManager.Player.IsDashing()
-                && !Orbwalker.IsAutoAttacking)
+                && !ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 foreach (var enemy in HeroManager.Enemies.Where(x => x.LSIsValidTarget(spells[SpellSlot.Q].Range)))
                 {
@@ -670,7 +686,7 @@ namespace IKalista
                     .FirstOrDefault();
 
             // ReSharper disable once ConstantNullCoalescingCondition
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
             this.DoWallFlee();
         }
 
@@ -682,7 +698,7 @@ namespace IKalista
             var spearTarget = TargetSelector.GetTarget(
                 spells[SpellSlot.Q].Range,
                 DamageType.Physical);
-            if (getCheckBoxItem(harassMenu, "useQH") && spells[SpellSlot.Q].IsReady() && !Orbwalker.IsAutoAttacking && !ObjectManager.Player.IsDashing())
+            if (getCheckBoxItem(harassMenu, "useQH") && spells[SpellSlot.Q].IsReady() && !ObjectManager.Player.Spellbook.IsAutoAttacking && !ObjectManager.Player.IsDashing())
             {
                 if (getCheckBoxItem(miscMenu, "qMana") && ObjectManager.Player.Mana < spells[SpellSlot.Q].Instance.SData.Mana + spells[SpellSlot.E].Instance.SData.Mana && spells[SpellSlot.Q].GetDamage(spearTarget) < spearTarget.GetTotalHealth())
                 {
@@ -704,7 +720,7 @@ namespace IKalista
                 }
 
                 var prediction = spells[SpellSlot.Q].GetSPrediction(spearTarget);
-                if (!Orbwalker.IsAutoAttacking && !ObjectManager.Player.IsDashing())
+                if (!ObjectManager.Player.Spellbook.IsAutoAttacking && !ObjectManager.Player.IsDashing())
                 {
                     switch (prediction.HitChance)
                     {
@@ -796,7 +812,7 @@ namespace IKalista
                             collisionMinion =>
                             collisionMinion.GetTotalHealth() < spells[SpellSlot.Q].GetDamage(collisionMinion))
                     where killcount >= getSliderItem(laneClearMenu, "minHitQ")
-                    where !Orbwalker.IsAutoAttacking && !ObjectManager.Player.IsDashing()
+                    where !ObjectManager.Player.Spellbook.IsAutoAttacking && !ObjectManager.Player.IsDashing()
                     select selectedMinion)
                 {
                     spells[SpellSlot.Q].Cast(selectedMinion.ServerPosition);
@@ -874,22 +890,22 @@ namespace IKalista
         /// </param>
         private void OnUpdate(EventArgs args)
         {
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo)) 
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
             {
                 OnCombo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass)) 
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
             {
                 OnHarass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit)) 
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
                 OnLastHit();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) 
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnLaneClear();
             }
@@ -943,7 +959,7 @@ namespace IKalista
         {
             var minions = MinionManager.GetMinions(ObjectManager.Player.Position, spells[SpellSlot.Q].Range);
 
-            if (minions.Count < 1 || !getCheckBoxItem(comboMenu, "useQMin") || Orbwalker.IsAutoAttacking || ObjectManager.Player.IsDashing())
+            if (minions.Count < 1 || !getCheckBoxItem(comboMenu, "useQMin") || ObjectManager.Player.Spellbook.IsAutoAttacking || ObjectManager.Player.IsDashing())
             {
                 return;
             }

@@ -13,7 +13,7 @@ using PredictionInput = SebbyLib.Prediction.PredictionInput;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace OneKeyToWin_AIO_Sebby
+ namespace OneKeyToWin_AIO_Sebby
 {
     internal class Orianna
     {

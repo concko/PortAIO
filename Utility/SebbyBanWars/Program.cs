@@ -10,7 +10,7 @@ using SharpDX.Direct3D9;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Sebby_Ban_War
+ namespace Sebby_Ban_War
 {
     class Program
     {

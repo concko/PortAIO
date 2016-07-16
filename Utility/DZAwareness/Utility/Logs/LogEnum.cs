@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DZAwarenessAIO.Utility.Logs
+ namespace DZAwarenessAIO.Utility.Logs
 {
     /// <summary>
     /// The Log Severity enum

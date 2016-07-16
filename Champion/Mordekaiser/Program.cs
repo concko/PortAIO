@@ -5,7 +5,7 @@ using LeagueSharp.Common;
 using Mordekaiser.Events;
 using Mordekaiser.Logics;
 
-namespace Mordekaiser
+ namespace Mordekaiser
 {
     internal class Program
     {

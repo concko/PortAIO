@@ -5,7 +5,7 @@ using LeagueSharp.SDK;
 
 #endregion
 
-namespace Infected_Twitch
+ namespace Infected_Twitch
 {
     internal class Program
     {

@@ -16,7 +16,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 using LeagueSharp.SDK.Enumerations;
 
-namespace Tyler1
+ namespace Tyler1
 {
     class Program
     {
@@ -136,7 +136,7 @@ namespace Tyler1
             WCombo = Menu.Add("tyler1WCombo", new CheckBox("Use W in Combo", true)).CurrentValue;
             UseItems = Menu.Add("tyler1Items", new CheckBox("Use Items?", true)).CurrentValue;
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             var target = TargetSelector.GetTarget(E.Range, DamageType.Physical);
@@ -336,7 +336,7 @@ namespace Tyler1
             Vector3 Mouse = Game.CursorPos;
             if (!ObjectManager.Get<GameObject>().Any(x => x.Name.Equals("Draven_Base_Q_reticle_self.troy") && !x.IsDead) || !AutoCatch)
             {
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
             if (AutoCatch)
             {
@@ -349,7 +349,7 @@ namespace Tyler1
                     }
                     if (CatchOnlyCloseToMouse && AXE.Distance(Mouse) > MaxDistToMouse)
                     {
-                        Orbwalker.DisableMovement = false;
+                        PortAIO.OrbwalkerManager.SetMovement(true);
 
                         if (GameObjects.EnemyHeroes.Count(e => e.IsHPBarRendered && e.IsMelee && e.ServerPosition.Distance(AXE.Position) < 350) >= 1)
                         {
@@ -359,13 +359,13 @@ namespace Tyler1
                     }
                     if (AXE.Distance(Player.ServerPosition) > 60 && Orbwalker.CanMove)
                     {
-                        Orbwalker.DisableMovement = false;
-                        Orbwalker.OrbwalkTo(AXE.Position.Randomize());
-                        Orbwalker.DisableMovement = true;
+                        PortAIO.OrbwalkerManager.SetMovement(true);
+                        Orbwalker.MoveTo(AXE.Position.Randomize());
+                        PortAIO.OrbwalkerManager.SetMovement(false);
                     }
                     if (AXE.Distance(Player.ServerPosition) <= 70)
                     {
-                        Orbwalker.DisableMovement = false;
+                        PortAIO.OrbwalkerManager.SetMovement(true);
                     }
                 }
             }

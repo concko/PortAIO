@@ -6,7 +6,7 @@ using LeagueSharp.Common;
 using Dark_Star_Thresh.Core;
 using EloBuddy;
 
-namespace Dark_Star_Thresh.Drawings
+ namespace Dark_Star_Thresh.Drawings
 {
     class DrawDmg : Core.Core
     {

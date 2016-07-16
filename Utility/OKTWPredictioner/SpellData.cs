@@ -23,7 +23,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace OKTWPredictioner
+ namespace OKTWPredictioner
 {
     public class SpellData
     {

@@ -1,4 +1,4 @@
-﻿namespace SkyLv_Taric
+﻿ namespace SkyLv_Taric
 {
     using System;
 
@@ -70,7 +70,7 @@
         {
             Game.OnUpdate += Game_OnUpdate;
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass) || getKeyBindItem(SkyLv_Taric.Harass, "Taric.HarassActiveT"))

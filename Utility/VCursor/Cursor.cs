@@ -3,7 +3,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace VCursor
+ namespace VCursor
 {
     internal static class Cursor
     {

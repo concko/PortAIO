@@ -10,7 +10,7 @@ using SharpDX;
 using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace ElTristana
+ namespace ElTristana
 {
 
     #region
@@ -54,19 +54,13 @@ namespace ElTristana
             miscMenu = MenuInit.miscMenu,
             killstealMenu = MenuInit.killstealMenu;
 
-        public static string ScriptVersion
-        {
-            get { return typeof(Tristana).Assembly.GetName().Version.ToString(); }
-        }
+        public static String ScriptVersion => typeof(Tristana).Assembly.GetName().Version.ToString();
 
         #endregion
 
         #region Properties
 
-        private static AIHeroClient Player
-        {
-            get { return ObjectManager.Player; }
-        }
+        private static AIHeroClient Player => ObjectManager.Player;
         #endregion
 
         #region Public Methods and Operators
@@ -146,7 +140,7 @@ namespace ElTristana
                 }
             }
         }
-
+        
         private static void Orbwalker_OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             try
@@ -162,36 +156,36 @@ namespace ElTristana
                     var targeta = HeroManager.Enemies.Find(x => x.HasBuff("TristanaECharge") && x.LSIsValidTarget(spells[Spells.E].Range));
                     if (targeta == null)
                     {
-                        Orbwalker.ForcedTarget = null;
+                        Orbwalker.ForcedTarget =(null);
                         return;
                     }
                     if (Orbwalking.InAutoAttackRange(targeta))
                     {
-                        Orbwalker.ForcedTarget = targeta;
+                        Orbwalker.ForcedTarget =(targeta);
                     }
                     else
                     {
-                        Orbwalker.ForcedTarget = null;
+                        Orbwalker.ForcedTarget =(null);
                     }
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     var minion = args.Target as Obj_AI_Minion;
                     if (minion != null)
                     {
                         if (minion.HasBuff("TristanaECharge"))
                         {
-                            Orbwalker.ForcedTarget = minion;
+                            Orbwalker.ForcedTarget =(minion);
                         }
                         else
                         {
-                            Orbwalker.ForcedTarget = null;
+                            Orbwalker.ForcedTarget =(null);
                         }
                     }
                     else
                     {
-                        Orbwalker.ForcedTarget = null;
+                        Orbwalker.ForcedTarget =(null);
                     }
                 }
             }
@@ -209,7 +203,7 @@ namespace ElTristana
         {
             if (getCheckBoxItem(miscMenu, "ElTristana.Antigapcloser"))
             {
-                if (gapcloser.Sender.LSIsValidTarget(250f) && spells[Spells.R].IsReady())
+                if (spells[Spells.R].IsReady())
                 {
                     spells[Spells.R].Cast(gapcloser.Sender);
                 }
@@ -260,7 +254,7 @@ namespace ElTristana
             if (getCheckBoxItem(comboMenu, "ElTristana.Combo.Focus.E"))
             {
                 var passiveTarget = HeroManager.Enemies.Find(x => x.HasBuff("TristanaECharge") && x.LSIsValidTarget(spells[Spells.E].Range));
-                Orbwalker.ForcedTarget = passiveTarget ?? null;
+                Orbwalker.ForcedTarget =(passiveTarget ?? null);
             }
 
             if (spells[Spells.E].IsReady() && getCheckBoxItem(comboMenu, "ElTristana.Combo.E") && Player.ManaPercent > getSliderItem(comboMenu, "ElTristana.Combo.E.Mana"))
@@ -273,13 +267,13 @@ namespace ElTristana
                         if (comboMenu["ElTristana.E.On" + hero.NetworkId] != null && getEnemies)
                         {
                             spells[Spells.E].Cast(hero);
-                            Orbwalker.ForcedTarget = hero;
+                            Orbwalker.ForcedTarget =(hero);
                         }
 
                         if (comboMenu["ElTristana.E.On" + hero.NetworkId] != null && !getEnemies && Player.CountEnemiesInRange(1500) == 1)
                         {
                             spells[Spells.E].Cast(hero);
-                            Orbwalker.ForcedTarget = hero;
+                            Orbwalker.ForcedTarget =(hero);
                         }
                     }
                 }
@@ -297,7 +291,7 @@ namespace ElTristana
             {
                 if (spells[Spells.R].GetDamage(target)
                     + spells[Spells.E].GetDamage(target) * (0.3 * target.GetBuffCount("TristanaECharge") + 1)
-                    > target.Health)
+                    > target.Health + target.AttackShield + 75)
                 {
                     spells[Spells.R].Cast(target);
                 }
@@ -458,7 +452,7 @@ namespace ElTristana
                         if (harassMenu["ElTristana.E.On.Harass" + hero.NetworkId] != null && getEnemies)
                         {
                             spells[Spells.E].Cast(hero);
-                            Orbwalker.ForcedTarget = hero;
+                            Orbwalker.ForcedTarget =(hero);
                         }
                     }
                 }
@@ -521,11 +515,11 @@ namespace ElTristana
 
             if (eminion != null)
             {
-                Orbwalker.ForcedTarget = eminion;
+                Orbwalker.ForcedTarget =(eminion);
             }
             else
             {
-                Orbwalker.ForcedTarget = null;
+                Orbwalker.ForcedTarget =(null);
             }
 
             var minions = MinionManager.GetMinions(ObjectManager.Player.ServerPosition, spells[Spells.E].Range, MinionTypes.All, MinionTeam.NotAlly, MinionOrderTypes.MaxHealth);
@@ -544,7 +538,7 @@ namespace ElTristana
                 foreach (var minion in ObjectManager.Get<Obj_AI_Minion>().OrderByDescending(m => m.Health))
                 {
                     spells[Spells.E].Cast(minion);
-                    Orbwalker.ForcedTarget = minion;
+                    Orbwalker.ForcedTarget =(minion);
                 }
             }
         }
@@ -649,7 +643,7 @@ namespace ElTristana
 
                 if (passiveTarget != null)
                 {
-                    Orbwalker.ForcedTarget = passiveTarget;
+                    Orbwalker.ForcedTarget =(passiveTarget);
                 }
             }
 
@@ -698,8 +692,7 @@ namespace ElTristana
                     OnCombo();
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     OnLaneClear();
                     OnJungleClear();
@@ -742,7 +735,7 @@ namespace ElTristana
         {
             float damage = 0;
 
-            if (!Orbwalker.IsAutoAttacking)
+            if (!ObjectManager.Player.Spellbook.IsAutoAttacking)
             {
                 damage += ObjectManager.Player.GetAutoAttackDamage(enemy, true);
             }

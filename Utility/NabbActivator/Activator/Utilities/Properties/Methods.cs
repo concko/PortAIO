@@ -1,6 +1,6 @@
 using EloBuddy;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The methods class.

@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu;
 using EloBuddy;
 
-namespace iLucian
+ namespace iLucian
 {
     internal class Variables
     {

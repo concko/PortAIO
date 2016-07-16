@@ -10,7 +10,7 @@ using Color = System.Drawing.Color;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace BadaoKingdom.BadaoChampion.BadaoPoppy
+ namespace BadaoKingdom.BadaoChampion.BadaoPoppy
 {
     public static class BadaoPoppyHarass
     {
@@ -19,7 +19,7 @@ namespace BadaoKingdom.BadaoChampion.BadaoPoppy
             Game.OnUpdate += Game_OnUpdate;
             Orbwalker.OnPostAttack += Orbwalking_AfterAttack;
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))

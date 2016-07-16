@@ -8,6 +8,7 @@ namespace ElDiana
 {
     internal class DrawDamage //by xSalice
     {
+        
         #region Delegates
 
         public delegate float DamageToUnitDelegate(AIHeroClient hero);

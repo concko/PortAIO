@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
-namespace AhriSharp
+ namespace AhriSharp
 {
     internal class EnemyInfo
     {

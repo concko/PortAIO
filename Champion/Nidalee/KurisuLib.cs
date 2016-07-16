@@ -11,7 +11,7 @@ using CM = KurisuNidalee.CastManager;
 using KN = KurisuNidalee.KurisuNidalee;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace KurisuNidalee
+ namespace KurisuNidalee
 {
     internal static class KurisuLib
     {
@@ -172,8 +172,7 @@ namespace KurisuNidalee
 
         private static void Orbwalker_OnPreAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 if (args.Target.Name.Contains("Mini") && KN.m)
                     args.Process = false;
@@ -562,7 +561,7 @@ namespace KurisuNidalee
                 Console.WriteLine("KL: OnCastException (" + e.Message + ")");
             }
         }
-
+        
         /// <summary>
         ///     Gets the correct smite slot.
         /// </summary>

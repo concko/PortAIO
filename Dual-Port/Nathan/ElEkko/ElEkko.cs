@@ -1,4 +1,4 @@
-﻿﻿namespace ElEkko
+﻿﻿ namespace ElEkko
 {
     using System;
     using System.Collections.Generic;
@@ -141,7 +141,7 @@
         #endregion
 
         #region Methods
-
+        
         private static void AutoHarass()
         {
             var target = EloBuddy.SDK.TargetSelector.GetTarget(spells[Spells.Q].Range, EloBuddy.DamageType.Magical);
@@ -587,11 +587,11 @@
             {
                 OnHarass();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnLaneClear();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnJungleClear();
             }

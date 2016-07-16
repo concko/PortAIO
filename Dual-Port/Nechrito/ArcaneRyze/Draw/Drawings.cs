@@ -6,7 +6,7 @@ using static Arcane_Ryze.Core;
 
 #endregion
 
-namespace Arcane_Ryze.Draw
+ namespace Arcane_Ryze.Draw
 {
     internal class Drawings
     {

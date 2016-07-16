@@ -9,7 +9,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     class Corki
     {
@@ -114,7 +114,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                 LogicQ();
             if (Program.LagFree(2) && Program.Combo && W.IsReady())
                 LogicW();
-            if (Program.LagFree(4) && R.IsReady() && !Player.Spellbook.IsAutoAttacking && Sheen() && !Orbwalker.IsAutoAttacking)
+            if (Program.LagFree(4) && R.IsReady() && !Player.Spellbook.IsAutoAttacking && Sheen() && !ObjectManager.Player.Spellbook.IsAutoAttacking)
                 LogicR();
         }
 
@@ -228,7 +228,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
         }
         public static void farm()
         {
-            if (Program.LaneClear && !Orbwalker.IsAutoAttacking && Sheen())
+            if (Program.LaneClear && !ObjectManager.Player.Spellbook.IsAutoAttacking && Sheen())
             {
                 var mobs = Cache.GetMinions(Player.ServerPosition, Q.Range, MinionTeam.Neutral);
                 if (mobs.Count > 0 && Player.Mana > RMANA + WMANA + EMANA + QMANA)

@@ -7,7 +7,7 @@ using LeagueSharp;
 using SharpDX;
 using EloBuddy;
 
-namespace TheCheater
+ namespace TheCheater
 {
     public enum DetectorSetting { Preferred, Safe, AntiHumanizer}
     interface IDetector

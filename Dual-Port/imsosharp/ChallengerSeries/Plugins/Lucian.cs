@@ -6,7 +6,7 @@ using LeagueSharp.SDK;
 using SharpDX;
 using LeagueSharp.Data.Enumerations;
 
-namespace Challenger_Series.Plugins
+ namespace Challenger_Series.Plugins
 {
     using EloBuddy;
     using EloBuddy.SDK;
@@ -99,7 +99,7 @@ namespace Challenger_Series.Plugins
         }
 
         private bool pressedR = false;
-
+        
         private int ECastTime = 0;
 
         bool QLogic(AttackableUnit target)
@@ -395,13 +395,13 @@ namespace Challenger_Series.Plugins
                 var tg = TargetSelector.GetTarget(ObjectManager.Player.AttackRange, DamageType.Physical);
                 if (tg != null && tg.IsHPBarRendered)
                 {
-                    Orbwalker.ForcedTarget = tg;
+                    Orbwalker.ForcedTarget =(tg);
                     return;
                 }
             }
             else
             {
-                Orbwalker.ForcedTarget = null;
+                Orbwalker.ForcedTarget =(null);
             }
         }
 

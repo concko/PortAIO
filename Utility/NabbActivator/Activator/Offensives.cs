@@ -6,7 +6,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The activator class.

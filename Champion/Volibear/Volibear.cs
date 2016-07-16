@@ -10,7 +10,7 @@ using UnderratedAIO.Helpers;
 using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Volibear
     {
@@ -40,6 +40,7 @@ namespace UnderratedAIO.Champions
         {
             get { return player.Buffs.Any(buff => buff.Name == "volibearwparticle"); }
         }
+        
 
         private void Game_OnGameUpdate(EventArgs args)
         {
@@ -65,8 +66,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -152,7 +152,7 @@ namespace UnderratedAIO.Champions
             if (getCheckBoxItem(menuC, "selected"))
             {
                 target = CombatHelper.SetTarget(target, (AIHeroClient) Orbwalker.LastTarget);
-                Orbwalker.ForcedTarget = target;
+                Orbwalker.ForcedTarget =(target);
             }
             if (getCheckBoxItem(menuC, "useq") && Q.IsReady() && !QEnabled &&
                 player.LSDistance(target) >= getSliderItem(menuC, "useqmin") &&

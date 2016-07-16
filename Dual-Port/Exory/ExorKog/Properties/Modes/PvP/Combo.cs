@@ -5,7 +5,7 @@ using LeagueSharp;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 
-namespace ExorAIO.Champions.KogMaw
+ namespace ExorAIO.Champions.KogMaw
 {
     /// <summary>
     ///     The logics class.
@@ -48,7 +48,7 @@ namespace ExorAIO.Champions.KogMaw
                     Vars.Q.Instance.SData.Mana +
                     Vars.W.Instance.SData.Mana &&
                 Targets.Target.LSIsValidTarget(Vars.Q.Range) &&
-                Vars.getCheckBoxItem(Vars.QMenu, "combo"))
+                Vars.getCheckBoxItem(Vars.QMenu, "combo") && Targets.Target.IsVisible && Targets.Target.IsHPBarRendered)
             {
                 if (!Vars.Q.GetPrediction(Targets.Target).CollisionObjects.Any())
                 {

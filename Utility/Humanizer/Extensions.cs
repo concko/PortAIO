@@ -1,6 +1,6 @@
 ﻿using LeagueSharp.Common;
 
-namespace Humanizer
+ namespace Humanizer
 {
     internal static class Extensions
     {

@@ -18,6 +18,7 @@ namespace JaxQx
 {
     internal class Program
     {
+        
         public const string ChampionName = "Jax";
 
         //Orbwalker instance
@@ -175,20 +176,20 @@ namespace JaxQx
         private static void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
         {
             AIHeroClient t = TargetSelector.GetTarget(1100, DamageType.Physical);
-            if (!W.IsReady() || !target.IsValidTarget() || !target.IsEnemy)
+            if (!W.IsReady() || !t.IsValidTarget() || !t.IsEnemy)
             {
                 return;
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && target is AIHeroClient &&
-                getCheckBoxItem(miscMenu, "Misc.AutoW") && t != null && target.NetworkId == t.NetworkId)
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) && t is AIHeroClient &&
+                getCheckBoxItem(miscMenu, "Misc.AutoW") && t != null && t.NetworkId == t.NetworkId)
             {
                 W.Cast();
                 Orbwalker.ResetAutoAttack();
             }
-            if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) && !(target is AIHeroClient) &&
+            if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) && !(t is AIHeroClient) &&
                 getCheckBoxItem(laneClearMenu, "UseWLaneClear") &&
-                MinionManager.GetMinions(Orbwalking.GetRealAutoAttackRange(target), MinionTypes.All, MinionTeam.NotAlly)
-                    .Count(m => m.Health > Player.GetAutoAttackDamage((Obj_AI_Base)target, true)) > 0)
+                MinionManager.GetMinions(Orbwalking.GetRealAutoAttackRange(t), MinionTypes.All, MinionTeam.NotAlly)
+                    .Count(m => m.Health > Player.GetAutoAttackDamage((Obj_AI_Base)t, true)) > 0)
             {
                 W.Cast();
                 Orbwalker.ResetAutoAttack();
@@ -293,8 +294,7 @@ namespace JaxQx
                 }
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var existsManalc = Player.MaxMana/100*getSliderItem(laneClearMenu, "LaneClearMana");
                 if (Player.Mana >= existsManalc)
@@ -338,8 +338,9 @@ namespace JaxQx
                         if (E.IsReady() && Q.IsReady() && t.LSIsValidTarget(Q.Range))
                         {
                             if (Player.LSDistance(t) >= minQRange && t.LSIsValidTarget(Q.Range))
-                                Q.CastOnUnit(t);
-                            E.Cast();
+                                Q.Cast(t);
+                            if (E.IsReady() && t.LSIsValidTarget(Orbwalking.GetRealAutoAttackRange(null) + 95))
+                                E.Cast();
                         }
                         break;
                     case 1:

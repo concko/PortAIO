@@ -23,7 +23,7 @@ using EloBuddy;
 
 #endregion
 
-namespace MasterSharp
+ namespace MasterSharp
 {
     public static class SpellDatabase
     {

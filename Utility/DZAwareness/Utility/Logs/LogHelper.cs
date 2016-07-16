@@ -5,7 +5,7 @@ using System.Linq;
 using LeagueSharp;
 using EloBuddy;
 
-namespace DZAwarenessAIO.Utility.Logs
+ namespace DZAwarenessAIO.Utility.Logs
 {
     class LogHelper
     {

@@ -1,6 +1,6 @@
 ﻿using VayneHunter_Reborn.Modules.ModuleHelpers;
 
-namespace VayneHunter_Reborn.Modules
+ namespace VayneHunter_Reborn.Modules
 {
     interface IModule
     {

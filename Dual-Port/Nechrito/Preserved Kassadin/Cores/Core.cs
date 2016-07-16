@@ -2,7 +2,7 @@
 using EloBuddy.SDK;
 using LeagueSharp.SDK;
 
-namespace Preserved_Kassadin.Cores
+ namespace Preserved_Kassadin.Cores
 {
     class Coree
     {

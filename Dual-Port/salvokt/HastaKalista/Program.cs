@@ -11,7 +11,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace HastaKalistaBaby
+ namespace HastaKalistaBaby
 {
     internal class Program
     {
@@ -118,7 +118,7 @@ namespace HastaKalistaBaby
             lvl.Add("4", new ComboBox("4", 1, "Q", "W", "E", "R"));
             lvl.Add("s", new Slider("Start at level", 2, 1, 5));
         }
-
+        
         public static void OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

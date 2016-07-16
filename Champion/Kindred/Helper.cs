@@ -10,7 +10,7 @@ using Geometry = LeagueSharp.Common.Geometry;
 using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace Kindred___YinYang
+ namespace Kindred___YinYang
 {
     internal class Helper
     {
@@ -205,7 +205,7 @@ namespace Kindred___YinYang
                 }
             }
         }
-
+        
         public static void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (sender.IsMe && Orbwalking.IsAutoAttack(args.SData.Name) && args.Target is AIHeroClient &&

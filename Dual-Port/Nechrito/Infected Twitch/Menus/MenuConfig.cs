@@ -6,7 +6,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace Infected_Twitch.Menus
+ namespace Infected_Twitch.Menus
 {
     internal class MenuConfig
     {

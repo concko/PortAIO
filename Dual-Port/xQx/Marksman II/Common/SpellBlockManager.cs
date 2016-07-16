@@ -33,7 +33,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace Marksman.Common
+ namespace Marksman.Common
 {
     public class SpellBlockManager
     {

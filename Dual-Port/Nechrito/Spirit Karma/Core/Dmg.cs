@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using LeagueSharp.SDK;
 
-namespace Spirit_Karma.Core
+ namespace Spirit_Karma.Core
 {
     class Dmg : Core
     {

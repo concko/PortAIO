@@ -8,7 +8,7 @@ using Spell = LeagueSharp.Common.Spell;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace VoliPower
+ namespace VoliPower
 {
     class Program
     {
@@ -172,7 +172,7 @@ namespace VoliPower
             if (menuItem3 && _w.IsReady()) Render.Circle.DrawCircle(Player.Position, _w.Range, Color.Aqua);
             if (menuItem4 && _r.IsReady()) Render.Circle.DrawCircle(Player.Position, _r.Range, Color.Firebrick);
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Flee))

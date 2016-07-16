@@ -12,7 +12,7 @@ using Collision = LeagueSharp.Common.Collision;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     using EloBuddy;
     using EloBuddy.SDK;

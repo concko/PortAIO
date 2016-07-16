@@ -9,6 +9,7 @@ namespace ExorAIO.Champions.Darius
     /// </summary>
     internal class Methods
     {
+        
         /// <summary>
         ///     Sets the methods.
         /// </summary>

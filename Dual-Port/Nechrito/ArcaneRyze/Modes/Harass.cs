@@ -5,7 +5,7 @@ using static Arcane_Ryze.Core;
 
 #endregion
 
-namespace Arcane_Ryze.Modes
+ namespace Arcane_Ryze.Modes
 {
     internal class Harass
     {

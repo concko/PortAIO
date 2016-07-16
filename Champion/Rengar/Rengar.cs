@@ -1,4 +1,4 @@
-﻿namespace ElRengarRevamped
+﻿ namespace ElRengarRevamped
 {
     using System;
     using System.Collections.Generic;
@@ -55,7 +55,6 @@
                 Game.OnUpdate += OnUpdate;
                 Drawing.OnDraw += OnDraw;
                 CustomEvents.Unit.OnDash += OnDash;
-                Drawing.OnEndScene += OnDrawEndScene;
                 Obj_AI_Base.OnProcessSpellCast += OnProcessSpellCast;
                 Orbwalker.OnPostAttack += AfterAttack;
                 Orbwalker.OnPreAttack += BeforeAttack;
@@ -69,7 +68,7 @@
         #endregion
 
         #region Methods
-
+        
         private static void AfterAttack(AttackableUnit target, EventArgs args)
         {
             try
@@ -162,7 +161,7 @@
                 }
 
                 var target = Enemies.FirstOrDefault(x => x.LSIsValidTarget(spells[Spells.E].Range));
-                if (target == null)
+                if (target == null || target.IsDead || !target.IsHPBarRendered || !target.IsVisible)
                 {
                     return;
                 }
@@ -377,26 +376,6 @@
             }
         }
 
-        private static void OnDrawEndScene(EventArgs args)
-        {
-            try
-            {
-                if (Player.IsDead)
-                {
-                    return;
-                }
-
-                if (MenuInit.getCheckBoxItem(MenuInit.miscMenu, "Misc.Drawings.Minimap") && spells[Spells.R].Level > 0)
-                {
-                    Utility.DrawCircle(ObjectManager.Player.Position, spells[Spells.R].Range, Color.White, 1, 23, true);
-                }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-        }
-
         private static void OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             try
@@ -434,8 +413,7 @@
                     ActiveModes.Combo();
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                    Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     ActiveModes.Laneclear();
                     ActiveModes.Jungleclear();

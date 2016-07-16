@@ -28,7 +28,7 @@ using EloBuddy;
 
 #endregion
 
-namespace EvadeA
+ namespace EvadeA
 {
     public static class Utils
     {

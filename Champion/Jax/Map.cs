@@ -2,12 +2,13 @@
 using System.Linq;
 using SharpDX;
 
+
 namespace JaxQx
 {
     internal class Map
     {
         public List<Polygon> poligs = new List<Polygon>();
-
+        
         public Map()
         {
             #region Points definition

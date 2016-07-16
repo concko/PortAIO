@@ -12,7 +12,7 @@ using Color = System.Drawing.Color;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     internal class Velkoz
     {
@@ -146,7 +146,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                     QMissile = missile;
             }
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             if (Player.IsChannelingImportantSpell())
@@ -159,21 +159,21 @@ namespace OneKeyToWin_AIO_Sebby.Champions
                         Player.Spellbook.UpdateChargeableSpell(SpellSlot.R, R.GetPrediction(t, true).CastPosition, false, false);
                     }
                 }
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
             else
             {
                 if (R.IsReady() && getCheckBoxItem(rMenu, "autoR"))
                 LogicR();
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (!Player.IsChannelingImportantSpell())
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (Program.LagFree(4))

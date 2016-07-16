@@ -8,13 +8,14 @@ using EloBuddy;
 using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Cassiopeia
+ namespace ExorAIO.Champions.Cassiopeia
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>
@@ -31,7 +32,7 @@ namespace ExorAIO.Champions.Cassiopeia
             /// </summary>
             if (Vars.getCheckBoxItem(Vars.MiscMenu, "noaa"))
             {
-                Orbwalker.DisableAttacking = !(Bools.HasSheenBuff() || GameObjects.Player.ManaPercent < 10 || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || (!Vars.Q.IsReady() && !Vars.W.IsReady() && !Vars.E.IsReady()));
+                PortAIO.OrbwalkerManager.SetAttack(Bools.HasSheenBuff() || GameObjects.Player.ManaPercent < 10 || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || (!Vars.Q.IsReady() && !Vars.W.IsReady() && !Vars.E.IsReady()));
             }
 
             /// <summary>

@@ -16,6 +16,7 @@ namespace FioraProject
 {
     class HINH1
     {
+        
         #region HINH1
         private enum DrawType
         {

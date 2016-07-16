@@ -8,7 +8,7 @@ using Color = System.Drawing.Color;
 
 #endregion
 
-namespace Spirit_Karma.Draw
+ namespace Spirit_Karma.Draw
 {
     internal class HpBarDraw
     {

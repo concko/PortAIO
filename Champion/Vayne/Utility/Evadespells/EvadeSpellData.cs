@@ -20,7 +20,7 @@ using EloBuddy;
 
 #endregion
 
-namespace Evade
+ namespace Evade
 {
     public enum SpellValidTargets
     {

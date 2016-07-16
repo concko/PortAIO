@@ -12,7 +12,7 @@ using Color = SharpDX.Color;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Leblanc.Modes
+ namespace Leblanc.Modes
 {
     internal class ModeSettings
     {
@@ -51,6 +51,8 @@ namespace Leblanc.Modes
 
             MenuFlame = MenuParent.AddSubMenu("Flame", "Flame");
             MenuFlame.Add("Flame.Laugh", new ComboBox("After Kill:", 5, "Off", "Joke", "Taunt", "Laugh", "Mastery Badge", "Random"));
+
+            Modes.ModeJump.Init(MenuParent);
         }
 
         static void LoadDefaultSettingsQ()

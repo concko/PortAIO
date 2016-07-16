@@ -17,7 +17,7 @@ using Damage = LeagueSharp.Common.Damage;
 using EloBuddy.SDK.Menu.Values;
 
 
-namespace UnderratedAIO.Champions
+ namespace UnderratedAIO.Champions
 {
     internal class Renekton
     {
@@ -50,6 +50,7 @@ namespace UnderratedAIO.Champions
                 Console.WriteLine(args.SData.Name);
             }
         }
+        
 
         private static void Game_OnGameUpdate(EventArgs args)
         {
@@ -66,7 +67,7 @@ namespace UnderratedAIO.Champions
             {
                 Harass();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -307,7 +308,7 @@ namespace UnderratedAIO.Champions
                     if (player.LSDistance(target) < Orbwalking.GetRealAutoAttackRange(target) && Q.IsReady() &&
                         E.IsReady() && E.IsReady())
                     {
-                        Orbwalker.ForcedTarget = target;
+                        Orbwalker.ForcedTarget =(target);
                     }
                     return;
                 case 0:
@@ -330,7 +331,7 @@ namespace UnderratedAIO.Champions
                     if (player.LSDistance(target) < Orbwalking.GetRealAutoAttackRange(target) && Q.IsReady() &&
                         E.IsReady() && E.IsReady())
                     {
-                        Orbwalker.ForcedTarget = target;
+                        Orbwalker.ForcedTarget =(target);
                     }
                     return;
                 default:

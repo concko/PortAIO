@@ -97,7 +97,7 @@ namespace RevampedDraven
 
             Menu.AddSeparator();
 
-            Q = new EloBuddy.SDK.Spell.Active(SpellSlot.Q, (uint) myHero.GetAutoAttackRange());
+            Q = new EloBuddy.SDK.Spell.Active(SpellSlot.Q, (uint)myHero.GetAutoAttackRange());
             W = new EloBuddy.SDK.Spell.Active(SpellSlot.W);
             E = new EloBuddy.SDK.Spell.Skillshot(SpellSlot.E, 1020, SkillShotType.Linear, 250, 1400, 120);
             R = new EloBuddy.SDK.Spell.Skillshot(SpellSlot.R, 2500, SkillShotType.Linear, 400, 2000, 160);
@@ -153,7 +153,7 @@ namespace RevampedDraven
                         Drawing.DrawText(objectPos.X, objectPos.Y,
                             _bestDropObject != null && _bestDropObject.IsValid
                                 ? data.Object.NetworkId == _bestDropObject.NetworkId ? Color.YellowGreen : Color.Gray
-                                : Color.Gray, ((float) (data.ExpireTime - Environment.TickCount)/1000).ToString("0.0"));
+                                : Color.Gray, ((float)(data.ExpireTime - Environment.TickCount) / 1000).ToString("0.0"));
                     }
                 }
             }
@@ -182,7 +182,7 @@ namespace RevampedDraven
                                             var position = myHero.Position.LSExtend(args.TargetPosition, i);
                                             if (_bestDropObject.Position.LSDistance(position) < 120)
                                             {
-                                                Player.IssueOrder(GameObjectOrder.MoveTo, (Vector3) position);
+                                                Player.IssueOrder(GameObjectOrder.MoveTo, (Vector3)position);
                                                 args.Process = false;
                                                 break;
                                             }
@@ -329,7 +329,7 @@ namespace RevampedDraven
         {
             if (LastAATick <= Environment.TickCount)
             {
-                return Environment.TickCount + Game.Ping/2 >= LastAATick + myHero.AttackCastDelay*1000 + extraWindup;
+                return Environment.TickCount + Game.Ping / 2 >= LastAATick + myHero.AttackCastDelay * 1000 + extraWindup;
             }
             return false;
         }
@@ -513,7 +513,7 @@ namespace RevampedDraven
                                         EntityManager.MinionsAndMonsters.GetLaneMinions(
                                             EntityManager.UnitTeam.Enemy, myHero.ServerPosition, E.Range);
                                     var farmLocation = EntityManager.MinionsAndMonsters.GetLineFarmLocation(
-                                        minions, E.Width, (int) E.Range);
+                                        minions, E.Width, (int)E.Range);
                                     if (farmLocation.HitNumber >= 3)
                                     {
                                         E.Cast(farmLocation.CastPosition);
@@ -541,7 +541,7 @@ namespace RevampedDraven
                                         EntityManager.MinionsAndMonsters.GetJungleMonsters(myHero.ServerPosition,
                                             E.Range);
                                     var farmLocation = EntityManager.MinionsAndMonsters.GetLineFarmLocation(
-                                        minions, E.Width, (int) E.Range);
+                                        minions, E.Width, (int)E.Range);
                                     if (farmLocation.HitNumber >= 2)
                                     {
                                         E.Cast(farmLocation.CastPosition);
@@ -612,7 +612,7 @@ namespace RevampedDraven
                 if (!target.HasBuff("manabarriercooldown"))
                 {
                     if (target.Health + target.HPRegenRate +
-                        (damageType == DamageType.Physical ? target.AttackShield : target.MagicShield) + target.Mana*0.6 +
+                        (damageType == DamageType.Physical ? target.AttackShield : target.MagicShield) + target.Mana * 0.6 +
                         target.PARRegenRate < calculatedDamage)
                     {
                         return true;

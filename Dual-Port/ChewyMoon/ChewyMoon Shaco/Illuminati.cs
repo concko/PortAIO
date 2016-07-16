@@ -8,7 +8,7 @@ using Color = System.Drawing.Color;
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 
-namespace ChewyMoonsShaco
+ namespace ChewyMoonsShaco
 {
     internal class Illuminati
     {

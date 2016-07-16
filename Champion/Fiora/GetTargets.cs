@@ -20,6 +20,7 @@ namespace FioraProject
     using EloBuddy.SDK.Menu.Values;
     public static class GetTargets
     {
+        
         #region GetTarget
         public static bool FocusUlted { get { return getCheckBoxItem(Target, "Focus Ulted Target"); } }
         public static TargetMode TargetingMode

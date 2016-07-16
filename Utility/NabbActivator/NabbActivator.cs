@@ -2,7 +2,7 @@
 using EloBuddy;
 using LeagueSharp.SDK;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The main class.

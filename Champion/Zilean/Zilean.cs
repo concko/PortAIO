@@ -185,7 +185,7 @@
                 IncomingDamageManager.Skillshots = true;
 
 
-                Q = new Spell(SpellSlot.Q, 900f);
+                Q = new Spell(SpellSlot.Q, 900f - 100f);
                 W = new Spell(SpellSlot.W, Player.GetAutoAttackRange(Player));
                 E = new Spell(SpellSlot.E, 700f);
                 R = new Spell(SpellSlot.R, 900f);
@@ -198,6 +198,7 @@
                 Drawing.OnDraw += OnDraw;
                 Interrupter2.OnInterruptableTarget += OnInterruptableTarget;
                 Obj_AI_Base.OnProcessSpellCast += OnProcessSpellCast;
+                Orbwalker.OnPreAttack += BeforeAttack;
             }
             catch (Exception exception)
             {
@@ -280,6 +281,7 @@
 
                 miscMenu = Menu.AddSubMenu("Misc", "Misc");
                 {
+                    miscMenu.Add("ElZilean.Combo.AA", new CheckBox("Don't AA before Q", true));
                     miscMenu.Add("ElZilean.Q.Stun", new CheckBox("Auto Q on stunned targets", true));
                     miscMenu.Add("ElZilean.Q.Interrupt", new CheckBox("Interrupt spells with Q", true));
                     miscMenu.Add("ElZilean.E.Slow", new CheckBox("Speed up slowed allies", true));
@@ -314,6 +316,25 @@
             return m[item].Cast<KeyBind>().CurrentValue;
         }
 
+
+        /// <summary>
+        ///     
+        /// </summary>
+        /// <param name="args"></param>
+        private static void BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
+        {
+            if (getCheckBoxItem(miscMenu, "ElZilean.Combo.AA"))
+            {
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Harass))
+                {
+                    if (Q.IsReady())
+                    {
+                        args.Process = false;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         ///     The ignite killsteal logic
         /// </summary>
@@ -338,8 +359,6 @@
 
         private static void MouseCombo()
         {
-            EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-
             if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady())
             {
                 Q.Cast(Game.CursorPos);
@@ -352,92 +371,83 @@
         /// </summary>
         private static void OnCombo()
         {
-            var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
-            if (target == null)
             {
-                return;
-            }
-
-            if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady())
-            {
-                if (Player.GetEnemiesInRange(E.Range).Any())
-                {
-                    var closestEnemy =
-                        Player.GetEnemiesInRange(E.Range)
-                            .OrderByDescending(h => (h.PhysicalDamageDealtPlayer + h.MagicDamageDealtPlayer))
-                            .FirstOrDefault();
-
-                    if (closestEnemy == null)
-                    {
-                        return;
-                    }
-
-                    if (closestEnemy.HasBuffOfType(BuffType.Stun))
-                    {
-                        return;
-                    }
-
-                    E.Cast(closestEnemy);
-                }
-
-                if (Player.GetAlliesInRange(E.Range).Any() && Player.GetEnemiesInRange(800f).Count >= 1)
-                {
-                    var closestToTarget =
-                        Player.GetAlliesInRange(E.Range)
-                            .OrderByDescending(h => (h.PhysicalDamageDealtPlayer + h.MagicDamageDealtPlayer))
-                            .FirstOrDefault();
-
-                    E.Cast(closestToTarget);
-                }
-            }
-
-            if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.LSIsValidTarget(Q.Range) && !target.IsZombie)
-            {
-                var pred = Q.GetPrediction(target);
-                if (pred.Hitchance >= HitChance.VeryHigh)
-                {
-                    Q.Cast(pred.CastPosition);
-                }
-            }
-
-            // Check if target has a bomb
-            var isBombed = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.LSIsValidTarget(Q.Range));
-
-            if (!isBombed.LSIsValidTarget())
-            {
-                return;
-            }
-
-            if (isBombed != null && isBombed.LSIsValidTarget(Q.Range))
-            {
-                if (Q.Instance.CooldownExpires - Game.Time < 3)
+                var target = TargetSelector.GetTarget(Q.Range, DamageType.Magical);
+                if (target == null)
                 {
                     return;
                 }
 
-                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W"))
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.Q") && Q.IsReady() && target.IsValidTarget(Q.Range))
                 {
-                    Utility.DelayAction.Add(300, () => W.Cast());
+                    var pred = Q.GetPrediction(target);
+                    if (pred.Hitchance >= HitChance.VeryHigh)
+                    {
+                        Q.Cast(pred.CastPosition);
+                    }
                 }
-            }
 
-            if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W") && getCheckBoxItem(comboMenu, "ElZilean.Combo.W2") && W.IsReady() && !Q.IsReady())
-            {
-                W.Cast();
-            }
-
-            if (getCheckBoxItem(comboMenu, "ElZilean.Ignite") && isBombed != null)
-            {
-                if (Player.GetSpellSlot("summonerdot") == SpellSlot.Unknown)
+                // Check if target has a bomb
+                var isBombed = HeroManager.Enemies.Find(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
+                if (!isBombed.IsValidTarget())
                 {
                     return;
                 }
 
-                if (Q.GetDamage(isBombed) + IgniteSpell.GetDamage(isBombed) > isBombed.Health)
+                if (isBombed != null && isBombed.IsValidTarget(Q.Range))
                 {
-                    if (isBombed.LSIsValidTarget(Q.Range))
+                    if (Q.Instance.CooldownExpires - Game.Time < 3)
                     {
-                        Player.Spellbook.CastSpell(IgniteSpell.Slot, isBombed);
+                        return;
+                    }
+
+                    if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W"))
+                    {
+                        W.Cast();
+                    }
+                }
+
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.W") && getCheckBoxItem(comboMenu, "ElZilean.Combo.W2") && W.IsReady() && !Q.IsReady())
+                {
+                    if (HeroManager.Enemies.Any(x => x.Health > Q.GetDamage(x) && x.IsValidTarget(Q.Range)))
+                    {
+                        return;
+                    }
+
+                    W.Cast();
+                }
+
+                if (getCheckBoxItem(comboMenu, "ElZilean.Combo.E") && E.IsReady())
+                {
+                    if (Player.GetEnemiesInRange(E.Range).Any())
+                    {
+                        var closestEnemy =
+                            Player.GetEnemiesInRange(E.Range)
+                                .OrderByDescending(h => (h.PhysicalDamageDealtPlayer + h.MagicDamageDealtPlayer))
+                                .FirstOrDefault();
+
+                        if (closestEnemy == null || closestEnemy.HasBuffOfType(BuffType.Stun))
+                        {
+                            return;
+                        }
+
+                        E.Cast(closestEnemy);
+                    }
+                }
+
+                if (getCheckBoxItem(comboMenu, "ElZilean.Ignite") && isBombed != null)
+                {
+                    if (Player.GetSpellSlot("summonerdot") == SpellSlot.Unknown)
+                    {
+                        return;
+                    }
+
+                    if (Q.GetDamage(isBombed) + IgniteSpell.GetDamage(isBombed) > isBombed.Health)
+                    {
+                        if (isBombed.IsValidTarget(Q.Range))
+                        {
+                            Player.Spellbook.CastSpell(IgniteSpell.Slot, isBombed);
+                        }
                     }
                 }
             }
@@ -513,14 +523,16 @@
 
             // Check if target has a bomb
             var isBombed =
-                HeroManager.Enemies.FirstOrDefault(x => x.HasBuff("ZileanQEnemyBomb") && x.LSIsValidTarget(Q.Range));
+                HeroManager.Enemies.FirstOrDefault(x => x.HasBuff("ZileanQEnemyBomb") && x.IsValidTarget(Q.Range));
 
-            if (isBombed.LSIsValidTarget())
+            if (!isBombed.IsValidTarget())
             {
-                if (getCheckBoxItem(harassMenu, "ElZilean.Harass.W"))
-                {
-                    Utility.DelayAction.Add(100, () => W.Cast());
-                }
+                return;
+            }
+
+            if (getCheckBoxItem(harassMenu, "ElZilean.Harass.W"))
+            {
+                Utility.DelayAction.Add(100, () => W.Cast());
             }
         }
 
@@ -646,11 +658,11 @@
 
                     if (passiveTarget != null)
                     {
-                        Orbwalker.ForcedTarget = passiveTarget;
+                        Orbwalker.ForcedTarget = (passiveTarget);
                     }
                     else
                     {
-                        Orbwalker.ForcedTarget = null;
+                        Orbwalker.ForcedTarget = (null);
                     }
                 }
 
@@ -662,7 +674,7 @@
                 {
                     OnHarass();
                 }
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     OnLaneclear();
                 }
@@ -712,10 +724,9 @@
                             if (prediction.Hitchance >= HitChance.VeryHigh)
                             {
                                 Q.Cast(prediction.CastPosition);
+                                LeagueSharp.Common.Utility.DelayAction.Add(100, () => W.Cast());
                             }
                         }
-
-                        LeagueSharp.Common.Utility.DelayAction.Add(100, () => W.Cast());
                     }
                 }
 

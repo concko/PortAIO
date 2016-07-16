@@ -13,7 +13,7 @@ using SebbyLib;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace SDKPredictioner
+ namespace SDKPredictioner
 {
     public class EventHandlers
     {
@@ -66,6 +66,8 @@ namespace SDKPredictioner
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+
+        
 
         public static void Spellbook_OnCastSpell(Spellbook sender, SpellbookCastSpellEventArgs args)
         {

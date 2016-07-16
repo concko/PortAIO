@@ -6,7 +6,7 @@ using LeagueSharp.SDK;
 
 #endregion
 
-namespace Spirit_Karma.Core
+ namespace Spirit_Karma.Core
 {
     internal class Core
     {

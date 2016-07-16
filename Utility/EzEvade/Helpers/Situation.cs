@@ -7,15 +7,16 @@ using System.Threading.Tasks;
 using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
-using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
+using EloBuddy.SDK.Menu.Values;
+using EloBuddy.SDK;
 
 namespace ezEvade
 {
     public static class Situation
     {
         private static AIHeroClient myHero { get { return ObjectManager.Player; } }
-        
+
         static Situation()
         {
 
@@ -27,7 +28,7 @@ namespace ezEvade
             {
                 var curDistToEnemies = ObjectCache.myHeroCache.serverPos2D.GetDistanceToChampions();
                 var posDistToEnemies = pos.GetDistanceToChampions();
-                
+
                 if (curDistToEnemies < distance)
                 {
                     if (curDistToEnemies > posDistToEnemies)
@@ -46,7 +47,7 @@ namespace ezEvade
 
             return false;
         }
-                
+
         public static bool IsUnderTurret(this Vector2 pos, bool checkEnemy = true)
         {
             if (!ObjectCache.menuCache.cache["PreventDodgingUnderTower"].Cast<CheckBox>().CurrentValue)
@@ -70,7 +71,7 @@ namespace ezEvade
                     continue;
                 }
 
-                var distToTurret = pos.LSDistance(turret.Position.LSTo2D());
+                var distToTurret = pos.Distance(turret.Position.To2D());
                 if (distToTurret <= turretRange)
                 {
                     return true;

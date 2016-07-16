@@ -5,7 +5,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using System.Linq;
 
-namespace SephCassiopeia
+ namespace SephCassiopeia
 {
     class CassiopeiaMenu
     {

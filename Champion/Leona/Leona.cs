@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace ElEasy.Plugins
+ namespace ElEasy.Plugins
 {
     public class Leona
     {
@@ -316,7 +316,7 @@ namespace ElEasy.Plugins
                 spells[Spells.E].Cast(target);
             }
         }
-
+        
         private void OnUpdate(EventArgs args)
         {
             if (Player.IsDead)

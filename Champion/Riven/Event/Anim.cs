@@ -6,7 +6,7 @@ using NechritoRiven.Core;
 using NechritoRiven.Menus;
 using System;
 
-namespace NechritoRiven.Event
+ namespace NechritoRiven.Event
 {
     class Anim : Core.Core
     {
@@ -60,7 +60,7 @@ namespace NechritoRiven.Event
                     break;
             }
 
-            if (a != 0 && (Orbwalker.ActiveModesFlags != Orbwalker.ActiveModes.None))
+            if (a != 0 && (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None)))
             {
                 LeagueSharp.Common.Utility.DelayAction.Add(a, () =>
                 {
@@ -70,6 +70,7 @@ namespace NechritoRiven.Event
                 });
             }
         }
+        
         private static void CancelAnimation()
         {
             Orbwalker.ResetAutoAttack();

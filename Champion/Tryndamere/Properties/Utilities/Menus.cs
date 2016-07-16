@@ -1,7 +1,7 @@
 using EloBuddy.SDK.Menu.Values;
 using ExorAIO.Utilities;
 
-namespace ExorAIO.Champions.Tryndamere
+ namespace ExorAIO.Champions.Tryndamere
 {
     /// <summary>
     ///     The menu class.
@@ -18,7 +18,8 @@ namespace ExorAIO.Champions.Tryndamere
             /// </summary>
             Vars.QMenu = Vars.Menu.AddSubMenu("Use Q to:");
             {
-                Vars.QMenu.Add("logical", new CheckBox("Logical", true));
+                Vars.QMenu.Add("health", new Slider("Use if Health <= x%..", 50, 1, 101));
+                Vars.QMenu.Add("fury", new Slider("..and only if Fury >= x%", 75, 5, 101));
             }
 
             /// <summary>

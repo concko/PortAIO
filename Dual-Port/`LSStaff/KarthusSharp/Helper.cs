@@ -5,7 +5,7 @@ using EloBuddy;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace KarthusSharp
+ namespace KarthusSharp
 {
     internal class EnemyInfo
     {

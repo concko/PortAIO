@@ -2,7 +2,7 @@
 using EloBuddy;
 using LeagueSharp.Common;
 
-namespace LCS_Lucian
+ namespace LCS_Lucian
 {
     public enum SpellType
     {

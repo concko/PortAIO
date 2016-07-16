@@ -3,7 +3,7 @@ using EloBuddy.SDK.Menu.Values;
 using LeagueSharp;
 using LeagueSharp.Common;
 
-namespace SephKhazix
+ namespace SephKhazix
 {
     class KhazixMenu
     {

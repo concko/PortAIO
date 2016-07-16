@@ -12,7 +12,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 
-namespace yol0Brand
+ namespace yol0Brand
 {
     internal class Program
     {
@@ -138,7 +138,7 @@ namespace yol0Brand
                 Render.Circle.DrawCircle(Player.Position, _R.Range, Color.Green);
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

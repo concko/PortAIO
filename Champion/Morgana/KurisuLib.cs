@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using EloBuddy;
 
-namespace KurisuMorgana
+ namespace KurisuMorgana
 {
     public enum Skilltype
     {

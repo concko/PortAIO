@@ -17,7 +17,7 @@ namespace OneKeyToWin_AIO_Sebby
         private Menu Config = Program.Config;
         private LeagueSharp.Common.Spell E, Q, Qc, R, W;
         private float QMANA = 0, WMANA = 0, EMANA = 0, RMANA = 0;
-
+        
         private float QCastTime = 0;
 
         public AIHeroClient Player { get { return ObjectManager.Player; } }

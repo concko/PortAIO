@@ -7,7 +7,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace Irelia.Common
+ namespace Irelia.Common
 {
     internal class CommonMath
     {

@@ -8,7 +8,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Lux
+ namespace ExorAIO.Champions.Lux
 {
     /// <summary>
     ///     The champion class.
@@ -18,7 +18,7 @@ namespace ExorAIO.Champions.Lux
         /// <summary>
         ///     Defines the missile object for the E.
         /// </summary>
-        public static GameObject EMissile;
+        public static GameObject EMissile = null;
 
         /// <summary>
         ///     Loads Lux.
@@ -83,7 +83,7 @@ namespace ExorAIO.Champions.Lux
                 }
             }
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>
@@ -191,14 +191,14 @@ namespace ExorAIO.Champions.Lux
                         t.LSIsValidTarget(Vars.AARange) &&
                         t.HasBuff("luxilluminatingfraulein")))
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                     return;
                 }
 
-                Orbwalker.ForcedTarget = GameObjects.EnemyHeroes.FirstOrDefault(
+                Orbwalker.ForcedTarget =(GameObjects.EnemyHeroes.FirstOrDefault(
                     t =>
                         t.LSIsValidTarget(Vars.AARange) &&
-                        t.HasBuff("luxilluminatingfraulein"));
+                        t.HasBuff("luxilluminatingfraulein")));
                 return;
             }
 

@@ -22,7 +22,7 @@ using YasuoPro;
 
 #endregion
 
-namespace EvadeA
+ namespace EvadeA
 {
     public class SpellData
     {

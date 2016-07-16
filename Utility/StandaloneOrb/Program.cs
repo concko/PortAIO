@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK;
 
-namespace PuppyStandaloneOrbwalker
+ namespace PuppyStandaloneOrbwalker
 {
     internal class Program
     {

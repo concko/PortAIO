@@ -5,7 +5,7 @@ using Spirit_Karma.Menus;
 
 #endregion
 
-namespace Spirit_Karma.Core
+ namespace Spirit_Karma.Core
 {
     internal class Usables : Core
     {

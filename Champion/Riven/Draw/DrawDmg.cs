@@ -7,7 +7,7 @@ using NechritoRiven.Menus;
 using SharpDX;
 using EloBuddy;
 
-namespace NechritoRiven.Draw
+ namespace NechritoRiven.Draw
 {
     class DrawDmg
     {

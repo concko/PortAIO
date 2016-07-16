@@ -14,7 +14,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     internal class Kogmaw : Champion
     {
@@ -184,8 +184,9 @@ namespace Marksman.Champions
             }
         }
 
-        public override void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
+        public override void Orbwalking_AfterAttack(AttackableUnit targetA, EventArgs args)
         {
+            var target = targetA;
             if (target != null && (!ComboActive && !HarassActive) || !(target is AIHeroClient))
             {
                 return;

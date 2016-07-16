@@ -24,6 +24,7 @@ namespace HeavenStrikeAzir
 {
     public static class Insec
     {
+        
         public static AIHeroClient Player { get { return ObjectManager.Player; } }
         public static int LastJump;
         public static Vector3 LastLeftClick = new Vector3();
@@ -89,7 +90,7 @@ namespace HeavenStrikeAzir
                 return;
             if (Orbwalker.CanMove)
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
             if (!InsecPoint.IsValid())
                 return;

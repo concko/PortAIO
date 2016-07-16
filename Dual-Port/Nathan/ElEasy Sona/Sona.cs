@@ -1,4 +1,4 @@
-﻿namespace ElEasy.Plugins
+﻿ namespace ElEasy.Plugins
 {
     using System;
     using System.Collections.Generic;
@@ -344,7 +344,7 @@
                 spells[Spells.Q].Cast(target);
             }
         }
-
+        
         private void OnUpdate(EventArgs args)
         {
             if (this.Player.IsDead)

@@ -8,7 +8,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using SharpDX;
 
-namespace ezEvade.SpecialSpells
+ namespace ezEvade.SpecialSpells
 {
     class Syndra : ChampionPlugin
     {

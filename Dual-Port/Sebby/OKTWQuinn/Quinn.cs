@@ -9,7 +9,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace OneKeyToWin_AIO_Sebby
+ namespace OneKeyToWin_AIO_Sebby
 {
     class Quinn
     {
@@ -101,6 +101,7 @@ namespace OneKeyToWin_AIO_Sebby
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
+        
 
         private static void Orbwalking_BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
@@ -111,9 +112,9 @@ namespace OneKeyToWin_AIO_Sebby
                 {
                     var best = Program.Enemies.FirstOrDefault(enemy => enemy.LSIsValidTarget() && SebbyLib.Orbwalking.InAutoAttackRange(enemy) && enemy.HasBuff("quinnw"));
                     if (best != null)
-                        Orbwalker.ForcedTarget = best;
+                        Orbwalker.ForcedTarget =(best);
                     else
-                        Orbwalker.ForcedTarget = null;
+                        Orbwalker.ForcedTarget =(null);
                 }
             }
             else if (Program.LaneClear && args.Target.Type == GameObjectType.obj_AI_Minion && getCheckBoxItem(farmMenu, "farmP"))
@@ -121,7 +122,7 @@ namespace OneKeyToWin_AIO_Sebby
                 var bestMinion = Cache.GetMinions(Player.Position, Player.AttackRange).FirstOrDefault(minion => minion.LSIsValidTarget() && SebbyLib.Orbwalking.InAutoAttackRange(minion) && minion.HasBuff("quinnw"));
 
                 if (bestMinion != null)
-                    Orbwalker.ForcedTarget = bestMinion;
+                    Orbwalker.ForcedTarget =(bestMinion);
             }
         }
 

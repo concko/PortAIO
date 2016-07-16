@@ -1,4 +1,4 @@
-﻿namespace VCursor
+﻿ namespace VCursor
 {
     internal static class PathGenerator
     {

@@ -7,7 +7,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using EloBuddy;
 
-namespace DZAwarenessAIO.Modules.TFHelper
+ namespace DZAwarenessAIO.Modules.TFHelper
 {
     class TFHelperCalculator
     {

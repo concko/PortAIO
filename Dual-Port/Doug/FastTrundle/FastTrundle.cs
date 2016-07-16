@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 
-namespace FastTrundle
+ namespace FastTrundle
 {
     internal enum Spells
     {
@@ -135,6 +135,7 @@ namespace FastTrundle
                 }
             }
         }
+        
 
         private static void AntiGapcloser_OnEnemyGapcloser(ActiveGapcloser gapcloser)
         {

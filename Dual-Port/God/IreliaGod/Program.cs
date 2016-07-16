@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace IreliaGod
+ namespace IreliaGod
 {
     internal class Program
     {
@@ -57,9 +57,9 @@ namespace IreliaGod
                     LeagueSharp.Common.Utility.DelayAction.Add(260, Orbwalker.ResetAutoAttack);
             };
 
-            Orbwalker.OnPostAttack += (unit, target) =>
+            Orbwalker.OnPostAttack += (AttackableUnit target, EventArgs args) =>
             {
-                if (getCheckBoxItem(comboMenu, "combo.items") && unit.IsMe && target != null && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
+                if (getCheckBoxItem(comboMenu, "combo.items") && target != null && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
                 {
                     if (Spells.Tiamat.IsReady())
                         Spells.Tiamat.Cast();
@@ -193,7 +193,7 @@ namespace IreliaGod
 
             return tower != null;
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             Killsteal();

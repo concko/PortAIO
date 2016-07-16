@@ -11,6 +11,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Environment = UnderratedAIO.Helpers.Environment;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace UnderratedAIO.Champions
 {
     internal class Garen
@@ -18,7 +19,7 @@ namespace UnderratedAIO.Champions
         public static Menu config, drawMenu, comboMenu, laneClearMenu, miscMenu;
         public static readonly AIHeroClient player = ObjectManager.Player;
         public static Spell Q, W, E, R;
-
+        
         public static int[] spins = {5, 6, 7, 8, 9, 10};
         public static double[] baseEDamage = {15, 18.8, 22.5, 26.3, 30};
         public static double[] bonusEDamage = {34.5, 35.3, 36, 36.8, 37.5};
@@ -46,23 +47,20 @@ namespace UnderratedAIO.Champions
         {
             if (GarenE)
             {
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetMovement(false);
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
+                {
+                    EloBuddy.Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
+                }
             }
             else
             {
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
-            if (GarenE && getCheckBoxItem(comboMenu, "orbwalkto"))
-            {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None))
-                {
-                    Player.IssueOrder(GameObjectOrder.MoveTo, Game.CursorPos);
-                }
-            }
-
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -97,6 +95,11 @@ namespace UnderratedAIO.Champions
             if (target == null)
             {
                 return;
+            }
+
+            if (R.IsInRange(target) && R.IsReady() && target.LSIsValidTarget() && ObjectManager.Player.CalculateDamageOnUnit(target, DamageType.Physical, (float)R.GetDamage(target)) > target.Health)
+            {
+                R.Cast(target);
             }
 
             var hasIgnite = player.Spellbook.CanUseSpell(player.GetSpellSlot("SummonerDot")) == SpellState.Ready;

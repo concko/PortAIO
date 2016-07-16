@@ -21,7 +21,7 @@ using LeagueSharp;
 using EloBuddy;
 #endregion
 
-namespace OlafxQx.Evade
+ namespace OlafxQx.Evade
 {
     public static class SpellDatabase
     {

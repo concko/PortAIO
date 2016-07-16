@@ -12,6 +12,7 @@ using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
+
 namespace UnderratedAIO.Champions
 {
     internal class Galio
@@ -19,7 +20,7 @@ namespace UnderratedAIO.Champions
         public static Spell Q, W, E, R;
         public static readonly AIHeroClient player = ObjectManager.Player;
         public static bool justR, justQ, justE;
-
+        
         public static Menu config, drawMenu, comboMenu, harassMenu, laneClearMenu, miscMenu;
 
         private static bool rActive
@@ -76,12 +77,12 @@ namespace UnderratedAIO.Champions
             }
             if (rActive || justR)
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
                 return;
             }
-            Orbwalker.DisableAttacking = false;
-            Orbwalker.DisableMovement = false;
+            PortAIO.OrbwalkerManager.SetAttack(true);
+            PortAIO.OrbwalkerManager.SetMovement(true);
 
             if (getKeyBindItem(comboMenu, "manualRflash"))
             {
@@ -98,8 +99,7 @@ namespace UnderratedAIO.Champions
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -131,8 +131,8 @@ namespace UnderratedAIO.Champions
                     Utility.DelayAction.Add(50, () => { R.Cast(getCheckBoxItem(config, "packets")); });
                     justR = true;
                     Utility.DelayAction.Add(200, () => justR = false);
-                    Orbwalker.DisableAttacking = true;
-                    Orbwalker.DisableMovement = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
+                    PortAIO.OrbwalkerManager.SetMovement(false);
                     return;
                 }
             }
@@ -140,7 +140,7 @@ namespace UnderratedAIO.Champions
             {
                 if (!justR)
                 {
-                    Orbwalker.OrbwalkTo(Game.CursorPos);
+                    Orbwalker.MoveTo(Game.CursorPos);
                     Combo();
                 }
             }

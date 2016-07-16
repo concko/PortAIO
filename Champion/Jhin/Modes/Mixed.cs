@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using EloBuddy;
 using EloBuddy.SDK;
+
 using Jhin___The_Virtuoso.Extensions;
 using LeagueSharp.Common;
 
@@ -8,6 +9,7 @@ namespace Jhin___The_Virtuoso.Modes
 {
     internal static class Mixed
     {
+        
         /// <summary>
         ///     Execute Harass W
         /// </summary>

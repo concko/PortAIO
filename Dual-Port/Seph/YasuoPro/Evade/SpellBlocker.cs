@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using LeagueSharp;
 using EloBuddy;
 
-namespace EvadeA
+ namespace EvadeA
 {
     public static class SpellBlocker
     {

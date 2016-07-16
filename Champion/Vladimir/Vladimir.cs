@@ -11,7 +11,7 @@ using Spell = LeagueSharp.Common.Spell;
 using SharpDX;
 using Color = System.Drawing.Color;
 
-namespace ElVladimirReborn
+ namespace ElVladimirReborn
 {
     internal enum Spells
     {
@@ -288,6 +288,7 @@ namespace ElVladimirReborn
                 }
             }
         }
+        
 
         private static void OnUpdate(EventArgs args)
         {
@@ -301,8 +302,7 @@ namespace ElVladimirReborn
                 OnHarass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 OnLaneClear();
                 OnJungleClear();

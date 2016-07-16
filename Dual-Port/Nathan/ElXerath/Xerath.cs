@@ -1,4 +1,4 @@
-﻿namespace ElXerath
+﻿ namespace ElXerath
 {
     using System;
     using System.Collections.Generic;
@@ -553,7 +553,7 @@
                 }
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (Player.IsDead)

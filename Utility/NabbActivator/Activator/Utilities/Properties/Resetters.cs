@@ -2,7 +2,7 @@ using System.Linq;
 using EloBuddy;
 using LeagueSharp.SDK.Core.Utils;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The resetters class.

@@ -20,7 +20,7 @@ using System.Text.RegularExpressions;
 using EloBuddy;
 using LS = LeagueSharp.Common;
 
-namespace SoloVayne.Utility.Entities
+ namespace SoloVayne.Utility.Entities
 {
     /// <summary>
     ///     The jungle utility class, provides utils for jungle related items.

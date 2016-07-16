@@ -1,4 +1,4 @@
-﻿namespace iTwitch
+﻿ namespace iTwitch
 {
     using System;
     using System.Collections.Generic;
@@ -275,7 +275,7 @@
                 }
             }
         }
-
+        
         private static void OnUpdate(EventArgs args)
         {
             if (getKeyBindItem(miscOptions, "com.itwitch.misc.recall"))

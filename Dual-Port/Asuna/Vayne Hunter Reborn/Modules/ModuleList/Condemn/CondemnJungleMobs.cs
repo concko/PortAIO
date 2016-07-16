@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace VayneHunter_Reborn.Modules.ModuleList.Condemn
+ namespace VayneHunter_Reborn.Modules.ModuleList.Condemn
 {
     class CondemnJungleMobs : IModule
     {
@@ -31,6 +31,7 @@ namespace VayneHunter_Reborn.Modules.ModuleList.Condemn
             return MenuGenerator.farmMenu["dz191.vhr.farm.condemnjungle"].Cast<CheckBox>().CurrentValue &&
                    Variables.spells[SpellSlot.E].IsReady() && (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear));
         }
+        
 
         public ModuleType GetModuleType()
         {

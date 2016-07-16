@@ -6,7 +6,7 @@ using SharpDX;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace Nechrito_Gragas
+ namespace Nechrito_Gragas
 {
     class Mode
     {
@@ -135,7 +135,7 @@ namespace Nechrito_Gragas
                 }
             }
         }
-
+        
         public static void JungleLogic()
         {
             var mobs = MinionManager.GetMinions(Player.Position, Spells.W.Range, MinionTypes.All, MinionTeam.Neutral, MinionOrderTypes.MaxHealth);

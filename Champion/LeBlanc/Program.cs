@@ -14,7 +14,7 @@ using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 
-namespace PopBlanc
+ namespace PopBlanc
 {
     internal static class Program
     {
@@ -151,7 +151,7 @@ namespace PopBlanc
             Game.OnWndProc += Game_OnWndProc;
             Game.OnUpdate += Game_OnUpdate;
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             OnUpdate();
@@ -172,9 +172,8 @@ namespace PopBlanc
                 OnCombo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
+                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LastHit))
             {
                 OnFarm();
             }
@@ -254,7 +253,7 @@ namespace PopBlanc
             if (getCheckBoxItem(comboMenu, "ComboOrbwalk"))
             {
                 //Orbwalking.Orbwalk(Orbwalker.GetTarget(), Game.CursorPos);
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
         }
 

@@ -6,7 +6,7 @@ using LeagueSharp.SDK.Core.Utils;
 using SharpDX;
 using EloBuddy;
 
-namespace AsunaCondemn
+ namespace AsunaCondemn
 {
     /// <summary>
     ///     The main class.

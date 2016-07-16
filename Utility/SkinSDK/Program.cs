@@ -4,7 +4,7 @@ using LeagueSharp.SDK;
 using System;
 using System.Linq;
 
-namespace SDK_SkinChanger
+ namespace SDK_SkinChanger
 {
     class Program
     {

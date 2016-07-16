@@ -9,7 +9,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 
-namespace OneKeyToWin_AIO_Sebby.Champions
+ namespace OneKeyToWin_AIO_Sebby.Champions
 {
     class Thresh
     {
@@ -202,24 +202,24 @@ namespace OneKeyToWin_AIO_Sebby.Champions
             E.Cast(pos);
         }
 
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
 
             if (Program.Combo && getCheckBoxItem(miscMenu, "AACombo"))
             {
                 if (!E.IsReady())
-                    Orbwalker.DisableAttacking = false;
+                    PortAIO.OrbwalkerManager.SetAttack(true);
 
                 else
-                    Orbwalker.DisableAttacking = true;
+                    PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
 
             if (getKeyBindItem(eMenu, "FlayPush") || getKeyBindItem(eMenu, "FlayPull"))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
 
             var Etarget = TargetSelector.GetTarget(E.Range, DamageType.Magical);

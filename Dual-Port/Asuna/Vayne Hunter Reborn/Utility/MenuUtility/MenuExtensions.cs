@@ -6,7 +6,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace VayneHunter_Reborn.Utility.MenuUtility
+ namespace VayneHunter_Reborn.Utility.MenuUtility
 {
     static class MenuExtensions
     {
@@ -34,7 +34,7 @@ namespace VayneHunter_Reborn.Utility.MenuUtility
                 mode = "combo";
             }
 
-            if (mode.Contains("harass"))
+            if (mode.Contains("mixed") || mode.Contains("harass"))
             {
                 m = MenuGenerator.harassMenu;
             }

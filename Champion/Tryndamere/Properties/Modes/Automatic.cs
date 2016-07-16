@@ -4,7 +4,7 @@ using LeagueSharp.SDK;
 using ExorAIO.Utilities;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Tryndamere
+ namespace ExorAIO.Champions.Tryndamere
 {
     /// <summary>
     ///     The logics class.
@@ -26,11 +26,13 @@ namespace ExorAIO.Champions.Tryndamere
             ///     The Automatic Q Logic.
             /// </summary>
             if (Vars.Q.IsReady() &&
-                GameObjects.Player.ManaPercent >= 75 &&
-                Health.GetPrediction(GameObjects.Player, (int)(250 + Game.Ping/2f)) <= GameObjects.Player.MaxHealth/2 &&
                 Vars.getCheckBoxItem(Vars.QMenu, "logical"))
             {
-                Vars.Q.Cast();
+                if ((GameObjects.Player.HealthPercent <= Vars.getSliderItem(Vars.QMenu, "health")) &&
+                    (GameObjects.Player.ManaPercent >= Vars.getSliderItem(Vars.QMenu, "fury")))
+                {
+                    Vars.Q.Cast();
+                }
             }
 
             /// <summary>

@@ -22,7 +22,7 @@ using System.Speech.Synthesis;
 using static FreshBooster.FreshCommon;
 using UnderratedAIO.Helpers;
 
-namespace FreshBooster.Champion
+ namespace FreshBooster.Champion
 {
     class Veigar
     {
@@ -186,7 +186,7 @@ namespace FreshBooster.Champion
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
             Interrupter2.OnInterruptableTarget += Interrupter2_OnInterruptableTarget;
         }
-
+        
         private static void OnGameUpdate(EventArgs args)
         {
             try

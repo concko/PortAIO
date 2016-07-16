@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Summoners
+﻿ namespace ElUtilitySuite.Summoners
 {
     using System;
     using System.Collections.Generic;

@@ -7,6 +7,7 @@ using DZLib.Modules;
 using iKalistaReborn.Utils;
 using LeagueSharp;
 using LeagueSharp.Common;
+
 using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
@@ -15,6 +16,7 @@ namespace iKalistaReborn.Modules
 {
     class AutoELeavingModule : IModule
     {
+        
         public static Menu
             comboMenu = Kalista.comboMenu,
             mixedMenu = Kalista.mixedMenu,

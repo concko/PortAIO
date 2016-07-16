@@ -6,7 +6,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace NechritoRiven.Menus
+ namespace NechritoRiven.Menus
 {
     internal class MenuConfig : Core.Core
     {

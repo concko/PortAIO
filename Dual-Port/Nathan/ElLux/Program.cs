@@ -1,4 +1,4 @@
-﻿namespace ElLux
+﻿ namespace ElLux
 {
     using LeagueSharp.Common;
 

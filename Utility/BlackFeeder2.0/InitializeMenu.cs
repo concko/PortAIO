@@ -2,7 +2,7 @@
 using EloBuddy.SDK.Menu.Values;
 using LeagueSharp.Common;
 
-namespace BlackFeeder
+ namespace BlackFeeder
 {
 
     public class InitializeMenu

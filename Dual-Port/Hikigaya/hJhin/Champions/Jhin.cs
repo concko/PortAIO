@@ -11,7 +11,7 @@ using LeagueSharp.SDK;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace hJhin.Champions
+ namespace hJhin.Champions
 {
     public class Jhin
     {
@@ -42,6 +42,7 @@ namespace hJhin.Champions
         {
             return m[item].Cast<KeyBind>().CurrentValue;
         }
+        
 
         private static void OnUpdate(EventArgs args)
         {
@@ -51,11 +52,11 @@ namespace hJhin.Champions
                 {
                     Combo.Execute();
                 }
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     Clear.Execute();
                 }
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
                 {
                     Jungle.Execute();
                 }
@@ -68,18 +69,18 @@ namespace hJhin.Champions
            
             if (ObjectManager.Player.IsActive(Spells.R))
             {
-                Orbwalker.DisableAttacking = true;
-                Orbwalker.DisableMovement = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
             else if (!ObjectManager.Player.IsActive(Spells.R))
             {
-                Orbwalker.DisableAttacking = false;
-                Orbwalker.DisableMovement = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             if (getKeyBindItem(Config.SemiManualUlt, "semi.manual.ult") && !ObjectManager.Player.IsActive(Spells.R))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
 
             if (Spells.R.IsReady() && getKeyBindItem(Config.SemiManualUlt, "semi.manual.ult"))

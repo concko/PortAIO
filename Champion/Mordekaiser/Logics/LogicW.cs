@@ -4,7 +4,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using LeagueSharp.Common;
 
-namespace Mordekaiser.Logics
+ namespace Mordekaiser.Logics
 {
     public class LogicW
     {

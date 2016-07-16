@@ -30,7 +30,7 @@ namespace TheBrand
         private void Orbwalking_BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             _recentFarmTarget = args.Target.Type == GameObjectType.obj_AI_Base
-                ? (Obj_AI_Base) args.Target
+                ? (Obj_AI_Base)args.Target
                 : _recentFarmTarget;
         }
 
@@ -49,7 +49,7 @@ namespace TheBrand
         public override void Execute(AIHeroClient target)
         {
             var distance = target.LSDistance(ObjectManager.Player);
-                //Todo: make him use fireminions even in range, just for showoff and potential AOE. Check if hes on fire too though
+            //Todo: make him use fireminions even in range, just for showoff and potential AOE. Check if hes on fire too though
             if (distance < 950 && distance > 650 && Program.getMiscMenuCB("eMinion"))
             {
                 var fireMinion =

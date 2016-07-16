@@ -21,7 +21,7 @@ using LeagueSharp;
 using EloBuddy;
 #endregion
 
-namespace Irelia.Evade
+ namespace Irelia.Evade
 {
     public static class SpellDatabase
     {

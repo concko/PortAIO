@@ -23,7 +23,7 @@ using LeagueSharp.Common;
 
 #endregion
 
-namespace SDKPredictioner
+ namespace SDKPredictioner
 {
     public class SpellData
     {

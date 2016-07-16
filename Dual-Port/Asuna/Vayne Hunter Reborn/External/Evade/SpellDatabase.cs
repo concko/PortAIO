@@ -40,7 +40,7 @@ using System.Speech.Synthesis;
 
 #endregion
 
-namespace VayneHunter_Reborn.External.Evade
+ namespace VayneHunter_Reborn.External.Evade
 {
     public static class SpellDatabase
     {

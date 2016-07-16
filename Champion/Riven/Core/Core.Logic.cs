@@ -8,7 +8,7 @@ using EloBuddy.SDK;
 
 #endregion
 
-namespace NechritoRiven.Core
+ namespace NechritoRiven.Core
 {
    internal partial class Core
     {

@@ -1,6 +1,6 @@
 ﻿using DZAwarenessAIO.Utility;
 
-namespace DZAwarenessAIO.Modules
+ namespace DZAwarenessAIO.Modules
 {
     /// <summary>
     /// The ModuleBase class

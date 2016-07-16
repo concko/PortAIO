@@ -19,7 +19,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace Activators.Items
+ namespace Activators.Items
 {
     public class CoreItem
     {
@@ -71,6 +71,7 @@ namespace Activators.Items
 
         public void UseItem(bool combo = false)
         {
+            Console.WriteLine("1");
             if (IsReady())
             {
                 LeagueSharp.Common.Utility.DelayAction.Add(80 - Priority * 10, () => Needed = true);

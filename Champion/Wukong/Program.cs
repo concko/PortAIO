@@ -14,7 +14,7 @@ using Spell = LeagueSharp.Common.Spell;
 
 #endregion
 
-namespace Wukong
+ namespace Wukong
 {
     internal class Program
     {
@@ -169,7 +169,7 @@ namespace Wukong
                 args.Process = false;
             }
         }
-
+        
         private static void Game_OnUpdate(EventArgs args)
         {
             var miscAutoQ = getBoxItem(menuMisc, "Misc.AutoQ");
@@ -209,8 +209,7 @@ namespace Wukong
                     Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var clearMana = getSliderItem(menuLane, "LaneClearMana");
                 if (Player.ManaPercent >= clearMana)

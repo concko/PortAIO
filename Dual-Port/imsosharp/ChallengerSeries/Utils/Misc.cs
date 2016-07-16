@@ -19,7 +19,7 @@ using SharpDX.Text;
 using Color = System.Drawing.Color;
 using EloBuddy;
 
-namespace Challenger_Series.Utils
+ namespace Challenger_Series.Utils
 {
     public static class Misc
     {

@@ -1,4 +1,4 @@
-﻿namespace AntiAlistar
+﻿ namespace AntiAlistar
 {
     using System;
     using System.Linq;

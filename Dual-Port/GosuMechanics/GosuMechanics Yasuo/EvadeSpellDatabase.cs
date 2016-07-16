@@ -25,7 +25,7 @@ using EloBuddy;
 
 #endregion
 
-namespace GosuMechanicsYasuo
+ namespace GosuMechanicsYasuo
 {
     internal class EvadeSpellDatabase
     {

@@ -6,7 +6,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using TreeLib.Extensions;
 
-namespace jesuisFiora
+ namespace jesuisFiora
 {
     internal static class SpellManager
     {
@@ -61,7 +61,7 @@ namespace jesuisFiora
             }
 
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 s = "LaneClear";
             }

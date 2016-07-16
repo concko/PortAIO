@@ -1,7 +1,7 @@
 ﻿using LeagueSharp.SDK;
 using System;
 
-namespace Preserved_Kassadin
+ namespace Preserved_Kassadin
 {
     class Program
     {

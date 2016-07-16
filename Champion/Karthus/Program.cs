@@ -14,6 +14,7 @@ using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 using EloBuddy.SDK;
 
+
 namespace OneKeyToWin_AIO_Sebby.Champions
 {
     internal class Karthus
@@ -22,6 +23,7 @@ namespace OneKeyToWin_AIO_Sebby.Champions
         public static Menu drawMenu, qMenu, wMenu, eMenu, rMenu, harassMenu, farmMenu, miscMenu;
         private static Spell E, Q, R, W;
         private static float QMANA, WMANA, EMANA, RMANA;
+        
 
         public static AIHeroClient Player
         {
@@ -123,7 +125,10 @@ namespace OneKeyToWin_AIO_Sebby.Champions
             {
                 if (getCheckBoxItem(miscMenu, "autoZombie"))
                 {
-                    Orbwalker.ActiveModesFlags = Player.LSCountEnemiesInRange(Q.Range) > 0 ? Orbwalker.ActiveModes.Combo : Orbwalker.ActiveModes.LaneClear;
+                    if (Player.CountEnemiesInRange(Q.Range) > 0)
+                        PortAIO.OrbwalkerManager.SetActiveCombo();
+                    else
+                        PortAIO.OrbwalkerManager.SetActiveClear();
                 }
                 if (R.IsReady() && getCheckBoxItem(rMenu, "autoRzombie"))
                 {

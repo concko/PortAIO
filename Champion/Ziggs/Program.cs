@@ -15,7 +15,7 @@ using Utility = LeagueSharp.Common.Utility;
 
 #endregion
 
-namespace Ziggs
+ namespace Ziggs
 {
     internal class Program
     {
@@ -180,7 +180,7 @@ namespace Ziggs
                     true);
             }
         }
-
+        
         private static void Game_OnGameUpdate(EventArgs args)
         {
             //Combo & Harass
@@ -296,8 +296,7 @@ namespace Ziggs
             }
 
             //Farm
-            var lc = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                     Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
+            var lc = Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear);
             if (lc)
             {
                 Farm();

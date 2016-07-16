@@ -17,7 +17,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-namespace IKalista
+ namespace IKalista
 {
     using System;
     using System.Linq;

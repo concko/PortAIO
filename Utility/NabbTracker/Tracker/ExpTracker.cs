@@ -5,7 +5,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace NabbTracker
+ namespace NabbTracker
 {
     /// <summary>
     ///     The drawings class.

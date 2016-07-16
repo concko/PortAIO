@@ -94,8 +94,10 @@ namespace SCommon.PluginBase
 
             Game.OnUpdate += Game_OnUpdate;
             Drawing.OnDraw += Drawing_OnDraw;
+
             Orbwalker.OnPreAttack += OrbwalkingEvents_BeforeAttack;
             Orbwalker.OnPostAttack += OrbwalkingEvents_AfterAttack;
+
             AntiGapcloser.OnEnemyGapcloser += AntiGapcloser_OnEnemyGapcloser;
             Interrupter2.OnInterruptableTarget += Interrupter_OnPossibleToInterrupt;
             Obj_AI_Base.OnBuffGain += Obj_AI_Base_OnBuffAdd;
@@ -137,7 +139,7 @@ namespace SCommon.PluginBase
                     OnHarass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 if (OnLaneClear != null)
                     OnLaneClear();

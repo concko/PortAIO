@@ -18,7 +18,7 @@ namespace FioraProject
     {
         private const int BAR_WIDTH = 104;
         private const int LINE_THICKNESS = 9;
-
+        
         private static LeagueSharp.Common.Utility.HpBarDamageIndicator.DamageToUnitDelegate damageToUnit;
 
         private static readonly Vector2 BarOffset = new Vector2(10, 25);

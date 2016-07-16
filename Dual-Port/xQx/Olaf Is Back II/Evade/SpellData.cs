@@ -21,7 +21,7 @@ using LeagueSharp;
 
 #endregion
 
-namespace OlafxQx.Evade
+ namespace OlafxQx.Evade
 {
     public class SpellData
     {

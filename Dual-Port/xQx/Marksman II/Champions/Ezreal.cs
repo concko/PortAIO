@@ -15,7 +15,7 @@ using Marksman.Common;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     using EloBuddy;
     using EloBuddy.SDK;
@@ -152,6 +152,7 @@ namespace Marksman.Champions
                 }
             }
         }
+        
 
         public override void Game_OnGameUpdate(EventArgs args)
         {

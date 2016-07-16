@@ -9,7 +9,7 @@ using LeagueSharp.Common;
 using PortAIO.Utility.BrianSharp;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace BrianSharp.Plugin
+ namespace BrianSharp.Plugin
 {
     internal class Rammus : Helper
     {
@@ -122,8 +122,7 @@ namespace BrianSharp.Plugin
                 Fight();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -135,7 +134,7 @@ namespace BrianSharp.Plugin
                 }
             }
         }
-
+        
         private static void OnDraw(EventArgs args)
         {
             if (Player.IsDead)

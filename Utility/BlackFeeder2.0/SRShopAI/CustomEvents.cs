@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using LeagueSharp;
 using EloBuddy;
 
-namespace BlackFeeder.SRShopAI
+ namespace BlackFeeder.SRShopAI
 {
     public class CustomEvents
     {

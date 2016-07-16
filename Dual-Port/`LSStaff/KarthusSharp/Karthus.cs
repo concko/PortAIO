@@ -11,7 +11,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using Color = SharpDX.Color;
 
-namespace KarthusSharp
+ namespace KarthusSharp
 {
     /*
     * LaneClear:
@@ -169,20 +169,20 @@ namespace KarthusSharp
 
             if (getCheckBoxItem(comboMenu, "comboAA") || ObjectManager.Player.Mana < 100)
             {
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             if (getCheckBoxItem(farmMenu, "farmAA") || ObjectManager.Player.Mana < 100)
             {
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))
@@ -195,7 +195,7 @@ namespace KarthusSharp
                 Harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
             }
@@ -228,7 +228,7 @@ namespace KarthusSharp
                       GetManaPercent() >= getSliderItem(farmMenu, "farmQPercent"));
             }
         }
-
+        
         public float GetManaPercent()
         {
             return (ObjectManager.Player.Mana/ObjectManager.Player.MaxMana)*100f;

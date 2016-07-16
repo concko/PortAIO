@@ -12,7 +12,7 @@ using EloBuddy.SDK;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace Irelia.Champion
+ namespace Irelia.Champion
 {
     public static class PlayerSpells
     {
@@ -118,7 +118,7 @@ namespace Irelia.Champion
         {
             return m[item].Cast<ComboBox>().CurrentValue;
         }
-
+        
         private static void GameOnOnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

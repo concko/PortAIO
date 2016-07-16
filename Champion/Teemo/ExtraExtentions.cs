@@ -1,7 +1,7 @@
 ﻿using EloBuddy;
 using EloBuddy.SDK;
 
-namespace PortAIO.Champion.Teemo
+ namespace PortAIO.Champion.Teemo
 {
     internal static class ExtraExtensions
     {

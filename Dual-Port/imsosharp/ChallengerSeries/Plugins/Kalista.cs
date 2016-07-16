@@ -14,7 +14,7 @@ using EloBuddy.SDK;
 using EloBuddy;
 //using LeagueSharp.Common;
 
-namespace Challenger_Series.Plugins
+ namespace Challenger_Series.Plugins
 {
     using LeagueSharp.SDK.Core.Utils;
     using LeagueSharp.SDK.Enumerations;
@@ -56,17 +56,18 @@ namespace Challenger_Series.Plugins
         {
             if (FocusWBuffedEnemyBool)
             {
-                Orbwalker.ForcedTarget =
+                Orbwalker.ForcedTarget =(
                     ValidTargets.FirstOrDefault(
                         h =>
                         h.Distance(ObjectManager.Player.ServerPosition) < 600
-                        && h.HasBuff("kalistacoopstrikemarkally"));
+                        && h.HasBuff("kalistacoopstrikemarkally")));
             }
         }
 
-        private void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
+        private void Orbwalker_OnPostAttack(AttackableUnit targetA, EventArgs args)
         {
-            Orbwalker.ForcedTarget = null;
+            var target = targetA;
+            Orbwalker.ForcedTarget =(null);
             var t = target as Obj_AI_Base;
             if (Q.IsReady() && target.LSIsValidTarget() && !t.IsMinion)
             {
@@ -77,6 +78,7 @@ namespace Challenger_Series.Plugins
                 }
             }
         }
+        
 
         public override void OnUpdate(EventArgs args)
         {

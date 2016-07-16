@@ -6,7 +6,7 @@ using EloBuddy.SDK;
 using LeagueSharp.Common;
 using Spell = LeagueSharp.Common.Spell;
 
-namespace ElSejuani
+ namespace ElSejuani
 {
     internal enum Spells
     {
@@ -336,6 +336,7 @@ namespace ElSejuani
                 }
             }
         }
+        
 
         private static void OnUpdate(EventArgs args)
         {
@@ -349,7 +350,7 @@ namespace ElSejuani
                 Combo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
                 JungleClear();

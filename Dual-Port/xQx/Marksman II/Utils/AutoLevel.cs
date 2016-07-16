@@ -4,7 +4,7 @@ using LeagueSharp;
 using LeagueSharp.Common;
 using Color = SharpDX.Color;
 
-namespace Marksman.Utils
+ namespace Marksman.Utils
 {
     using EloBuddy;
     using EloBuddy.SDK.Menu;

@@ -6,7 +6,7 @@ using LeagueSharp.Common;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy;
 
-namespace Activators.Items.Cleansers
+ namespace Activators.Items.Cleansers
 {
     class _3222 : CoreItem
     {
@@ -28,11 +28,11 @@ namespace Activators.Items.Cleansers
 
             foreach (var hero in Activator.Allies())
             {
-                if (Activator.cmenu[Parent.UniqueMenuId + "useon" + hero.Player.NetworkId] == null)
+                if (Activator.cmenu[Activator.cmenu.UniqueMenuId + "useon" + hero.Player.NetworkId] == null)
                 {
                     continue;
                 }
-                if (!Activator.cmenu[Parent.UniqueMenuId + "useon" + hero.Player.NetworkId].Cast<CheckBox>().CurrentValue)
+                if (!Activator.cmenu[Activator.cmenu.UniqueMenuId + "useon" + hero.Player.NetworkId].Cast<CheckBox>().CurrentValue)
                     continue;
 
                 if (hero.Player.LSDistance(Player.ServerPosition) > Range)

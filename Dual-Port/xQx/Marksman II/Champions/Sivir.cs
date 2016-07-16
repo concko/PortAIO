@@ -7,7 +7,7 @@ using Marksman.Utils;
 
 #endregion
 
-namespace Marksman.Champions
+ namespace Marksman.Champions
 {
     using System.Collections.Generic;
     using SharpDX;

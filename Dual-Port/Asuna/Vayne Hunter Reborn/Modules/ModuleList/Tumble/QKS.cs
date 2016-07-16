@@ -8,7 +8,7 @@ using VayneHunter_Reborn.Skills.Tumble;
 using VayneHunter_Reborn.Utility;
 using VayneHunter_Reborn.Utility.MenuUtility;
 
-namespace VayneHunter_Reborn.Modules.ModuleList.Tumble
+ namespace VayneHunter_Reborn.Modules.ModuleList.Tumble
 {
     class QKS : IModule
     {
@@ -26,19 +26,19 @@ namespace VayneHunter_Reborn.Modules.ModuleList.Tumble
         {
             return ModuleType.OnUpdate;
         }
-
+        
         public void OnExecute()
         {
             var currentTarget = TargetSelector.GetTarget(Orbwalking.GetRealAutoAttackRange(null) + 240f, DamageType.Physical);
             if (!currentTarget.LSIsValidTarget())
             {
-                Orbwalker.ForcedTarget = null;
+                Orbwalker.ForcedTarget =(null);
                 return;
             }
 
             if (currentTarget.ServerPosition.LSDistance(ObjectManager.Player.ServerPosition) <= Orbwalking.GetRealAutoAttackRange(null))
             {
-                Orbwalker.ForcedTarget = null;
+                Orbwalker.ForcedTarget =(null);
                 return;
             }
 
@@ -53,7 +53,7 @@ namespace VayneHunter_Reborn.Modules.ModuleList.Tumble
                 {
                     Orbwalker.ResetAutoAttack();
                     Variables.spells[SpellSlot.Q].Cast(extendedPosition);
-                    Orbwalker.ForcedTarget = currentTarget;
+                    Orbwalker.ForcedTarget =(currentTarget);
                 }
             }
         }

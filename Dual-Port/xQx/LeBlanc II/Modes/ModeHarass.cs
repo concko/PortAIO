@@ -11,7 +11,7 @@ using EloBuddy;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace Leblanc.Modes
+ namespace Leblanc.Modes
 {
 
     internal class ModeHarass
@@ -47,6 +47,7 @@ namespace Leblanc.Modes
 
             Game.OnUpdate += GameOnOnUpdate;
         }
+        
 
         private static void GameOnOnUpdate(EventArgs args)
         {
@@ -111,7 +112,7 @@ namespace Leblanc.Modes
 
         private static void ExecuteToggle()
         {
-            if (ToggleActive == 0 && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (ToggleActive == 0 && !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) || !Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 return;
             }

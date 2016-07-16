@@ -9,7 +9,7 @@ using EloBuddy.SDK.Menu;
 using Spell = LeagueSharp.Common.Spell;
 using EloBuddy.SDK.Menu.Values;
 
-namespace KurisuBlitzcrank
+ namespace KurisuBlitzcrank
 {
     class Program
     {
@@ -123,7 +123,7 @@ namespace KurisuBlitzcrank
                 Render.Circle.DrawCircle(Player.Position, R.Range, R.IsReady() ? Color.LawnGreen : Color.Red, 2);
             }
         }
-
+        
         private static void Orbwalking_BeforeAttack(AttackableUnit target, Orbwalker.PreAttackArgs args)
         {
             if (getCheckBoxItem(exmenu, "supp"))
@@ -274,7 +274,7 @@ namespace KurisuBlitzcrank
                 return;
             }
 
-            Orbwalker.OrbwalkTo(Game.CursorPos);
+            Orbwalker.MoveTo(Game.CursorPos);
         }
 
         private static void Combo(bool useq, bool usee, bool user)

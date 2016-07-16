@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu.Values;
 using Prediction = LeagueSharp.Common.Prediction;
 using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
-namespace OneKeyToWin_AIO_Sebby
+ namespace OneKeyToWin_AIO_Sebby
 {
     class Lucian
     {
@@ -111,8 +111,8 @@ namespace OneKeyToWin_AIO_Sebby
 
         private static void afterAttack(AttackableUnit target, EventArgs args)
         {
-            if (!target.IsMe)
-                return;
+            //if (!target.IsMe)
+                //return;
         }
 
         private static void Obj_AI_Base_OnProcessSpellCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)

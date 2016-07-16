@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
 
-namespace iLucian.Utils
+ namespace iLucian.Utils
 {
     public class MathHelper
     {

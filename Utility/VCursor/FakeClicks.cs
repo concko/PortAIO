@@ -30,7 +30,7 @@ using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 
-namespace VCursor
+ namespace VCursor
 {
     /// <summary>
     ///     Simulates clicks.

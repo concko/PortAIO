@@ -10,7 +10,7 @@ using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK;
 using EloBuddy;
 
-namespace Leblanc.Modes
+ namespace Leblanc.Modes
 {
     internal class ModePerma
     {
@@ -22,7 +22,7 @@ namespace Leblanc.Modes
         {
             //Game.OnUpdate += GameOnOnUpdate;
         }
-
+        
         private static void GameOnOnUpdate(EventArgs args)
         {
             if (!Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.Combo))

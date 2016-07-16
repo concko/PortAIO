@@ -17,7 +17,7 @@ using LS = LeagueSharp.Common;
 using SV = SoloVayne.Skills.Tumble;
 using EvadeA;
 
-namespace Vayne1
+ namespace Vayne1
 {
     public static class Program
     {
@@ -133,6 +133,7 @@ namespace Vayne1
                 }
             }
         }
+        
 
         public static void OnUpdate(EventArgs args)
         {
@@ -507,7 +508,7 @@ namespace Vayne1
                         h.GetBuffCount("vaynesilvereddebuff") == 2);
             if (TryToFocus2WBool && possible2WTarget.IsValidTarget())
             {
-                Orbwalker.ForcedTarget = possible2WTarget;
+                Orbwalker.ForcedTarget =(possible2WTarget);
             }
 
             if (myHero.HasBuff("vaynetumblefade"))
@@ -541,7 +542,7 @@ namespace Vayne1
                 var possibleTarget = TargetSelector.GetTarget(-1f, DamageType.Physical);
                 if (possibleTarget != null && possibleTarget.IsInAutoAttackRange(myHero))
                 {
-                    Orbwalker.ForcedTarget = possibleTarget;
+                    Orbwalker.ForcedTarget =(possibleTarget);
                     args.Process = false;
                 }
             }
@@ -581,7 +582,7 @@ namespace Vayne1
 
         private static void Orbwalker_OnPostAttack(AttackableUnit target, EventArgs args)
         {
-            Orbwalker.ForcedTarget = null;
+            Orbwalker.ForcedTarget =(null);
             var possible2WTarget =
                 EntityManager.Heroes.Enemies.FirstOrDefault(
                     h =>
@@ -619,7 +620,7 @@ namespace Vayne1
                                 {
                                     tumblePosition = Game.CursorPos;
                                 }
-                                Orbwalker.ForcedTarget = tg;
+                                Orbwalker.ForcedTarget =(tg);
                                 break;
                             case 3: // VHR
                                 if (smartq)
@@ -760,7 +761,7 @@ namespace Vayne1
                     }
                 }
             }
-            if (target is Obj_AI_Minion && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (target is Obj_AI_Minion && Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 var tg = target as Obj_AI_Minion;
                 if (E.IsReady())
@@ -853,7 +854,7 @@ namespace Vayne1
                 return;
             }
 
-            Orbwalker.ForcedTarget = target;
+            Orbwalker.ForcedTarget =(target);
 
             if (ObjectManager.Player.CountEnemiesInRange(1500f) >= 3)
             {

@@ -9,7 +9,7 @@ using Geometry = ExorAIO.Utilities.Geometry;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.MissFortune
+ namespace ExorAIO.Champions.MissFortune
 {
     /// <summary>
     ///     The logics class.
@@ -29,9 +29,9 @@ namespace ExorAIO.Champions.MissFortune
                 !Bools.HasSheenBuff() &&
                 Vars.getCheckBoxItem(Vars.WMenu, "combo"))
             {
-                if (Orbwalker.LastTarget as AIHeroClient != null ||
-                    GameObjects.EnemyHeroes.Any(t => t.LSIsValidTarget(Vars.R.Range)) &&
-                    Vars.getCheckBoxItem(Vars.WMenu, "engager"))
+                if (GameObjects.EnemyHeroes.Any(t => t.IsValidTarget(Vars.getCheckBoxItem(Vars.WMenu, "engager")
+                        ? Vars.R.Range
+                        : Vars.AARange)))
                 {
                     Vars.W.Cast();
                 }

@@ -8,13 +8,14 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Jinx
+ namespace ExorAIO.Champions.Jinx
 {
     /// <summary>
     ///     The logics class.
     /// </summary>
     internal partial class Logics
     {
+        
         /// <summary>
         ///     Called when the game updates itself.
         /// </summary>
@@ -100,9 +101,9 @@ namespace ExorAIO.Champions.Jinx
                         }
 
                         /// <summary>
-                        ///     LaneClear Logics.
+                        ///     The LaneClear Logics.
                         /// </summary>
-                        if (Targets.Minions.Any())
+                        if (Targets.Minions.Any(m => Vars.GetRealHealth(m) < GameObjects.Player.GetAutoAttackDamage(m) * 1.1))
                         {
                             /*
                             /// <summary>
@@ -118,10 +119,17 @@ namespace ExorAIO.Champions.Jinx
                             */
 
                             /// <summary>
-                            ///     Enable if:
-                            ///     More or equal than 2 minions in explosion range from the target minion. (Lane AoE Logic).
+                            ///     Disable if:
+                            ///     The player has Runaan's Hurricane and there are more than 1 hittable Minions..
+                            ///     And there more than 2 killable minions in Q explosion range (Lane AoE Logic).
                             /// </summary>
-                            if (Targets.Minions.Count(m2 => m2.Distance(Targets.Minions[0]) < 250f) >= 3)
+                            if ((Items.HasItem(3085) && Targets.Minions.Count() > 1) ||
+                                Targets.Minions.Where(
+                                m =>
+                                    Vars.GetRealHealth(m) <
+                                        GameObjects.Player.GetAutoAttackDamage(m) * 1.1).Count(
+                                            m2 =>
+                                                m2.Distance(Targets.Minions.First(m => Vars.GetRealHealth(m) < GameObjects.Player.GetAutoAttackDamage(m) * 1.1)) < 250f) >= 3)
                             {
                                 Vars.Q.Cast();
                                 Console.WriteLine("ExorAIO: Jinx - LaneClear - Enabled for AoE Check.");
@@ -130,7 +138,7 @@ namespace ExorAIO.Champions.Jinx
                         }
 
                         /// <summary>
-                        ///     JungleClear Logics.
+                        ///     The JungleClear Logics.
                         /// </summary>
                         else if (Targets.JungleMinions.Any())
                         {
@@ -138,7 +146,7 @@ namespace ExorAIO.Champions.Jinx
                             ///     Enable if:
                             ///     No monster in PowPow Range and at least 1 monster in Fishbones Range.. (Jungle Range Logic).
                             /// </summary>
-                            if (!Targets.JungleMinions.Any(m => m.LSIsValidTarget(Vars.PowPow.Range)))
+                            if (!Targets.JungleMinions.Any(m => m.IsValidTarget(Vars.PowPow.Range)))
                             {
                                 Vars.Q.Cast();
                                 Console.WriteLine("ExorAIO: Jinx - JungleClear - Enabled for Range Check.");
@@ -276,8 +284,9 @@ namespace ExorAIO.Champions.Jinx
                         ///     There is at least 1 minion in PowPow Range.. (Lane Range Logic).
                         ///     .. And less than 2 minions in explosion range from the minion target (Lane AoE Logic).
                         /// </summary>
-                        if (Targets.Minions.Any(m => m.LSIsValidTarget(Vars.PowPow.Range)) &&
-                            Targets.Minions.Count(m2 => m2.Distance(Targets.Minions[0]) < 250f) < 3)
+                        if ((!Items.HasItem(3085) || Targets.Minions.Count() < 2) &&
+                            (!Targets.Minions.Any(m => Vars.GetRealHealth(m) < GameObjects.Player.GetAutoAttackDamage(m) * 1.1) ||
+                            Targets.Minions.Count(m2 => m2.Distance(Targets.Minions.First(m => Vars.GetRealHealth(m) < GameObjects.Player.GetAutoAttackDamage(m) * 1.1)) < 250f) < 3))
                         {
                             Vars.Q.Cast();
                             Console.WriteLine("ExorAIO: Jinx - LaneClear - Disabled.");
@@ -289,7 +298,7 @@ namespace ExorAIO.Champions.Jinx
                         ///     There is at least 1 monster in PowPow Range.. (Jungle Range Logic).
                         ///     .. And less than 1 monster in explosion range from the monster target (Jungle AoE Logic).
                         /// </summary>
-                        else if (Targets.JungleMinions.Any(m => m.LSIsValidTarget(Vars.PowPow.Range)) &&
+                        else if (Targets.JungleMinions.Any(m => m.IsValidTarget(Vars.PowPow.Range)) &&
                             Targets.JungleMinions.Count(m2 => m2.Distance(Targets.JungleMinions[0]) < 250f) < 2)
                         {
                             Vars.Q.Cast();
@@ -345,27 +354,6 @@ namespace ExorAIO.Champions.Jinx
             }
 
             /// <summary>
-            ///     The Automatic W Logic.
-            /// </summary>
-            if (Vars.W.IsReady() &&
-                !GameObjects.Player.IsUnderEnemyTurret() &&
-                Vars.getCheckBoxItem(Vars.WMenu, "logical"))
-            {
-                foreach (var target in GameObjects.EnemyHeroes.Where(
-                    t =>
-                        Bools.IsImmobile(t) &&
-                        !Invulnerable.Check(t) &&
-                        t.LSIsValidTarget(Vars.W.Range)))
-                {
-                    if (!Vars.W.GetPrediction(Targets.Target).CollisionObjects.Any(c => Targets.Minions.Contains(c)))
-                    {
-                        Vars.W.Cast(target.ServerPosition);
-                        return;
-                    }
-                }
-            }
-
-            /// <summary>
             ///     The Automatic E Logic.
             /// </summary>
             if (Vars.E.IsReady() &&
@@ -374,10 +362,31 @@ namespace ExorAIO.Champions.Jinx
                 foreach (var target in GameObjects.EnemyHeroes.Where(
                     t =>
                         Bools.IsImmobile(t) &&
-                        t.LSIsValidTarget(Vars.E.Range) &&
+                        t.IsValidTarget(Vars.E.Range) &&
                         !Invulnerable.Check(t, DamageType.Magical, false)))
                 {
                     Vars.E.Cast(target.ServerPosition);
+                }
+            }
+
+            /// <summary>
+            ///     The Automatic W Logic.
+            /// </summary>
+            if (Vars.W.IsReady() &&
+                !GameObjects.Player.IsUnderEnemyTurret() &&
+                GameObjects.Player.CountEnemyHeroesInRange(Vars.Q.Range) < 3 &&
+                Vars.getCheckBoxItem(Vars.WMenu, "logical"))
+            {
+                foreach (var target in GameObjects.EnemyHeroes.Where(
+                    t =>
+                        Bools.IsImmobile(t) &&
+                        !Invulnerable.Check(t) &&
+                        t.IsValidTarget(Vars.W.Range)))
+                {
+                    if (!Vars.W.GetPrediction(target).CollisionObjects.Any())
+                    {
+                        Vars.W.Cast(target.ServerPosition);
+                    }
                 }
             }
         }
@@ -400,17 +409,14 @@ namespace ExorAIO.Champions.Jinx
                     return;
                 }
 
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+                /// <summary>
+                ///     Block if:
+                ///     It doesn't respect the ManaManager Check, (Mana check),
+                /// </summary>
+                if (GameObjects.Player.ManaPercent <
+                        ManaManager.GetNeededMana(Vars.W.Slot, Vars.getSliderItem(Vars.QMenu, "clear")))
                 {
-                    /// <summary>
-                    ///     Block if:
-                    ///     It doesn't respect the ManaManager Check, (Mana check),
-                    /// </summary>
-                    if (GameObjects.Player.ManaPercent <
-                            ManaManager.GetNeededMana(Vars.W.Slot, Vars.getSliderItem(Vars.QMenu, "clear")))
-                    {
-                        args.Process = false;
-                    }
+                    args.Process = false;
                 }
             }
         }

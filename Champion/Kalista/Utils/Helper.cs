@@ -5,6 +5,7 @@
 
     using EloBuddy;
     using LeagueSharp.Common;
+    
 
     using SharpDX;
 
@@ -15,6 +16,7 @@
     /// </summary>
     internal static class Helper
     {
+        
         #region Public Methods and Operators
 
         /// <summary>

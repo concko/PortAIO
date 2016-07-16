@@ -24,7 +24,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace EvadeA
+ namespace EvadeA
 {
     public enum SpellValidTargets
     {

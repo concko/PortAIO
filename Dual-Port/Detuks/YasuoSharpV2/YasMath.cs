@@ -8,7 +8,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
 
-namespace YasuoSharpV2
+ namespace YasuoSharpV2
 {
     class YasMath
     {

@@ -13,7 +13,7 @@ using EloBuddy.SDK.Menu.Values;
 
 #endregion
 
-namespace hi_im_gosu
+ namespace hi_im_gosu
 {
     public class Vayne
     {
@@ -162,7 +162,7 @@ namespace hi_im_gosu
             }
         }
 
-
+        
         public static void Orbwalking_AfterAttack(AttackableUnit target, EventArgs args)
         {
             if ((Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear)) && 100 * (Player.Mana / Player.MaxMana) > getSliderItem(qmenu, "Junglemana"))
@@ -197,7 +197,7 @@ namespace hi_im_gosu
                     Q.Cast(Game.CursorPos);
                 }
 
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
 
             if (getKeyBindItem(emenu, "UseEaa"))
@@ -280,7 +280,7 @@ namespace hi_im_gosu
 
             if (getKeyBindItem(menu, "aaqaa"))
             {
-                Orbwalker.OrbwalkTo(Game.CursorPos);
+                Orbwalker.MoveTo(Game.CursorPos);
             }
 
             if (!E.IsReady()) return;

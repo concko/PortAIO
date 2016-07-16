@@ -4,11 +4,13 @@ using EloBuddy;
 using EloBuddy.SDK.Menu;
 using LeagueSharp.Common;
 
+
 namespace JaxQx
 {
     internal class PlayerSpells
     {
         public static SpellSlot SmiteSlot = SpellSlot.Unknown;
+        
         public static SpellSlot IgniteSlot = SpellSlot.Unknown;
         private static readonly int[] SmitePurple = {3713, 3726, 3725, 3726, 3723};
         private static readonly int[] SmiteGrey = {3711, 3722, 3721, 3720, 3719};

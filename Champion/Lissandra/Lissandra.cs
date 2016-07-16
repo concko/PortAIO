@@ -14,7 +14,7 @@ using Spell = LeagueSharp.Common.Spell;
 using Utility = LeagueSharp.Common.Utility;
 using Version = System.Version;
 
-namespace SephLissandra
+ namespace SephLissandra
 {
     internal static class Lissandra
     {
@@ -133,12 +133,12 @@ namespace SephLissandra
             {
                 FarmHandler();
             }
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 WaveClearHandler();
             }
         }
-
+        
         private static void EToMouse(Vector3 Position)
         {
             if (Spells["E"].IsReady() && LissEMissile == null && !LissUtils.CanSecondE())

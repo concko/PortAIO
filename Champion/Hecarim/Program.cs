@@ -10,10 +10,12 @@ using Color = System.Drawing.Color;
 using Damage = LeagueSharp.Common.Damage;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace JustHecarim
 {
     internal class Program
     {
+        
         public const string ChampName = "Hecarim";
         public const string Menuname = "JustHecarim";
         public static Menu Config, comboMenu, harassMenu, laneClear, drawMenu, miscMenu;
@@ -169,8 +171,7 @@ namespace JustHecarim
                 harass();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }
@@ -248,7 +249,7 @@ namespace JustHecarim
 
             if (player.ManaPercent >= lanemana)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                     getCheckBoxItem(laneClear, "laneQ"))
                 {
                     Q.Cast();
@@ -257,7 +258,7 @@ namespace JustHecarim
 
             if (player.ManaPercent >= lanemana)
             {
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                     getCheckBoxItem(laneClear, "laneE"))
                 {
                     E.Cast();
@@ -265,7 +266,7 @@ namespace JustHecarim
             }
 
             if (minionObj.Count > getSliderItem(laneClear, "wmin") && player.ManaPercent >= lanemana)
-                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) &&
+                if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) &&
                     getCheckBoxItem(laneClear, "laneW"))
                 {
                     {

@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Core.Utils;
 using LeagueSharp.Data.Enumerations;
 using EloBuddy;
 
-namespace ExorAIO.Champions.Kalista
+ namespace ExorAIO.Champions.Kalista
 {
     /// <summary>
     ///     The logics class.

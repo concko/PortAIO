@@ -9,10 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RyzeAssembly
+ namespace RyzeAssembly
 {
     class Modes
     {
+        
         public void Update(RyzeMain ryze)
         {
             ryze.Spells.igniteCast();

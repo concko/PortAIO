@@ -5,7 +5,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy.SDK.Menu;
 using EloBuddy.SDK.Menu.Values;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The Vars class.

@@ -11,7 +11,7 @@ using LeagueSharp.Common;
 using SharpDX;
 using EloBuddy;
 
-namespace ezEvade.Draw
+ namespace ezEvade.Draw
 {
     class RenderText : RenderObject
     {

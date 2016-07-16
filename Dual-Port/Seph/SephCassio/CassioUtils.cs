@@ -6,7 +6,7 @@ using SharpDX;
 using EloBuddy.SDK.Menu.Values;
 using EloBuddy.SDK.Menu;
 
-namespace SephCassiopeia
+ namespace SephCassiopeia
 {
     class CassioUtils
     {

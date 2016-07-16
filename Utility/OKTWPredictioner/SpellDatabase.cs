@@ -25,7 +25,7 @@ using EloBuddy;
 
 #endregion
 
-namespace OKTWPredictioner
+ namespace OKTWPredictioner
 {
     public static class SpellDatabase
     {

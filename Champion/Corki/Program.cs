@@ -28,6 +28,7 @@ namespace ElCorki
 
     internal static class Corki
     {
+        
         #region Public Properties
 
         public static string ScriptVersion
@@ -570,8 +571,7 @@ namespace ElCorki
                 Combo(target);
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 LaneClear();
                 JungleClear();

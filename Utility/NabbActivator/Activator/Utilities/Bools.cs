@@ -3,7 +3,7 @@ using EloBuddy;
 using LeagueSharp.SDK;
 using LeagueSharp.SDK.Core.Utils;
 
-namespace NabbActivator
+ namespace NabbActivator
 {
     /// <summary>
     ///     The bools.

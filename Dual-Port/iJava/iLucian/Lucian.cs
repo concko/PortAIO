@@ -1,4 +1,4 @@
-﻿namespace iLucian
+﻿ namespace iLucian
 {
     using System;
     using System.Collections.Generic;
@@ -447,7 +447,7 @@
             Variables.Spell[Variables.Spells.W].SetSkillshot(0.30f, 70f, 1600f, false, SkillshotType.SkillshotLine);
             Variables.Spell[Variables.Spells.R].SetSkillshot(0.2f, 110f, 2500, true, SkillshotType.SkillshotLine);
         }
-
+        
         private void OnDoCast(Obj_AI_Base sender, GameObjectProcessSpellCastEventArgs args)
         {
             if (!sender.IsMe) return;
@@ -740,13 +740,13 @@
             if (ObjectManager.Player.HasBuff("LucianR")
                 && getKeyBindItem(MenuGenerator.comboOptions, "com.ilucian.combo.forceR"))
             {
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
             }
 
             if (!ObjectManager.Player.HasBuff("LucianR")
                 || !getKeyBindItem(MenuGenerator.comboOptions, "com.ilucian.combo.forceR"))
             {
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
             }
 
             if (getCheckBoxItem(MenuGenerator.miscOptions, "com.ilucian.misc.forcePassive") && Variables.HasPassive())
@@ -756,11 +756,11 @@
                     DamageType.Physical);
                 if (target != null && target.IsValid && target.IsHPBarRendered)
                 {
-                    Orbwalker.ForcedTarget = target;
+                    Orbwalker.ForcedTarget =(target);
                 }
                 else
                 {
-                    Orbwalker.ForcedTarget = null;
+                    Orbwalker.ForcedTarget =(null);
                 }
             }
 

@@ -2,7 +2,7 @@ using EloBuddy;
 using EloBuddy.SDK;
 using EloBuddy.SDK.Menu;
 
-namespace ElUtilitySuite.Items
+ namespace ElUtilitySuite.Items
 {
     /// <summary>
     ///     Represents an item.

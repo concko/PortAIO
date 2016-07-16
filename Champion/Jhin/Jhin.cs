@@ -5,12 +5,14 @@ using EloBuddy;
 using EloBuddy.SDK;
 using Jhin___The_Virtuoso.Extensions;
 using Jhin___The_Virtuoso.Modes;
+
 using LeagueSharp.Common;
 
 namespace Jhin___The_Virtuoso
 {
     public class Jhin
     {
+        
         /// <summary>
         ///     Jhin On Load Event
         /// </summary>
@@ -36,8 +38,7 @@ namespace Jhin___The_Virtuoso
                 Combo.ExecuteCombo();
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Jungle.ExecuteJungle();
                 Clear.ExecuteClear();
@@ -62,13 +63,13 @@ namespace Jhin___The_Virtuoso
 
             if (ObjectManager.Player.IsActive(Spells.R))
             {
-                Orbwalker.DisableMovement = true;
-                Orbwalker.DisableAttacking = true;
+                PortAIO.OrbwalkerManager.SetAttack(false);
+                PortAIO.OrbwalkerManager.SetMovement(false);
             }
             else
             {
-                Orbwalker.DisableMovement = false;
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
+                PortAIO.OrbwalkerManager.SetMovement(true);
             }
 
             #endregion

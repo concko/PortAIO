@@ -10,6 +10,7 @@ using SebbyLib;
 using Orbwalking = SebbyLib.Orbwalking;
 using Spell = LeagueSharp.Common.Spell;
 
+
 namespace PortAIO.Champion.Anivia
 {
     class Anivia
@@ -23,7 +24,7 @@ namespace PortAIO.Champion.Anivia
         {
             get { return ObjectManager.Player; }
         }
-
+        
         public static Menu drawMenu, QMenu, WMenu, EMenu, RMenu, FarmMenu, AniviaMenu;
 
         public static void LoadOKTW()
@@ -162,10 +163,14 @@ namespace PortAIO.Champion.Anivia
         {
             if (Program.Combo && getCheckBoxItem(AniviaMenu, "AACombo"))
             {
-                Orbwalker.DisableAttacking = E.IsReady();
+                if (!E.IsReady())
+                    PortAIO.OrbwalkerManager.SetAttack(true);
+
+                else
+                    PortAIO.OrbwalkerManager.SetAttack(false);
             }
             else
-                Orbwalker.DisableAttacking = false;
+                PortAIO.OrbwalkerManager.SetAttack(true);
 
             if (Q.IsReady() && QMissile != null && QMissile.Position.LSCountEnemiesInRange(220) > 0)
                 Q.Cast();

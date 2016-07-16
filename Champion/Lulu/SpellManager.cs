@@ -21,7 +21,7 @@ using System;
 using System.Speech.Synthesis;
 using TreeLib.Extensions;
 
-namespace LuluLicious
+ namespace LuluLicious
 {
     internal static class SpellManager
     {
@@ -46,7 +46,7 @@ namespace LuluLicious
         public static void Initialize()
         {
         }
-
+        
         public static bool IsActive(this LeagueSharp.Common.Spell spell, bool force = false)
         {
             if (force)

@@ -1,4 +1,4 @@
-﻿namespace ElUtilitySuite.Summoners
+﻿ namespace ElUtilitySuite.Summoners
 {
     using System;
     using System.Drawing;
@@ -43,7 +43,7 @@
         #endregion
 
         #region Public Properties
-
+        
         /// <summary>
         ///     Gets a value indicating whether the combo mode is active.
         /// </summary>

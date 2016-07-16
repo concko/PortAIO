@@ -21,7 +21,7 @@ namespace BrianSharp.Plugin
         private const int RWidth = 325;
         private static bool _rCasted;
         public static Spell Q, Q2, W, E, R;
-
+        
         public static Menu config, comboMenu, harassMenu, clearMenu, lastHitMenu, fleeMenu, miscMenu, drawMenu;
 
         public static AIHeroClient Player
@@ -155,8 +155,7 @@ namespace BrianSharp.Plugin
                 Fight(harassMenu);
             }
 
-            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear) ||
-                Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear))
+            if (Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.LaneClear) || Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.JungleClear))
             {
                 Clear();
             }

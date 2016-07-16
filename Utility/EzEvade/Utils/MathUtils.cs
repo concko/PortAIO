@@ -5,6 +5,7 @@ using System.Text;
 
 using LeagueSharp.Common;
 using SharpDX;
+using EloBuddy.SDK;
 
 namespace ezEvade
 {
@@ -12,7 +13,7 @@ namespace ezEvade
     {
         public static bool CheckLineIntersection(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
         {
-            return a.LSIntersection(b, c, d).Intersects;
+            return a.Intersection(b, c, d).Intersects;
         }
 
         public static bool CheckLineIntersectionEx(Vector2 a, Vector2 b, Vector2 c, Vector2 d)
@@ -82,7 +83,7 @@ namespace ezEvade
                 var sol = Geometry.VectorMovementCollision(spellPos, spell.endPos, spell.info.projectileSpeed, heroPos, ObjectCache.myHeroCache.moveSpeed);
 
                 var startTime = 0f;
-                var endTime = spellPos.LSDistance(spell.endPos) / spell.info.projectileSpeed;
+                var endTime = spellPos.Distance(spell.endPos) / spell.info.projectileSpeed;
 
                 var time = (float) sol[0];
                 var pos = (Vector2) sol[1];
@@ -183,8 +184,8 @@ namespace ezEvade
             {
                 float t0 = (-b + (float)Math.Sqrt(discriminant)) / (2 * a);
                 float t1 = (-b - (float)Math.Sqrt(discriminant)) / (2 * a);
-                
-                if(t0 >= 0 && t1 >= 0)
+
+                if (t0 >= 0 && t1 >= 0)
                     t = Math.Min(t0, t1);
                 else
                     t = Math.Max(t0, t1);
@@ -213,7 +214,7 @@ namespace ezEvade
                 PA = Pa + (collisionTime * Va);
                 PB = Pb + (collisionTime * Vb);
 
-                return PA.LSDistance(PB);
+                return PA.Distance(PB);
             }
 
             PA = Vector2.Zero;
@@ -233,10 +234,10 @@ namespace ezEvade
                 Vector2 PA = Pa + (collisionTime * Va);
                 Vector2 PB = Pb + (collisionTime * Vb);
 
-                PA = PA.LSProjectOn(Pa, PaEnd).SegmentPoint;
-                PB = PB.LSProjectOn(Pb, PbEnd).SegmentPoint;
+                PA = PA.ProjectOn(Pa, PaEnd).SegmentPoint;
+                PB = PB.ProjectOn(Pb, PbEnd).SegmentPoint;
 
-                return PA.LSDistance(PB);
+                return PA.Distance(PB);
             }
 
             return float.MaxValue;
@@ -278,7 +279,7 @@ namespace ezEvade
                     new Vector2(from.X + t * dx, from.Y + t * dy);
                 intersection2 = new Vector2(float.NaN, float.NaN);
 
-                var projection1 = intersection1.LSProjectOn(from, to);
+                var projection1 = intersection1.ProjectOn(from, to);
                 if (projection1.IsOnSegment)
                 {
                     return 1;
@@ -298,8 +299,8 @@ namespace ezEvade
                 intersection2 =
                     new Vector2(from.X + t * dx, from.Y + t * dy);
 
-                var projection1 = intersection1.LSProjectOn(from, to);
-                var projection2 = intersection2.LSProjectOn(from, to);
+                var projection1 = intersection1.ProjectOn(from, to);
+                var projection2 = intersection2.ProjectOn(from, to);
 
                 if (projection1.IsOnSegment && projection2.IsOnSegment)
                 {

@@ -22,7 +22,7 @@ namespace OneKeyToWin_AIO_Sebby
         public static Menu drawMenu, wMenu, eMenu, rMenu, harassMenu, farmMenu, miscMenu;
         public static Spell Q, W, E, R;
         public static float QMANA, WMANA, EMANA, RMANA;
-
+        
         private static Vector3 CursorPosition = Vector3.Zero;
         public static double lag;
         public static double WCastTime = 0;

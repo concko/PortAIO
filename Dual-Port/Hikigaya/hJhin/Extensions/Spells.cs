@@ -9,7 +9,7 @@ using LeagueSharp.SDK;
 using Spell = LeagueSharp.SDK.Spell;
 using LeagueSharp.SDK.Enumerations;
 
-namespace hJhin.Extensions
+ namespace hJhin.Extensions
 {
     static class Spells
     {

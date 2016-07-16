@@ -7,7 +7,7 @@ using LeagueSharp.SDK.Core.Utils;
 using EloBuddy;
 using EloBuddy.SDK;
 
-namespace ExorAIO.Champions.Jinx
+ namespace ExorAIO.Champions.Jinx
 {
     /// <summary>
     ///     The champion class.
@@ -34,7 +34,7 @@ namespace ExorAIO.Champions.Jinx
             /// </summary>
             Drawings.Initialize();
         }
-
+        
         /// <summary>
         ///     Fired when the game is updated.
         /// </summary>
@@ -92,7 +92,9 @@ namespace ExorAIO.Champions.Jinx
                 !Invulnerable.Check(args.Sender, DamageType.Magical, false) &&
                 Vars.getCheckBoxItem(Vars.EMenu, "gapcloser"))
             {
-                Vars.E.Cast(args.End);
+                Vars.E.Cast(args.IsDirectedToPlayer
+                    ? GameObjects.Player.ServerPosition
+                    : args.End);
             }
         }
 

@@ -32,7 +32,7 @@ using EloBuddy.SDK.Menu;
 
 #endregion
 
-namespace EvadeSharp
+ namespace EvadeSharp
 {
     internal class Program
     {
