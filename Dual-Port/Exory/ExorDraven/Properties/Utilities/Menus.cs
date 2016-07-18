@@ -27,6 +27,7 @@ using LeagueSharp.SDK;
             /// </summary>
             Vars.WMenu = Vars.Menu.AddSubMenu("Use W to:");
             {
+                Vars.WMenu.Add("engager", new CheckBox("Engager", true));
                 Vars.WMenu.Add("combo", new Slider("Combo / If Mana >= x%", 50, 0, 101));
             }
 
@@ -48,7 +49,9 @@ using LeagueSharp.SDK;
             Vars.RMenu = Vars.Menu.AddSubMenu("Use R to:");
             {
                 Vars.RMenu.Add("combo", new CheckBox("Combo", true));
-                Vars.RMenu.Add("killsteal", new CheckBox("KillSteal", true));
+                Vars.RMenu.AddLabel("The Semi-Automatic R will automatically ult the lowest on health non-invulnerable enemy in range.");
+                Vars.RMenu.Add("bool", new CheckBox("Semi-Automatic R", true));
+                Vars.RMenu.Add("key", new KeyBind("Key:", false, KeyBind.BindTypes.HoldActive, 'T'));
                 {
                     /// <summary>
                     ///     Sets the menu for the R Whitelist.
@@ -68,7 +71,6 @@ using LeagueSharp.SDK;
             /// </summary>
             Vars.DrawingsMenu = Vars.Menu.AddSubMenu("Drawings");
             {
-                Vars.DrawingsMenu.Add("w", new CheckBox("W Range"));
                 Vars.DrawingsMenu.Add("e", new CheckBox("E Range"));
             }
         }

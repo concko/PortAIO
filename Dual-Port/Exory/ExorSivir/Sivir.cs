@@ -103,7 +103,7 @@ using EloBuddy.SDK;
         }
 
         /// <summary>
-        ///     Called while processing Spelaneclearlearast operations.
+        ///     Called while processing spellcast operations.
         /// </summary>
         /// <param name="sender">The sender.</param>
         /// <param name="args">The args.</param>
@@ -112,9 +112,23 @@ using EloBuddy.SDK;
             /// <summary>
             ///     The Automatic E Logic.
             /// </summary>
-            if (Vars.E.IsReady() && Menus.getCheckBoxItem(Vars.EMenu, "logical"))
+            if (Vars.E.IsReady() && Vars.getCheckBoxItem(Vars.EMenu, "logical"))
             {
                 Logics.AutoShield(sender, args);
+            }
+            if (sender != null && args.Target != null && sender.Type == GameObjectType.AIHeroClient && args.Target.IsMe && sender.IsEnemy && Vars.getCheckBoxItem(Vars.EMenu, "logical") && Vars.E.IsReady())
+            {
+                if (!args.SData.ConsideredAsAutoAttack)
+                {
+                    if (!args.SData.Name.Contains("summoner") && !args.SData.Name.Contains("TormentedSoil"))
+                    {
+                        Vars.E.Cast();
+                    }
+                }
+                else if (args.SData.Name == "BlueCardAttack" || args.SData.Name == "RedCardAttack" || args.SData.Name == "GoldCardAttack")
+                {
+                    Vars.E.Cast();
+                }
             }
         }
     }

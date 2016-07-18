@@ -42,8 +42,8 @@ using LeagueSharp.SDK;
             /// </summary>
             Vars.EMenu = Vars.Menu.AddSubMenu("Use E to:");
             {
+                Vars.EMenu.Add("vision", new CheckBox("Vision", true));
                 Vars.EMenu.Add("logical", new CheckBox("Logical", true));
-                Vars.EMenu.Add("vision", new Slider("Vision / if Mana >= x%", 50, 0, 101));
             }
 
             /// <summary>
@@ -55,6 +55,8 @@ using LeagueSharp.SDK;
                 Vars.RMenu.Add("killsteal", new CheckBox("KillSteal", true));
                 Vars.RMenu.Add("gapcloser", new CheckBox("Anti-Gapcloser", true));
                 Vars.RMenu.Add("interrupter", new CheckBox("Interrupt Enemy Channels", true));
+                Vars.RMenu.AddLabel("The Semi-Automatic R will automatically ult the");
+                Vars.RMenu.AddLabel("lowest on health non-invulnerable enemy in range.");
                 Vars.RMenu.Add("bool", new CheckBox("Semi-Automatic R", true));
                 Vars.RMenu.Add("key", new KeyBind("Key:", false, KeyBind.BindTypes.HoldActive, 'T'));
                 {

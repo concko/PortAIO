@@ -51,9 +51,7 @@ using EloBuddy.SDK;
             if (Vars.E.IsReady() &&
                 Orbwalker.ActiveModesFlags.HasFlag(Orbwalker.ActiveModes.None) &&
                 GameObjects.Player.CountEnemyHeroesInRange(1000f) == 0 &&
-                GameObjects.Player.ManaPercent >
-                    ManaManager.GetNeededMana(Vars.E.Slot, Vars.getSliderItem(Vars.EMenu, "vision")) &&
-                Vars.getSliderItem(Vars.EMenu, "vision") != 101)
+                Vars.getCheckBoxItem(Vars.EMenu, "vision"))
             {
                 if (GameObjects.EnemyHeroes.Any(
                     x =>
@@ -90,6 +88,30 @@ using EloBuddy.SDK;
 
                     Vars.R.Cast(Vars.R.GetPrediction(Targets.Target).UnitPosition);
                 }
+            }
+
+            /// <summary>
+            ///     The Semi-Automatic R Management.
+            /// </summary>
+            if (Vars.R.IsReady() &&
+                Vars.getCheckBoxItem(Vars.RMenu, "bool") &&
+                Vars.getKeyBindItem(Vars.RMenu, "key"))
+            {
+                if (!GameObjects.EnemyHeroes.Any(
+                    t =>
+                        !Invulnerable.Check(t) &&
+                        t.IsValidTarget(Vars.R.Range) &&
+                        Vars.getCheckBoxItem(Vars.WhiteListMenu, Targets.Target.ChampionName.ToLower())))
+                {
+                    return;
+                }
+
+                Vars.R.Cast(Vars.R.GetPrediction(
+                    GameObjects.EnemyHeroes.Where(
+                        t =>
+                            !Invulnerable.Check(t) &&
+                            t.IsValidTarget(Vars.R.Range) &&
+                            Vars.getCheckBoxItem(Vars.WhiteListMenu, Targets.Target.ChampionName.ToLower())).OrderBy(o => o.Health).First()).UnitPosition);
             }
         }
     }
