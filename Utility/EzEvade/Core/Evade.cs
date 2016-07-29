@@ -372,11 +372,11 @@ using EloBuddy.SDK;
                         var posInfo = EvadeHelper.CanHeroWalkToPos(end, evadeSpell.speed, ObjectCache.gamePing, 0);
                         if (posInfo.posDangerCount > 0)
                         {
-                            args.Process = false;
+                            //args.Process = false;
                         }
                         else
                         {
-                            lastPosInfo.position = end;
+                            //lastPosInfo.position = end;
                             lastDodgingEndTime = EvadeUtils.TickCount;
 
                             if (isDodging || EvadeUtils.TickCount < lastDodgingEndTime + 500)
@@ -411,7 +411,7 @@ using EloBuddy.SDK;
                         }
                         else
                         {
-                            lastPosInfo.position = dashPos;
+                            //lastPosInfo.position = dashPos;
                             lastDodgingEndTime = EvadeUtils.TickCount;
 
                             if (isDodging || EvadeUtils.TickCount < lastDodgingEndTime + 500)

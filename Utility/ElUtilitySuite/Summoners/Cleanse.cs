@@ -13,7 +13,7 @@
     using EloBuddy;
     using EloBuddy.SDK.Menu;
     using EloBuddy.SDK.Menu.Values;
-    internal class Cleanse : IPlugin
+    internal class Cleanse //: IPlugin
     {
         #region Constructors and Destructors
 
@@ -355,7 +355,7 @@
                                  },
                              new CleanseSpell
                                  {
-                                     Champion = "Skarner", Name = "Suppression", MenuName = "Skarner (R)",
+                                     Champion = "Skarner", Name = "Skarnerimpale", MenuName = "Skarner (R)",
                                      Evade = false, DoT = false, EvadeTimer = 0, Cleanse = true, CleanseTimer = 500,
                                      Slot = SpellSlot.R
                                  },

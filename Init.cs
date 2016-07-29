@@ -518,6 +518,9 @@ namespace PortAIO
                             case 2:
                                 ExorAIO.AIO.OnLoad();
                                 break;
+                            case 3:
+                                new EatMyCass.EatMyCass().OnLoad();
+                                break;
                             default:
                                 Champion = new SAutoCarry.Champions.Cassiopeia();
                                 break;
@@ -626,6 +629,9 @@ namespace PortAIO
                                 break;
                             case 5:
                                 HeavenStrikeRyze.Program.Game_OnGameLoad();
+                                break;
+                            case 6:
+                                SurvivorRyze.Program.Game_OnGameLoad();
                                 break;
                             default:
                                 ExorAIO.AIO.OnLoad();
@@ -1058,6 +1064,9 @@ namespace PortAIO
                                 break;
                             case 4:
                                 BLeblanc.Program.Game_OnGameLoad();
+                                break;
+                            case 5:
+                                LCS_LeBlanc.Program.OnLoad();
                                 break;
                             default:
                                 PopBlanc.Program.OnLoad();

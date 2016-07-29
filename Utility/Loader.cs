@@ -363,7 +363,7 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[32]))
                 {
-                    Miscc.Add("ryze", new ComboBox("Use addon for Ryze : ", 0, "ExorAIO", "ElEasy Ryze", "SluttyRyze", "Arcane Ryze", "Sergix Ryze", "HeavenStrikeRyze"));
+                    Miscc.Add("ryze", new ComboBox("Use addon for Ryze : ", 0, "ExorAIO", "ElEasy Ryze", "SluttyRyze", "Arcane Ryze", "Sergix Ryze", "HeavenStrikeRyze", "SurvivorRyze"));
                 }
                 if (Player.ChampionName.Equals(Champion[33]))
                 {
@@ -387,7 +387,7 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[38]))
                 {
-                    Miscc.Add("leblanc", new ComboBox("Use addon for LeBlanc : ", 0, "PopBlanc", "xQx LeBlanc", "FreshBooster", "LeBlanc II", "Badao LeBlanc"));
+                    Miscc.Add("leblanc", new ComboBox("Use addon for LeBlanc : ", 0, "PopBlanc", "xQx LeBlanc", "FreshBooster", "LeBlanc II", "Badao LeBlanc", "LCS LeBlanc"));
                 }
                 if (Player.ChampionName.Equals(Champion[39]))
                 {
@@ -467,7 +467,7 @@ namespace PortAIO.Utility
                 }
                 if (Player.ChampionName.Equals(Champion[58]))
                 {
-                    Miscc.Add("cassiopeia", new ComboBox("Use addon for Cassiopeia : ", 0, "SAutoCarry", "Seph Cassio", "ExorAIO"));
+                    Miscc.Add("cassiopeia", new ComboBox("Use addon for Cassiopeia : ", 0, "SAutoCarry", "Seph Cassio", "ExorAIO", "Eat My Cass"));
                 }
                 if (Player.ChampionName.Equals(Champion[59]))
                 {

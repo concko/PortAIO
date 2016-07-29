@@ -267,7 +267,7 @@ namespace OneKeyToWin_AIO_Sebby
         {
             if (Player.Mana > RMANA + WMANA)
             {
-                if (Program.Combo && Player.Spellbook.IsAutoAttacking)
+                if (Program.Combo)
                     return;
                 if (getCheckBoxItem(wMenu, "autoW"))
                 {
@@ -275,12 +275,12 @@ namespace OneKeyToWin_AIO_Sebby
                     {
                         if (Utils.TickCount - W.LastCastAttemptT > 1000)
                         {
-                            W.Cast(enemy.Position, true);
+                            W.Cast(enemy);
                             LastW = enemy;
                         }
                         else if (LastW.NetworkId != enemy.NetworkId)
                         {
-                            W.Cast(enemy.Position, true);
+                            W.Cast(enemy, true);
                             LastW = enemy;
                         }
                     }
